@@ -1,0 +1,8 @@
+_BASE_: Base-clip-vit_ceiling_painting.yaml
+MODEL:
+  META_ARCHITECTURE: "SAN"
+  MASK_ON: True
+  SAN:
+    NUM_CLASSES: 4
+SOLVER:
+  BACKBONE_MULTIPLIER: 1.0
