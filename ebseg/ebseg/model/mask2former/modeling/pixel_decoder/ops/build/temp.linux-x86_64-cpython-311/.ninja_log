@@ -1,0 +1,4 @@
+# ninja log v5
+1	3486	1746651031725592366	/home/ra78lof/consulting_pro/ebseg/ebseg/model/mask2former/modeling/pixel_decoder/ops/build/temp.linux-x86_64-cpython-311/home/ra78lof/consulting_pro/ebseg/ebseg/model/mask2former/modeling/pixel_decoder/ops/src/cpu/ms_deform_attn_cpu.o	b553c3329ab78174
+1	10953	1746651039189540565	/home/ra78lof/consulting_pro/ebseg/ebseg/model/mask2former/modeling/pixel_decoder/ops/build/temp.linux-x86_64-cpython-311/home/ra78lof/consulting_pro/ebseg/ebseg/model/mask2former/modeling/pixel_decoder/ops/src/vision.o	8d8378fe243cbb99
+1	15535	1746651043761508835	/home/ra78lof/consulting_pro/ebseg/ebseg/model/mask2former/modeling/pixel_decoder/ops/build/temp.linux-x86_64-cpython-311/home/ra78lof/consulting_pro/ebseg/ebseg/model/mask2former/modeling/pixel_decoder/ops/src/cuda/ms_deform_attn_cuda.o	9bbf47fdad852d33

@@ -1,0 +1,41 @@
+Traceback (most recent call last):
+  File "/home/ra78lof/consulting_pro/ebseg/train_net.py", line 282, in <module>
+    launch(
+  File "/home/ra78lof/consulting_pro/detectron2/detectron2/engine/launch.py", line 84, in launch
+    main_func(*args)
+  File "/home/ra78lof/consulting_pro/ebseg/train_net.py", line 271, in main
+    trainer = Trainer(cfg)
+              ^^^^^^^^^^^^
+  File "/home/ra78lof/consulting_pro/ebseg/train_net.py", line 50, in __init__
+    super().__init__(cfg)
+  File "/home/ra78lof/consulting_pro/detectron2/detectron2/engine/defaults.py", line 410, in __init__
+    model = self.build_model(cfg)
+            ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ra78lof/consulting_pro/detectron2/detectron2/engine/defaults.py", line 550, in build_model
+    model = build_model(cfg)
+            ^^^^^^^^^^^^^^^^
+  File "/home/ra78lof/consulting_pro/detectron2/detectron2/modeling/meta_arch/build.py", line 22, in build_model
+    model = META_ARCH_REGISTRY.get(meta_arch)(cfg)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ra78lof/consulting_pro/detectron2/detectron2/config/config.py", line 189, in wrapped
+    explicit_args = _get_args_from_config(from_config_func, *args, **kwargs)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ra78lof/consulting_pro/detectron2/detectron2/config/config.py", line 245, in _get_args_from_config
+    ret = from_config_func(*args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ra78lof/consulting_pro/ebseg/ebseg/model/EBSeg.py", line 153, in from_config
+    model, _, preprocess = open_clip.create_model_and_transforms(
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ra78lof/anaconda3/envs/ebseg/lib/python3.11/site-packages/open_clip/factory.py", line 292, in create_model_and_transforms
+    model = create_model(
+            ^^^^^^^^^^^^^
+  File "/home/ra78lof/anaconda3/envs/ebseg/lib/python3.11/site-packages/open_clip/factory.py", line 144, in create_model
+    model = load_openai_model(
+            ^^^^^^^^^^^^^^^^^^
+  File "/home/ra78lof/anaconda3/envs/ebseg/lib/python3.11/site-packages/open_clip/openai.py", line 66, in load_openai_model
+    model = torch.jit.load(model_path, map_location=device if jit else "cpu").eval()
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ra78lof/anaconda3/envs/ebseg/lib/python3.11/site-packages/torch/jit/_serialization.py", line 158, in load
+    cpp_module = torch._C.import_ir_module(cu, os.fspath(f), map_location, _extra_files, _restore_shapes)  # type: ignore[call-arg]
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt

@@ -1,0 +1,259 @@
+[32m[05/08 08:00:18 d2.engine.defaults]: [0mModel:
+EBSeg(
+  (criterion): Criterion SetCriterion
+      matcher: Matcher HungarianMatcher
+          cost_class: 2.0
+          cost_mask: 5.0
+          cost_dice: 5.0
+      losses: ['labels', 'masks']
+      weight_dict: {'loss_ce': 1.5, '1_loss_ce': 1.5, 'loss_mask': 5.0, 'loss_dice': 5.0, 'loss_ce_0': 1.5, '1_loss_ce_0': 1.5, 'loss_mask_0': 5.0, 'loss_dice_0': 5.0, 'loss_ce_1': 1.5, '1_loss_ce_1': 1.5, 'loss_mask_1': 5.0, 'loss_dice_1': 5.0, 'loss_ce_2': 1.5, '1_loss_ce_2': 1.5, 'loss_mask_2': 5.0, 'loss_dice_2': 5.0, 'loss_ce_3': 1.5, '1_loss_ce_3': 1.5, 'loss_mask_3': 5.0, 'loss_dice_3': 5.0, 'loss_ce_4': 1.5, '1_loss_ce_4': 1.5, 'loss_mask_4': 5.0, 'loss_dice_4': 5.0, 'loss_ce_5': 1.5, '1_loss_ce_5': 1.5, 'loss_mask_5': 5.0, 'loss_dice_5': 5.0, 'loss_ce_6': 1.5, '1_loss_ce_6': 1.5, 'loss_mask_6': 5.0, 'loss_dice_6': 5.0, 'loss_ce_7': 1.5, '1_loss_ce_7': 1.5, 'loss_mask_7': 5.0, 'loss_dice_7': 5.0, 'loss_ce_8': 1.5, '1_loss_ce_8': 1.5, 'loss_mask_8': 5.0, 'loss_dice_8': 5.0, 'mse_ssc_loss_1': 10, 'mse_ssc_loss_2': 10, 'mse_ssc_loss_3': 10, 'mse_ssc_loss_4': 10, 'mse_ssc_loss_5': 10, 'mse_ssc_loss_6': 10, 'mse_ssc_loss_7': 10, 'mse_ssc_loss_8': 10, 'mse_ssc_loss_9': 10, 'mse_ssc_loss_10': 10, 'mse_ssc_loss_11': 10, 'mse_ssc_loss_12': 10, 'mse_ssc_loss_13': 10, 'mse_ssc_loss_14': 10, 'mse_ssc_loss_15': 10, 'mse_ssc_loss_16': 10, 'mse_ssc_loss_17': 10, 'mse_ssc_loss_18': 10, 'mse_ssc_loss_19': 10, 'mse_ssc_loss_20': 10}
+      num_classes: 171
+      eos_coef: 0.1
+      num_points: 12544
+      oversample_ratio: 3.0
+      importance_sample_ratio: 0.75
+  (clip_visual_extractor): CLIP_surgery_FeatureExtractor(
+    (patchnorm_pre_ln): Identity()
+    (conv1): Conv2d(3, 1024, kernel_size=(14, 14), stride=(14, 14), bias=False)
+    (patch_dropout): Identity()
+    (ln_pre): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+    (ln_post): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+    (resblocks): ModuleList(
+      (0-3): 4 x ResidualAttentionBlock(
+        (ln_1): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+        (attn): MultiheadAttention(
+          (out_proj): NonDynamicallyQuantizableLinear(in_features=1024, out_features=1024, bias=True)
+        )
+        (ls_1): Identity()
+        (ln_2): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+        (mlp): Sequential(
+          (c_fc): Linear(in_features=1024, out_features=4096, bias=True)
+          (gelu): QuickGELU()
+          (c_proj): Linear(in_features=4096, out_features=1024, bias=True)
+        )
+        (ls_2): Identity()
+      )
+      (4-17): 14 x Surgery_ResidualAttentionBlock(
+        (attn): Attention(
+          (qkv): Linear(in_features=1024, out_features=3072, bias=True)
+          (attn_drop): Dropout(p=0.0, inplace=False)
+          (proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (proj_drop): Dropout(p=0.0, inplace=False)
+        )
+        (ln_1): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+        (mlp): Sequential(
+          (c_fc): Linear(in_features=1024, out_features=4096, bias=True)
+          (gelu): QuickGELU()
+          (c_proj): Linear(in_features=4096, out_features=1024, bias=True)
+        )
+        (ln_2): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+      )
+    )
+  )
+  (clip_rec_head): CLIP_surgery_RecWithAttnbiasHead(
+    (resblocks): ModuleList(
+      (0-5): 6 x Surgery_ResidualAttentionBlock(
+        (attn): Attention(
+          (qkv): Linear(in_features=1024, out_features=3072, bias=True)
+          (attn_drop): Dropout(p=0.0, inplace=False)
+          (proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (proj_drop): Dropout(p=0.0, inplace=False)
+        )
+        (ln_1): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+        (mlp): Sequential(
+          (c_fc): Linear(in_features=1024, out_features=4096, bias=True)
+          (gelu): QuickGELU()
+          (c_proj): Linear(in_features=4096, out_features=1024, bias=True)
+        )
+        (ln_2): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+      )
+    )
+    (ln_post): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+  )
+  (ov_classifier): LearnableBgOvClassifier(
+    (transformer): Transformer(
+      (resblocks): ModuleList(
+        (0-11): 12 x ResidualAttentionBlock(
+          (ln_1): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+          (attn): MultiheadAttention(
+            (out_proj): NonDynamicallyQuantizableLinear(in_features=768, out_features=768, bias=True)
+          )
+          (ls_1): Identity()
+          (ln_2): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+          (mlp): Sequential(
+            (c_fc): Linear(in_features=768, out_features=3072, bias=True)
+            (gelu): QuickGELU()
+            (c_proj): Linear(in_features=3072, out_features=768, bias=True)
+          )
+          (ls_2): Identity()
+        )
+      )
+    )
+    (token_embedding): Embedding(49408, 768)
+    (ln_final): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+    (coco_text_embedding_distance): PairwiseDistance()
+  )
+  (backbone): ImageEncoderViT(
+    (patch_embed): PatchEmbed(
+      (proj): Conv2d(3, 768, kernel_size=(16, 16), stride=(16, 16))
+    )
+    (blocks): ModuleList(
+      (0-11): 12 x Block(
+        (norm1): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+        (attn): Attention(
+          (qkv): Linear(in_features=768, out_features=2304, bias=True)
+          (proj): Linear(in_features=768, out_features=768, bias=True)
+        )
+        (norm2): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+        (mlp): MLPBlock(
+          (lin1): Linear(in_features=768, out_features=3072, bias=True)
+          (lin2): Linear(in_features=3072, out_features=768, bias=True)
+          (act): GELU(approximate='none')
+        )
+      )
+    )
+  )
+  (sem_seg_head): EBSeg_Mask2former_Head(
+    (pixel_decoder): MSDeformAttnPixelDecoder(
+      (input_proj): ModuleList(
+        (0-2): 3 x Sequential(
+          (0): Conv2d(768, 256, kernel_size=(1, 1), stride=(1, 1))
+          (1): GroupNorm(32, 256, eps=1e-05, affine=True)
+        )
+      )
+      (transformer): MSDeformAttnTransformerEncoderOnly(
+        (encoder): MSDeformAttnTransformerEncoder(
+          (layers): ModuleList(
+            (0-5): 6 x MSDeformAttnTransformerEncoderLayer(
+              (self_attn): MSDeformAttn(
+                (sampling_offsets): Linear(in_features=256, out_features=192, bias=True)
+                (attention_weights): Linear(in_features=256, out_features=96, bias=True)
+                (value_proj): Linear(in_features=256, out_features=256, bias=True)
+                (output_proj): Linear(in_features=256, out_features=256, bias=True)
+              )
+              (dropout1): Dropout(p=0.0, inplace=False)
+              (norm1): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+              (linear1): Linear(in_features=256, out_features=1024, bias=True)
+              (dropout2): Dropout(p=0.0, inplace=False)
+              (linear2): Linear(in_features=1024, out_features=256, bias=True)
+              (dropout3): Dropout(p=0.0, inplace=False)
+              (norm2): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+            )
+          )
+        )
+      )
+      (pe_layer): Positional encoding PositionEmbeddingSine
+          num_pos_feats: 128
+          temperature: 10000
+          normalize: True
+          scale: 6.283185307179586
+      (mask_features): Conv2d(256, 256, kernel_size=(1, 1), stride=(1, 1))
+      (adapter_1): Conv2d(
+        768, 256, kernel_size=(1, 1), stride=(1, 1), bias=False
+        (norm): GroupNorm(32, 256, eps=1e-05, affine=True)
+      )
+      (layer_1): Conv2d(
+        256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+        (norm): GroupNorm(32, 256, eps=1e-05, affine=True)
+      )
+    )
+    (predictor): MultiScaleMaskedTransformerDecoder(
+      (pe_layer): Positional encoding PositionEmbeddingSine
+          num_pos_feats: 128
+          temperature: 10000
+          normalize: True
+          scale: 6.283185307179586
+      (transformer_self_attention_layers): ModuleList(
+        (0-8): 9 x SelfAttentionLayer(
+          (self_attn): MultiheadAttention(
+            (out_proj): NonDynamicallyQuantizableLinear(in_features=256, out_features=256, bias=True)
+          )
+          (norm): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+          (dropout): Dropout(p=0.0, inplace=False)
+        )
+      )
+      (transformer_cross_attention_layers): ModuleList(
+        (0-8): 9 x CrossAttentionLayer(
+          (multihead_attn): MultiheadAttention(
+            (out_proj): NonDynamicallyQuantizableLinear(in_features=256, out_features=256, bias=True)
+          )
+          (norm): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+          (dropout): Dropout(p=0.0, inplace=False)
+        )
+      )
+      (transformer_ffn_layers): ModuleList(
+        (0-8): 9 x FFNLayer(
+          (linear1): Linear(in_features=256, out_features=2048, bias=True)
+          (dropout): Dropout(p=0.0, inplace=False)
+          (linear2): Linear(in_features=2048, out_features=256, bias=True)
+          (norm): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+        )
+      )
+      (decoder_norm): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+      (query_feat): Embedding(100, 256)
+      (query_embed): Embedding(100, 256)
+      (level_embed): Embedding(3, 256)
+      (input_proj): ModuleList(
+        (0-2): 3 x Sequential()
+      )
+      (mask_embed): MLP(
+        (layers): ModuleList(
+          (0-2): 3 x Linear(in_features=256, out_features=256, bias=True)
+        )
+      )
+      (pool_proj): Sequential(
+        (0): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+        (1): Linear(in_features=256, out_features=256, bias=True)
+      )
+      (mask_embed1): MLP(
+        (layers): ModuleList(
+          (0-1): 2 x Linear(in_features=256, out_features=256, bias=True)
+          (2): Linear(in_features=256, out_features=768, bias=True)
+        )
+      )
+      (mask_pooling): MaskPooling()
+      (attn_proj): MLP(
+        (layers): ModuleList(
+          (0-1): 2 x Linear(in_features=256, out_features=256, bias=True)
+          (2): Linear(in_features=256, out_features=4096, bias=True)
+        )
+      )
+      (bias_scaling): Linear(in_features=1, out_features=1, bias=True)
+    )
+    (clip_fusion_layers): ModuleList(
+      (0-2): 3 x Sequential(
+        (0): LayerNorm()
+        (1): Conv2d(1024, 768, kernel_size=(1, 1), stride=(1, 1))
+      )
+    )
+  )
+  (ssc_mse_loss): MSELoss()
+)
+Traceback (most recent call last):
+  File "/home/ra78lof/consulting_pro/ebseg/train_net.py", line 282, in <module>
+    launch(
+  File "/home/ra78lof/consulting_pro/detectron2/detectron2/engine/launch.py", line 84, in launch
+    main_func(*args)
+  File "/home/ra78lof/consulting_pro/ebseg/train_net.py", line 271, in main
+    trainer = Trainer(cfg)
+              ^^^^^^^^^^^^
+  File "/home/ra78lof/consulting_pro/ebseg/train_net.py", line 50, in __init__
+    super().__init__(cfg)
+  File "/home/ra78lof/consulting_pro/detectron2/detectron2/engine/defaults.py", line 412, in __init__
+    data_loader = self.build_train_loader(cfg)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ra78lof/consulting_pro/ebseg/train_net.py", line 95, in build_train_loader
+    mapper = MaskFormerSemanticDatasetMapper(cfg, True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ra78lof/consulting_pro/detectron2/detectron2/config/config.py", line 189, in wrapped
+    explicit_args = _get_args_from_config(from_config_func, *args, **kwargs)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ra78lof/consulting_pro/detectron2/detectron2/config/config.py", line 245, in _get_args_from_config
+    ret = from_config_func(*args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ra78lof/consulting_pro/ebseg/ebseg/data/dataset_mappers/mask_former_semantic_dataset_mapper.py", line 88, in from_config
+    ignore_label = meta.ignore_label
+                   ^^^^^^^^^^^^^^^^^
+  File "/home/ra78lof/consulting_pro/detectron2/detectron2/data/catalog.py", line 131, in __getattr__
+    raise AttributeError(
+AttributeError: Attribute 'ignore_label' does not exist in the metadata of dataset 'ceiling_easy_train': metadata is empty.
