@@ -1,0 +1,17 @@
+_BASE_: ./fcclip_convnext_large_eval_ade20k.yaml
+
+MODEL:
+  MASK_FORMER:
+    TRAIN:
+      PANOPTIC_ON: False # TODO: check what those two configs mean
+      INSTANCE_ON: False # TODO: check what those two configs mean
+    TEST:
+      PANOPTIC_ON: False
+      INSTANCE_ON: False
+
+# change both the train and test dataset
+DATASETS:
+  TRAIN: ("ceiling_easy_train",)
+  TEST: ("ceiling_easy_val",)
+
+OUTPUT_DIR: ./train/fc-clip/pc459

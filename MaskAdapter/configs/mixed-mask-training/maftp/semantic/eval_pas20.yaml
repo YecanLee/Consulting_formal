@@ -1,0 +1,12 @@
+_BASE_: ./eval.yaml
+
+MODEL:
+  MASK_FORMER:
+    TEST:
+      PANOPTIC_ON: False
+      INSTANCE_ON: False
+
+DATASETS:
+  TEST: ("openvocab_pascal20_sem_seg_val",)
+
+OUTPUT_DIR: ./eval/pas20

@@ -1,0 +1,60 @@
+MODEL:
+  BACKBONE:
+    FREEZE_AT: 0
+    NAME: "build_resnet_backbone"
+  WEIGHTS: "detectron2://ImageNetPretrained/torchvision/R-50.pkl"
+  PIXEL_MEAN: [123.675, 116.280, 103.530]
+  PIXEL_STD: [58.395, 57.120, 57.375]
+  RESNETS:
+    DEPTH: 50
+    STEM_TYPE: "basic"  # not used
+    STEM_OUT_CHANNELS: 64
+    STRIDE_IN_1X1: False
+    OUT_FEATURES: ["res2", "res3", "res4", "res5"]
+    # NORM: "SyncBN"
+    RES5_MULTI_GRID: [1, 1, 1]  # not used
+
+SOLVER:
+  IMS_PER_BATCH: 8
+  BASE_LR: 0.0001
+  STEPS: (260231, 283888)
+  MAX_ITER: 295717
+  WARMUP_FACTOR: 1.0
+  WARMUP_ITERS: 10
+  CHECKPOINT_PERIOD: 10000
+  WEIGHT_DECAY: 0.05
+  OPTIMIZER: "ADAMW"
+  BACKBONE_MULTIPLIER: 0.1
+  CLIP_GRADIENTS:
+    ENABLED: True
+    CLIP_TYPE: "full_model"
+    CLIP_VALUE: 1.0
+    NORM_TYPE: 2.0
+  AMP:
+    ENABLED: True
+INPUT:
+  IMAGE_SIZE: 768
+  MIN_SCALE: 0.1
+  MAX_SCALE: 2.0
+  FORMAT: "RGB"
+  MIN_SIZE_TRAIN: (1024,)
+  MAX_SIZE_TRAIN: 1024
+  DATASET_MAPPER_NAME: "coco_combine_lsj"
+  MASK_FORMAT: "bitmask"
+  COLOR_AUG_SSD: True
+
+DATASETS:
+  TRAIN: ("openvocab_coco_2017_train_panoptic_with_sem_seg",)
+  TEST: ("openvocab_ade20k_panoptic_val",)  # to evaluate instance and semantic performance as well
+DATALOADER:
+  SAMPLER_TRAIN: "MultiDatasetSampler"
+  USE_DIFF_BS_SIZE: False
+  DATASET_RATIO: [1.0]
+  DATASET_BS: [2]
+  USE_RFS: [False]
+  NUM_WORKERS: 8
+  DATASET_ANN: ['mask']
+  ASPECT_RATIO_GROUPING: True
+TEST:
+  EVAL_PERIOD: 10000
+VERSION: 2
