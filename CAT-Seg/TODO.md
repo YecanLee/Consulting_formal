@@ -1,0 +1,1 @@
+# Check the customized defined `VOCbEvaluator` class in the `train_net.py` file, it seems like we can inherit another evaluator and overwrite the default one, so we don't have to change the meta data of the registered ceiling painting evaluation dataset.

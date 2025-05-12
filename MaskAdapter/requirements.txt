@@ -1,0 +1,12 @@
+cython
+scipy
+shapely
+timm
+h5py
+submitit
+scikit-image
+einops
+Pillow==8.4.0
+opencv-python
+pycocotools~=2.0.4
+open_clip_torch==2.16.0

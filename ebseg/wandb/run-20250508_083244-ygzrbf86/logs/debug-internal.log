@@ -1,0 +1,16 @@
+{"time":"2025-05-08T08:32:44.548571583Z","level":"INFO","msg":"stream: starting","core version":"0.19.11","symlink path":"/home/ra78lof/consulting_pro/ebseg/wandb/run-20250508_083244-ygzrbf86/logs/debug-core.log"}
+{"time":"2025-05-08T08:32:44.811114407Z","level":"INFO","msg":"created new stream","id":"ygzrbf86"}
+{"time":"2025-05-08T08:32:44.811149257Z","level":"INFO","msg":"stream: started","id":"ygzrbf86"}
+{"time":"2025-05-08T08:32:44.811176597Z","level":"INFO","msg":"sender: started","stream_id":"ygzrbf86"}
+{"time":"2025-05-08T08:32:44.811176577Z","level":"INFO","msg":"writer: Do: started","stream_id":"ygzrbf86"}
+{"time":"2025-05-08T08:32:44.811223547Z","level":"INFO","msg":"handler: started","stream_id":"ygzrbf86"}
+{"time":"2025-05-08T08:32:45.065507059Z","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-05-08T08:32:52.202341523Z","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-05-08T08:32:52.202430533Z","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-05-08T08:32:52.847023451Z","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-05-08T08:32:53.056583379Z","level":"INFO","msg":"handler: operation stats","stats":{}}
+{"time":"2025-05-08T08:32:53.060093239Z","level":"INFO","msg":"stream: closing","id":"ygzrbf86"}
+{"time":"2025-05-08T08:32:53.060110679Z","level":"INFO","msg":"handler: closed","stream_id":"ygzrbf86"}
+{"time":"2025-05-08T08:32:53.060127299Z","level":"INFO","msg":"sender: closed","stream_id":"ygzrbf86"}
+{"time":"2025-05-08T08:32:53.060122339Z","level":"INFO","msg":"writer: Close: closed","stream_id":"ygzrbf86"}
+{"time":"2025-05-08T08:32:53.060233788Z","level":"INFO","msg":"stream: closed","id":"ygzrbf86"}

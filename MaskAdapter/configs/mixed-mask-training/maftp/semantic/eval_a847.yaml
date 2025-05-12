@@ -1,0 +1,13 @@
+_BASE_: ./eval.yaml
+
+MODEL:
+  MASK_FORMER:
+    TEST:
+      PANOPTIC_ON: False
+      INSTANCE_ON: False
+
+DATASETS:
+  TEST: ("openvocab_ade20k_full_sem_seg_val",)
+
+
+OUTPUT_DIR: ./eval/a847

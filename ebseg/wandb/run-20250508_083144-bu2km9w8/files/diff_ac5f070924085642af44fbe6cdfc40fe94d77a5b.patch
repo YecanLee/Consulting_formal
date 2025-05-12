@@ -1,0 +1,163 @@
+diff --git a/configs/ebseg/ebseg_b.yaml b/configs/ebseg/ebseg_b.yaml
+index 80612e3..fb59b5b 100644
+--- a/configs/ebseg/ebseg_b.yaml
++++ b/configs/ebseg/ebseg_b.yaml
+@@ -45,17 +45,19 @@ MODEL:
+       PANOPTIC_ON: False
+       OVERLAP_THRESHOLD: 0.8
+       OBJECT_MASK_THRESHOLD: 0.8
++INPUT:
++  DATASET_MAPPER_NAME: "ceiling"
+ TEST:
+   EVAL_PERIOD: 10000
+ SOLVER:
+   BASE_LR: 0.0001
+-  IMS_PER_BATCH: 16
+-  MAX_ITER: 120000
+-  CHECKPOINT_PERIOD: 10000
++  IMS_PER_BATCH: 1
++  MAX_ITER: 100
++  CHECKPOINT_PERIOD: 100
+   WEIGHT_DECAY: 0.05
+   BACKBONE_MULTIPLIER: 1.0
+ WANDB:
+   PROJECT: EBSeg
+ DATASETS:
+-  TRAIN: ("coco_2017_train_stuff_sem_seg",)
+-  TEST: ( 'voc_sem_seg_val','pcontext_sem_seg_val','pcontext_full_sem_seg_val','ade20k_sem_seg_val', 'ade20k_full_sem_seg_val')
+\ No newline at end of file
++  TRAIN: ("ceiling_easy_train",)
++  TEST: ("ceiling_easy_val",)
+diff --git a/ebseg/data/datasets/__init__.py b/ebseg/data/datasets/__init__.py
+index 3f4397d..55ecfee 100644
+--- a/ebseg/data/datasets/__init__.py
++++ b/ebseg/data/datasets/__init__.py
+@@ -3,4 +3,5 @@ from . import (
+     register_coco_stuff_164k,
+     register_pcontext,
+     register_voc,
++    register_ceiling,
+ )
+diff --git a/ebseg/model/EBSeg.py b/ebseg/model/EBSeg.py
+index 7c73bf4..02a6091 100644
+--- a/ebseg/model/EBSeg.py
++++ b/ebseg/model/EBSeg.py
+@@ -241,6 +241,7 @@ class EBSeg(nn.Module):
+         if self.training:
+             losses = {}
+             if "instances" in batched_inputs[0]:
++                print(f"this is the first input of the batch: {batched_inputs[0]} 🔥🔥🔥")
+                 gt_instances = [x["instances"].to(self.device) for x in batched_inputs]
+                 targets, labels = self.prepare_targets(gt_instances, images)
+             else:
+diff --git a/ebseg/model/mask2former/modeling/pixel_decoder/ops/MultiScaleDeformableAttention.egg-info/PKG-INFO b/ebseg/model/mask2former/modeling/pixel_decoder/ops/MultiScaleDeformableAttention.egg-info/PKG-INFO
+index 18ccefb..86fadb6 100644
+--- a/ebseg/model/mask2former/modeling/pixel_decoder/ops/MultiScaleDeformableAttention.egg-info/PKG-INFO
++++ b/ebseg/model/mask2former/modeling/pixel_decoder/ops/MultiScaleDeformableAttention.egg-info/PKG-INFO
+@@ -1,11 +1,9 @@
+-Metadata-Version: 2.1
++Metadata-Version: 2.4
+ Name: MultiScaleDeformableAttention
+ Version: 1.0
+ Summary: PyTorch Wrapper for CUDA Functions of Multi-Scale Deformable Attention
+ Home-page: https://github.com/fundamentalvision/Deformable-DETR
+ Author: Weijie Su
+-License: UNKNOWN
+-Platform: UNKNOWN
+-
+-UNKNOWN
+-
++Dynamic: author
++Dynamic: home-page
++Dynamic: summary
+diff --git a/ebseg/model/mask2former/modeling/pixel_decoder/ops/MultiScaleDeformableAttention.egg-info/SOURCES.txt b/ebseg/model/mask2former/modeling/pixel_decoder/ops/MultiScaleDeformableAttention.egg-info/SOURCES.txt
+index 31104cc..ab86532 100644
+--- a/ebseg/model/mask2former/modeling/pixel_decoder/ops/MultiScaleDeformableAttention.egg-info/SOURCES.txt
++++ b/ebseg/model/mask2former/modeling/pixel_decoder/ops/MultiScaleDeformableAttention.egg-info/SOURCES.txt
+@@ -1,7 +1,7 @@
+ setup.py
+-/home/dancer/sxh/SAN-sam-large-inf-surgery/san/model/Mask2Former/mask2former/modeling/pixel_decoder/ops/src/vision.cpp
+-/home/dancer/sxh/SAN-sam-large-inf-surgery/san/model/Mask2Former/mask2former/modeling/pixel_decoder/ops/src/cpu/ms_deform_attn_cpu.cpp
+-/home/dancer/sxh/SAN-sam-large-inf-surgery/san/model/Mask2Former/mask2former/modeling/pixel_decoder/ops/src/cuda/ms_deform_attn_cuda.cu
++/home/ra78lof/consulting_pro/ebseg/ebseg/model/mask2former/modeling/pixel_decoder/ops/src/vision.cpp
++/home/ra78lof/consulting_pro/ebseg/ebseg/model/mask2former/modeling/pixel_decoder/ops/src/cpu/ms_deform_attn_cpu.cpp
++/home/ra78lof/consulting_pro/ebseg/ebseg/model/mask2former/modeling/pixel_decoder/ops/src/cuda/ms_deform_attn_cuda.cu
+ MultiScaleDeformableAttention.egg-info/PKG-INFO
+ MultiScaleDeformableAttention.egg-info/SOURCES.txt
+ MultiScaleDeformableAttention.egg-info/dependency_links.txt
+diff --git a/ebseg/model/segment_anything/build_sam.py b/ebseg/model/segment_anything/build_sam.py
+index 9f7b658..0f14dcd 100644
+--- a/ebseg/model/segment_anything/build_sam.py
++++ b/ebseg/model/segment_anything/build_sam.py
+@@ -11,7 +11,7 @@ from functools import partial
+ from .modeling import ImageEncoderViT, MaskDecoder, PromptEncoder, Sam, TwoWayTransformer
+ 
+ 
+-def build_sam_vit_h(checkpoint='/home/dancer/sxh/work_dirs/checkpoint/sam/sam_vit_h_4b8939.pth'):
++def build_sam_vit_h(checkpoint='/home/ra78lof/consulting_pro/ebseg/pretrained_weights/sam_vit_h_4b8939.pth'):
+     return _build_sam(
+         encoder_embed_dim=1280,
+         encoder_depth=32,
+@@ -24,7 +24,7 @@ def build_sam_vit_h(checkpoint='/home/dancer/sxh/work_dirs/checkpoint/sam/sam_vi
+ build_sam = build_sam_vit_h
+ 
+ 
+-def build_sam_vit_l(checkpoint='/home/dancer/shanxiangheng/work_dirs/checkpoint/sam/sam_vit_l_0b3195.pth'):
++def build_sam_vit_l(checkpoint='/home/ra78lof/consulting_pro/ebseg/pretrained_weights/sam_vit_l_0b3195.pth'):
+     return _build_sam(
+         encoder_embed_dim=1024,
+         encoder_depth=24,
+@@ -34,7 +34,7 @@ def build_sam_vit_l(checkpoint='/home/dancer/shanxiangheng/work_dirs/checkpoint/
+     )
+ 
+ 
+-def build_sam_vit_b(checkpoint='/home/dancer/sxh/work_dirs/checkpoint/sam/sam_vit_b_01ec64.pth'):
++def build_sam_vit_b(checkpoint='/home/ra78lof/consulting_pro/ebseg/pretrained_weights/sam_vit_b_01ec64.pth'):
+     return _build_sam(
+         encoder_embed_dim=768,
+         encoder_depth=12,
+diff --git a/requirements.txt b/requirements.txt
+index b029756..8473844 100644
+--- a/requirements.txt
++++ b/requirements.txt
+@@ -1,20 +1,20 @@
+-cog==0.9.9
+-detail==0.2.4
+-fvcore==0.1.5.post20221221
+-iopath==0.1.9
+-matplotlib==3.8.1
+-numpy==1.26.4
+-open_clip_torch==2.20.0
+-opencv_python==4.8.1.78
+-Pillow==10.3.0
+-pycocotools==2.0.7
+-scipy==1.13.1
+-setuptools==60.2.0
+-Shapely==2.0.4
+-tabulate==0.9.0
+-termcolor==2.4.0
+-timm==0.9.8
+-torch==2.0.1
+-torchvision==0.15.2
+-tqdm==4.65.2
+-wandb==0.15.10
++cog
++detail
++fvcore
++iopath
++matplotlib
++numpy==1.22.4
++open_clip_torch==2.16.0
++opencv_python
++Pillow==9.3.0
++pycocotools~=2.0.4
++scipy
++setuptools
++Shapely
++tabulate
++termcolor
++timm
++torch
++torchvision
++tqdm
++wandb

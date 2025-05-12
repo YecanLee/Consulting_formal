@@ -1,0 +1,41 @@
+_BASE_: ../maskformer2_R50_bs16_50ep.yaml
+MODEL:
+  MASK_ON: True
+  META_ARCHITECTURE: "MASK_Adapter"
+  MASK_ADAPTER:
+    NAME: "MASKAdapterHead"
+    MASK_IN_CHANNELS: 16
+    NUM_CHANNELS: 768
+    USE_CHECKPOINT: False
+    NUM_OUTPUT_MAPS: 16
+  # backbone part.
+  BACKBONE:
+    NAME: "CLIP"
+  WEIGHTS: ""
+  PIXEL_MEAN: [122.7709383, 116.7460125, 104.09373615]
+  PIXEL_STD: [68.5005327, 66.6321579, 70.32316305]
+  FC_CLIP:
+    CLIP_MODEL_NAME: "convnext_large_d_320"
+    CLIP_PRETRAINED_WEIGHTS: "laion2b_s29b_b131k_ft_soup"
+    EMBED_DIM: 768
+    GEOMETRIC_ENSEMBLE_ALPHA: -1.0
+    GEOMETRIC_ENSEMBLE_BETA: -1.0
+  MASK_FORMER:
+    NUM_OBJECT_QUERIES: 250
+    TEST:
+      SEMANTIC_ON: True
+      INSTANCE_ON: True
+      PANOPTIC_ON: True
+      OVERLAP_THRESHOLD: 0.7
+      OBJECT_MASK_THRESHOLD: 0.0
+
+INPUT:
+  DATASET_MAPPER_NAME: "ceiling_painting" 
+
+DATALOADER:
+  SAMPLER_TRAIN: "TrainingSampler"
+
+DATASETS:
+  TRAIN: ("ceiling_easy_train",)
+  TEST: ("ceiling_easy_val",) 
+OUTPUT_DIR: ./training/first-phase/fcclip-l-adapter

@@ -1,0 +1,46 @@
+# python train_net.py --config-file configs/semantic/train_semantic_large.yaml  --num-gpus 8 
+
+_BASE_: ../maskformer2_R50_bs16_50ep.yaml
+MODEL:
+  META_ARCHITECTURE: "MAFT_Plus"  # FCCLIP MAFT_Plus
+  SEM_SEG_HEAD:
+    NAME: "FCCLIPHead"
+    NUM_CLASSES: 171
+  MASK_ADAPTER:
+    NAME: "MASKAdapterHead"
+    MASK_IN_CHANNELS: 16
+    NUM_CHANNELS: 768
+    USE_CHECKPOINT: False
+    NUM_OUTPUT_MAPS: 16
+    MASK_THRESHOLD: 0.40
+  FC_CLIP:
+    CLIP_MODEL_NAME: "convnext_large_d_320"  
+    CLIP_PRETRAINED_WEIGHTS: "laion2b_s29b_b131k_ft_soup" 
+    EMBED_DIM: 768
+    GEOMETRIC_ENSEMBLE_ALPHA: 0.8
+    GEOMETRIC_ENSEMBLE_BETA: 1.0
+  rc_weights: 0.1
+  MASK_FORMER:
+    TEST:
+      SEMANTIC_ON: True
+      INSTANCE_ON: True
+      PANOPTIC_ON: True
+      OBJECT_MASK_THRESHOLD: 0.0
+
+SOLVER:
+  IMS_PER_BATCH: 24
+  BASE_LR: 0.0001
+  STEPS: (43371, 47314)
+  MAX_ITER: 49286
+  CHECKPOINT_PERIOD: 2500
+TEST:
+  EVAL_PERIOD: 2500
+INPUT:
+  DATASET_MAPPER_NAME: "mask_former_semantic"  # mask_former_semantic coco_panoptic_lsj
+DATASETS:
+  TRAIN: ("openvocab_coco_2017_train_stuff_sem_seg",)  #  openvocab_coco_2017_train_panoptic_with_sem_seg
+  TEST: ('openvocab_ade20k_panoptic_val',) 
+
+
+
+OUTPUT_DIR: ./training/maftp-large/ade20k
