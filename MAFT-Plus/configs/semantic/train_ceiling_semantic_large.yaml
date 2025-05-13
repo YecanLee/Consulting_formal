@@ -1,0 +1,30 @@
+# python train_net.py --config-file configs/semantic/train_semantic_large.yaml  --num-gpus 8 
+
+_BASE_: ../maskformer2_R50_bs16_50ep.yaml
+MODEL:
+  MASK_ON: True
+  META_ARCHITECTURE: "MAFT_Plus"  # FCCLIP MAFT_Plus
+  SEM_SEG_HEAD:
+    NAME: "FCCLIPHead"
+    NUM_CLASSES: 4
+  FC_CLIP:
+    CLIP_MODEL_NAME: "convnext_large_d_320"  
+    CLIP_PRETRAINED_WEIGHTS: "laion2b_s29b_b131k_ft_soup" 
+    EMBED_DIM: 768
+    GEOMETRIC_ENSEMBLE_ALPHA: -1.
+    GEOMETRIC_ENSEMBLE_BETA: -1.
+  rc_weights: 0.1
+
+INPUT:
+  DATASET_MAPPER_NAME: "ceiling_painting" # use the default mapper with our coco format customized dataset
+DATASETS:
+  TRAIN: ("ceiling_easy_train",)  #  openvocab_coco_2017_train_panoptic_with_sem_seg
+  TEST: ("ceiling_easy_val",) 
+
+SOLVER:
+  IMS_PER_BATCH: 1
+  BASE_LR: 0.0001
+  MAX_ITER: 500
+
+OUTPUT_DIR: ./out/semantic/MAFT_Plus_large/ori
+
