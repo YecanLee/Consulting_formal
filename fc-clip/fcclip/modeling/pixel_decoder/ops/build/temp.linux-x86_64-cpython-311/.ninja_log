@@ -1,0 +1,4 @@
+# ninja log v5
+0	3574	1747121629237101453	/home/ra78lof/consulting_pro/fc-clip/fcclip/modeling/pixel_decoder/ops/build/temp.linux-x86_64-cpython-311/home/ra78lof/consulting_pro/fc-clip/fcclip/modeling/pixel_decoder/ops/src/cpu/ms_deform_attn_cpu.o	55c76b3a49a788a1
+1	11340	1747121637005051867	/home/ra78lof/consulting_pro/fc-clip/fcclip/modeling/pixel_decoder/ops/build/temp.linux-x86_64-cpython-311/home/ra78lof/consulting_pro/fc-clip/fcclip/modeling/pixel_decoder/ops/src/vision.o	19940d0428a486f7
+1	15985	1747121641637022289	/home/ra78lof/consulting_pro/fc-clip/fcclip/modeling/pixel_decoder/ops/build/temp.linux-x86_64-cpython-311/home/ra78lof/consulting_pro/fc-clip/fcclip/modeling/pixel_decoder/ops/src/cuda/ms_deform_attn_cuda.o	9c48b5ff7e0538b6
