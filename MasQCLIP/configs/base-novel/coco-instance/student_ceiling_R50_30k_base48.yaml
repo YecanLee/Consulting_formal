@@ -1,0 +1,28 @@
+_BASE_: maskformer2_R50_bs16_50ep.yaml
+DATASETS:
+  TRAIN: ("ceiling_easy_train",)
+  TEST: ("ceiling_easy_val",)
+SOLVER:
+  IMS_PER_BATCH: 2
+  BASE_LR: 0.00005
+  STEPS: (327778, 355092)
+  MAX_ITER: 300
+  CHECKPOINT_PERIOD: 100
+TEST:
+  EVAL_PERIOD: 300
+MODEL:
+  MASK_ON: True
+  META_ARCHITECTURE: "MaskDistill"
+  SEM_SEG_HEAD:
+    NUM_CLASSES: 4  # class agnostic
+  MASK_FORMER:
+    CLASS_WEIGHT: 2.0
+    MASK_WEIGHT: 5.0
+    DICE_WEIGHT: 5.0
+    TEST:
+      SEMANTIC_ON: True
+      INSTANCE_ON: False
+      PANOPTIC_ON: False
+      OVERLAP_THRESHOLD: 0.8
+      OBJECT_MASK_THRESHOLD: 0.8
+
