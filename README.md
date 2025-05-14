@@ -54,3 +54,14 @@ If your labeled dataset is in `COCO` format, you could use the `register_coco_in
 
 Please do not forget to call the defined registration function in the `SAN/san/data/datasets/register_<your_dataset_name>.py` file. Otherwise, the model will not be able to find your dataset.
 
+### In construction and Alert
+Some of the models here require more than one train scripts, this section is mainly used to record which repo requires more than one train scripts.
+
+The `MasQCLIP` requires two Progressive Distillation traning and one Mask-Q Tuning, they all used the `train_net.py` script, but with different config files.
+
+The `MaskQCLIP` was trained with only two classes, `backdground` and `non-background`. This means that the model may have a different class_emb shape compared to our customized ceiling painting dataset. If we only have "mural" as the only class, this is fine. Otherwise, we need to modify the `class_emb` layer in the `mask_distill.py` file `MaskFormer` class to match our dataset.
+
+### TODO(A quick to-do list)
+- [ ] Check if the evaluators are working for different models. This may require us to change the way we register the `ceiling_painting` dataset. Or we may need to modify the metadata `evaluator_type` of the dataset.
+- [ ] Add pre-commit hooks to check the code style. We may only check the files we changed during the whole project instead of every file.
+- [ ] Add dockerfile for each model. We will only offer one training dockerfile and one deployment dockerfile.
