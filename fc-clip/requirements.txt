@@ -1,0 +1,9 @@
+cython
+scipy
+shapely
+timm
+h5py
+submitit
+scikit-image
+opencv-python-headless
+open-clip-torch==2.24.0
