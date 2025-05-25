@@ -1,0 +1,69 @@
+_base_: 'default.yml'
+
+model:
+  type: MultiLabelContrastive
+  img_encoder:
+    type: GroupViT
+    embed_dim: 384
+    num_heads: [6, 6, 6]
+    depths: [6, 3, 3]
+    num_group_tokens: [64, 8, 0]
+    num_output_groups: [64, 8]
+    drop_rate: 0.0
+    drop_path_rate: 0.1
+  text_encoder:
+    type: TextTransformer
+    context_length: 77
+    width: 256
+    layers: 12
+    vocab_size: 49408
+  contrast_temperature: 0.07
+  proj_num_layers: 2
+  output_dim: 256
+  multi_label: ${data.text_aug.multi_label} # multi_label=0 is better for RedCap
+data:
+  batch_size: 4
+  num_workers: 16
+  dataset:
+    train:
+      - ceiling_easy_train
+    val:
+      - ceiling_easy_val
+    meta:
+      ceiling_easy_train:
+        type: img_txt_pair
+        path: ../../ceiling_painting_dataset_with_masks/
+        prefix: ""
+        length: 121  # need to be adapted to the real value
+        file_pattern: "*.jpg"
+      ceiling_easy_val:
+        type: img_txt_pair
+        path: ../../ceiling_painting_dataset_with_masks/
+        prefix: ""
+        length: 19  # need to be adapted to the real value
+        file_pattern: "*.jpg"
+  img_aug:
+    deit_aug: true
+    img_size: 1280
+    img_scale: [0.5, 1.0]
+    interpolation: bilinear
+    color_jitter: 0.4
+    auto_augment: 'rand-m9-mstd0.5-inc1'
+    re_prob: 0.25
+    re_mode: 'pixel'
+    re_count: 1
+  text_aug:
+    max_seq_len: 77
+    multi_label: 0
+    word_type: 'noun'
+
+evaluate:
+  eval_only: false
+  eval_freq: 100
+  task:
+    - seg
+  seg:
+    save_best: true
+    cfg: segmentation/configs/_base_/datasets/pascal_voc12.py
+    template: simple
+    opts: []
