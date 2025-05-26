@@ -3,7 +3,34 @@ This repo includes our customized implementation of several Open Vocabulary Segm
 We modified the model configurations and dataset loaders according to our own customized ceiling paiting datasets labelled by `Roboflow`.
 
 ## Starting Point
-Please have some brief idea about what "Open Vocabulary Segmentation Task" is by reading some introduction blogs as well as some examples on Github.
+Please have some brief idea about what "Open Vocabulary Segmentation Task", "Super Resolution Task" and "Open Object Detection Task" are by reading some introduction blogs as well as some examples on Github. It will be helpful if you also understand some basic concepts of image storage format, i.e. coco-format.
+
+## Introduction of our project pipeline
+We include multiple features in our repo, this includes:
+- Automatic image upscaling with Open-source Super Resolution Model, we only include the following models now:
+  - `stablediffusionupscalepipeline` from `diffusers` package.
+  - `DRCT` (DRCT: Saving Image Super-resolution away from Information Bottleneck) published in CVPR 2024 and is SOTA on several super resolution benchmarks.
+
+- Open Vocabulary Segmentation Task, this includes:
+  - `SAN` paper, published in CVPR 2024.
+  - `MaskQCLIP` paper, published in CVPR 2024.
+  - `MasQCLIP` paper, published in CVPR 2024.
+
+- Open Object Detection Task, this includes:
+  - `FC-Clip` paper, published in CVPR 2024.
+
+- Open Vocabulary Object Detection Task, this includes:
+  - `FC-Clip` paper, published in CVPR 2024.
+
+- Multi-model pre-training with our customized ceiling painting dataset, this includes:
+    - `GroupViT` paper, published in CVPR 2022.
+    - `SegCLIP` paper, published in ICML 2023.
+
+- Some side features and funny ideas, you can find them in the `Fancy_Ideas` folder. This includes the following parts right now:
+    - `DragGAN` with GUI installation and usage case, you can manually drag a ceiling painting image to the target position. And create a short "video" which shows the whole process.
+    - `google_veo_video`, which includes a python ipynb script to create a video by using one of the `ceiling_painting` dataset's image as part of the input prompt.
+    - `diffuser_upscaler`, which uses an open-sourced upscaler to upscale a ceiling painting images which are super blured in the original dataset.
+
 
 ## Environment Installation
 ### SAN paper env installation instructions
@@ -54,14 +81,108 @@ If your labeled dataset is in `COCO` format, you could use the `register_coco_in
 
 Please do not forget to call the defined registration function in the `SAN/san/data/datasets/register_<your_dataset_name>.py` file. Otherwise, the model will not be able to find your dataset.
 
-### In construction and Alert
+## In construction and Alert
 Some of the models here require more than one train scripts, this section is mainly used to record which repo requires more than one train scripts.
 
 The `MasQCLIP` requires two Progressive Distillation traning and one Mask-Q Tuning, they all used the `train_net.py` script, but with different config files.
 
 The `MaskQCLIP` was trained with only two classes, `backdground` and `non-background`. This means that the model may have a different class_emb shape compared to our customized ceiling painting dataset. If we only have "mural" as the only class, this is fine. Otherwise, we need to modify the `class_emb` layer in the `mask_distill.py` file `MaskFormer` class to match our dataset.
 
+The mmcv-full from the GroupViT and SegCLIP are only compiled with numpy version smaller than 2.0.0, otherwise the installation of the mmcv-full will fail.
+
+We pinned our mmcv as well as our mmsegmentation package to older versions since those papers were developed based on 1.X version instead of 2.X version.
+
 ### TODO(A quick to-do list)
 - [ ] Check if the evaluators are working for different models. This may require us to change the way we register the `ceiling_painting` dataset. Or we may need to modify the metadata `evaluator_type` of the dataset.
 - [ ] Add pre-commit hooks to check the code style. We may only check the files we changed during the whole project instead of every file.
 - [ ] Add dockerfile for each model. We will only offer one training dockerfile and one deployment dockerfile.
+
+- [ ] Pin the debug guidance in fc-clip as an example, this should be pinned very precisely to which line and which file should be modified if `detectron2` package is used to trian and validate the model proposed in the paper.
+
+- [ ] Add some open sourced `video generation` models into the `Fancy_Ideas` folder. I propose we could use this [new paper](https://github.com/thu-ml/RIFLEx) since this new `ICML` paper can generate a little bit longer video compared to the previous models.
+
+## Debug Guidance
+The repos which were built upon the `mm-lab` series of packages require extra attention when you try to install the environment since the `mmcv` or `mmsegmentation` package are compiled with C++ backend, which may cause some issues when you try to install the environment.
+
+We pinned our environment installation as a combination of `segclip` and `groupvit` repo's environment installation instructions. But we only used `apex` installation part of the `groupvit` repo's installation instructions. However, extra attention should be paid to this part.
+
+You may run the following command to initialize the environment.
+
+```bash
+conda create -n segclip python=3.8 -y
+conda activate segclip
+conda install pytorch==1.8.0 torchvision==0.9.0 cudatoolkit=11.1 -c pytorch -c conda-forge
+pip install mmcv-full==1.3.14 -f https://download.openmmlab.com/mmcv/dist/cu111/torch1.8.0/index.html
+pip install mmsegmentation==0.18.0
+pip install webdataset==0.1.103
+pip install timm==0.4.12
+pip install opencv-python==4.4.0.46 termcolor==1.1.0 diffdist einops omegaconf
+pip install nltk ftfy regex tqdm
+pip install prefetch_generator
+pip install Pillow==8.2.0
+```
+Please be aware about the conda channel you are using for installing the `torch` and other important packages like `mmcv` and `mmsegmentation`. They are from different channels, please only use the command we provided above, official website guidance of the installation of those packages may not work.
+
+You may then need to install the `apex` package from the `groupvit` repo. The official github repo's command does not work, you may encounter the following issue when you run the installation command from the `GroupViT` repo:
+
+```bash
+apex RuntimeError: Cuda extensions are being compiled with a version of Cuda that does not match the version used to compile Pytorch binaries. Pytorch binaries were compiled with Cuda 11.1.
+```
+
+To fix this issue, please run the following command to install the `apex` package.
+
+```bash
+git clone https://github.com/ptrblck/apex.git
+cd apex
+git checkout apex_no_distributed
+pip install -v --no-cache-dir ./
+``` 
+
+Since this is an `outdated` version of the `apex` package, you will encounter some issues when you try to run the `GroupViT` repo inference command, especially this `apex` package was built upon an older version of `pytorch` package. You will encounter this issue when you run the inference command of the `GroupViT` repo:
+
+```bash
+AttributeError: module 'torch.nn' has no attribute 'backends'
+```
+
+This error means that we need to modify the source code of the `apex` package, please beware that since we are using a different branch of this `outdated` cloned `apex` repo, you should modify the source code of the `apex` installed in your conda environment.
+
+Suppose your conda environment path is `/home/user/anaconda3/envs/segclip`, first we need to use `vim` to open the `apex` source code file, please run the following command:
+
+```bash
+sudo apt install vim
+vim /home/user/anaconda3/envs/segclip/lib/python3.8/site-packages/apex/amp/utils.py
+```
+
+Then in this file, starting from line 132, there are three consecutive functions which used `torch.nn.backends.backend.FunctionBackend`, this is a fairly old legacy version of `pytorch`, please change those three functions with the following one:
+
+```bash 
+def has_func(mod, fn):
+    if isinstance(mod, dict):
+      return fn in mod
+    else:
+      return hasattr(mod, fn)
+
+def get_func(mod, fn):
+    if isinstance(mod, dict):
+      return mod[fn]
+    else:
+    return getattr(mod, fn)
+
+def set_func(mod, fn, new_fn):
+    if isinstance(mod, dict):
+        mod[fn] = new_fn
+    else:
+        setattr(mod, fn, new_fn)
+```
+
+Then you need to save the file and exit from `vim`.
+
+After this, you can run the `GroupViT` repo's inference command again.
+
+```bash
+./tools/dist_launch.sh main_seg.py configs/group_vit_gcc_ceiling.yml 1 --resume pretrained_weights/group_vit_gcc_yfcc_30e-879422e0.pth --opts evaluate.seg.cfg=segmentation/configs/_base_/datasets/ceiling_painting.py
+```
+
+And this should work.
+
+To add new datasets into the repo built upon the `detectron2` framework, you should always try to pin to the way we used in the `fc-clip` repo folder first, this is the vanilla method from the `detectron2` package, in the case of encountering errors, try to register the dataset by using the `register_ceiling_dataset` defined in the `consulting_pro/fc-clip/fcclip/data/datasets/register_ceiling.py` file. Some of the models may require you to use a different dataset register format during the training and inference phase.
