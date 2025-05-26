@@ -1,0 +1,45 @@
+/home/ra78lof/anaconda3/envs/ov-seg/lib/python3.11/site-packages/torch/functional.py:513: UserWarning: torch.meshgrid: in an upcoming release, it will be required to pass the indexing argument. (Triggered internally at ../aten/src/ATen/native/TensorShape.cpp:3609.)
+  return _VF.meshgrid(tensors, **kwargs)  # type: ignore[attr-defined]
+/home/ra78lof/consulting_pro/ov-seg/third_party/CLIP/clip/clip.py:157: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  state_dict = torch.load(model_path, map_location="cpu")
+3
+Traceback (most recent call last):
+  File "/home/ra78lof/consulting_pro/ov-seg/train_net.py", line 302, in <module>
+    launch(
+  File "/home/ra78lof/consulting_pro/detectron2/detectron2/engine/launch.py", line 84, in launch
+    main_func(*args)
+  File "/home/ra78lof/consulting_pro/ov-seg/train_net.py", line 294, in main
+    trainer = Trainer(cfg)
+              ^^^^^^^^^^^^
+  File "/home/ra78lof/consulting_pro/detectron2/detectron2/engine/defaults.py", line 410, in __init__
+    model = self.build_model(cfg)
+            ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ra78lof/consulting_pro/detectron2/detectron2/engine/defaults.py", line 550, in build_model
+    model = build_model(cfg)
+            ^^^^^^^^^^^^^^^^
+  File "/home/ra78lof/consulting_pro/detectron2/detectron2/modeling/meta_arch/build.py", line 22, in build_model
+    model = META_ARCH_REGISTRY.get(meta_arch)(cfg)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ra78lof/consulting_pro/detectron2/detectron2/config/config.py", line 189, in wrapped
+    explicit_args = _get_args_from_config(from_config_func, *args, **kwargs)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ra78lof/consulting_pro/detectron2/detectron2/config/config.py", line 245, in _get_args_from_config
+    ret = from_config_func(*args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ra78lof/consulting_pro/ov-seg/open_vocab_seg/ovseg_model.py", line 101, in from_config
+    clip_adapter = MaskFormerClipAdapter(
+                   ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ra78lof/consulting_pro/ov-seg/open_vocab_seg/modeling/clip_adapter/adapter.py", line 88, in __init__
+    super().__init__(clip_model_name, mask_prompt_depth, text_templates)
+  File "/home/ra78lof/consulting_pro/ov-seg/open_vocab_seg/modeling/clip_adapter/adapter.py", line 22, in __init__
+    self.clip_model = build_clip_model(clip_model_name, mask_prompt_depth)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ra78lof/consulting_pro/ov-seg/open_vocab_seg/modeling/clip_adapter/utils.py", line 73, in build_clip_model
+    model, _ = clip.load(model, mask_prompt_depth=mask_prompt_depth, device="cpu")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ra78lof/consulting_pro/ov-seg/third_party/CLIP/clip/clip.py", line 167, in load
+    model = build_model(state_dict or model.state_dict(), mask_prompt_depth).to(device)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ra78lof/consulting_pro/ov-seg/third_party/CLIP/clip/model.py", line 558, in build_model
+    assert mask_prompt_depth == 0, 'ResNets do not support mask prompt tuning'
+AssertionError: ResNets do not support mask prompt tuning

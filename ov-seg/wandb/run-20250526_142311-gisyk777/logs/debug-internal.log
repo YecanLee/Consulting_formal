@@ -1,0 +1,16 @@
+{"time":"2025-05-26T14:23:11.760548007Z","level":"INFO","msg":"stream: starting","core version":"0.19.11","symlink path":"/home/ra78lof/consulting_pro/ov-seg/wandb/run-20250526_142311-gisyk777/logs/debug-core.log"}
+{"time":"2025-05-26T14:23:12.024610136Z","level":"INFO","msg":"created new stream","id":"gisyk777"}
+{"time":"2025-05-26T14:23:12.024755195Z","level":"INFO","msg":"stream: started","id":"gisyk777"}
+{"time":"2025-05-26T14:23:12.024782495Z","level":"INFO","msg":"writer: Do: started","stream_id":"gisyk777"}
+{"time":"2025-05-26T14:23:12.024806575Z","level":"INFO","msg":"handler: started","stream_id":"gisyk777"}
+{"time":"2025-05-26T14:23:12.024869724Z","level":"INFO","msg":"sender: started","stream_id":"gisyk777"}
+{"time":"2025-05-26T14:23:12.252791155Z","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-05-26T14:23:12.253006154Z","level":"ERROR","msg":"git repo not found","error":"repository does not exist"}
+{"time":"2025-05-26T14:23:14.523476051Z","level":"INFO","msg":"stream: closing","id":"gisyk777"}
+{"time":"2025-05-26T14:23:14.523500911Z","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-05-26T14:23:14.523550741Z","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-05-26T14:23:15.157822414Z","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-05-26T14:23:15.356565381Z","level":"INFO","msg":"handler: closed","stream_id":"gisyk777"}
+{"time":"2025-05-26T14:23:15.35660875Z","level":"INFO","msg":"sender: closed","stream_id":"gisyk777"}
+{"time":"2025-05-26T14:23:15.35660901Z","level":"INFO","msg":"writer: Close: closed","stream_id":"gisyk777"}
+{"time":"2025-05-26T14:23:15.35674198Z","level":"INFO","msg":"stream: closed","id":"gisyk777"}
