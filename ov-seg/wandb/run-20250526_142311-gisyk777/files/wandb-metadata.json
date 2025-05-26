@@ -1,0 +1,50 @@
+{
+  "os": "Linux-6.5.0-44-generic-x86_64-with-glibc2.38",
+  "python": "CPython 3.11.0",
+  "startedAt": "2025-05-26T14:23:11.759284Z",
+  "args": [
+    "--num-gpu",
+    "1",
+    "--config-file",
+    "configs/ovseg_swinB_vitL_bs2_ceiling.yaml",
+    "MODEL.CLIP_ADAPTER.CLIP_MODEL_NAME",
+    "pretrained_weights/ovseg_swinbase_vitL14_ft_mpt.pth"
+  ],
+  "program": "/home/ra78lof/consulting_pro/ov-seg/train_net.py",
+  "codePath": "ov-seg/train_net.py",
+  "git": {
+    "remote": "https://github.com/YecanLee/Consulting_formal.git",
+    "commit": "a77bb61d47c0b0b152d2eba2ee954f5871d03f05"
+  },
+  "email": "yecanlee@Yahoo.com",
+  "root": "/home/ra78lof/consulting_pro/ov-seg",
+  "host": "LMMISTA-biostat",
+  "executable": "/home/ra78lof/anaconda3/envs/ov-seg/bin/python",
+  "codePathLocal": "train_net.py",
+  "cpu_count": 16,
+  "cpu_count_logical": 32,
+  "gpu": "NVIDIA GeForce RTX 4090",
+  "gpu_count": 1,
+  "disk": {
+    "/": {
+      "total": "1889086754816",
+      "used": "779464462336"
+    }
+  },
+  "memory": {
+    "total": "67333353472"
+  },
+  "cpu": {
+    "count": 16,
+    "countLogical": 32
+  },
+  "gpu_nvidia": [
+    {
+      "name": "NVIDIA GeForce RTX 4090",
+      "memoryTotal": "25757220864",
+      "cudaCores": 16384,
+      "architecture": "Ada"
+    }
+  ],
+  "cudaVersion": "12.2"
+}

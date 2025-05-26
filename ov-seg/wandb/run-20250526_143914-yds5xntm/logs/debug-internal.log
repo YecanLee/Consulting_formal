@@ -1,0 +1,16 @@
+{"time":"2025-05-26T14:39:14.255306433Z","level":"INFO","msg":"stream: starting","core version":"0.19.11","symlink path":"/home/ra78lof/consulting_pro/ov-seg/wandb/run-20250526_143914-yds5xntm/logs/debug-core.log"}
+{"time":"2025-05-26T14:39:14.518904094Z","level":"INFO","msg":"created new stream","id":"yds5xntm"}
+{"time":"2025-05-26T14:39:14.518936314Z","level":"INFO","msg":"stream: started","id":"yds5xntm"}
+{"time":"2025-05-26T14:39:14.518956084Z","level":"INFO","msg":"writer: Do: started","stream_id":"yds5xntm"}
+{"time":"2025-05-26T14:39:14.518984134Z","level":"INFO","msg":"handler: started","stream_id":"yds5xntm"}
+{"time":"2025-05-26T14:39:14.518991544Z","level":"INFO","msg":"sender: started","stream_id":"yds5xntm"}
+{"time":"2025-05-26T14:39:14.776841859Z","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-05-26T14:39:14.777133917Z","level":"ERROR","msg":"git repo not found","error":"repository does not exist"}
+{"time":"2025-05-26T14:39:17.123211914Z","level":"INFO","msg":"stream: closing","id":"yds5xntm"}
+{"time":"2025-05-26T14:39:17.123247704Z","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-05-26T14:39:17.123323004Z","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-05-26T14:39:17.750164254Z","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-05-26T14:39:17.960966542Z","level":"INFO","msg":"handler: closed","stream_id":"yds5xntm"}
+{"time":"2025-05-26T14:39:17.961001861Z","level":"INFO","msg":"writer: Close: closed","stream_id":"yds5xntm"}
+{"time":"2025-05-26T14:39:17.961018771Z","level":"INFO","msg":"sender: closed","stream_id":"yds5xntm"}
+{"time":"2025-05-26T14:39:17.961121651Z","level":"INFO","msg":"stream: closed","id":"yds5xntm"}

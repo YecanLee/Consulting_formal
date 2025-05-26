@@ -1,0 +1,16 @@
+{"time":"2025-05-26T14:20:32.99381187Z","level":"INFO","msg":"stream: starting","core version":"0.19.11","symlink path":"/home/ra78lof/consulting_pro/ov-seg/wandb/run-20250526_142032-cng3yuao/logs/debug-core.log"}
+{"time":"2025-05-26T14:20:33.253818779Z","level":"INFO","msg":"created new stream","id":"cng3yuao"}
+{"time":"2025-05-26T14:20:33.253847969Z","level":"INFO","msg":"stream: started","id":"cng3yuao"}
+{"time":"2025-05-26T14:20:33.253867369Z","level":"INFO","msg":"writer: Do: started","stream_id":"cng3yuao"}
+{"time":"2025-05-26T14:20:33.253875039Z","level":"INFO","msg":"sender: started","stream_id":"cng3yuao"}
+{"time":"2025-05-26T14:20:33.253921838Z","level":"INFO","msg":"handler: started","stream_id":"cng3yuao"}
+{"time":"2025-05-26T14:20:33.507241289Z","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-05-26T14:20:33.507470858Z","level":"ERROR","msg":"git repo not found","error":"repository does not exist"}
+{"time":"2025-05-26T14:20:35.826194427Z","level":"INFO","msg":"stream: closing","id":"cng3yuao"}
+{"time":"2025-05-26T14:20:35.826230887Z","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-05-26T14:20:35.826282787Z","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-05-26T14:20:36.41019158Z","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-05-26T14:20:36.705154161Z","level":"INFO","msg":"handler: closed","stream_id":"cng3yuao"}
+{"time":"2025-05-26T14:20:36.705201071Z","level":"INFO","msg":"sender: closed","stream_id":"cng3yuao"}
+{"time":"2025-05-26T14:20:36.705191431Z","level":"INFO","msg":"writer: Close: closed","stream_id":"cng3yuao"}
+{"time":"2025-05-26T14:20:36.70531943Z","level":"INFO","msg":"stream: closed","id":"cng3yuao"}

@@ -1,0 +1,1047 @@
+diff --git a/GroupViT/output/group_vit_gcc_ceiling_bs4x1/log.txt b/GroupViT/output/group_vit_gcc_ceiling_bs4x1/log.txt
+index 6790c8b..c80b2ce 100644
+--- a/GroupViT/output/group_vit_gcc_ceiling_bs4x1/log.txt
++++ b/GroupViT/output/group_vit_gcc_ceiling_bs4x1/log.txt
+@@ -8223,3 +8223,742 @@ model:
+ [2025-05-25 21:03:27 group_vit_gcc_ceiling_bs4x1] (group_vit_seg.py 138): INFO Building GroupViTSegInference with 4 classes, test_cfg=Config (path: None): {'bg_thresh': 0.95, 'mode': 'slide', 'stride': (224, 224), 'crop_size': (448, 448)}, with_bg=False
+ [2025-05-25 21:03:31 group_vit_gcc_ceiling_bs4x1] (main_group_vit.py 394): INFO Eval Seg mIoU 4.93
+ [2025-05-25 21:03:31 group_vit_gcc_ceiling_bs4x1] (main_seg.py 93): INFO mIoU of the network on the 118 test images: 4.93%
++[2025-05-26 09:14:01 group_vit_gcc_ceiling_bs4x1] (main_seg.py 181): INFO Full config saved to output/group_vit_gcc_ceiling_bs4x1/config.json
++[2025-05-26 09:14:01 group_vit_gcc_ceiling_bs4x1] (main_seg.py 184): INFO data:
++  batch_size: 4
++  pin_memory: true
++  num_workers: 16
++  shuffle_buffer: 10000
++  seed: ${train.seed}
++  dataset:
++    meta:
++      gcc3m:
++        type: img_txt_pair
++        path: local_data/gcc3m_shards
++        prefix: gcc-train-{000000..00436}.tar
++        length: 2891445
++      gcc12m:
++        type: img_txt_pair
++        path: local_data/gcc12m_shards
++        prefix: gcc-conceptual-12m-{000000..001943}.tar
++        length: 11156203
++      yfcc14m:
++        type: img_txt_pair
++        path: local_data/yfcc14m_shards
++        prefix: yfcc14m-{000000..001888}.tar
++        length: 14615499
++      redcap12m:
++        type: img_txt_pair
++        path: local_data/redcap12m_shards
++        prefix: redcap12m-{000000..001211}.tar
++        length: 11866987
++      imagenet:
++        type: img_cls_pair
++        path: local_data/imagenet_shards
++        prefix: imagenet-val-{000000..000049}.tar
++        length: 50000
++      ceiling_easy_train:
++        type: img_txt_pair
++        path: ../../ceiling_painting_dataset_with_masks/
++        prefix: ''
++        length: 121
++        file_pattern: '*.jpg'
++      ceiling_easy_val:
++        type: img_txt_pair
++        path: ../../ceiling_painting_dataset_with_masks/
++        prefix: ''
++        length: 19
++        file_pattern: '*.jpg'
++    train:
++    - ceiling_easy_train
++    val:
++    - ceiling_easy_val
++  img_aug:
++    deit_aug: true
++    img_size: 1280
++    img_scale:
++    - 0.5
++    - 1.0
++    interpolation: bilinear
++    color_jitter: 0.4
++    auto_augment: rand-m9-mstd0.5-inc1
++    re_prob: 0.25
++    re_mode: pixel
++    re_count: 1
++  text_aug:
++    max_seq_len: 77
++    multi_label: 0
++    word_type: noun
++train:
++  start_epoch: 0
++  epochs: 30
++  warmup_epochs: 2
++  base_lr: 0.0016
++  weight_decay: 0.05
++  warmup_lr: 4.0e-06
++  min_lr: 4.0e-05
++  clip_grad: 5.0
++  accumulation_steps: 0
++  amp_opt_level: O1
++  seed: 0
++  lr_scheduler:
++    name: cosine
++  optimizer:
++    name: adamw
++    eps: 1.0e-08
++    betas:
++    - 0.9
++    - 0.999
++evaluate:
++  eval_only: true
++  eval_freq: 100
++  task:
++  - seg
++  cls:
++    save_best: true
++    template: subset
++  seg:
++    save_best: true
++    cfg: segmentation/configs/_base_/datasets/ceiling_painting.py
++    template: simple
++    opts: []
++checkpoint:
++  auto_resume: true
++  resume: pretrained_weights/group_vit_gcc_yfcc_30e-879422e0.pth
++  freq: 1
++  max_kept: -1
++  save_freq: 1
++model_name: group_vit_gcc_ceiling_bs4x1
++output: output/group_vit_gcc_ceiling_bs4x1
++tag: default
++print_freq: 10
++seed: 0
++wandb: false
++local_rank: 0
++vis: []
++_base_: default.yml
++model:
++  type: MultiLabelContrastive
++  img_encoder:
++    type: GroupViT
++    embed_dim: 384
++    num_heads:
++    - 6
++    - 6
++    - 6
++    depths:
++    - 6
++    - 3
++    - 3
++    num_group_tokens:
++    - 64
++    - 8
++    - 0
++    num_output_groups:
++    - 64
++    - 8
++    drop_rate: 0.0
++    drop_path_rate: 0.1
++  text_encoder:
++    type: TextTransformer
++    context_length: 77
++    width: 256
++    layers: 12
++    vocab_size: 49408
++  contrast_temperature: 0.07
++  proj_num_layers: 2
++  output_dim: 256
++  multi_label: ${data.text_aug.multi_label}
++
++[2025-05-26 09:14:01 group_vit_gcc_ceiling_bs4x1] (main_seg.py 76): INFO Evaluating dataset: <segmentation.datasets.coco_segmentation.CeilingPaintingDataset object at 0x7761e1d7a0a0>
++[2025-05-26 09:14:01 group_vit_gcc_ceiling_bs4x1] (main_seg.py 78): INFO Creating model:MultiLabelContrastive/group_vit_gcc_ceiling_bs4x1
++[2025-05-26 09:14:02 group_vit_gcc_ceiling_bs4x1] (main_seg.py 81): INFO MultiLabelContrastive(
++  (img_encoder): GroupViT(
++    (patch_embed): PatchEmbed(
++      (proj): Conv2d(3, 384, kernel_size=(16, 16), stride=(16, 16))
++      (norm): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
++    )
++    (avgpool): AdaptiveAvgPool1d(output_size=1)
++    (pos_drop): Dropout(p=0.0, inplace=False)
++    (layers): ModuleList(
++      (0): GroupingLayer(
++        dim=384, 
++        input_resolution=196, 
++        depth=6, 
++        num_group_token=64, 
++        
++        (blocks): ModuleList(
++          (0): AttnBlock(
++            (norm1): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
++            (attn): Attention(
++              num_heads=6, 
++              qkv_bias=0.125, 
++              qkv_fuse=True
++              (qkv): Linear(in_features=384, out_features=1152, bias=True)
++              (attn_drop): Dropout(p=0.0, inplace=False)
++              (proj): Linear(in_features=384, out_features=384, bias=True)
++              (proj_drop): Dropout(p=0.0, inplace=False)
++            )
++            (drop_path): Identity()
++            (norm2): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
++            (mlp): Mlp(
++              (fc1): Linear(in_features=384, out_features=1536, bias=True)
++              (act): GELU()
++              (fc2): Linear(in_features=1536, out_features=384, bias=True)
++              (drop): Dropout(p=0.0, inplace=False)
++            )
++          )
++          (1): AttnBlock(
++            (norm1): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
++            (attn): Attention(
++              num_heads=6, 
++              qkv_bias=0.125, 
++              qkv_fuse=True
++              (qkv): Linear(in_features=384, out_features=1152, bias=True)
++              (attn_drop): Dropout(p=0.0, inplace=False)
++              (proj): Linear(in_features=384, out_features=384, bias=True)
++              (proj_drop): Dropout(p=0.0, inplace=False)
++            )
++            (drop_path): DropPath()
++            (norm2): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
++            (mlp): Mlp(
++              (fc1): Linear(in_features=384, out_features=1536, bias=True)
++              (act): GELU()
++              (fc2): Linear(in_features=1536, out_features=384, bias=True)
++              (drop): Dropout(p=0.0, inplace=False)
++            )
++          )
++          (2): AttnBlock(
++            (norm1): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
++            (attn): Attention(
++              num_heads=6, 
++              qkv_bias=0.125, 
++              qkv_fuse=True
++              (qkv): Linear(in_features=384, out_features=1152, bias=True)
++              (attn_drop): Dropout(p=0.0, inplace=False)
++              (proj): Linear(in_features=384, out_features=384, bias=True)
++              (proj_drop): Dropout(p=0.0, inplace=False)
++            )
++            (drop_path): DropPath()
++            (norm2): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
++            (mlp): Mlp(
++              (fc1): Linear(in_features=384, out_features=1536, bias=True)
++              (act): GELU()
++              (fc2): Linear(in_features=1536, out_features=384, bias=True)
++              (drop): Dropout(p=0.0, inplace=False)
++            )
++          )
++          (3): AttnBlock(
++            (norm1): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
++            (attn): Attention(
++              num_heads=6, 
++              qkv_bias=0.125, 
++              qkv_fuse=True
++              (qkv): Linear(in_features=384, out_features=1152, bias=True)
++              (attn_drop): Dropout(p=0.0, inplace=False)
++              (proj): Linear(in_features=384, out_features=384, bias=True)
++              (proj_drop): Dropout(p=0.0, inplace=False)
++            )
++            (drop_path): DropPath()
++            (norm2): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
++            (mlp): Mlp(
++              (fc1): Linear(in_features=384, out_features=1536, bias=True)
++              (act): GELU()
++              (fc2): Linear(in_features=1536, out_features=384, bias=True)
++              (drop): Dropout(p=0.0, inplace=False)
++            )
++          )
++          (4): AttnBlock(
++            (norm1): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
++            (attn): Attention(
++              num_heads=6, 
++              qkv_bias=0.125, 
++              qkv_fuse=True
++              (qkv): Linear(in_features=384, out_features=1152, bias=True)
++              (attn_drop): Dropout(p=0.0, inplace=False)
++              (proj): Linear(in_features=384, out_features=384, bias=True)
++              (proj_drop): Dropout(p=0.0, inplace=False)
++            )
++            (drop_path): DropPath()
++            (norm2): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
++            (mlp): Mlp(
++              (fc1): Linear(in_features=384, out_features=1536, bias=True)
++              (act): GELU()
++              (fc2): Linear(in_features=1536, out_features=384, bias=True)
++              (drop): Dropout(p=0.0, inplace=False)
++            )
++          )
++          (5): AttnBlock(
++            (norm1): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
++            (attn): Attention(
++              num_heads=6, 
++              qkv_bias=0.125, 
++              qkv_fuse=True
++              (qkv): Linear(in_features=384, out_features=1152, bias=True)
++              (attn_drop): Dropout(p=0.0, inplace=False)
++              (proj): Linear(in_features=384, out_features=384, bias=True)
++              (proj_drop): Dropout(p=0.0, inplace=False)
++            )
++            (drop_path): DropPath()
++            (norm2): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
++            (mlp): Mlp(
++              (fc1): Linear(in_features=384, out_features=1536, bias=True)
++              (act): GELU()
++              (fc2): Linear(in_features=1536, out_features=384, bias=True)
++              (drop): Dropout(p=0.0, inplace=False)
++            )
++          )
++        )
++        (downsample): GroupingBlock(
++          hard=True, 
++          gumbel=True, 
++          sum_assign=False, 
++          num_output_group=64, 
++           
++          (norm_tokens): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
++          (mlp_inter): Mlp(
++            (fc1): Linear(in_features=64, out_features=192, bias=True)
++            (act): GELU()
++            (fc2): Linear(in_features=192, out_features=64, bias=True)
++            (drop): Dropout(p=0.0, inplace=False)
++          )
++          (norm_post_tokens): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
++          (norm_x): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
++          (pre_assign_attn): CrossAttnBlock(
++            (norm_post): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
++            (norm_q): Identity()
++            (norm_k): Identity()
++            (attn): Attention(
++              num_heads=6, 
++              qkv_bias=0.125, 
++              qkv_fuse=False
++              (q_proj): Linear(in_features=384, out_features=384, bias=True)
++              (k_proj): Linear(in_features=384, out_features=384, bias=True)
++              (v_proj): Linear(in_features=384, out_features=384, bias=True)
++              (attn_drop): Dropout(p=0.0, inplace=False)
++              (proj): Linear(in_features=384, out_features=384, bias=True)
++              (proj_drop): Dropout(p=0.0, inplace=False)
++            )
++            (drop_path): Identity()
++            (norm2): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
++            (mlp): Mlp(
++              (fc1): Linear(in_features=384, out_features=1536, bias=True)
++              (act): GELU()
++              (fc2): Linear(in_features=1536, out_features=384, bias=True)
++              (drop): Dropout(p=0.0, inplace=False)
++            )
++          )
++          (assign): AssignAttention(
++            num_heads: 1, 
++            hard: True, 
++            gumbel: True, 
++            sum_assign=False, 
++            gumbel_tau: 1.0, 
++            assign_eps: 1.0
++            (q_proj): Linear(in_features=384, out_features=384, bias=True)
++            (k_proj): Linear(in_features=384, out_features=384, bias=True)
++            (v_proj): Linear(in_features=384, out_features=384, bias=True)
++            (attn_drop): Dropout(p=0.0, inplace=False)
++            (proj): Linear(in_features=384, out_features=384, bias=True)
++            (proj_drop): Dropout(p=0.0, inplace=False)
++          )
++          (norm_new_x): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
++          (mlp_channels): Mlp(
++            (fc1): Linear(in_features=384, out_features=1536, bias=True)
++            (act): GELU()
++            (fc2): Linear(in_features=1536, out_features=384, bias=True)
++            (drop): Dropout(p=0.0, inplace=False)
++          )
++          (reduction): Identity()
++        )
++      )
++      (1): GroupingLayer(
++        dim=384, 
++        input_resolution=64, 
++        depth=3, 
++        num_group_token=8, 
++        
++        (blocks): ModuleList(
++          (0): AttnBlock(
++            (norm1): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
++            (attn): Attention(
++              num_heads=6, 
++              qkv_bias=0.125, 
++              qkv_fuse=True
++              (qkv): Linear(in_features=384, out_features=1152, bias=True)
++              (attn_drop): Dropout(p=0.0, inplace=False)
++              (proj): Linear(in_features=384, out_features=384, bias=True)
++              (proj_drop): Dropout(p=0.0, inplace=False)
++            )
++            (drop_path): DropPath()
++            (norm2): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
++            (mlp): Mlp(
++              (fc1): Linear(in_features=384, out_features=1536, bias=True)
++              (act): GELU()
++              (fc2): Linear(in_features=1536, out_features=384, bias=True)
++              (drop): Dropout(p=0.0, inplace=False)
++            )
++          )
++          (1): AttnBlock(
++            (norm1): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
++            (attn): Attention(
++              num_heads=6, 
++              qkv_bias=0.125, 
++              qkv_fuse=True
++              (qkv): Linear(in_features=384, out_features=1152, bias=True)
++              (attn_drop): Dropout(p=0.0, inplace=False)
++              (proj): Linear(in_features=384, out_features=384, bias=True)
++              (proj_drop): Dropout(p=0.0, inplace=False)
++            )
++            (drop_path): DropPath()
++            (norm2): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
++            (mlp): Mlp(
++              (fc1): Linear(in_features=384, out_features=1536, bias=True)
++              (act): GELU()
++              (fc2): Linear(in_features=1536, out_features=384, bias=True)
++              (drop): Dropout(p=0.0, inplace=False)
++            )
++          )
++          (2): AttnBlock(
++            (norm1): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
++            (attn): Attention(
++              num_heads=6, 
++              qkv_bias=0.125, 
++              qkv_fuse=True
++              (qkv): Linear(in_features=384, out_features=1152, bias=True)
++              (attn_drop): Dropout(p=0.0, inplace=False)
++              (proj): Linear(in_features=384, out_features=384, bias=True)
++              (proj_drop): Dropout(p=0.0, inplace=False)
++            )
++            (drop_path): DropPath()
++            (norm2): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
++            (mlp): Mlp(
++              (fc1): Linear(in_features=384, out_features=1536, bias=True)
++              (act): GELU()
++              (fc2): Linear(in_features=1536, out_features=384, bias=True)
++              (drop): Dropout(p=0.0, inplace=False)
++            )
++          )
++        )
++        (downsample): GroupingBlock(
++          hard=True, 
++          gumbel=True, 
++          sum_assign=False, 
++          num_output_group=8, 
++           
++          (norm_tokens): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
++          (mlp_inter): Mlp(
++            (fc1): Linear(in_features=8, out_features=192, bias=True)
++            (act): GELU()
++            (fc2): Linear(in_features=192, out_features=8, bias=True)
++            (drop): Dropout(p=0.0, inplace=False)
++          )
++          (norm_post_tokens): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
++          (norm_x): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
++          (pre_assign_attn): CrossAttnBlock(
++            (norm_post): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
++            (norm_q): Identity()
++            (norm_k): Identity()
++            (attn): Attention(
++              num_heads=6, 
++              qkv_bias=0.125, 
++              qkv_fuse=False
++              (q_proj): Linear(in_features=384, out_features=384, bias=True)
++              (k_proj): Linear(in_features=384, out_features=384, bias=True)
++              (v_proj): Linear(in_features=384, out_features=384, bias=True)
++              (attn_drop): Dropout(p=0.0, inplace=False)
++              (proj): Linear(in_features=384, out_features=384, bias=True)
++              (proj_drop): Dropout(p=0.0, inplace=False)
++            )
++            (drop_path): Identity()
++            (norm2): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
++            (mlp): Mlp(
++              (fc1): Linear(in_features=384, out_features=1536, bias=True)
++              (act): GELU()
++              (fc2): Linear(in_features=1536, out_features=384, bias=True)
++              (drop): Dropout(p=0.0, inplace=False)
++            )
++          )
++          (assign): AssignAttention(
++            num_heads: 1, 
++            hard: True, 
++            gumbel: True, 
++            sum_assign=False, 
++            gumbel_tau: 1.0, 
++            assign_eps: 1.0
++            (q_proj): Linear(in_features=384, out_features=384, bias=True)
++            (k_proj): Linear(in_features=384, out_features=384, bias=True)
++            (v_proj): Linear(in_features=384, out_features=384, bias=True)
++            (attn_drop): Dropout(p=0.0, inplace=False)
++            (proj): Linear(in_features=384, out_features=384, bias=True)
++            (proj_drop): Dropout(p=0.0, inplace=False)
++          )
++          (norm_new_x): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
++          (mlp_channels): Mlp(
++            (fc1): Linear(in_features=384, out_features=1536, bias=True)
++            (act): GELU()
++            (fc2): Linear(in_features=1536, out_features=384, bias=True)
++            (drop): Dropout(p=0.0, inplace=False)
++          )
++          (reduction): Identity()
++        )
++        (group_projector): Sequential(
++          (0): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
++          (1): MixerMlp(
++            (fc1): Linear(in_features=64, out_features=192, bias=True)
++            (act): GELU()
++            (fc2): Linear(in_features=192, out_features=8, bias=True)
++            (drop): Dropout(p=0.0, inplace=False)
++          )
++        )
++      )
++      (2): GroupingLayer(
++        dim=384, 
++        input_resolution=8, 
++        depth=3, 
++        num_group_token=0, 
++        
++        (blocks): ModuleList(
++          (0): AttnBlock(
++            (norm1): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
++            (attn): Attention(
++              num_heads=6, 
++              qkv_bias=0.125, 
++              qkv_fuse=True
++              (qkv): Linear(in_features=384, out_features=1152, bias=True)
++              (attn_drop): Dropout(p=0.0, inplace=False)
++              (proj): Linear(in_features=384, out_features=384, bias=True)
++              (proj_drop): Dropout(p=0.0, inplace=False)
++            )
++            (drop_path): DropPath()
++            (norm2): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
++            (mlp): Mlp(
++              (fc1): Linear(in_features=384, out_features=1536, bias=True)
++              (act): GELU()
++              (fc2): Linear(in_features=1536, out_features=384, bias=True)
++              (drop): Dropout(p=0.0, inplace=False)
++            )
++          )
++          (1): AttnBlock(
++            (norm1): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
++            (attn): Attention(
++              num_heads=6, 
++              qkv_bias=0.125, 
++              qkv_fuse=True
++              (qkv): Linear(in_features=384, out_features=1152, bias=True)
++              (attn_drop): Dropout(p=0.0, inplace=False)
++              (proj): Linear(in_features=384, out_features=384, bias=True)
++              (proj_drop): Dropout(p=0.0, inplace=False)
++            )
++            (drop_path): DropPath()
++            (norm2): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
++            (mlp): Mlp(
++              (fc1): Linear(in_features=384, out_features=1536, bias=True)
++              (act): GELU()
++              (fc2): Linear(in_features=1536, out_features=384, bias=True)
++              (drop): Dropout(p=0.0, inplace=False)
++            )
++          )
++          (2): AttnBlock(
++            (norm1): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
++            (attn): Attention(
++              num_heads=6, 
++              qkv_bias=0.125, 
++              qkv_fuse=True
++              (qkv): Linear(in_features=384, out_features=1152, bias=True)
++              (attn_drop): Dropout(p=0.0, inplace=False)
++              (proj): Linear(in_features=384, out_features=384, bias=True)
++              (proj_drop): Dropout(p=0.0, inplace=False)
++            )
++            (drop_path): DropPath()
++            (norm2): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
++            (mlp): Mlp(
++              (fc1): Linear(in_features=384, out_features=1536, bias=True)
++              (act): GELU()
++              (fc2): Linear(in_features=1536, out_features=384, bias=True)
++              (drop): Dropout(p=0.0, inplace=False)
++            )
++          )
++        )
++      )
++    )
++    (norm): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
++    (head): Identity()
++  )
++  (text_encoder): TextTransformer(
++    (transformer): Transformer(
++      (resblocks): Sequential(
++        (0): ResidualAttentionBlock(
++          (attn): MultiheadAttention(
++            (out_proj): _LinearWithBias(in_features=256, out_features=256, bias=True)
++          )
++          (ln_1): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
++          (mlp): Sequential(
++            (c_fc): Linear(in_features=256, out_features=1024, bias=True)
++            (gelu): QuickGELU()
++            (c_proj): Linear(in_features=1024, out_features=256, bias=True)
++          )
++          (ln_2): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
++        )
++        (1): ResidualAttentionBlock(
++          (attn): MultiheadAttention(
++            (out_proj): _LinearWithBias(in_features=256, out_features=256, bias=True)
++          )
++          (ln_1): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
++          (mlp): Sequential(
++            (c_fc): Linear(in_features=256, out_features=1024, bias=True)
++            (gelu): QuickGELU()
++            (c_proj): Linear(in_features=1024, out_features=256, bias=True)
++          )
++          (ln_2): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
++        )
++        (2): ResidualAttentionBlock(
++          (attn): MultiheadAttention(
++            (out_proj): _LinearWithBias(in_features=256, out_features=256, bias=True)
++          )
++          (ln_1): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
++          (mlp): Sequential(
++            (c_fc): Linear(in_features=256, out_features=1024, bias=True)
++            (gelu): QuickGELU()
++            (c_proj): Linear(in_features=1024, out_features=256, bias=True)
++          )
++          (ln_2): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
++        )
++        (3): ResidualAttentionBlock(
++          (attn): MultiheadAttention(
++            (out_proj): _LinearWithBias(in_features=256, out_features=256, bias=True)
++          )
++          (ln_1): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
++          (mlp): Sequential(
++            (c_fc): Linear(in_features=256, out_features=1024, bias=True)
++            (gelu): QuickGELU()
++            (c_proj): Linear(in_features=1024, out_features=256, bias=True)
++          )
++          (ln_2): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
++        )
++        (4): ResidualAttentionBlock(
++          (attn): MultiheadAttention(
++            (out_proj): _LinearWithBias(in_features=256, out_features=256, bias=True)
++          )
++          (ln_1): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
++          (mlp): Sequential(
++            (c_fc): Linear(in_features=256, out_features=1024, bias=True)
++            (gelu): QuickGELU()
++            (c_proj): Linear(in_features=1024, out_features=256, bias=True)
++          )
++          (ln_2): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
++        )
++        (5): ResidualAttentionBlock(
++          (attn): MultiheadAttention(
++            (out_proj): _LinearWithBias(in_features=256, out_features=256, bias=True)
++          )
++          (ln_1): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
++          (mlp): Sequential(
++            (c_fc): Linear(in_features=256, out_features=1024, bias=True)
++            (gelu): QuickGELU()
++            (c_proj): Linear(in_features=1024, out_features=256, bias=True)
++          )
++          (ln_2): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
++        )
++        (6): ResidualAttentionBlock(
++          (attn): MultiheadAttention(
++            (out_proj): _LinearWithBias(in_features=256, out_features=256, bias=True)
++          )
++          (ln_1): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
++          (mlp): Sequential(
++            (c_fc): Linear(in_features=256, out_features=1024, bias=True)
++            (gelu): QuickGELU()
++            (c_proj): Linear(in_features=1024, out_features=256, bias=True)
++          )
++          (ln_2): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
++        )
++        (7): ResidualAttentionBlock(
++          (attn): MultiheadAttention(
++            (out_proj): _LinearWithBias(in_features=256, out_features=256, bias=True)
++          )
++          (ln_1): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
++          (mlp): Sequential(
++            (c_fc): Linear(in_features=256, out_features=1024, bias=True)
++            (gelu): QuickGELU()
++            (c_proj): Linear(in_features=1024, out_features=256, bias=True)
++          )
++          (ln_2): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
++        )
++        (8): ResidualAttentionBlock(
++          (attn): MultiheadAttention(
++            (out_proj): _LinearWithBias(in_features=256, out_features=256, bias=True)
++          )
++          (ln_1): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
++          (mlp): Sequential(
++            (c_fc): Linear(in_features=256, out_features=1024, bias=True)
++            (gelu): QuickGELU()
++            (c_proj): Linear(in_features=1024, out_features=256, bias=True)
++          )
++          (ln_2): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
++        )
++        (9): ResidualAttentionBlock(
++          (attn): MultiheadAttention(
++            (out_proj): _LinearWithBias(in_features=256, out_features=256, bias=True)
++          )
++          (ln_1): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
++          (mlp): Sequential(
++            (c_fc): Linear(in_features=256, out_features=1024, bias=True)
++            (gelu): QuickGELU()
++            (c_proj): Linear(in_features=1024, out_features=256, bias=True)
++          )
++          (ln_2): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
++        )
++        (10): ResidualAttentionBlock(
++          (attn): MultiheadAttention(
++            (out_proj): _LinearWithBias(in_features=256, out_features=256, bias=True)
++          )
++          (ln_1): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
++          (mlp): Sequential(
++            (c_fc): Linear(in_features=256, out_features=1024, bias=True)
++            (gelu): QuickGELU()
++            (c_proj): Linear(in_features=1024, out_features=256, bias=True)
++          )
++          (ln_2): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
++        )
++        (11): ResidualAttentionBlock(
++          (attn): MultiheadAttention(
++            (out_proj): _LinearWithBias(in_features=256, out_features=256, bias=True)
++          )
++          (ln_1): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
++          (mlp): Sequential(
++            (c_fc): Linear(in_features=256, out_features=1024, bias=True)
++            (gelu): QuickGELU()
++            (c_proj): Linear(in_features=1024, out_features=256, bias=True)
++          )
++          (ln_2): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
++        )
++      )
++    )
++    (ln_final): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
++    (token_embedding): Embedding(49408, 256)
++  )
++  (cross_entropy): CrossEntropyLoss()
++  (soft_cross_entropy): SoftTargetCrossEntropy()
++  (img_projector): ProjectMLP(
++    (linear_hidden): Sequential(
++      (0): Conv1d(384, 4096, kernel_size=(1,), stride=(1,))
++      (1): SyncBatchNorm(4096, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
++      (2): ReLU(inplace=True)
++    )
++    (linear_out): Conv1d(4096, 256, kernel_size=(1,), stride=(1,))
++  )
++  (text_projector): ProjectMLP(
++    (linear_hidden): Sequential(
++      (0): Conv1d(256, 4096, kernel_size=(1,), stride=(1,))
++      (1): SyncBatchNorm(4096, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
++      (2): ReLU(inplace=True)
++    )
++    (linear_out): Conv1d(4096, 256, kernel_size=(1,), stride=(1,))
++  )
++)
++[2025-05-26 09:14:02 group_vit_gcc_ceiling_bs4x1] (main_seg.py 87): INFO number of params: 55726609
++[2025-05-26 09:14:02 group_vit_gcc_ceiling_bs4x1] (checkpoint.py 48): INFO ==============> Resuming form pretrained_weights/group_vit_gcc_yfcc_30e-879422e0.pth....................
++[2025-05-26 09:14:02 group_vit_gcc_ceiling_bs4x1] (checkpoint.py 51): INFO _IncompatibleKeys(missing_keys=[], unexpected_keys=['multi_label_logit_scale'])
++[2025-05-26 09:14:02 group_vit_gcc_ceiling_bs4x1] (group_vit_seg.py 138): INFO Building GroupViTSegInference with 4 classes, test_cfg=Config (path: None): {'bg_thresh': 0.95, 'mode': 'slide', 'stride': (224, 224), 'crop_size': (448, 448)}, with_bg=False
++[2025-05-26 09:14:07 group_vit_gcc_ceiling_bs4x1] (main_group_vit.py 394): INFO Eval Seg mIoU 4.93
++[2025-05-26 09:14:07 group_vit_gcc_ceiling_bs4x1] (main_seg.py 93): INFO mIoU of the network on the 118 test images: 4.93%
+diff --git a/MaskAdapter/.gitignore b/MaskAdapter/.gitignore
+index 9a9f9de..696c2de 100644
+--- a/MaskAdapter/.gitignore
++++ b/MaskAdapter/.gitignore
+@@ -163,5 +163,4 @@ cython_debug/
+ 
+ 
+ /pretrained_weights
+-/datasets
+ /output
+\ No newline at end of file
+diff --git a/README.md b/README.md
+index 06327ee..69e104f 100644
+--- a/README.md
++++ b/README.md
+@@ -3,7 +3,34 @@ This repo includes our customized implementation of several Open Vocabulary Segm
+ We modified the model configurations and dataset loaders according to our own customized ceiling paiting datasets labelled by `Roboflow`.
+ 
+ ## Starting Point
+-Please have some brief idea about what "Open Vocabulary Segmentation Task" is by reading some introduction blogs as well as some examples on Github.
++Please have some brief idea about what "Open Vocabulary Segmentation Task", "Super Resolution Task" and "Open Object Detection Task" are by reading some introduction blogs as well as some examples on Github. It will be helpful if you also understand some basic concepts of image storage format, i.e. coco-format.
++
++## Introduction of our project pipeline
++We include multiple features in our repo, this includes:
++- Automatic image upscaling with Open-source Super Resolution Model, we only include the following models now:
++  - `stablediffusionupscalepipeline` from `diffusers` package.
++  - `DRCT` (DRCT: Saving Image Super-resolution away from Information Bottleneck) published in CVPR 2024 and is SOTA on several super resolution benchmarks.
++
++- Open Vocabulary Segmentation Task, this includes:
++  - `SAN` paper, published in CVPR 2024.
++  - `MaskQCLIP` paper, published in CVPR 2024.
++  - `MasQCLIP` paper, published in CVPR 2024.
++
++- Open Object Detection Task, this includes:
++  - `FC-Clip` paper, published in CVPR 2024.
++
++- Open Vocabulary Object Detection Task, this includes:
++  - `FC-Clip` paper, published in CVPR 2024.
++
++- Multi-model pre-training with our customized ceiling painting dataset, this includes:
++    - `GroupViT` paper, published in CVPR 2022.
++    - `SegCLIP` paper, published in ICML 2023.
++
++- Some side features and funny ideas, you can find them in the `Fancy_Ideas` folder. This includes the following parts right now:
++    - `DragGAN` with GUI installation and usage case, you can manually drag a ceiling painting image to the target position. And create a short "video" which shows the whole process.
++    - `google_veo_video`, which includes a python ipynb script to create a video by using one of the `ceiling_painting` dataset's image as part of the input prompt.
++    - `diffuser_upscaler`, which uses an open-sourced upscaler to upscale a ceiling painting images which are super blured in the original dataset.
++
+ 
+ ## Environment Installation
+ ### SAN paper env installation instructions
+@@ -54,14 +81,108 @@ If your labeled dataset is in `COCO` format, you could use the `register_coco_in
+ 
+ Please do not forget to call the defined registration function in the `SAN/san/data/datasets/register_<your_dataset_name>.py` file. Otherwise, the model will not be able to find your dataset.
+ 
+-### In construction and Alert
++## In construction and Alert
+ Some of the models here require more than one train scripts, this section is mainly used to record which repo requires more than one train scripts.
+ 
+ The `MasQCLIP` requires two Progressive Distillation traning and one Mask-Q Tuning, they all used the `train_net.py` script, but with different config files.
+ 
+ The `MaskQCLIP` was trained with only two classes, `backdground` and `non-background`. This means that the model may have a different class_emb shape compared to our customized ceiling painting dataset. If we only have "mural" as the only class, this is fine. Otherwise, we need to modify the `class_emb` layer in the `mask_distill.py` file `MaskFormer` class to match our dataset.
+ 
++The mmcv-full from the GroupViT and SegCLIP are only compiled with numpy version smaller than 2.0.0, otherwise the installation of the mmcv-full will fail.
++
++We pinned our mmcv as well as our mmsegmentation package to older versions since those papers were developed based on 1.X version instead of 2.X version.
++
+ ### TODO(A quick to-do list)
+ - [ ] Check if the evaluators are working for different models. This may require us to change the way we register the `ceiling_painting` dataset. Or we may need to modify the metadata `evaluator_type` of the dataset.
+ - [ ] Add pre-commit hooks to check the code style. We may only check the files we changed during the whole project instead of every file.
+ - [ ] Add dockerfile for each model. We will only offer one training dockerfile and one deployment dockerfile.
++
++- [ ] Pin the debug guidance in fc-clip as an example, this should be pinned very precisely to which line and which file should be modified if `detectron2` package is used to trian and validate the model proposed in the paper.
++
++- [ ] Add some open sourced `video generation` models into the `Fancy_Ideas` folder. I propose we could use this [new paper](https://github.com/thu-ml/RIFLEx) since this new `ICML` paper can generate a little bit longer video compared to the previous models.
++
++## Debug Guidance
++The repos which were built upon the `mm-lab` series of packages require extra attention when you try to install the environment since the `mmcv` or `mmsegmentation` package are compiled with C++ backend, which may cause some issues when you try to install the environment.
++
++We pinned our environment installation as a combination of `segclip` and `groupvit` repo's environment installation instructions. But we only used `apex` installation part of the `groupvit` repo's installation instructions. However, extra attention should be paid to this part.
++
++You may run the following command to initialize the environment.
++
++```bash
++conda create -n segclip python=3.8 -y
++conda activate segclip
++conda install pytorch==1.8.0 torchvision==0.9.0 cudatoolkit=11.1 -c pytorch -c conda-forge
++pip install mmcv-full==1.3.14 -f https://download.openmmlab.com/mmcv/dist/cu111/torch1.8.0/index.html
++pip install mmsegmentation==0.18.0
++pip install webdataset==0.1.103
++pip install timm==0.4.12
++pip install opencv-python==4.4.0.46 termcolor==1.1.0 diffdist einops omegaconf
++pip install nltk ftfy regex tqdm
++pip install prefetch_generator
++pip install Pillow==8.2.0
++```
++Please be aware about the conda channel you are using for installing the `torch` and other important packages like `mmcv` and `mmsegmentation`. They are from different channels, please only use the command we provided above, official website guidance of the installation of those packages may not work.
++
++You may then need to install the `apex` package from the `groupvit` repo. The official github repo's command does not work, you may encounter the following issue when you run the installation command from the `GroupViT` repo:
++
++```bash
++apex RuntimeError: Cuda extensions are being compiled with a version of Cuda that does not match the version used to compile Pytorch binaries. Pytorch binaries were compiled with Cuda 11.1.
++```
++
++To fix this issue, please run the following command to install the `apex` package.
++
++```bash
++git clone https://github.com/ptrblck/apex.git
++cd apex
++git checkout apex_no_distributed
++pip install -v --no-cache-dir ./
++``` 
++
++Since this is an `outdated` version of the `apex` package, you will encounter some issues when you try to run the `GroupViT` repo inference command, especially this `apex` package was built upon an older version of `pytorch` package. You will encounter this issue when you run the inference command of the `GroupViT` repo:
++
++```bash
++AttributeError: module 'torch.nn' has no attribute 'backends'
++```
++
++This error means that we need to modify the source code of the `apex` package, please beware that since we are using a different branch of this `outdated` cloned `apex` repo, you should modify the source code of the `apex` installed in your conda environment.
++
++Suppose your conda environment path is `/home/user/anaconda3/envs/segclip`, first we need to use `vim` to open the `apex` source code file, please run the following command:
++
++```bash
++sudo apt install vim
++vim /home/user/anaconda3/envs/segclip/lib/python3.8/site-packages/apex/amp/utils.py
++```
++
++Then in this file, starting from line 132, there are three consecutive functions which used `torch.nn.backends.backend.FunctionBackend`, this is a fairly old legacy version of `pytorch`, please change those three functions with the following one:
++
++```bash 
++def has_func(mod, fn):
++    if isinstance(mod, dict):
++      return fn in mod
++    else:
++      return hasattr(mod, fn)
++
++def get_func(mod, fn):
++    if isinstance(mod, dict):
++      return mod[fn]
++    else:
++    return getattr(mod, fn)
++
++def set_func(mod, fn, new_fn):
++    if isinstance(mod, dict):
++        mod[fn] = new_fn
++    else:
++        setattr(mod, fn, new_fn)
++```
++
++Then you need to save the file and exit from `vim`.
++
++After this, you can run the `GroupViT` repo's inference command again.
++
++```bash
++./tools/dist_launch.sh main_seg.py configs/group_vit_gcc_ceiling.yml 1 --resume pretrained_weights/group_vit_gcc_yfcc_30e-879422e0.pth --opts evaluate.seg.cfg=segmentation/configs/_base_/datasets/ceiling_painting.py
++```
++
++And this should work.
++
++To add new datasets into the repo built upon the `detectron2` framework, you should always try to pin to the way we used in the `fc-clip` repo folder first, this is the vanilla method from the `detectron2` package, in the case of encountering errors, try to register the dataset by using the `register_ceiling_dataset` defined in the `consulting_pro/fc-clip/fcclip/data/datasets/register_ceiling.py` file. Some of the models may require you to use a different dataset register format during the training and inference phase.
+\ No newline at end of file
+diff --git a/fc-clip/fcclip/__pycache__/__init__.cpython-311.pyc b/fc-clip/fcclip/__pycache__/__init__.cpython-311.pyc
+index 9522869..26b91ab 100644
+Binary files a/fc-clip/fcclip/__pycache__/__init__.cpython-311.pyc and b/fc-clip/fcclip/__pycache__/__init__.cpython-311.pyc differ
+diff --git a/fc-clip/fcclip/__pycache__/config.cpython-311.pyc b/fc-clip/fcclip/__pycache__/config.cpython-311.pyc
+index 206078a..77b946e 100644
+Binary files a/fc-clip/fcclip/__pycache__/config.cpython-311.pyc and b/fc-clip/fcclip/__pycache__/config.cpython-311.pyc differ
+diff --git a/fc-clip/fcclip/__pycache__/fcclip.cpython-311.pyc b/fc-clip/fcclip/__pycache__/fcclip.cpython-311.pyc
+index f24689c..7f2dd5f 100644
+Binary files a/fc-clip/fcclip/__pycache__/fcclip.cpython-311.pyc and b/fc-clip/fcclip/__pycache__/fcclip.cpython-311.pyc differ
+diff --git a/fc-clip/fcclip/__pycache__/test_time_augmentation.cpython-311.pyc b/fc-clip/fcclip/__pycache__/test_time_augmentation.cpython-311.pyc
+index 53c792b..5eb520d 100644
+Binary files a/fc-clip/fcclip/__pycache__/test_time_augmentation.cpython-311.pyc and b/fc-clip/fcclip/__pycache__/test_time_augmentation.cpython-311.pyc differ
+diff --git a/fc-clip/fcclip/data/__pycache__/__init__.cpython-311.pyc b/fc-clip/fcclip/data/__pycache__/__init__.cpython-311.pyc
+index 736de7b..80ac3fc 100644
+Binary files a/fc-clip/fcclip/data/__pycache__/__init__.cpython-311.pyc and b/fc-clip/fcclip/data/__pycache__/__init__.cpython-311.pyc differ
+diff --git a/fc-clip/fcclip/data/dataset_mappers/__pycache__/__init__.cpython-311.pyc b/fc-clip/fcclip/data/dataset_mappers/__pycache__/__init__.cpython-311.pyc
+index adbbd70..7903338 100644
+Binary files a/fc-clip/fcclip/data/dataset_mappers/__pycache__/__init__.cpython-311.pyc and b/fc-clip/fcclip/data/dataset_mappers/__pycache__/__init__.cpython-311.pyc differ
+diff --git a/fc-clip/fcclip/data/dataset_mappers/__pycache__/coco_instance_new_baseline_dataset_mapper.cpython-311.pyc b/fc-clip/fcclip/data/dataset_mappers/__pycache__/coco_instance_new_baseline_dataset_mapper.cpython-311.pyc
+index cd98bd7..bab9901 100644
+Binary files a/fc-clip/fcclip/data/dataset_mappers/__pycache__/coco_instance_new_baseline_dataset_mapper.cpython-311.pyc and b/fc-clip/fcclip/data/dataset_mappers/__pycache__/coco_instance_new_baseline_dataset_mapper.cpython-311.pyc differ
+diff --git a/fc-clip/fcclip/data/dataset_mappers/__pycache__/coco_panoptic_new_baseline_dataset_mapper.cpython-311.pyc b/fc-clip/fcclip/data/dataset_mappers/__pycache__/coco_panoptic_new_baseline_dataset_mapper.cpython-311.pyc
+index af17a7c..f833fd6 100644
+Binary files a/fc-clip/fcclip/data/dataset_mappers/__pycache__/coco_panoptic_new_baseline_dataset_mapper.cpython-311.pyc and b/fc-clip/fcclip/data/dataset_mappers/__pycache__/coco_panoptic_new_baseline_dataset_mapper.cpython-311.pyc differ
+diff --git a/fc-clip/fcclip/data/dataset_mappers/__pycache__/mask_former_instance_dataset_mapper.cpython-311.pyc b/fc-clip/fcclip/data/dataset_mappers/__pycache__/mask_former_instance_dataset_mapper.cpython-311.pyc
+index dc6b18c..c36759b 100644
+Binary files a/fc-clip/fcclip/data/dataset_mappers/__pycache__/mask_former_instance_dataset_mapper.cpython-311.pyc and b/fc-clip/fcclip/data/dataset_mappers/__pycache__/mask_former_instance_dataset_mapper.cpython-311.pyc differ
+diff --git a/fc-clip/fcclip/data/dataset_mappers/__pycache__/mask_former_panoptic_dataset_mapper.cpython-311.pyc b/fc-clip/fcclip/data/dataset_mappers/__pycache__/mask_former_panoptic_dataset_mapper.cpython-311.pyc
+index c7b83ef..fd0fd79 100644
+Binary files a/fc-clip/fcclip/data/dataset_mappers/__pycache__/mask_former_panoptic_dataset_mapper.cpython-311.pyc and b/fc-clip/fcclip/data/dataset_mappers/__pycache__/mask_former_panoptic_dataset_mapper.cpython-311.pyc differ
+diff --git a/fc-clip/fcclip/data/dataset_mappers/__pycache__/mask_former_semantic_dataset_mapper.cpython-311.pyc b/fc-clip/fcclip/data/dataset_mappers/__pycache__/mask_former_semantic_dataset_mapper.cpython-311.pyc
+index 0bcec00..eb463d1 100644
+Binary files a/fc-clip/fcclip/data/dataset_mappers/__pycache__/mask_former_semantic_dataset_mapper.cpython-311.pyc and b/fc-clip/fcclip/data/dataset_mappers/__pycache__/mask_former_semantic_dataset_mapper.cpython-311.pyc differ
+diff --git a/fc-clip/fcclip/data/datasets/__pycache__/__init__.cpython-311.pyc b/fc-clip/fcclip/data/datasets/__pycache__/__init__.cpython-311.pyc
+index 676d5f4..26b1cb6 100644
+Binary files a/fc-clip/fcclip/data/datasets/__pycache__/__init__.cpython-311.pyc and b/fc-clip/fcclip/data/datasets/__pycache__/__init__.cpython-311.pyc differ
+diff --git a/fc-clip/fcclip/data/datasets/__pycache__/openseg_classes.cpython-311.pyc b/fc-clip/fcclip/data/datasets/__pycache__/openseg_classes.cpython-311.pyc
+index 335bae6..43c25ca 100644
+Binary files a/fc-clip/fcclip/data/datasets/__pycache__/openseg_classes.cpython-311.pyc and b/fc-clip/fcclip/data/datasets/__pycache__/openseg_classes.cpython-311.pyc differ
+diff --git a/fc-clip/fcclip/data/datasets/__pycache__/register_ade20k_full.cpython-311.pyc b/fc-clip/fcclip/data/datasets/__pycache__/register_ade20k_full.cpython-311.pyc
+index a16fb1e..31d520e 100644
+Binary files a/fc-clip/fcclip/data/datasets/__pycache__/register_ade20k_full.cpython-311.pyc and b/fc-clip/fcclip/data/datasets/__pycache__/register_ade20k_full.cpython-311.pyc differ
+diff --git a/fc-clip/fcclip/data/datasets/__pycache__/register_ade20k_instance.cpython-311.pyc b/fc-clip/fcclip/data/datasets/__pycache__/register_ade20k_instance.cpython-311.pyc
+index c299704..cf2a55b 100644
+Binary files a/fc-clip/fcclip/data/datasets/__pycache__/register_ade20k_instance.cpython-311.pyc and b/fc-clip/fcclip/data/datasets/__pycache__/register_ade20k_instance.cpython-311.pyc differ
+diff --git a/fc-clip/fcclip/data/datasets/__pycache__/register_ade20k_panoptic.cpython-311.pyc b/fc-clip/fcclip/data/datasets/__pycache__/register_ade20k_panoptic.cpython-311.pyc
+index 7ca1ae0..7eb25ba 100644
+Binary files a/fc-clip/fcclip/data/datasets/__pycache__/register_ade20k_panoptic.cpython-311.pyc and b/fc-clip/fcclip/data/datasets/__pycache__/register_ade20k_panoptic.cpython-311.pyc differ
+diff --git a/fc-clip/fcclip/data/datasets/__pycache__/register_ceiling.cpython-311.pyc b/fc-clip/fcclip/data/datasets/__pycache__/register_ceiling.cpython-311.pyc
+index 2dd3630..31efaee 100644
+Binary files a/fc-clip/fcclip/data/datasets/__pycache__/register_ceiling.cpython-311.pyc and b/fc-clip/fcclip/data/datasets/__pycache__/register_ceiling.cpython-311.pyc differ
+diff --git a/fc-clip/fcclip/data/datasets/__pycache__/register_cityscapes_panoptic.cpython-311.pyc b/fc-clip/fcclip/data/datasets/__pycache__/register_cityscapes_panoptic.cpython-311.pyc
+index 91dfb68..034173d 100644
+Binary files a/fc-clip/fcclip/data/datasets/__pycache__/register_cityscapes_panoptic.cpython-311.pyc and b/fc-clip/fcclip/data/datasets/__pycache__/register_cityscapes_panoptic.cpython-311.pyc differ
+diff --git a/fc-clip/fcclip/data/datasets/__pycache__/register_coco_instance.cpython-311.pyc b/fc-clip/fcclip/data/datasets/__pycache__/register_coco_instance.cpython-311.pyc
+index 219ff60..e32708b 100644
+Binary files a/fc-clip/fcclip/data/datasets/__pycache__/register_coco_instance.cpython-311.pyc and b/fc-clip/fcclip/data/datasets/__pycache__/register_coco_instance.cpython-311.pyc differ
+diff --git a/fc-clip/fcclip/data/datasets/__pycache__/register_coco_panoptic_annos_semseg.cpython-311.pyc b/fc-clip/fcclip/data/datasets/__pycache__/register_coco_panoptic_annos_semseg.cpython-311.pyc
+index c8ed6b8..f2731df 100644
+Binary files a/fc-clip/fcclip/data/datasets/__pycache__/register_coco_panoptic_annos_semseg.cpython-311.pyc and b/fc-clip/fcclip/data/datasets/__pycache__/register_coco_panoptic_annos_semseg.cpython-311.pyc differ
+diff --git a/fc-clip/fcclip/data/datasets/__pycache__/register_coco_stuff_164k.cpython-311.pyc b/fc-clip/fcclip/data/datasets/__pycache__/register_coco_stuff_164k.cpython-311.pyc
+index b761a2e..208508f 100644
+Binary files a/fc-clip/fcclip/data/datasets/__pycache__/register_coco_stuff_164k.cpython-311.pyc and b/fc-clip/fcclip/data/datasets/__pycache__/register_coco_stuff_164k.cpython-311.pyc differ
+diff --git a/fc-clip/fcclip/data/datasets/__pycache__/register_mapillary_vistas_panoptic.cpython-311.pyc b/fc-clip/fcclip/data/datasets/__pycache__/register_mapillary_vistas_panoptic.cpython-311.pyc
+index 9dfa05b..6f10173 100644
+Binary files a/fc-clip/fcclip/data/datasets/__pycache__/register_mapillary_vistas_panoptic.cpython-311.pyc and b/fc-clip/fcclip/data/datasets/__pycache__/register_mapillary_vistas_panoptic.cpython-311.pyc differ
+diff --git a/fc-clip/fcclip/data/datasets/__pycache__/register_pascal_ctx_459_sem_seg.cpython-311.pyc b/fc-clip/fcclip/data/datasets/__pycache__/register_pascal_ctx_459_sem_seg.cpython-311.pyc
+index 20e95cc..98442db 100644
+Binary files a/fc-clip/fcclip/data/datasets/__pycache__/register_pascal_ctx_459_sem_seg.cpython-311.pyc and b/fc-clip/fcclip/data/datasets/__pycache__/register_pascal_ctx_459_sem_seg.cpython-311.pyc differ
+diff --git a/fc-clip/fcclip/data/datasets/__pycache__/register_pascal_ctx_59_sem_seg.cpython-311.pyc b/fc-clip/fcclip/data/datasets/__pycache__/register_pascal_ctx_59_sem_seg.cpython-311.pyc
+index 3b94f90..e5d8651 100644
+Binary files a/fc-clip/fcclip/data/datasets/__pycache__/register_pascal_ctx_59_sem_seg.cpython-311.pyc and b/fc-clip/fcclip/data/datasets/__pycache__/register_pascal_ctx_59_sem_seg.cpython-311.pyc differ
+diff --git a/fc-clip/fcclip/data/datasets/__pycache__/register_pascal_voc_20_semantic.cpython-311.pyc b/fc-clip/fcclip/data/datasets/__pycache__/register_pascal_voc_20_semantic.cpython-311.pyc
+index 0d8cfe2..eb7a739 100644
+Binary files a/fc-clip/fcclip/data/datasets/__pycache__/register_pascal_voc_20_semantic.cpython-311.pyc and b/fc-clip/fcclip/data/datasets/__pycache__/register_pascal_voc_20_semantic.cpython-311.pyc differ
+diff --git a/fc-clip/fcclip/data/datasets/__pycache__/register_pascal_voc_21_semantic.cpython-311.pyc b/fc-clip/fcclip/data/datasets/__pycache__/register_pascal_voc_21_semantic.cpython-311.pyc
+index e9f3b4d..e7027f2 100644
+Binary files a/fc-clip/fcclip/data/datasets/__pycache__/register_pascal_voc_21_semantic.cpython-311.pyc and b/fc-clip/fcclip/data/datasets/__pycache__/register_pascal_voc_21_semantic.cpython-311.pyc differ
+diff --git a/fc-clip/fcclip/evaluation/__pycache__/__init__.cpython-311.pyc b/fc-clip/fcclip/evaluation/__pycache__/__init__.cpython-311.pyc
+index ae9f18d..b2f630c 100644
+Binary files a/fc-clip/fcclip/evaluation/__pycache__/__init__.cpython-311.pyc and b/fc-clip/fcclip/evaluation/__pycache__/__init__.cpython-311.pyc differ
+diff --git a/fc-clip/fcclip/evaluation/__pycache__/instance_evaluation.cpython-311.pyc b/fc-clip/fcclip/evaluation/__pycache__/instance_evaluation.cpython-311.pyc
+index 7c0d5ec..86146a6 100644
+Binary files a/fc-clip/fcclip/evaluation/__pycache__/instance_evaluation.cpython-311.pyc and b/fc-clip/fcclip/evaluation/__pycache__/instance_evaluation.cpython-311.pyc differ
+diff --git a/fc-clip/fcclip/modeling/__pycache__/__init__.cpython-311.pyc b/fc-clip/fcclip/modeling/__pycache__/__init__.cpython-311.pyc
+index e983e61..ffaed18 100644
+Binary files a/fc-clip/fcclip/modeling/__pycache__/__init__.cpython-311.pyc and b/fc-clip/fcclip/modeling/__pycache__/__init__.cpython-311.pyc differ
+diff --git a/fc-clip/fcclip/modeling/__pycache__/criterion.cpython-311.pyc b/fc-clip/fcclip/modeling/__pycache__/criterion.cpython-311.pyc
+index 1d7e554..a90967d 100644
+Binary files a/fc-clip/fcclip/modeling/__pycache__/criterion.cpython-311.pyc and b/fc-clip/fcclip/modeling/__pycache__/criterion.cpython-311.pyc differ
+diff --git a/fc-clip/fcclip/modeling/__pycache__/matcher.cpython-311.pyc b/fc-clip/fcclip/modeling/__pycache__/matcher.cpython-311.pyc
+index 5203a55..ac04876 100644
+Binary files a/fc-clip/fcclip/modeling/__pycache__/matcher.cpython-311.pyc and b/fc-clip/fcclip/modeling/__pycache__/matcher.cpython-311.pyc differ
+diff --git a/fc-clip/fcclip/modeling/backbone/__pycache__/__init__.cpython-311.pyc b/fc-clip/fcclip/modeling/backbone/__pycache__/__init__.cpython-311.pyc
+index 5e8808d..eb3f1e4 100644
+Binary files a/fc-clip/fcclip/modeling/backbone/__pycache__/__init__.cpython-311.pyc and b/fc-clip/fcclip/modeling/backbone/__pycache__/__init__.cpython-311.pyc differ
+diff --git a/fc-clip/fcclip/modeling/backbone/__pycache__/clip.cpython-311.pyc b/fc-clip/fcclip/modeling/backbone/__pycache__/clip.cpython-311.pyc
+index 70e449c..4e11b78 100644
+Binary files a/fc-clip/fcclip/modeling/backbone/__pycache__/clip.cpython-311.pyc and b/fc-clip/fcclip/modeling/backbone/__pycache__/clip.cpython-311.pyc differ
+diff --git a/fc-clip/fcclip/modeling/meta_arch/__pycache__/__init__.cpython-311.pyc b/fc-clip/fcclip/modeling/meta_arch/__pycache__/__init__.cpython-311.pyc
+index 79ffd45..8e722c2 100644
+Binary files a/fc-clip/fcclip/modeling/meta_arch/__pycache__/__init__.cpython-311.pyc and b/fc-clip/fcclip/modeling/meta_arch/__pycache__/__init__.cpython-311.pyc differ
+diff --git a/fc-clip/fcclip/modeling/meta_arch/__pycache__/fcclip_head.cpython-311.pyc b/fc-clip/fcclip/modeling/meta_arch/__pycache__/fcclip_head.cpython-311.pyc
+index b1cc50f..0f7f9f0 100644
+Binary files a/fc-clip/fcclip/modeling/meta_arch/__pycache__/fcclip_head.cpython-311.pyc and b/fc-clip/fcclip/modeling/meta_arch/__pycache__/fcclip_head.cpython-311.pyc differ
+diff --git a/fc-clip/fcclip/modeling/pixel_decoder/__pycache__/__init__.cpython-311.pyc b/fc-clip/fcclip/modeling/pixel_decoder/__pycache__/__init__.cpython-311.pyc
+index fcc8fda..52345ba 100644
+Binary files a/fc-clip/fcclip/modeling/pixel_decoder/__pycache__/__init__.cpython-311.pyc and b/fc-clip/fcclip/modeling/pixel_decoder/__pycache__/__init__.cpython-311.pyc differ
+diff --git a/fc-clip/fcclip/modeling/pixel_decoder/__pycache__/msdeformattn.cpython-311.pyc b/fc-clip/fcclip/modeling/pixel_decoder/__pycache__/msdeformattn.cpython-311.pyc
+index 8d7d96f..24a5c17 100644
+Binary files a/fc-clip/fcclip/modeling/pixel_decoder/__pycache__/msdeformattn.cpython-311.pyc and b/fc-clip/fcclip/modeling/pixel_decoder/__pycache__/msdeformattn.cpython-311.pyc differ
+diff --git a/fc-clip/fcclip/modeling/pixel_decoder/ops/functions/__pycache__/__init__.cpython-311.pyc b/fc-clip/fcclip/modeling/pixel_decoder/ops/functions/__pycache__/__init__.cpython-311.pyc
+index 2e4da51..7d1ab80 100644
+Binary files a/fc-clip/fcclip/modeling/pixel_decoder/ops/functions/__pycache__/__init__.cpython-311.pyc and b/fc-clip/fcclip/modeling/pixel_decoder/ops/functions/__pycache__/__init__.cpython-311.pyc differ
+diff --git a/fc-clip/fcclip/modeling/pixel_decoder/ops/functions/__pycache__/ms_deform_attn_func.cpython-311.pyc b/fc-clip/fcclip/modeling/pixel_decoder/ops/functions/__pycache__/ms_deform_attn_func.cpython-311.pyc
+index 60fdddb..e7cdbd8 100644
+Binary files a/fc-clip/fcclip/modeling/pixel_decoder/ops/functions/__pycache__/ms_deform_attn_func.cpython-311.pyc and b/fc-clip/fcclip/modeling/pixel_decoder/ops/functions/__pycache__/ms_deform_attn_func.cpython-311.pyc differ
+diff --git a/fc-clip/fcclip/modeling/pixel_decoder/ops/modules/__pycache__/__init__.cpython-311.pyc b/fc-clip/fcclip/modeling/pixel_decoder/ops/modules/__pycache__/__init__.cpython-311.pyc
+index 8ceb47b..f6cc512 100644
+Binary files a/fc-clip/fcclip/modeling/pixel_decoder/ops/modules/__pycache__/__init__.cpython-311.pyc and b/fc-clip/fcclip/modeling/pixel_decoder/ops/modules/__pycache__/__init__.cpython-311.pyc differ
+diff --git a/fc-clip/fcclip/modeling/pixel_decoder/ops/modules/__pycache__/ms_deform_attn.cpython-311.pyc b/fc-clip/fcclip/modeling/pixel_decoder/ops/modules/__pycache__/ms_deform_attn.cpython-311.pyc
+index d407c38..7cc1164 100644
+Binary files a/fc-clip/fcclip/modeling/pixel_decoder/ops/modules/__pycache__/ms_deform_attn.cpython-311.pyc and b/fc-clip/fcclip/modeling/pixel_decoder/ops/modules/__pycache__/ms_deform_attn.cpython-311.pyc differ
+diff --git a/fc-clip/fcclip/modeling/transformer_decoder/__pycache__/__init__.cpython-311.pyc b/fc-clip/fcclip/modeling/transformer_decoder/__pycache__/__init__.cpython-311.pyc
+index 1703678..bb6ac98 100644
+Binary files a/fc-clip/fcclip/modeling/transformer_decoder/__pycache__/__init__.cpython-311.pyc and b/fc-clip/fcclip/modeling/transformer_decoder/__pycache__/__init__.cpython-311.pyc differ
+diff --git a/fc-clip/fcclip/modeling/transformer_decoder/__pycache__/fcclip_transformer_decoder.cpython-311.pyc b/fc-clip/fcclip/modeling/transformer_decoder/__pycache__/fcclip_transformer_decoder.cpython-311.pyc
+index 3d5c2c0..bb7b419 100644
+Binary files a/fc-clip/fcclip/modeling/transformer_decoder/__pycache__/fcclip_transformer_decoder.cpython-311.pyc and b/fc-clip/fcclip/modeling/transformer_decoder/__pycache__/fcclip_transformer_decoder.cpython-311.pyc differ
+diff --git a/fc-clip/fcclip/modeling/transformer_decoder/__pycache__/position_encoding.cpython-311.pyc b/fc-clip/fcclip/modeling/transformer_decoder/__pycache__/position_encoding.cpython-311.pyc
+index 54f7c2c..436ecd0 100644
+Binary files a/fc-clip/fcclip/modeling/transformer_decoder/__pycache__/position_encoding.cpython-311.pyc and b/fc-clip/fcclip/modeling/transformer_decoder/__pycache__/position_encoding.cpython-311.pyc differ
+diff --git a/fc-clip/fcclip/utils/__pycache__/__init__.cpython-311.pyc b/fc-clip/fcclip/utils/__pycache__/__init__.cpython-311.pyc
+index 52caa78..b864b7b 100644
+Binary files a/fc-clip/fcclip/utils/__pycache__/__init__.cpython-311.pyc and b/fc-clip/fcclip/utils/__pycache__/__init__.cpython-311.pyc differ
+diff --git a/fc-clip/fcclip/utils/__pycache__/misc.cpython-311.pyc b/fc-clip/fcclip/utils/__pycache__/misc.cpython-311.pyc
+index 5c15a01..817d9ba 100644
+Binary files a/fc-clip/fcclip/utils/__pycache__/misc.cpython-311.pyc and b/fc-clip/fcclip/utils/__pycache__/misc.cpython-311.pyc differ
