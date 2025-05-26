@@ -1,0 +1,178 @@
+[2025-05-26 11:33:29 seg] (main_seg_zeroshot.py 321): INFO Full config saved to output/seg/config.json
+[2025-05-26 11:33:29 seg] (main_seg_zeroshot.py 324): INFO train:
+  amp_opt_level: O0
+evaluate:
+  eval_only: true
+  eval_freq: 1
+  task:
+  - cls
+  - seg
+  cls:
+    save_best: true
+    template: subset
+  seg:
+    save_best: true
+    cfg: /home/ra78lof/consulting_pro/SegCLIP/seg_segmentation/configs/_base_/datasets/coco.py
+    template: simple
+    opts: []
+model_name: seg
+output: output/seg
+tag: default
+local_rank: 0
+vis: []
+
+[2025-05-26 11:34:48 seg] (main_seg_zeroshot.py 321): INFO Full config saved to output/seg/config.json
+[2025-05-26 11:34:48 seg] (main_seg_zeroshot.py 324): INFO train:
+  amp_opt_level: O0
+evaluate:
+  eval_only: true
+  eval_freq: 1
+  task:
+  - cls
+  - seg
+  cls:
+    save_best: true
+    template: subset
+  seg:
+    save_best: true
+    cfg: /home/ra78lof/consulting_pro/SegCLIP/seg_segmentation/configs/_base_/datasets/coco.py
+    template: simple
+    opts: []
+model_name: seg
+output: output/seg
+tag: default
+local_rank: 0
+vis: []
+
+[2025-05-26 11:38:27 seg] (main_seg_zeroshot.py 321): INFO Full config saved to output/seg/config.json
+[2025-05-26 11:38:27 seg] (main_seg_zeroshot.py 324): INFO train:
+  amp_opt_level: O0
+evaluate:
+  eval_only: true
+  eval_freq: 1
+  task:
+  - cls
+  - seg
+  cls:
+    save_best: true
+    template: subset
+  seg:
+    save_best: true
+    cfg: /home/ra78lof/consulting_pro/SegCLIP/seg_segmentation/configs/_base_/datasets/coco.py
+    template: simple
+    opts: []
+model_name: seg
+output: output/seg
+tag: default
+local_rank: 0
+vis: []
+
+[2025-05-26 11:56:06 seg] (main_seg_zeroshot.py 327): INFO Full config saved to output/seg/config.json
+[2025-05-26 11:56:06 seg] (main_seg_zeroshot.py 330): INFO train:
+  amp_opt_level: O0
+evaluate:
+  eval_only: true
+  eval_freq: 1
+  task:
+  - cls
+  - seg
+  cls:
+    save_best: true
+    template: subset
+  seg:
+    save_best: true
+    cfg: /home/ra78lof/consulting_pro/SegCLIP/seg_segmentation/configs/_base_/datasets/ceiling_painting.py
+    template: simple
+    opts: []
+model_name: seg
+output: output/seg
+tag: default
+local_rank: 0
+vis: []
+
+[2025-05-26 11:56:06 seg] (main_seg_zeroshot.py 173): INFO Evaluating dataset: <seg_segmentation.datasets.coco_segmentation.CeilingPaintingDataset object at 0x72441d221160>
+[2025-05-26 11:59:45 seg] (main_seg_zeroshot.py 327): INFO Full config saved to output/seg/config.json
+[2025-05-26 11:59:45 seg] (main_seg_zeroshot.py 330): INFO train:
+  amp_opt_level: O0
+evaluate:
+  eval_only: true
+  eval_freq: 1
+  task:
+  - cls
+  - seg
+  cls:
+    save_best: true
+    template: subset
+  seg:
+    save_best: true
+    cfg: /home/ra78lof/consulting_pro/SegCLIP/seg_segmentation/configs/_base_/datasets/ceiling_painting.py
+    template: simple
+    opts: []
+model_name: seg
+output: output/seg
+tag: default
+local_rank: 0
+vis: []
+
+[2025-05-26 11:59:45 seg] (main_seg_zeroshot.py 173): INFO Evaluating dataset: <seg_segmentation.datasets.coco_segmentation.CeilingPaintingDataset object at 0x72e47179f640>
+[2025-05-26 11:59:47 seg] (util_module.py 194): INFO 	 embed_dim: 512
+[2025-05-26 11:59:47 seg] (util_module.py 194): INFO 	 image_resolution: 224
+[2025-05-26 11:59:47 seg] (util_module.py 194): INFO 	 vision_layers: 12
+[2025-05-26 11:59:47 seg] (util_module.py 194): INFO 	 vision_width: 768
+[2025-05-26 11:59:47 seg] (util_module.py 194): INFO 	 vision_patch_size: 16
+[2025-05-26 11:59:47 seg] (util_module.py 194): INFO 	 context_length: 77
+[2025-05-26 11:59:47 seg] (util_module.py 194): INFO 	 vocab_size: 49408
+[2025-05-26 11:59:47 seg] (util_module.py 194): INFO 	 transformer_width: 512
+[2025-05-26 11:59:47 seg] (util_module.py 194): INFO 	 transformer_heads: 8
+[2025-05-26 11:59:47 seg] (util_module.py 194): INFO 	 transformer_layers: 12
+[2025-05-26 11:59:47 seg] (util_module.py 194): INFO 		 first_stage_layer: 10
+[2025-05-26 11:59:47 seg] (util_module.py 194): INFO 	 cut_top_layer: 0
+[2025-05-26 11:59:49 seg] (util_module.py 141): WARNING Weights from pretrained model not used in SegCLIP: 
+   vis_mae_decoder.mask_token
+   vis_mae_decoder.decoder_pos_embed
+   vis_mae_decoder.decoder_embed.weight
+   vis_mae_decoder.decoder_embed.bias
+   vis_mae_decoder.decoder_blocks.0.norm1.weight
+   vis_mae_decoder.decoder_blocks.0.norm1.bias
+   vis_mae_decoder.decoder_blocks.0.attn.qkv.weight
+   vis_mae_decoder.decoder_blocks.0.attn.qkv.bias
+   vis_mae_decoder.decoder_blocks.0.attn.proj.weight
+   vis_mae_decoder.decoder_blocks.0.attn.proj.bias
+   vis_mae_decoder.decoder_blocks.0.norm2.weight
+   vis_mae_decoder.decoder_blocks.0.norm2.bias
+   vis_mae_decoder.decoder_blocks.0.mlp.fc1.weight
+   vis_mae_decoder.decoder_blocks.0.mlp.fc1.bias
+   vis_mae_decoder.decoder_blocks.0.mlp.fc2.weight
+   vis_mae_decoder.decoder_blocks.0.mlp.fc2.bias
+   vis_mae_decoder.decoder_blocks.1.norm1.weight
+   vis_mae_decoder.decoder_blocks.1.norm1.bias
+   vis_mae_decoder.decoder_blocks.1.attn.qkv.weight
+   vis_mae_decoder.decoder_blocks.1.attn.qkv.bias
+   vis_mae_decoder.decoder_blocks.1.attn.proj.weight
+   vis_mae_decoder.decoder_blocks.1.attn.proj.bias
+   vis_mae_decoder.decoder_blocks.1.norm2.weight
+   vis_mae_decoder.decoder_blocks.1.norm2.bias
+   vis_mae_decoder.decoder_blocks.1.mlp.fc1.weight
+   vis_mae_decoder.decoder_blocks.1.mlp.fc1.bias
+   vis_mae_decoder.decoder_blocks.1.mlp.fc2.weight
+   vis_mae_decoder.decoder_blocks.1.mlp.fc2.bias
+   vis_mae_decoder.decoder_blocks.2.norm1.weight
+   vis_mae_decoder.decoder_blocks.2.norm1.bias
+   vis_mae_decoder.decoder_blocks.2.attn.qkv.weight
+   vis_mae_decoder.decoder_blocks.2.attn.qkv.bias
+   vis_mae_decoder.decoder_blocks.2.attn.proj.weight
+   vis_mae_decoder.decoder_blocks.2.attn.proj.bias
+   vis_mae_decoder.decoder_blocks.2.norm2.weight
+   vis_mae_decoder.decoder_blocks.2.norm2.bias
+   vis_mae_decoder.decoder_blocks.2.mlp.fc1.weight
+   vis_mae_decoder.decoder_blocks.2.mlp.fc1.bias
+   vis_mae_decoder.decoder_blocks.2.mlp.fc2.weight
+   vis_mae_decoder.decoder_blocks.2.mlp.fc2.bias
+   vis_mae_decoder.decoder_norm.weight
+   vis_mae_decoder.decoder_norm.bias
+   vis_mae_decoder.decoder_pred.weight
+   vis_mae_decoder.decoder_pred.bias
+[2025-05-26 11:59:49 seg] (main_seg_zeroshot.py 183): INFO number of params: 182808393
+[2025-05-26 11:59:49 seg] (vit_seg.py 139): INFO Building ViTSegInference with 4 classes, test_cfg=Config (path: None): {'bg_thresh': 0.95, 'mode': 'slide', 'stride': (224, 224), 'crop_size': (448, 448)}, with_bg=False
+[2025-05-26 11:59:53 seg] (main_seg_zeroshot.py 164): INFO Eval Seg mIoU 21.95
+[2025-05-26 11:59:53 seg] (main_seg_zeroshot.py 188): INFO mIoU of the network on the 118 test images: 21.95%

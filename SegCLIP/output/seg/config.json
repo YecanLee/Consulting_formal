@@ -1,0 +1,21 @@
+train:
+  amp_opt_level: O0
+evaluate:
+  eval_only: true
+  eval_freq: 1
+  task:
+  - cls
+  - seg
+  cls:
+    save_best: true
+    template: subset
+  seg:
+    save_best: true
+    cfg: /home/ra78lof/consulting_pro/SegCLIP/seg_segmentation/configs/_base_/datasets/ceiling_painting.py
+    template: simple
+    opts: []
+model_name: seg
+output: output/seg
+tag: default
+local_rank: 0
+vis: []
