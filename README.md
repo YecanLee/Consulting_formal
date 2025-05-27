@@ -79,7 +79,38 @@ To register your own custom dataset, you need to add one registration file in th
 
 If your labeled dataset is in `COCO` format, you could use the `register_coco_instances` function to register your dataset. This is the easiest way to register your dataset. We used this method since `Roboflow` provides the dataset to be downloaded in `COCO` format.
 
-Please do not forget to call the defined registration function in the `SAN/san/data/datasets/register_<your_dataset_name>.py` file. Otherwise, the model will not be able to find your dataset.
+Please do not forget to call the defined registration function in the `SAN/san/data/datasets/register_<your_dataset_name>.py` file. Otherwise, the model will not be able to find your dataset.  
+
+## 🚀Train Command Encylopedia
+
+## 🔥Demo Command Encylopedia
+
+### Built upon `detectron2`
+- SegCLIP   
+To run the `main_seg_vis.py` script in `SegCLIP` folder to do inference upon __one__ image, please run the following command:
+
+```bash
+# ALERT: multiple images are not supported yet.
+python main_seg_vis.py --input YOUR_IMAGE_PATH \
+--device cuda:0 \
+--vis input CHOOSE_VIS_MODE \
+--dataset CHOOSE_DATASET \
+--init_model YOUR_TRAINED_WEIGHTS_PATH
+```
+
+### Built upon `mm-lab`
+- OV-Seg   
+To run the `demo.py` script in `ov-seg` folder to do inference upon one or more images, please run the following command:
+
+```bash
+python demo.py --config-file configs/ovseg_swinB_vitL_ceiling_demo.yaml \
+--class-names 'NAME' 'YOUR' 'CLASS' 'NAMES' ... \
+--input YOUR_IMAGE_PATH1 YOUR_IMAGE_PATH2 ... \
+--output ./pred \
+--opts MODEL.WEIGHTS YOUR_TRAINED_WEIGHTS_PATH 
+```
+
+There is a numpy version issue in the original repo, please pin to our version to use the demo.
 
 ## In construction and Alert
 Some of the models here require more than one train scripts, this section is mainly used to record which repo requires more than one train scripts.
@@ -97,7 +128,7 @@ We pinned our mmcv as well as our mmsegmentation package to older versions since
 - [ ] Add pre-commit hooks to check the code style. We may only check the files we changed during the whole project instead of every file.
 - [ ] Add dockerfile for each model. We will only offer one training dockerfile and one deployment dockerfile.
 
-- [ ] Pin the debug guidance in fc-clip as an example, this should be pinned very precisely to which line and which file should be modified if `detectron2` package is used to trian and validate the model proposed in the paper.
+- [x] Pin the debug guidance in fc-clip as an example, this should be pinned very precisely to which line and which file should be modified if `detectron2` package is used to trian and validate the model proposed in the paper.
 
 - [ ] Add some open sourced `video generation` models into the `Fancy_Ideas` folder. I propose we could use this [new paper](https://github.com/thu-ml/RIFLEx) since this new `ICML` paper can generate a little bit longer video compared to the previous models.
 
