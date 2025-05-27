@@ -4,6 +4,21 @@ MaskFormer Training Script.
 
 This script is a simplified version of the training script in detectron2/tools.
 """
+
+# suppress the annoying warning from detectron2
+import warnings
+warnings.filterwarnings(
+    "ignore",
+    category=FutureWarning,
+    message=r"`torch\.cuda\.amp\.autocast"   
+)
+# suppress torch.load weights_only warning
+warnings.filterwarnings(
+    "ignore",
+    category=FutureWarning,
+    message=r"You are using `torch\.load` with `weights_only=False`"
+)
+
 import copy
 import itertools
 import logging

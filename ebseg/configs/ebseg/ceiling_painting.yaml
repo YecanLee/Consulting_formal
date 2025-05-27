@@ -1,14 +1,19 @@
 _BASE_: ./ebseg_b.yaml
 
+DATASETS:
+  TRAIN: ("ceiling_easy_train",)
+  TEST: ("ceiling_easy_val",)
 MODEL:
   EBSEG:
     CLIP_RESOLUTION: 0.7
     CLIP_MODEL_NAME: "ViT-L-14-336"
     FEATURE_LAST_LAYER_IDX: 18
+    NUM_CLASSES: 4
+  MASK_ON: True
 TEST:
   EVAL_PERIOD: 100
 SOLVER:
   BASE_LR: 0.00001
   IMS_PER_BATCH: 1
-  MAX_ITER: 100
+  MAX_ITER: 1000
   CHECKPOINT_PERIOD: 100
