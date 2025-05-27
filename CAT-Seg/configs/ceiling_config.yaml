@@ -26,13 +26,14 @@ MODEL:
     ATTENTION_TYPE: "linear"
     CLIP_FINETUNE: "attention"
   PROMPT_ENSEMBLE_TYPE: "single"
+  MASK_ON: True
 DATASETS:
   TRAIN: ("ceiling_easy_train",)
   TEST: ("ceiling_easy_val",)
 SOLVER:
   IMS_PER_BATCH: 2
   BASE_LR: 0.0002
-  MAX_ITER: 100
+  MAX_ITER: 1000
   WARMUP_FACTOR: 1.0
   WARMUP_ITERS: 0
   WEIGHT_DECAY: 0.0001

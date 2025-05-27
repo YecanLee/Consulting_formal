@@ -7,7 +7,7 @@ import open_clip
 from detectron2.config import configurable
 from detectron2.modeling import META_ARCH_REGISTRY
 from detectron2.modeling.postprocessing import sem_seg_postprocess
-from detectron2.structures import ImageList
+from detectron2.structures import ImageList, BitMasks
 from detectron2.utils.memory import retry_if_cuda_oom
 from detectron2.modeling import META_ARCH_REGISTRY, build_sem_seg_head, ShapeSpec
 from detectron2.utils.logger import log_first_n
@@ -322,12 +322,14 @@ class EBSeg(nn.Module):
         labels = []
         for targets_per_image in targets:
             gt_masks = targets_per_image.gt_masks
+            gt_masks = BitMasks.from_polygon_masks(gt_masks, h_pad, w_pad)
+            gt_masks_tensor = gt_masks.tensor.to(self.device)
             padded_masks = torch.zeros(
-                (gt_masks.shape[0], h_pad, w_pad),
-                dtype=gt_masks.dtype,
-                device=gt_masks.device,
+                (gt_masks_tensor.shape[0], h_pad, w_pad),
+                dtype=gt_masks_tensor.dtype,
+                device=gt_masks_tensor.device,
             )
-            padded_masks[:, : gt_masks.shape[1], : gt_masks.shape[2]] = gt_masks
+            padded_masks[:, : gt_masks_tensor.shape[1], : gt_masks_tensor.shape[2]] = gt_masks_tensor
             labels.append(targets_per_image.gt_classes)
             new_targets.append(
                 {
