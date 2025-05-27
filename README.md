@@ -86,6 +86,26 @@ If your labeled dataset is in `COCO` format, you could use the `register_coco_in
 Please do not forget to call the defined registration function in the `SAN/san/data/datasets/register_<your_dataset_name>.py` file. Otherwise, the model will not be able to find your dataset.  
 
 ## 🚀Train Command Encylopedia
+### CAT-Seg
+To finetune the pretrained `CAT-Seg` model with our customized ceiling painting dataset, please run the following command:
+
+```bash
+cd CAT-Seg
+mkdir pretrained_weights   
+
+# download the pretrained weights with ViT-L backbone
+wget -P pretrained_weights https://huggingface.co/spaces/hamacojr/CAT-Seg-weights/resolve/main/model_large.pth   
+# Or
+# wget -P pretrained_weights https://huggingface.co/spaces/hamacojr/CAT-Seg-weights/resolve/main/model_base.pth
+
+# finetune the pretrained model with ViT-L backbone
+python train_net.py --config configs/ceiling_config.yaml  --num-gpus 1 --dist-url "auto"  --resume MODEL.WEIGHTS pretrained_weights/model_large.pth OUTPUT_DIR output    
+
+# finetune the pretrained model with ViT-B backbone
+# python train_net.py --config configs/ceiling_config.yaml  --num-gpus 1 --dist-url "auto"  --resume MODEL.WEIGHTS pretrained_weights/model_base.pth OUTPUT_DIR output
+```
+
+
 
 ## 🔥Demo Command Encylopedia
 
