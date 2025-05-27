@@ -3,3 +3,7 @@ open_clip_training/src/logs/*
 *__pycache__*
 
 pretrained_weights/*
+output/* 
+pred.png/
+
+wandb/* 

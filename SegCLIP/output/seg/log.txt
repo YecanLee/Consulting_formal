@@ -176,3 +176,408 @@ vis: []
 [2025-05-26 11:59:49 seg] (vit_seg.py 139): INFO Building ViTSegInference with 4 classes, test_cfg=Config (path: None): {'bg_thresh': 0.95, 'mode': 'slide', 'stride': (224, 224), 'crop_size': (448, 448)}, with_bg=False
 [2025-05-26 11:59:53 seg] (main_seg_zeroshot.py 164): INFO Eval Seg mIoU 21.95
 [2025-05-26 11:59:53 seg] (main_seg_zeroshot.py 188): INFO mIoU of the network on the 118 test images: 21.95%
+[2025-05-26 20:30:37 seg] (util_module.py 194): INFO 	 embed_dim: 512
+[2025-05-26 20:30:37 seg] (util_module.py 194): INFO 	 image_resolution: 224
+[2025-05-26 20:30:37 seg] (util_module.py 194): INFO 	 vision_layers: 12
+[2025-05-26 20:30:37 seg] (util_module.py 194): INFO 	 vision_width: 768
+[2025-05-26 20:30:37 seg] (util_module.py 194): INFO 	 vision_patch_size: 16
+[2025-05-26 20:30:37 seg] (util_module.py 194): INFO 	 context_length: 77
+[2025-05-26 20:30:37 seg] (util_module.py 194): INFO 	 vocab_size: 49408
+[2025-05-26 20:30:37 seg] (util_module.py 194): INFO 	 transformer_width: 512
+[2025-05-26 20:30:37 seg] (util_module.py 194): INFO 	 transformer_heads: 8
+[2025-05-26 20:30:37 seg] (util_module.py 194): INFO 	 transformer_layers: 12
+[2025-05-26 20:30:37 seg] (util_module.py 194): INFO 		 first_stage_layer: 10
+[2025-05-26 20:30:37 seg] (util_module.py 194): INFO 	 cut_top_layer: 0
+[2025-05-26 20:30:39 seg] (util_module.py 141): WARNING Weights from pretrained model not used in SegCLIP: 
+   vis_mae_decoder.mask_token
+   vis_mae_decoder.decoder_pos_embed
+   vis_mae_decoder.decoder_embed.weight
+   vis_mae_decoder.decoder_embed.bias
+   vis_mae_decoder.decoder_blocks.0.norm1.weight
+   vis_mae_decoder.decoder_blocks.0.norm1.bias
+   vis_mae_decoder.decoder_blocks.0.attn.qkv.weight
+   vis_mae_decoder.decoder_blocks.0.attn.qkv.bias
+   vis_mae_decoder.decoder_blocks.0.attn.proj.weight
+   vis_mae_decoder.decoder_blocks.0.attn.proj.bias
+   vis_mae_decoder.decoder_blocks.0.norm2.weight
+   vis_mae_decoder.decoder_blocks.0.norm2.bias
+   vis_mae_decoder.decoder_blocks.0.mlp.fc1.weight
+   vis_mae_decoder.decoder_blocks.0.mlp.fc1.bias
+   vis_mae_decoder.decoder_blocks.0.mlp.fc2.weight
+   vis_mae_decoder.decoder_blocks.0.mlp.fc2.bias
+   vis_mae_decoder.decoder_blocks.1.norm1.weight
+   vis_mae_decoder.decoder_blocks.1.norm1.bias
+   vis_mae_decoder.decoder_blocks.1.attn.qkv.weight
+   vis_mae_decoder.decoder_blocks.1.attn.qkv.bias
+   vis_mae_decoder.decoder_blocks.1.attn.proj.weight
+   vis_mae_decoder.decoder_blocks.1.attn.proj.bias
+   vis_mae_decoder.decoder_blocks.1.norm2.weight
+   vis_mae_decoder.decoder_blocks.1.norm2.bias
+   vis_mae_decoder.decoder_blocks.1.mlp.fc1.weight
+   vis_mae_decoder.decoder_blocks.1.mlp.fc1.bias
+   vis_mae_decoder.decoder_blocks.1.mlp.fc2.weight
+   vis_mae_decoder.decoder_blocks.1.mlp.fc2.bias
+   vis_mae_decoder.decoder_blocks.2.norm1.weight
+   vis_mae_decoder.decoder_blocks.2.norm1.bias
+   vis_mae_decoder.decoder_blocks.2.attn.qkv.weight
+   vis_mae_decoder.decoder_blocks.2.attn.qkv.bias
+   vis_mae_decoder.decoder_blocks.2.attn.proj.weight
+   vis_mae_decoder.decoder_blocks.2.attn.proj.bias
+   vis_mae_decoder.decoder_blocks.2.norm2.weight
+   vis_mae_decoder.decoder_blocks.2.norm2.bias
+   vis_mae_decoder.decoder_blocks.2.mlp.fc1.weight
+   vis_mae_decoder.decoder_blocks.2.mlp.fc1.bias
+   vis_mae_decoder.decoder_blocks.2.mlp.fc2.weight
+   vis_mae_decoder.decoder_blocks.2.mlp.fc2.bias
+   vis_mae_decoder.decoder_norm.weight
+   vis_mae_decoder.decoder_norm.bias
+   vis_mae_decoder.decoder_pred.weight
+   vis_mae_decoder.decoder_pred.bias
+[2025-05-26 20:31:04 seg] (util_module.py 194): INFO 	 embed_dim: 512
+[2025-05-26 20:31:04 seg] (util_module.py 194): INFO 	 image_resolution: 224
+[2025-05-26 20:31:04 seg] (util_module.py 194): INFO 	 vision_layers: 12
+[2025-05-26 20:31:04 seg] (util_module.py 194): INFO 	 vision_width: 768
+[2025-05-26 20:31:04 seg] (util_module.py 194): INFO 	 vision_patch_size: 16
+[2025-05-26 20:31:04 seg] (util_module.py 194): INFO 	 context_length: 77
+[2025-05-26 20:31:04 seg] (util_module.py 194): INFO 	 vocab_size: 49408
+[2025-05-26 20:31:04 seg] (util_module.py 194): INFO 	 transformer_width: 512
+[2025-05-26 20:31:04 seg] (util_module.py 194): INFO 	 transformer_heads: 8
+[2025-05-26 20:31:04 seg] (util_module.py 194): INFO 	 transformer_layers: 12
+[2025-05-26 20:31:04 seg] (util_module.py 194): INFO 		 first_stage_layer: 10
+[2025-05-26 20:31:04 seg] (util_module.py 194): INFO 	 cut_top_layer: 0
+[2025-05-26 20:31:06 seg] (util_module.py 141): WARNING Weights from pretrained model not used in SegCLIP: 
+   vis_mae_decoder.mask_token
+   vis_mae_decoder.decoder_pos_embed
+   vis_mae_decoder.decoder_embed.weight
+   vis_mae_decoder.decoder_embed.bias
+   vis_mae_decoder.decoder_blocks.0.norm1.weight
+   vis_mae_decoder.decoder_blocks.0.norm1.bias
+   vis_mae_decoder.decoder_blocks.0.attn.qkv.weight
+   vis_mae_decoder.decoder_blocks.0.attn.qkv.bias
+   vis_mae_decoder.decoder_blocks.0.attn.proj.weight
+   vis_mae_decoder.decoder_blocks.0.attn.proj.bias
+   vis_mae_decoder.decoder_blocks.0.norm2.weight
+   vis_mae_decoder.decoder_blocks.0.norm2.bias
+   vis_mae_decoder.decoder_blocks.0.mlp.fc1.weight
+   vis_mae_decoder.decoder_blocks.0.mlp.fc1.bias
+   vis_mae_decoder.decoder_blocks.0.mlp.fc2.weight
+   vis_mae_decoder.decoder_blocks.0.mlp.fc2.bias
+   vis_mae_decoder.decoder_blocks.1.norm1.weight
+   vis_mae_decoder.decoder_blocks.1.norm1.bias
+   vis_mae_decoder.decoder_blocks.1.attn.qkv.weight
+   vis_mae_decoder.decoder_blocks.1.attn.qkv.bias
+   vis_mae_decoder.decoder_blocks.1.attn.proj.weight
+   vis_mae_decoder.decoder_blocks.1.attn.proj.bias
+   vis_mae_decoder.decoder_blocks.1.norm2.weight
+   vis_mae_decoder.decoder_blocks.1.norm2.bias
+   vis_mae_decoder.decoder_blocks.1.mlp.fc1.weight
+   vis_mae_decoder.decoder_blocks.1.mlp.fc1.bias
+   vis_mae_decoder.decoder_blocks.1.mlp.fc2.weight
+   vis_mae_decoder.decoder_blocks.1.mlp.fc2.bias
+   vis_mae_decoder.decoder_blocks.2.norm1.weight
+   vis_mae_decoder.decoder_blocks.2.norm1.bias
+   vis_mae_decoder.decoder_blocks.2.attn.qkv.weight
+   vis_mae_decoder.decoder_blocks.2.attn.qkv.bias
+   vis_mae_decoder.decoder_blocks.2.attn.proj.weight
+   vis_mae_decoder.decoder_blocks.2.attn.proj.bias
+   vis_mae_decoder.decoder_blocks.2.norm2.weight
+   vis_mae_decoder.decoder_blocks.2.norm2.bias
+   vis_mae_decoder.decoder_blocks.2.mlp.fc1.weight
+   vis_mae_decoder.decoder_blocks.2.mlp.fc1.bias
+   vis_mae_decoder.decoder_blocks.2.mlp.fc2.weight
+   vis_mae_decoder.decoder_blocks.2.mlp.fc2.bias
+   vis_mae_decoder.decoder_norm.weight
+   vis_mae_decoder.decoder_norm.bias
+   vis_mae_decoder.decoder_pred.weight
+   vis_mae_decoder.decoder_pred.bias
+[2025-05-26 20:31:08 seg] (vit_seg.py 139): INFO Building ViTSegInference with 4 classes, test_cfg=Config (path: None): {'bg_thresh': 0.95, 'mode': 'slide', 'stride': (224, 224), 'crop_size': (448, 448)}, with_bg=False
+[2025-05-26 20:32:39 seg] (util_module.py 194): INFO 	 embed_dim: 512
+[2025-05-26 20:32:39 seg] (util_module.py 194): INFO 	 image_resolution: 224
+[2025-05-26 20:32:39 seg] (util_module.py 194): INFO 	 vision_layers: 12
+[2025-05-26 20:32:39 seg] (util_module.py 194): INFO 	 vision_width: 768
+[2025-05-26 20:32:39 seg] (util_module.py 194): INFO 	 vision_patch_size: 16
+[2025-05-26 20:32:39 seg] (util_module.py 194): INFO 	 context_length: 77
+[2025-05-26 20:32:39 seg] (util_module.py 194): INFO 	 vocab_size: 49408
+[2025-05-26 20:32:39 seg] (util_module.py 194): INFO 	 transformer_width: 512
+[2025-05-26 20:32:39 seg] (util_module.py 194): INFO 	 transformer_heads: 8
+[2025-05-26 20:32:39 seg] (util_module.py 194): INFO 	 transformer_layers: 12
+[2025-05-26 20:32:39 seg] (util_module.py 194): INFO 		 first_stage_layer: 10
+[2025-05-26 20:32:39 seg] (util_module.py 194): INFO 	 cut_top_layer: 0
+[2025-05-26 20:32:41 seg] (util_module.py 141): WARNING Weights from pretrained model not used in SegCLIP: 
+   vis_mae_decoder.mask_token
+   vis_mae_decoder.decoder_pos_embed
+   vis_mae_decoder.decoder_embed.weight
+   vis_mae_decoder.decoder_embed.bias
+   vis_mae_decoder.decoder_blocks.0.norm1.weight
+   vis_mae_decoder.decoder_blocks.0.norm1.bias
+   vis_mae_decoder.decoder_blocks.0.attn.qkv.weight
+   vis_mae_decoder.decoder_blocks.0.attn.qkv.bias
+   vis_mae_decoder.decoder_blocks.0.attn.proj.weight
+   vis_mae_decoder.decoder_blocks.0.attn.proj.bias
+   vis_mae_decoder.decoder_blocks.0.norm2.weight
+   vis_mae_decoder.decoder_blocks.0.norm2.bias
+   vis_mae_decoder.decoder_blocks.0.mlp.fc1.weight
+   vis_mae_decoder.decoder_blocks.0.mlp.fc1.bias
+   vis_mae_decoder.decoder_blocks.0.mlp.fc2.weight
+   vis_mae_decoder.decoder_blocks.0.mlp.fc2.bias
+   vis_mae_decoder.decoder_blocks.1.norm1.weight
+   vis_mae_decoder.decoder_blocks.1.norm1.bias
+   vis_mae_decoder.decoder_blocks.1.attn.qkv.weight
+   vis_mae_decoder.decoder_blocks.1.attn.qkv.bias
+   vis_mae_decoder.decoder_blocks.1.attn.proj.weight
+   vis_mae_decoder.decoder_blocks.1.attn.proj.bias
+   vis_mae_decoder.decoder_blocks.1.norm2.weight
+   vis_mae_decoder.decoder_blocks.1.norm2.bias
+   vis_mae_decoder.decoder_blocks.1.mlp.fc1.weight
+   vis_mae_decoder.decoder_blocks.1.mlp.fc1.bias
+   vis_mae_decoder.decoder_blocks.1.mlp.fc2.weight
+   vis_mae_decoder.decoder_blocks.1.mlp.fc2.bias
+   vis_mae_decoder.decoder_blocks.2.norm1.weight
+   vis_mae_decoder.decoder_blocks.2.norm1.bias
+   vis_mae_decoder.decoder_blocks.2.attn.qkv.weight
+   vis_mae_decoder.decoder_blocks.2.attn.qkv.bias
+   vis_mae_decoder.decoder_blocks.2.attn.proj.weight
+   vis_mae_decoder.decoder_blocks.2.attn.proj.bias
+   vis_mae_decoder.decoder_blocks.2.norm2.weight
+   vis_mae_decoder.decoder_blocks.2.norm2.bias
+   vis_mae_decoder.decoder_blocks.2.mlp.fc1.weight
+   vis_mae_decoder.decoder_blocks.2.mlp.fc1.bias
+   vis_mae_decoder.decoder_blocks.2.mlp.fc2.weight
+   vis_mae_decoder.decoder_blocks.2.mlp.fc2.bias
+   vis_mae_decoder.decoder_norm.weight
+   vis_mae_decoder.decoder_norm.bias
+   vis_mae_decoder.decoder_pred.weight
+   vis_mae_decoder.decoder_pred.bias
+[2025-05-26 20:32:43 seg] (vit_seg.py 139): INFO Building ViTSegInference with 4 classes, test_cfg=Config (path: None): {'bg_thresh': 0.95, 'mode': 'slide', 'stride': (224, 224), 'crop_size': (448, 448)}, with_bg=False
+[2025-05-26 20:34:06 seg] (util_module.py 194): INFO 	 embed_dim: 512
+[2025-05-26 20:34:06 seg] (util_module.py 194): INFO 	 image_resolution: 224
+[2025-05-26 20:34:06 seg] (util_module.py 194): INFO 	 vision_layers: 12
+[2025-05-26 20:34:06 seg] (util_module.py 194): INFO 	 vision_width: 768
+[2025-05-26 20:34:06 seg] (util_module.py 194): INFO 	 vision_patch_size: 16
+[2025-05-26 20:34:06 seg] (util_module.py 194): INFO 	 context_length: 77
+[2025-05-26 20:34:06 seg] (util_module.py 194): INFO 	 vocab_size: 49408
+[2025-05-26 20:34:06 seg] (util_module.py 194): INFO 	 transformer_width: 512
+[2025-05-26 20:34:06 seg] (util_module.py 194): INFO 	 transformer_heads: 8
+[2025-05-26 20:34:06 seg] (util_module.py 194): INFO 	 transformer_layers: 12
+[2025-05-26 20:34:06 seg] (util_module.py 194): INFO 		 first_stage_layer: 10
+[2025-05-26 20:34:06 seg] (util_module.py 194): INFO 	 cut_top_layer: 0
+[2025-05-26 20:34:08 seg] (util_module.py 141): WARNING Weights from pretrained model not used in SegCLIP: 
+   vis_mae_decoder.mask_token
+   vis_mae_decoder.decoder_pos_embed
+   vis_mae_decoder.decoder_embed.weight
+   vis_mae_decoder.decoder_embed.bias
+   vis_mae_decoder.decoder_blocks.0.norm1.weight
+   vis_mae_decoder.decoder_blocks.0.norm1.bias
+   vis_mae_decoder.decoder_blocks.0.attn.qkv.weight
+   vis_mae_decoder.decoder_blocks.0.attn.qkv.bias
+   vis_mae_decoder.decoder_blocks.0.attn.proj.weight
+   vis_mae_decoder.decoder_blocks.0.attn.proj.bias
+   vis_mae_decoder.decoder_blocks.0.norm2.weight
+   vis_mae_decoder.decoder_blocks.0.norm2.bias
+   vis_mae_decoder.decoder_blocks.0.mlp.fc1.weight
+   vis_mae_decoder.decoder_blocks.0.mlp.fc1.bias
+   vis_mae_decoder.decoder_blocks.0.mlp.fc2.weight
+   vis_mae_decoder.decoder_blocks.0.mlp.fc2.bias
+   vis_mae_decoder.decoder_blocks.1.norm1.weight
+   vis_mae_decoder.decoder_blocks.1.norm1.bias
+   vis_mae_decoder.decoder_blocks.1.attn.qkv.weight
+   vis_mae_decoder.decoder_blocks.1.attn.qkv.bias
+   vis_mae_decoder.decoder_blocks.1.attn.proj.weight
+   vis_mae_decoder.decoder_blocks.1.attn.proj.bias
+   vis_mae_decoder.decoder_blocks.1.norm2.weight
+   vis_mae_decoder.decoder_blocks.1.norm2.bias
+   vis_mae_decoder.decoder_blocks.1.mlp.fc1.weight
+   vis_mae_decoder.decoder_blocks.1.mlp.fc1.bias
+   vis_mae_decoder.decoder_blocks.1.mlp.fc2.weight
+   vis_mae_decoder.decoder_blocks.1.mlp.fc2.bias
+   vis_mae_decoder.decoder_blocks.2.norm1.weight
+   vis_mae_decoder.decoder_blocks.2.norm1.bias
+   vis_mae_decoder.decoder_blocks.2.attn.qkv.weight
+   vis_mae_decoder.decoder_blocks.2.attn.qkv.bias
+   vis_mae_decoder.decoder_blocks.2.attn.proj.weight
+   vis_mae_decoder.decoder_blocks.2.attn.proj.bias
+   vis_mae_decoder.decoder_blocks.2.norm2.weight
+   vis_mae_decoder.decoder_blocks.2.norm2.bias
+   vis_mae_decoder.decoder_blocks.2.mlp.fc1.weight
+   vis_mae_decoder.decoder_blocks.2.mlp.fc1.bias
+   vis_mae_decoder.decoder_blocks.2.mlp.fc2.weight
+   vis_mae_decoder.decoder_blocks.2.mlp.fc2.bias
+   vis_mae_decoder.decoder_norm.weight
+   vis_mae_decoder.decoder_norm.bias
+   vis_mae_decoder.decoder_pred.weight
+   vis_mae_decoder.decoder_pred.bias
+[2025-05-26 20:34:10 seg] (vit_seg.py 139): INFO Building ViTSegInference with 4 classes, test_cfg=Config (path: None): {'bg_thresh': 0.95, 'mode': 'slide', 'stride': (224, 224), 'crop_size': (448, 448)}, with_bg=False
+[2025-05-26 20:37:49 seg] (util_module.py 194): INFO 	 embed_dim: 512
+[2025-05-26 20:37:49 seg] (util_module.py 194): INFO 	 image_resolution: 224
+[2025-05-26 20:37:49 seg] (util_module.py 194): INFO 	 vision_layers: 12
+[2025-05-26 20:37:49 seg] (util_module.py 194): INFO 	 vision_width: 768
+[2025-05-26 20:37:49 seg] (util_module.py 194): INFO 	 vision_patch_size: 16
+[2025-05-26 20:37:49 seg] (util_module.py 194): INFO 	 context_length: 77
+[2025-05-26 20:37:49 seg] (util_module.py 194): INFO 	 vocab_size: 49408
+[2025-05-26 20:37:49 seg] (util_module.py 194): INFO 	 transformer_width: 512
+[2025-05-26 20:37:49 seg] (util_module.py 194): INFO 	 transformer_heads: 8
+[2025-05-26 20:37:49 seg] (util_module.py 194): INFO 	 transformer_layers: 12
+[2025-05-26 20:37:49 seg] (util_module.py 194): INFO 		 first_stage_layer: 10
+[2025-05-26 20:37:49 seg] (util_module.py 194): INFO 	 cut_top_layer: 0
+[2025-05-26 20:37:51 seg] (util_module.py 141): WARNING Weights from pretrained model not used in SegCLIP: 
+   vis_mae_decoder.mask_token
+   vis_mae_decoder.decoder_pos_embed
+   vis_mae_decoder.decoder_embed.weight
+   vis_mae_decoder.decoder_embed.bias
+   vis_mae_decoder.decoder_blocks.0.norm1.weight
+   vis_mae_decoder.decoder_blocks.0.norm1.bias
+   vis_mae_decoder.decoder_blocks.0.attn.qkv.weight
+   vis_mae_decoder.decoder_blocks.0.attn.qkv.bias
+   vis_mae_decoder.decoder_blocks.0.attn.proj.weight
+   vis_mae_decoder.decoder_blocks.0.attn.proj.bias
+   vis_mae_decoder.decoder_blocks.0.norm2.weight
+   vis_mae_decoder.decoder_blocks.0.norm2.bias
+   vis_mae_decoder.decoder_blocks.0.mlp.fc1.weight
+   vis_mae_decoder.decoder_blocks.0.mlp.fc1.bias
+   vis_mae_decoder.decoder_blocks.0.mlp.fc2.weight
+   vis_mae_decoder.decoder_blocks.0.mlp.fc2.bias
+   vis_mae_decoder.decoder_blocks.1.norm1.weight
+   vis_mae_decoder.decoder_blocks.1.norm1.bias
+   vis_mae_decoder.decoder_blocks.1.attn.qkv.weight
+   vis_mae_decoder.decoder_blocks.1.attn.qkv.bias
+   vis_mae_decoder.decoder_blocks.1.attn.proj.weight
+   vis_mae_decoder.decoder_blocks.1.attn.proj.bias
+   vis_mae_decoder.decoder_blocks.1.norm2.weight
+   vis_mae_decoder.decoder_blocks.1.norm2.bias
+   vis_mae_decoder.decoder_blocks.1.mlp.fc1.weight
+   vis_mae_decoder.decoder_blocks.1.mlp.fc1.bias
+   vis_mae_decoder.decoder_blocks.1.mlp.fc2.weight
+   vis_mae_decoder.decoder_blocks.1.mlp.fc2.bias
+   vis_mae_decoder.decoder_blocks.2.norm1.weight
+   vis_mae_decoder.decoder_blocks.2.norm1.bias
+   vis_mae_decoder.decoder_blocks.2.attn.qkv.weight
+   vis_mae_decoder.decoder_blocks.2.attn.qkv.bias
+   vis_mae_decoder.decoder_blocks.2.attn.proj.weight
+   vis_mae_decoder.decoder_blocks.2.attn.proj.bias
+   vis_mae_decoder.decoder_blocks.2.norm2.weight
+   vis_mae_decoder.decoder_blocks.2.norm2.bias
+   vis_mae_decoder.decoder_blocks.2.mlp.fc1.weight
+   vis_mae_decoder.decoder_blocks.2.mlp.fc1.bias
+   vis_mae_decoder.decoder_blocks.2.mlp.fc2.weight
+   vis_mae_decoder.decoder_blocks.2.mlp.fc2.bias
+   vis_mae_decoder.decoder_norm.weight
+   vis_mae_decoder.decoder_norm.bias
+   vis_mae_decoder.decoder_pred.weight
+   vis_mae_decoder.decoder_pred.bias
+[2025-05-26 20:37:53 seg] (vit_seg.py 139): INFO Building ViTSegInference with 81 classes, test_cfg=Config (path: None): {'bg_thresh': 0.65, 'mode': 'slide', 'stride': (224, 224), 'crop_size': (224, 224)}, with_bg=True
+[2025-05-27 07:26:29 seg] (util_module.py 194): INFO 	 embed_dim: 512
+[2025-05-27 07:26:29 seg] (util_module.py 194): INFO 	 image_resolution: 224
+[2025-05-27 07:26:29 seg] (util_module.py 194): INFO 	 vision_layers: 12
+[2025-05-27 07:26:29 seg] (util_module.py 194): INFO 	 vision_width: 768
+[2025-05-27 07:26:29 seg] (util_module.py 194): INFO 	 vision_patch_size: 16
+[2025-05-27 07:26:29 seg] (util_module.py 194): INFO 	 context_length: 77
+[2025-05-27 07:26:29 seg] (util_module.py 194): INFO 	 vocab_size: 49408
+[2025-05-27 07:26:29 seg] (util_module.py 194): INFO 	 transformer_width: 512
+[2025-05-27 07:26:29 seg] (util_module.py 194): INFO 	 transformer_heads: 8
+[2025-05-27 07:26:29 seg] (util_module.py 194): INFO 	 transformer_layers: 12
+[2025-05-27 07:26:29 seg] (util_module.py 194): INFO 		 first_stage_layer: 10
+[2025-05-27 07:26:29 seg] (util_module.py 194): INFO 	 cut_top_layer: 0
+[2025-05-27 07:26:31 seg] (util_module.py 141): WARNING Weights from pretrained model not used in SegCLIP: 
+   vis_mae_decoder.mask_token
+   vis_mae_decoder.decoder_pos_embed
+   vis_mae_decoder.decoder_embed.weight
+   vis_mae_decoder.decoder_embed.bias
+   vis_mae_decoder.decoder_blocks.0.norm1.weight
+   vis_mae_decoder.decoder_blocks.0.norm1.bias
+   vis_mae_decoder.decoder_blocks.0.attn.qkv.weight
+   vis_mae_decoder.decoder_blocks.0.attn.qkv.bias
+   vis_mae_decoder.decoder_blocks.0.attn.proj.weight
+   vis_mae_decoder.decoder_blocks.0.attn.proj.bias
+   vis_mae_decoder.decoder_blocks.0.norm2.weight
+   vis_mae_decoder.decoder_blocks.0.norm2.bias
+   vis_mae_decoder.decoder_blocks.0.mlp.fc1.weight
+   vis_mae_decoder.decoder_blocks.0.mlp.fc1.bias
+   vis_mae_decoder.decoder_blocks.0.mlp.fc2.weight
+   vis_mae_decoder.decoder_blocks.0.mlp.fc2.bias
+   vis_mae_decoder.decoder_blocks.1.norm1.weight
+   vis_mae_decoder.decoder_blocks.1.norm1.bias
+   vis_mae_decoder.decoder_blocks.1.attn.qkv.weight
+   vis_mae_decoder.decoder_blocks.1.attn.qkv.bias
+   vis_mae_decoder.decoder_blocks.1.attn.proj.weight
+   vis_mae_decoder.decoder_blocks.1.attn.proj.bias
+   vis_mae_decoder.decoder_blocks.1.norm2.weight
+   vis_mae_decoder.decoder_blocks.1.norm2.bias
+   vis_mae_decoder.decoder_blocks.1.mlp.fc1.weight
+   vis_mae_decoder.decoder_blocks.1.mlp.fc1.bias
+   vis_mae_decoder.decoder_blocks.1.mlp.fc2.weight
+   vis_mae_decoder.decoder_blocks.1.mlp.fc2.bias
+   vis_mae_decoder.decoder_blocks.2.norm1.weight
+   vis_mae_decoder.decoder_blocks.2.norm1.bias
+   vis_mae_decoder.decoder_blocks.2.attn.qkv.weight
+   vis_mae_decoder.decoder_blocks.2.attn.qkv.bias
+   vis_mae_decoder.decoder_blocks.2.attn.proj.weight
+   vis_mae_decoder.decoder_blocks.2.attn.proj.bias
+   vis_mae_decoder.decoder_blocks.2.norm2.weight
+   vis_mae_decoder.decoder_blocks.2.norm2.bias
+   vis_mae_decoder.decoder_blocks.2.mlp.fc1.weight
+   vis_mae_decoder.decoder_blocks.2.mlp.fc1.bias
+   vis_mae_decoder.decoder_blocks.2.mlp.fc2.weight
+   vis_mae_decoder.decoder_blocks.2.mlp.fc2.bias
+   vis_mae_decoder.decoder_norm.weight
+   vis_mae_decoder.decoder_norm.bias
+   vis_mae_decoder.decoder_pred.weight
+   vis_mae_decoder.decoder_pred.bias
+[2025-05-27 07:26:33 seg] (vit_seg.py 139): INFO Building ViTSegInference with 81 classes, test_cfg=Config (path: None): {'bg_thresh': 0.65, 'mode': 'slide', 'stride': (224, 224), 'crop_size': (224, 224)}, with_bg=True
+[2025-05-27 07:30:37 seg] (util_module.py 194): INFO 	 embed_dim: 512
+[2025-05-27 07:30:37 seg] (util_module.py 194): INFO 	 image_resolution: 224
+[2025-05-27 07:30:37 seg] (util_module.py 194): INFO 	 vision_layers: 12
+[2025-05-27 07:30:37 seg] (util_module.py 194): INFO 	 vision_width: 768
+[2025-05-27 07:30:37 seg] (util_module.py 194): INFO 	 vision_patch_size: 16
+[2025-05-27 07:30:37 seg] (util_module.py 194): INFO 	 context_length: 77
+[2025-05-27 07:30:37 seg] (util_module.py 194): INFO 	 vocab_size: 49408
+[2025-05-27 07:30:37 seg] (util_module.py 194): INFO 	 transformer_width: 512
+[2025-05-27 07:30:37 seg] (util_module.py 194): INFO 	 transformer_heads: 8
+[2025-05-27 07:30:37 seg] (util_module.py 194): INFO 	 transformer_layers: 12
+[2025-05-27 07:30:37 seg] (util_module.py 194): INFO 		 first_stage_layer: 10
+[2025-05-27 07:30:37 seg] (util_module.py 194): INFO 	 cut_top_layer: 0
+[2025-05-27 07:30:39 seg] (util_module.py 141): WARNING Weights from pretrained model not used in SegCLIP: 
+   vis_mae_decoder.mask_token
+   vis_mae_decoder.decoder_pos_embed
+   vis_mae_decoder.decoder_embed.weight
+   vis_mae_decoder.decoder_embed.bias
+   vis_mae_decoder.decoder_blocks.0.norm1.weight
+   vis_mae_decoder.decoder_blocks.0.norm1.bias
+   vis_mae_decoder.decoder_blocks.0.attn.qkv.weight
+   vis_mae_decoder.decoder_blocks.0.attn.qkv.bias
+   vis_mae_decoder.decoder_blocks.0.attn.proj.weight
+   vis_mae_decoder.decoder_blocks.0.attn.proj.bias
+   vis_mae_decoder.decoder_blocks.0.norm2.weight
+   vis_mae_decoder.decoder_blocks.0.norm2.bias
+   vis_mae_decoder.decoder_blocks.0.mlp.fc1.weight
+   vis_mae_decoder.decoder_blocks.0.mlp.fc1.bias
+   vis_mae_decoder.decoder_blocks.0.mlp.fc2.weight
+   vis_mae_decoder.decoder_blocks.0.mlp.fc2.bias
+   vis_mae_decoder.decoder_blocks.1.norm1.weight
+   vis_mae_decoder.decoder_blocks.1.norm1.bias
+   vis_mae_decoder.decoder_blocks.1.attn.qkv.weight
+   vis_mae_decoder.decoder_blocks.1.attn.qkv.bias
+   vis_mae_decoder.decoder_blocks.1.attn.proj.weight
+   vis_mae_decoder.decoder_blocks.1.attn.proj.bias
+   vis_mae_decoder.decoder_blocks.1.norm2.weight
+   vis_mae_decoder.decoder_blocks.1.norm2.bias
+   vis_mae_decoder.decoder_blocks.1.mlp.fc1.weight
+   vis_mae_decoder.decoder_blocks.1.mlp.fc1.bias
+   vis_mae_decoder.decoder_blocks.1.mlp.fc2.weight
+   vis_mae_decoder.decoder_blocks.1.mlp.fc2.bias
+   vis_mae_decoder.decoder_blocks.2.norm1.weight
+   vis_mae_decoder.decoder_blocks.2.norm1.bias
+   vis_mae_decoder.decoder_blocks.2.attn.qkv.weight
+   vis_mae_decoder.decoder_blocks.2.attn.qkv.bias
+   vis_mae_decoder.decoder_blocks.2.attn.proj.weight
+   vis_mae_decoder.decoder_blocks.2.attn.proj.bias
+   vis_mae_decoder.decoder_blocks.2.norm2.weight
+   vis_mae_decoder.decoder_blocks.2.norm2.bias
+   vis_mae_decoder.decoder_blocks.2.mlp.fc1.weight
+   vis_mae_decoder.decoder_blocks.2.mlp.fc1.bias
+   vis_mae_decoder.decoder_blocks.2.mlp.fc2.weight
+   vis_mae_decoder.decoder_blocks.2.mlp.fc2.bias
+   vis_mae_decoder.decoder_norm.weight
+   vis_mae_decoder.decoder_norm.bias
+   vis_mae_decoder.decoder_pred.weight
+   vis_mae_decoder.decoder_pred.bias
+[2025-05-27 07:30:41 seg] (vit_seg.py 139): INFO Building ViTSegInference with 81 classes, test_cfg=Config (path: None): {'bg_thresh': 0.65, 'mode': 'slide', 'stride': (224, 224), 'crop_size': (224, 224)}, with_bg=True

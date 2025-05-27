@@ -26,7 +26,7 @@ from mmcv.image import tensor2imgs
 from mmcv.parallel import collate, scatter
 from mmseg.datasets.pipelines import Compose
 from omegaconf import read_write
-from seg_segmentation.datasets import COCOObjectDataset, PascalContextDataset, PascalVOCDataset
+from seg_segmentation.datasets import COCOObjectDataset, PascalContextDataset, PascalVOCDataset, CeilingPaintingDataset
 from seg_segmentation.evaluation import build_seg_dataloader, build_seg_dataset, build_seg_demo_pipeline, build_seg_inference
 from seg_segmentation.config import get_config
 from seg_segmentation.logger import get_logger
@@ -34,7 +34,6 @@ from seg_segmentation.logger import get_logger
 from modules.tokenization_clip import SimpleTokenizer
 from modules.file_utils import PYTORCH_PRETRAINED_BERT_CACHE
 from modules.modeling import SegCLIP
-
 
 class Tokenize:
 
@@ -79,7 +78,7 @@ def parse_args():
                                       '"input_pred", "all_groups", "first_group", "final_group", "input_pred_label"', default=None, nargs='+')
 
     parser.add_argument('--device', default='cuda:0', help='Device used for inference')
-    parser.add_argument('--dataset', default='voc', choices=['voc', 'coco', 'context'], help='dataset classes for visualization')
+    parser.add_argument('--dataset', default='voc', choices=['voc', 'coco', 'context', 'ceiling_painting'], help='dataset classes for visualization')
 
     parser.add_argument('--input', type=str, help='input image path')
     parser.add_argument('--output_dir', type=str, default="output", help='output dir')
@@ -135,6 +134,9 @@ def inference(args, cfg):
     elif args.dataset == 'context':
         dataset_class = PascalContextDataset
         seg_cfg = 'seg_segmentation/configs/_base_/datasets/pascal_context.py'
+    elif args.dataset == 'ceiling_painting':
+        dataset_class = CeilingPaintingDataset
+        seg_cfg = 'seg_segmentation/configs/_base_/datasets/ceiling_painting.py'
     else:
         raise ValueError('Unknown dataset: {}'.format(args.dataset))
 
