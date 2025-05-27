@@ -33,7 +33,7 @@ We include multiple features in our repo, this includes:
 
 
 ## Environment Installation
-### SAN paper env installation instructions
+### SAN paper env installation instructions (An example for `detectron2` based model)
 To install the environment we used in our projects's `SAN` paper implementation, please follow the instructions below, beware that the env installaton was only tested on a Linux machine, you may encounter specific issues when you try to install the `detectron2` package.
 
 __Alert__! We installed `detectron2` package from source by cloning the Meta official repo first, you may encounter issues if you installed the package by using `conda` or follow the original official repo's implementation method. __We pinned the pytorch as well as other dependencies to other versions, which is different from the README.md in the original repo__.
@@ -61,6 +61,10 @@ pip install -r requirements.txt
 # Test if the detectron2 has been installed successfully
 # python -c "import detectron2 ; print(detectron2.__version__)"
 ```
+
+### SegCLIP paper env installation instructions (An example for `mm-lab` based model)
+Since the `mm-lab` developed packages are really hard to install, we provide a detailed installation instruction for the `SegCLIP` paper. Please check the `Debug Guidance` section for more details. 
+
 
 ## Folder Structure
 ### SAN paper folder structure
