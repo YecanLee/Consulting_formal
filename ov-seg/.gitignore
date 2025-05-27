@@ -5,3 +5,5 @@ open_clip_training/src/logs/*
 pretrained_weights/*
 output/* 
 pred.png/
+
+wandb/* 
