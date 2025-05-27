@@ -82,7 +82,7 @@ MODEL:
     MASK_FILL: mean
     MASK_MATTING: false
     MASK_PROMPT_DEPTH: 3
-    MASK_PROMPT_FWD: false
+    MASK_PROMPT_FWD: true
     MASK_THR: 0.4
     PREDEFINED_PROMPT_TEMPLATES:
     - a photo of a {}.

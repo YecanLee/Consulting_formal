@@ -1,0 +1,1437 @@
+this is the config 🔥🔥🔥 CUDNN_BENCHMARK: False
+DATALOADER:
+  ASPECT_RATIO_GROUPING: True
+  FILTER_EMPTY_ANNOTATIONS: True
+  NUM_WORKERS: 4
+  REPEAT_SQRT: True
+  REPEAT_THRESHOLD: 0.0
+  SAMPLER_TRAIN: TrainingSampler
+DATASETS:
+  PRECOMPUTED_PROPOSAL_TOPK_TEST: 1000
+  PRECOMPUTED_PROPOSAL_TOPK_TRAIN: 2000
+  PROPOSAL_FILES_TEST: ()
+  PROPOSAL_FILES_TRAIN: ()
+  SAMPLE_PER_CLASS: -1
+  SAMPLE_SEED: 0
+  TEST: ('ceiling_easy_val',)
+  TRAIN: ('ceiling_easy_train',)
+FLOAT32_PRECISION:
+GLOBAL:
+  HACK: 1.0
+INPUT:
+  COLOR_AUG_SSD: True
+  CROP:
+    ENABLED: True
+    SINGLE_CATEGORY_MAX_AREA: 1.0
+    SIZE: [640, 640]
+    TYPE: absolute
+  DATASET_MAPPER_NAME: ceiling_painting
+  FORMAT: RGB
+  MASK_FORMAT: polygon
+  MAX_SIZE_TEST: 2560
+  MAX_SIZE_TRAIN: 2560
+  MIN_SIZE_TEST: 640
+  MIN_SIZE_TRAIN: (640, 704, 768, 832, 896, 960, 1024, 1088, 1152, 1216, 1280, 1344, 1408, 1472)
+  MIN_SIZE_TRAIN_SAMPLING: choice
+  RANDOM_FLIP: horizontal
+  SIZE_DIVISIBILITY: 640
+MODEL:
+  ANCHOR_GENERATOR:
+    ANGLES: [[-90, 0, 90]]
+    ASPECT_RATIOS: [[0.5, 1.0, 2.0]]
+    NAME: DefaultAnchorGenerator
+    OFFSET: 0.0
+    SIZES: [[32, 64, 128, 256, 512]]
+  BACKBONE:
+    FREEZE_AT: 0
+    NAME: D2SwinTransformer
+  CLIP_ADAPTER:
+    CLIP_ENSEMBLE: True
+    CLIP_ENSEMBLE_WEIGHT: 0.7
+    CLIP_MODEL_NAME: ViT-L/14
+    MASK_EXPAND_RATIO: 1.0
+    MASK_FILL: mean
+    MASK_MATTING: False
+    MASK_PROMPT_DEPTH: 3
+    MASK_PROMPT_FWD: True
+    MASK_THR: 0.4
+    PREDEFINED_PROMPT_TEMPLATES: ['a photo of a {}.']
+    PROMPT_CHECKPOINT:
+    REGION_RESIZED: True
+    TEXT_TEMPLATES: vild
+  DEVICE: cuda
+  FPN:
+    FUSE_TYPE: sum
+    IN_FEATURES: []
+    NORM:
+    OUT_CHANNELS: 256
+  KEYPOINT_ON: False
+  LOAD_PROPOSALS: False
+  MASK_FORMER:
+    DEC_LAYERS: 6
+    DEEP_SUPERVISION: True
+    DICE_WEIGHT: 1.0
+    DIM_FEEDFORWARD: 2048
+    DROPOUT: 0.1
+    ENC_LAYERS: 0
+    ENFORCE_INPUT_PROJ: False
+    HIDDEN_DIM: 256
+    MASK_WEIGHT: 20.0
+    NHEADS: 8
+    NO_OBJECT_WEIGHT: 0.1
+    NUM_OBJECT_QUERIES: 100
+    PRE_NORM: False
+    SIZE_DIVISIBILITY: 32
+    TEST:
+      OBJECT_MASK_THRESHOLD: 0.0
+      OVERLAP_THRESHOLD: 0.0
+      PANOPTIC_ON: False
+      SEM_SEG_POSTPROCESSING_BEFORE_INFERENCE: False
+    TRANSFORMER_IN_FEATURE: res5
+  MASK_ON: True
+  META_ARCHITECTURE: OVSeg
+  PANOPTIC_FPN:
+    COMBINE:
+      ENABLED: True
+      INSTANCES_CONFIDENCE_THRESH: 0.5
+      OVERLAP_THRESH: 0.5
+      STUFF_AREA_LIMIT: 4096
+    INSTANCE_LOSS_WEIGHT: 1.0
+  PIXEL_MEAN: [123.675, 116.28, 103.53]
+  PIXEL_STD: [58.395, 57.12, 57.375]
+  PROPOSAL_GENERATOR:
+    MIN_SIZE: 0
+    NAME: RPN
+  RESNETS:
+    DEFORM_MODULATED: False
+    DEFORM_NUM_GROUPS: 1
+    DEFORM_ON_PER_STAGE: [False, False, False, False]
+    DEPTH: 50
+    NORM: FrozenBN
+    NUM_GROUPS: 1
+    OUT_FEATURES: ['res4']
+    RES2_OUT_CHANNELS: 256
+    RES4_DILATION: 1
+    RES5_DILATION: 1
+    RES5_MULTI_GRID: [1, 2, 4]
+    STEM_OUT_CHANNELS: 64
+    STEM_TYPE: deeplab
+    STRIDE_IN_1X1: True
+    WIDTH_PER_GROUP: 64
+  RETINANET:
+    BBOX_REG_LOSS_TYPE: smooth_l1
+    BBOX_REG_WEIGHTS: (1.0, 1.0, 1.0, 1.0)
+    FOCAL_LOSS_ALPHA: 0.25
+    FOCAL_LOSS_GAMMA: 2.0
+    IN_FEATURES: ['p3', 'p4', 'p5', 'p6', 'p7']
+    IOU_LABELS: [0, -1, 1]
+    IOU_THRESHOLDS: [0.4, 0.5]
+    NMS_THRESH_TEST: 0.5
+    NORM:
+    NUM_CLASSES: 80
+    NUM_CONVS: 4
+    PRIOR_PROB: 0.01
+    SCORE_THRESH_TEST: 0.05
+    SMOOTH_L1_LOSS_BETA: 0.1
+    TOPK_CANDIDATES_TEST: 1000
+  ROI_BOX_CASCADE_HEAD:
+    BBOX_REG_WEIGHTS: ((10.0, 10.0, 5.0, 5.0), (20.0, 20.0, 10.0, 10.0), (30.0, 30.0, 15.0, 15.0))
+    IOUS: (0.5, 0.6, 0.7)
+  ROI_BOX_HEAD:
+    BBOX_REG_LOSS_TYPE: smooth_l1
+    BBOX_REG_LOSS_WEIGHT: 1.0
+    BBOX_REG_WEIGHTS: (10.0, 10.0, 5.0, 5.0)
+    CLS_AGNOSTIC_BBOX_REG: False
+    CONV_DIM: 256
+    FC_DIM: 1024
+    FED_LOSS_FREQ_WEIGHT_POWER: 0.5
+    FED_LOSS_NUM_CLASSES: 50
+    NAME:
+    NORM:
+    NUM_CONV: 0
+    NUM_FC: 0
+    POOLER_RESOLUTION: 14
+    POOLER_SAMPLING_RATIO: 0
+    POOLER_TYPE: ROIAlignV2
+    SMOOTH_L1_BETA: 0.0
+    TRAIN_ON_PRED_BOXES: False
+    USE_FED_LOSS: False
+    USE_SIGMOID_CE: False
+  ROI_HEADS:
+    BATCH_SIZE_PER_IMAGE: 512
+    IN_FEATURES: ['res4']
+    IOU_LABELS: [0, 1]
+    IOU_THRESHOLDS: [0.5]
+    NAME: Res5ROIHeads
+    NMS_THRESH_TEST: 0.5
+    NUM_CLASSES: 80
+    POSITIVE_FRACTION: 0.25
+    PROPOSAL_APPEND_GT: True
+    SCORE_THRESH_TEST: 0.05
+  ROI_KEYPOINT_HEAD:
+    CONV_DIMS: (512, 512, 512, 512, 512, 512, 512, 512)
+    LOSS_WEIGHT: 1.0
+    MIN_KEYPOINTS_PER_IMAGE: 1
+    NAME: KRCNNConvDeconvUpsampleHead
+    NORMALIZE_LOSS_BY_VISIBLE_KEYPOINTS: True
+    NUM_KEYPOINTS: 17
+    POOLER_RESOLUTION: 14
+    POOLER_SAMPLING_RATIO: 0
+    POOLER_TYPE: ROIAlignV2
+  ROI_MASK_HEAD:
+    CLS_AGNOSTIC_MASK: False
+    CONV_DIM: 256
+    NAME: MaskRCNNConvUpsampleHead
+    NORM:
+    NUM_CONV: 0
+    POOLER_RESOLUTION: 14
+    POOLER_SAMPLING_RATIO: 0
+    POOLER_TYPE: ROIAlignV2
+  RPN:
+    BATCH_SIZE_PER_IMAGE: 256
+    BBOX_REG_LOSS_TYPE: smooth_l1
+    BBOX_REG_LOSS_WEIGHT: 1.0
+    BBOX_REG_WEIGHTS: (1.0, 1.0, 1.0, 1.0)
+    BOUNDARY_THRESH: -1
+    CONV_DIMS: [-1]
+    HEAD_NAME: StandardRPNHead
+    IN_FEATURES: ['res4']
+    IOU_LABELS: [0, -1, 1]
+    IOU_THRESHOLDS: [0.3, 0.7]
+    LOSS_WEIGHT: 1.0
+    NMS_THRESH: 0.7
+    POSITIVE_FRACTION: 0.5
+    POST_NMS_TOPK_TEST: 1000
+    POST_NMS_TOPK_TRAIN: 2000
+    PRE_NMS_TOPK_TEST: 6000
+    PRE_NMS_TOPK_TRAIN: 12000
+    SMOOTH_L1_BETA: 0.0
+  SEM_SEG_HEAD:
+    ASPP_CHANNELS: 256
+    ASPP_DILATIONS: [6, 12, 18]
+    ASPP_DROPOUT: 0.1
+    COMMON_STRIDE: 4
+    CONVS_DIM: 256
+    EMBEDDING_DIM: 768
+    EMBED_HIDDEN_DIM: 1024
+    EMBED_LAYERS: 2
+    IGNORE_VALUE: 255
+    IN_FEATURES: ['res2', 'res3', 'res4', 'res5']
+    LOSS_TYPE: hard_pixel_mining
+    LOSS_WEIGHT: 1.0
+    MASK_DIM: 256
+    NAME: OpenVocabMaskFormerHead
+    NORM: GN
+    NUM_CLASSES: 4
+    PIXEL_DECODER_NAME: BasePixelDecoder
+    PROJECT_CHANNELS: [48]
+    PROJECT_FEATURES: ['res2']
+    TRANSFORMER_ENC_LAYERS: 0
+    USE_DEPTHWISE_SEPARABLE_CONV: False
+  SWIN:
+    APE: False
+    ATTN_DROP_RATE: 0.0
+    DEPTHS: [2, 2, 18, 2]
+    DROP_PATH_RATE: 0.3
+    DROP_RATE: 0.0
+    EMBED_DIM: 128
+    MLP_RATIO: 4.0
+    NORM_INDICES: None
+    NUM_HEADS: [4, 8, 16, 32]
+    OUT_FEATURES: ['res2', 'res3', 'res4', 'res5']
+    PATCH_NORM: True
+    PATCH_SIZE: 4
+    PRETRAIN_IMG_SIZE: 384
+    PROJECTION: False
+    PROJECT_DIM: 256
+    QKV_BIAS: True
+    QK_SCALE: None
+    WINDOW_SIZE: 12
+  WEIGHTS: pretrained_weights/ovseg_swinbase_vitL14_ft_mpt.pth
+OUTPUT_DIR: ./output
+SEED: -1
+SOLVER:
+  AMP:
+    ENABLED: False
+  BACKBONE_MULTIPLIER: 1.0
+  BASE_LR: 1e-06
+  BASE_LR_END: 0.0
+  BIAS_LR_FACTOR: 1.0
+  CHECKPOINT_PERIOD: 5000
+  CLIP_GRADIENTS:
+    CLIP_TYPE: full_model
+    CLIP_VALUE: 0.01
+    ENABLED: True
+    NORM_TYPE: 2.0
+  GAMMA: 0.1
+  IMS_PER_BATCH: 1
+  LR_SCHEDULER_NAME: WarmupPolyLR
+  MAX_ITER: 1000
+  MOMENTUM: 0.9
+  NESTEROV: False
+  NUM_DECAYS: 3
+  OPTIMIZER: ADAMW
+  POLY_LR_CONSTANT_ENDING: 0.0
+  POLY_LR_POWER: 0.9
+  REFERENCE_WORLD_SIZE: 0
+  RESCALE_INTERVAL: False
+  STEPS: (30000,)
+  TEST_IMS_PER_BATCH: 1
+  WARMUP_FACTOR: 1e-06
+  WARMUP_ITERS: 1500
+  WARMUP_METHOD: linear
+  WEIGHT_DECAY: 0.01
+  WEIGHT_DECAY_BIAS: None
+  WEIGHT_DECAY_EMBED: 0.0
+  WEIGHT_DECAY_NORM: 0.0
+TEST:
+  AUG:
+    ENABLED: False
+    FLIP: True
+    MAX_SIZE: 2560
+    MIN_SIZES: (256, 384, 512, 640, 768, 896)
+  DENSE_CRF: False
+  DETECTIONS_PER_IMAGE: 100
+  EVAL_PERIOD: 1000
+  EXPECTED_RESULTS: []
+  KEYPOINT_OKS_SIGMAS: []
+  PRECISE_BN:
+    ENABLED: False
+    NUM_ITER: 200
+  SLIDING_OVERLAP: 0.6666666666666666
+  SLIDING_TILE_SIZE: 224
+  SLIDING_WINDOW: False
+VERSION: 2
+VIS_PERIOD: 0
+WANDB:
+  NAME: None
+  PROJECT: open_vocab_seg
+/home/ra78lof/anaconda3/envs/ov-seg/lib/python3.11/site-packages/torch/functional.py:513: UserWarning: torch.meshgrid: in an upcoming release, it will be required to pass the indexing argument. (Triggered internally at ../aten/src/ATen/native/TensorShape.cpp:3609.)
+  return _VF.meshgrid(tensors, **kwargs)  # type: ignore[attr-defined]
+[32m[05/26 21:21:10 d2.engine.defaults]: [0mModel:
+OVSeg(
+  (backbone): D2SwinTransformer(
+    (patch_embed): PatchEmbed(
+      (proj): Conv2d(3, 128, kernel_size=(4, 4), stride=(4, 4))
+      (norm): LayerNorm((128,), eps=1e-05, elementwise_affine=True)
+    )
+    (pos_drop): Dropout(p=0.0, inplace=False)
+    (layers): ModuleList(
+      (0): BasicLayer(
+        (blocks): ModuleList(
+          (0): SwinTransformerBlock(
+            (norm1): LayerNorm((128,), eps=1e-05, elementwise_affine=True)
+            (attn): WindowAttention(
+              (qkv): Linear(in_features=128, out_features=384, bias=True)
+              (attn_drop): Dropout(p=0.0, inplace=False)
+              (proj): Linear(in_features=128, out_features=128, bias=True)
+              (proj_drop): Dropout(p=0.0, inplace=False)
+              (softmax): Softmax(dim=-1)
+            )
+            (drop_path): Identity()
+            (norm2): LayerNorm((128,), eps=1e-05, elementwise_affine=True)
+            (mlp): Mlp(
+              (fc1): Linear(in_features=128, out_features=512, bias=True)
+              (act): GELU(approximate='none')
+              (fc2): Linear(in_features=512, out_features=128, bias=True)
+              (drop): Dropout(p=0.0, inplace=False)
+            )
+          )
+          (1): SwinTransformerBlock(
+            (norm1): LayerNorm((128,), eps=1e-05, elementwise_affine=True)
+            (attn): WindowAttention(
+              (qkv): Linear(in_features=128, out_features=384, bias=True)
+              (attn_drop): Dropout(p=0.0, inplace=False)
+              (proj): Linear(in_features=128, out_features=128, bias=True)
+              (proj_drop): Dropout(p=0.0, inplace=False)
+              (softmax): Softmax(dim=-1)
+            )
+            (drop_path): DropPath(drop_prob=0.013)
+            (norm2): LayerNorm((128,), eps=1e-05, elementwise_affine=True)
+            (mlp): Mlp(
+              (fc1): Linear(in_features=128, out_features=512, bias=True)
+              (act): GELU(approximate='none')
+              (fc2): Linear(in_features=512, out_features=128, bias=True)
+              (drop): Dropout(p=0.0, inplace=False)
+            )
+          )
+        )
+        (downsample): PatchMerging(
+          (reduction): Linear(in_features=512, out_features=256, bias=False)
+          (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+        )
+      )
+      (1): BasicLayer(
+        (blocks): ModuleList(
+          (0): SwinTransformerBlock(
+            (norm1): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+            (attn): WindowAttention(
+              (qkv): Linear(in_features=256, out_features=768, bias=True)
+              (attn_drop): Dropout(p=0.0, inplace=False)
+              (proj): Linear(in_features=256, out_features=256, bias=True)
+              (proj_drop): Dropout(p=0.0, inplace=False)
+              (softmax): Softmax(dim=-1)
+            )
+            (drop_path): DropPath(drop_prob=0.026)
+            (norm2): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+            (mlp): Mlp(
+              (fc1): Linear(in_features=256, out_features=1024, bias=True)
+              (act): GELU(approximate='none')
+              (fc2): Linear(in_features=1024, out_features=256, bias=True)
+              (drop): Dropout(p=0.0, inplace=False)
+            )
+          )
+          (1): SwinTransformerBlock(
+            (norm1): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+            (attn): WindowAttention(
+              (qkv): Linear(in_features=256, out_features=768, bias=True)
+              (attn_drop): Dropout(p=0.0, inplace=False)
+              (proj): Linear(in_features=256, out_features=256, bias=True)
+              (proj_drop): Dropout(p=0.0, inplace=False)
+              (softmax): Softmax(dim=-1)
+            )
+            (drop_path): DropPath(drop_prob=0.039)
+            (norm2): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+            (mlp): Mlp(
+              (fc1): Linear(in_features=256, out_features=1024, bias=True)
+              (act): GELU(approximate='none')
+              (fc2): Linear(in_features=1024, out_features=256, bias=True)
+              (drop): Dropout(p=0.0, inplace=False)
+            )
+          )
+        )
+        (downsample): PatchMerging(
+          (reduction): Linear(in_features=1024, out_features=512, bias=False)
+          (norm): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+        )
+      )
+      (2): BasicLayer(
+        (blocks): ModuleList(
+          (0): SwinTransformerBlock(
+            (norm1): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+            (attn): WindowAttention(
+              (qkv): Linear(in_features=512, out_features=1536, bias=True)
+              (attn_drop): Dropout(p=0.0, inplace=False)
+              (proj): Linear(in_features=512, out_features=512, bias=True)
+              (proj_drop): Dropout(p=0.0, inplace=False)
+              (softmax): Softmax(dim=-1)
+            )
+            (drop_path): DropPath(drop_prob=0.052)
+            (norm2): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+            (mlp): Mlp(
+              (fc1): Linear(in_features=512, out_features=2048, bias=True)
+              (act): GELU(approximate='none')
+              (fc2): Linear(in_features=2048, out_features=512, bias=True)
+              (drop): Dropout(p=0.0, inplace=False)
+            )
+          )
+          (1): SwinTransformerBlock(
+            (norm1): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+            (attn): WindowAttention(
+              (qkv): Linear(in_features=512, out_features=1536, bias=True)
+              (attn_drop): Dropout(p=0.0, inplace=False)
+              (proj): Linear(in_features=512, out_features=512, bias=True)
+              (proj_drop): Dropout(p=0.0, inplace=False)
+              (softmax): Softmax(dim=-1)
+            )
+            (drop_path): DropPath(drop_prob=0.065)
+            (norm2): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+            (mlp): Mlp(
+              (fc1): Linear(in_features=512, out_features=2048, bias=True)
+              (act): GELU(approximate='none')
+              (fc2): Linear(in_features=2048, out_features=512, bias=True)
+              (drop): Dropout(p=0.0, inplace=False)
+            )
+          )
+          (2): SwinTransformerBlock(
+            (norm1): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+            (attn): WindowAttention(
+              (qkv): Linear(in_features=512, out_features=1536, bias=True)
+              (attn_drop): Dropout(p=0.0, inplace=False)
+              (proj): Linear(in_features=512, out_features=512, bias=True)
+              (proj_drop): Dropout(p=0.0, inplace=False)
+              (softmax): Softmax(dim=-1)
+            )
+            (drop_path): DropPath(drop_prob=0.078)
+            (norm2): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+            (mlp): Mlp(
+              (fc1): Linear(in_features=512, out_features=2048, bias=True)
+              (act): GELU(approximate='none')
+              (fc2): Linear(in_features=2048, out_features=512, bias=True)
+              (drop): Dropout(p=0.0, inplace=False)
+            )
+          )
+          (3): SwinTransformerBlock(
+            (norm1): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+            (attn): WindowAttention(
+              (qkv): Linear(in_features=512, out_features=1536, bias=True)
+              (attn_drop): Dropout(p=0.0, inplace=False)
+              (proj): Linear(in_features=512, out_features=512, bias=True)
+              (proj_drop): Dropout(p=0.0, inplace=False)
+              (softmax): Softmax(dim=-1)
+            )
+            (drop_path): DropPath(drop_prob=0.091)
+            (norm2): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+            (mlp): Mlp(
+              (fc1): Linear(in_features=512, out_features=2048, bias=True)
+              (act): GELU(approximate='none')
+              (fc2): Linear(in_features=2048, out_features=512, bias=True)
+              (drop): Dropout(p=0.0, inplace=False)
+            )
+          )
+          (4): SwinTransformerBlock(
+            (norm1): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+            (attn): WindowAttention(
+              (qkv): Linear(in_features=512, out_features=1536, bias=True)
+              (attn_drop): Dropout(p=0.0, inplace=False)
+              (proj): Linear(in_features=512, out_features=512, bias=True)
+              (proj_drop): Dropout(p=0.0, inplace=False)
+              (softmax): Softmax(dim=-1)
+            )
+            (drop_path): DropPath(drop_prob=0.104)
+            (norm2): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+            (mlp): Mlp(
+              (fc1): Linear(in_features=512, out_features=2048, bias=True)
+              (act): GELU(approximate='none')
+              (fc2): Linear(in_features=2048, out_features=512, bias=True)
+              (drop): Dropout(p=0.0, inplace=False)
+            )
+          )
+          (5): SwinTransformerBlock(
+            (norm1): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+            (attn): WindowAttention(
+              (qkv): Linear(in_features=512, out_features=1536, bias=True)
+              (attn_drop): Dropout(p=0.0, inplace=False)
+              (proj): Linear(in_features=512, out_features=512, bias=True)
+              (proj_drop): Dropout(p=0.0, inplace=False)
+              (softmax): Softmax(dim=-1)
+            )
+            (drop_path): DropPath(drop_prob=0.117)
+            (norm2): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+            (mlp): Mlp(
+              (fc1): Linear(in_features=512, out_features=2048, bias=True)
+              (act): GELU(approximate='none')
+              (fc2): Linear(in_features=2048, out_features=512, bias=True)
+              (drop): Dropout(p=0.0, inplace=False)
+            )
+          )
+          (6): SwinTransformerBlock(
+            (norm1): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+            (attn): WindowAttention(
+              (qkv): Linear(in_features=512, out_features=1536, bias=True)
+              (attn_drop): Dropout(p=0.0, inplace=False)
+              (proj): Linear(in_features=512, out_features=512, bias=True)
+              (proj_drop): Dropout(p=0.0, inplace=False)
+              (softmax): Softmax(dim=-1)
+            )
+            (drop_path): DropPath(drop_prob=0.130)
+            (norm2): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+            (mlp): Mlp(
+              (fc1): Linear(in_features=512, out_features=2048, bias=True)
+              (act): GELU(approximate='none')
+              (fc2): Linear(in_features=2048, out_features=512, bias=True)
+              (drop): Dropout(p=0.0, inplace=False)
+            )
+          )
+          (7): SwinTransformerBlock(
+            (norm1): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+            (attn): WindowAttention(
+              (qkv): Linear(in_features=512, out_features=1536, bias=True)
+              (attn_drop): Dropout(p=0.0, inplace=False)
+              (proj): Linear(in_features=512, out_features=512, bias=True)
+              (proj_drop): Dropout(p=0.0, inplace=False)
+              (softmax): Softmax(dim=-1)
+            )
+            (drop_path): DropPath(drop_prob=0.143)
+            (norm2): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+            (mlp): Mlp(
+              (fc1): Linear(in_features=512, out_features=2048, bias=True)
+              (act): GELU(approximate='none')
+              (fc2): Linear(in_features=2048, out_features=512, bias=True)
+              (drop): Dropout(p=0.0, inplace=False)
+            )
+          )
+          (8): SwinTransformerBlock(
+            (norm1): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+            (attn): WindowAttention(
+              (qkv): Linear(in_features=512, out_features=1536, bias=True)
+              (attn_drop): Dropout(p=0.0, inplace=False)
+              (proj): Linear(in_features=512, out_features=512, bias=True)
+              (proj_drop): Dropout(p=0.0, inplace=False)
+              (softmax): Softmax(dim=-1)
+            )
+            (drop_path): DropPath(drop_prob=0.157)
+            (norm2): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+            (mlp): Mlp(
+              (fc1): Linear(in_features=512, out_features=2048, bias=True)
+              (act): GELU(approximate='none')
+              (fc2): Linear(in_features=2048, out_features=512, bias=True)
+              (drop): Dropout(p=0.0, inplace=False)
+            )
+          )
+          (9): SwinTransformerBlock(
+            (norm1): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+            (attn): WindowAttention(
+              (qkv): Linear(in_features=512, out_features=1536, bias=True)
+              (attn_drop): Dropout(p=0.0, inplace=False)
+              (proj): Linear(in_features=512, out_features=512, bias=True)
+              (proj_drop): Dropout(p=0.0, inplace=False)
+              (softmax): Softmax(dim=-1)
+            )
+            (drop_path): DropPath(drop_prob=0.170)
+            (norm2): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+            (mlp): Mlp(
+              (fc1): Linear(in_features=512, out_features=2048, bias=True)
+              (act): GELU(approximate='none')
+              (fc2): Linear(in_features=2048, out_features=512, bias=True)
+              (drop): Dropout(p=0.0, inplace=False)
+            )
+          )
+          (10): SwinTransformerBlock(
+            (norm1): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+            (attn): WindowAttention(
+              (qkv): Linear(in_features=512, out_features=1536, bias=True)
+              (attn_drop): Dropout(p=0.0, inplace=False)
+              (proj): Linear(in_features=512, out_features=512, bias=True)
+              (proj_drop): Dropout(p=0.0, inplace=False)
+              (softmax): Softmax(dim=-1)
+            )
+            (drop_path): DropPath(drop_prob=0.183)
+            (norm2): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+            (mlp): Mlp(
+              (fc1): Linear(in_features=512, out_features=2048, bias=True)
+              (act): GELU(approximate='none')
+              (fc2): Linear(in_features=2048, out_features=512, bias=True)
+              (drop): Dropout(p=0.0, inplace=False)
+            )
+          )
+          (11): SwinTransformerBlock(
+            (norm1): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+            (attn): WindowAttention(
+              (qkv): Linear(in_features=512, out_features=1536, bias=True)
+              (attn_drop): Dropout(p=0.0, inplace=False)
+              (proj): Linear(in_features=512, out_features=512, bias=True)
+              (proj_drop): Dropout(p=0.0, inplace=False)
+              (softmax): Softmax(dim=-1)
+            )
+            (drop_path): DropPath(drop_prob=0.196)
+            (norm2): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+            (mlp): Mlp(
+              (fc1): Linear(in_features=512, out_features=2048, bias=True)
+              (act): GELU(approximate='none')
+              (fc2): Linear(in_features=2048, out_features=512, bias=True)
+              (drop): Dropout(p=0.0, inplace=False)
+            )
+          )
+          (12): SwinTransformerBlock(
+            (norm1): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+            (attn): WindowAttention(
+              (qkv): Linear(in_features=512, out_features=1536, bias=True)
+              (attn_drop): Dropout(p=0.0, inplace=False)
+              (proj): Linear(in_features=512, out_features=512, bias=True)
+              (proj_drop): Dropout(p=0.0, inplace=False)
+              (softmax): Softmax(dim=-1)
+            )
+            (drop_path): DropPath(drop_prob=0.209)
+            (norm2): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+            (mlp): Mlp(
+              (fc1): Linear(in_features=512, out_features=2048, bias=True)
+              (act): GELU(approximate='none')
+              (fc2): Linear(in_features=2048, out_features=512, bias=True)
+              (drop): Dropout(p=0.0, inplace=False)
+            )
+          )
+          (13): SwinTransformerBlock(
+            (norm1): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+            (attn): WindowAttention(
+              (qkv): Linear(in_features=512, out_features=1536, bias=True)
+              (attn_drop): Dropout(p=0.0, inplace=False)
+              (proj): Linear(in_features=512, out_features=512, bias=True)
+              (proj_drop): Dropout(p=0.0, inplace=False)
+              (softmax): Softmax(dim=-1)
+            )
+            (drop_path): DropPath(drop_prob=0.222)
+            (norm2): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+            (mlp): Mlp(
+              (fc1): Linear(in_features=512, out_features=2048, bias=True)
+              (act): GELU(approximate='none')
+              (fc2): Linear(in_features=2048, out_features=512, bias=True)
+              (drop): Dropout(p=0.0, inplace=False)
+            )
+          )
+          (14): SwinTransformerBlock(
+            (norm1): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+            (attn): WindowAttention(
+              (qkv): Linear(in_features=512, out_features=1536, bias=True)
+              (attn_drop): Dropout(p=0.0, inplace=False)
+              (proj): Linear(in_features=512, out_features=512, bias=True)
+              (proj_drop): Dropout(p=0.0, inplace=False)
+              (softmax): Softmax(dim=-1)
+            )
+            (drop_path): DropPath(drop_prob=0.235)
+            (norm2): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+            (mlp): Mlp(
+              (fc1): Linear(in_features=512, out_features=2048, bias=True)
+              (act): GELU(approximate='none')
+              (fc2): Linear(in_features=2048, out_features=512, bias=True)
+              (drop): Dropout(p=0.0, inplace=False)
+            )
+          )
+          (15): SwinTransformerBlock(
+            (norm1): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+            (attn): WindowAttention(
+              (qkv): Linear(in_features=512, out_features=1536, bias=True)
+              (attn_drop): Dropout(p=0.0, inplace=False)
+              (proj): Linear(in_features=512, out_features=512, bias=True)
+              (proj_drop): Dropout(p=0.0, inplace=False)
+              (softmax): Softmax(dim=-1)
+            )
+            (drop_path): DropPath(drop_prob=0.248)
+            (norm2): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+            (mlp): Mlp(
+              (fc1): Linear(in_features=512, out_features=2048, bias=True)
+              (act): GELU(approximate='none')
+              (fc2): Linear(in_features=2048, out_features=512, bias=True)
+              (drop): Dropout(p=0.0, inplace=False)
+            )
+          )
+          (16): SwinTransformerBlock(
+            (norm1): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+            (attn): WindowAttention(
+              (qkv): Linear(in_features=512, out_features=1536, bias=True)
+              (attn_drop): Dropout(p=0.0, inplace=False)
+              (proj): Linear(in_features=512, out_features=512, bias=True)
+              (proj_drop): Dropout(p=0.0, inplace=False)
+              (softmax): Softmax(dim=-1)
+            )
+            (drop_path): DropPath(drop_prob=0.261)
+            (norm2): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+            (mlp): Mlp(
+              (fc1): Linear(in_features=512, out_features=2048, bias=True)
+              (act): GELU(approximate='none')
+              (fc2): Linear(in_features=2048, out_features=512, bias=True)
+              (drop): Dropout(p=0.0, inplace=False)
+            )
+          )
+          (17): SwinTransformerBlock(
+            (norm1): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+            (attn): WindowAttention(
+              (qkv): Linear(in_features=512, out_features=1536, bias=True)
+              (attn_drop): Dropout(p=0.0, inplace=False)
+              (proj): Linear(in_features=512, out_features=512, bias=True)
+              (proj_drop): Dropout(p=0.0, inplace=False)
+              (softmax): Softmax(dim=-1)
+            )
+            (drop_path): DropPath(drop_prob=0.274)
+            (norm2): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+            (mlp): Mlp(
+              (fc1): Linear(in_features=512, out_features=2048, bias=True)
+              (act): GELU(approximate='none')
+              (fc2): Linear(in_features=2048, out_features=512, bias=True)
+              (drop): Dropout(p=0.0, inplace=False)
+            )
+          )
+        )
+        (downsample): PatchMerging(
+          (reduction): Linear(in_features=2048, out_features=1024, bias=False)
+          (norm): LayerNorm((2048,), eps=1e-05, elementwise_affine=True)
+        )
+      )
+      (3): BasicLayer(
+        (blocks): ModuleList(
+          (0): SwinTransformerBlock(
+            (norm1): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+            (attn): WindowAttention(
+              (qkv): Linear(in_features=1024, out_features=3072, bias=True)
+              (attn_drop): Dropout(p=0.0, inplace=False)
+              (proj): Linear(in_features=1024, out_features=1024, bias=True)
+              (proj_drop): Dropout(p=0.0, inplace=False)
+              (softmax): Softmax(dim=-1)
+            )
+            (drop_path): DropPath(drop_prob=0.287)
+            (norm2): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+            (mlp): Mlp(
+              (fc1): Linear(in_features=1024, out_features=4096, bias=True)
+              (act): GELU(approximate='none')
+              (fc2): Linear(in_features=4096, out_features=1024, bias=True)
+              (drop): Dropout(p=0.0, inplace=False)
+            )
+          )
+          (1): SwinTransformerBlock(
+            (norm1): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+            (attn): WindowAttention(
+              (qkv): Linear(in_features=1024, out_features=3072, bias=True)
+              (attn_drop): Dropout(p=0.0, inplace=False)
+              (proj): Linear(in_features=1024, out_features=1024, bias=True)
+              (proj_drop): Dropout(p=0.0, inplace=False)
+              (softmax): Softmax(dim=-1)
+            )
+            (drop_path): DropPath(drop_prob=0.300)
+            (norm2): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+            (mlp): Mlp(
+              (fc1): Linear(in_features=1024, out_features=4096, bias=True)
+              (act): GELU(approximate='none')
+              (fc2): Linear(in_features=4096, out_features=1024, bias=True)
+              (drop): Dropout(p=0.0, inplace=False)
+            )
+          )
+        )
+      )
+    )
+    (norm0): LayerNorm((128,), eps=1e-05, elementwise_affine=True)
+    (norm1): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+    (norm2): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+    (norm3): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+  )
+  (sem_seg_head): OpenVocabMaskFormerHead(
+    (pixel_decoder): BasePixelDecoder(
+      (adapter_1): Conv2d(
+        128, 256, kernel_size=(1, 1), stride=(1, 1), bias=False
+        (norm): GroupNorm(32, 256, eps=1e-05, affine=True)
+      )
+      (layer_1): Conv2d(
+        256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+        (norm): GroupNorm(32, 256, eps=1e-05, affine=True)
+      )
+      (adapter_2): Conv2d(
+        256, 256, kernel_size=(1, 1), stride=(1, 1), bias=False
+        (norm): GroupNorm(32, 256, eps=1e-05, affine=True)
+      )
+      (layer_2): Conv2d(
+        256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+        (norm): GroupNorm(32, 256, eps=1e-05, affine=True)
+      )
+      (adapter_3): Conv2d(
+        512, 256, kernel_size=(1, 1), stride=(1, 1), bias=False
+        (norm): GroupNorm(32, 256, eps=1e-05, affine=True)
+      )
+      (layer_3): Conv2d(
+        256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+        (norm): GroupNorm(32, 256, eps=1e-05, affine=True)
+      )
+      (layer_4): Conv2d(
+        1024, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+        (norm): GroupNorm(32, 256, eps=1e-05, affine=True)
+      )
+      (mask_features): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (predictor): OpenVocabTransformerPredictor(
+      (pe_layer): PositionEmbeddingSine()
+      (transformer): Transformer(
+        (encoder): TransformerEncoder(
+          (layers): ModuleList()
+        )
+        (decoder): TransformerDecoder(
+          (layers): ModuleList(
+            (0-5): 6 x TransformerDecoderLayer(
+              (self_attn): MultiheadAttention(
+                (out_proj): NonDynamicallyQuantizableLinear(in_features=256, out_features=256, bias=True)
+              )
+              (multihead_attn): MultiheadAttention(
+                (out_proj): NonDynamicallyQuantizableLinear(in_features=256, out_features=256, bias=True)
+              )
+              (linear1): Linear(in_features=256, out_features=2048, bias=True)
+              (dropout): Dropout(p=0.1, inplace=False)
+              (linear2): Linear(in_features=2048, out_features=256, bias=True)
+              (norm1): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+              (norm2): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+              (norm3): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+              (dropout1): Dropout(p=0.1, inplace=False)
+              (dropout2): Dropout(p=0.1, inplace=False)
+              (dropout3): Dropout(p=0.1, inplace=False)
+            )
+          )
+          (norm): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+        )
+      )
+      (query_embed): Embedding(100, 256)
+      (input_proj): Conv2d(1024, 256, kernel_size=(1, 1), stride=(1, 1))
+      (mask_embed): MLP(
+        (layers): ModuleList(
+          (0-2): 3 x Linear(in_features=256, out_features=256, bias=True)
+        )
+      )
+      (class_embed): MLP(
+        (layers): ModuleList(
+          (0): Linear(in_features=256, out_features=1024, bias=True)
+          (1): Linear(in_features=1024, out_features=768, bias=True)
+        )
+      )
+    )
+  )
+  (criterion): SetCriterion(
+    (matcher): Matcher HungarianMatcher
+        cost_class: 1
+        cost_mask: 20.0
+        cost_dice: 1.0
+  )
+  (clip_adapter): MaskFormerClipAdapter(
+    (clip_model): CLIP(
+      (visual): VisionTransformer(
+        (conv1): Conv2d(3, 1024, kernel_size=(14, 14), stride=(14, 14), bias=False)
+        (ln_pre): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+        (transformer): Transformer(
+          (resblocks): Sequential(
+            (0): ResidualAttentionBlock(
+              (attn): MultiheadAttention(
+                (out_proj): NonDynamicallyQuantizableLinear(in_features=1024, out_features=1024, bias=True)
+              )
+              (ln_1): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+              (mlp): Sequential(
+                (c_fc): Linear(in_features=1024, out_features=4096, bias=True)
+                (gelu): QuickGELU()
+                (c_proj): Linear(in_features=4096, out_features=1024, bias=True)
+              )
+              (ln_2): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+            )
+            (1): ResidualAttentionBlock(
+              (attn): MultiheadAttention(
+                (out_proj): NonDynamicallyQuantizableLinear(in_features=1024, out_features=1024, bias=True)
+              )
+              (ln_1): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+              (mlp): Sequential(
+                (c_fc): Linear(in_features=1024, out_features=4096, bias=True)
+                (gelu): QuickGELU()
+                (c_proj): Linear(in_features=4096, out_features=1024, bias=True)
+              )
+              (ln_2): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+            )
+            (2): ResidualAttentionBlock(
+              (attn): MultiheadAttention(
+                (out_proj): NonDynamicallyQuantizableLinear(in_features=1024, out_features=1024, bias=True)
+              )
+              (ln_1): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+              (mlp): Sequential(
+                (c_fc): Linear(in_features=1024, out_features=4096, bias=True)
+                (gelu): QuickGELU()
+                (c_proj): Linear(in_features=4096, out_features=1024, bias=True)
+              )
+              (ln_2): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+            )
+            (3): ResidualAttentionBlock(
+              (attn): MultiheadAttention(
+                (out_proj): NonDynamicallyQuantizableLinear(in_features=1024, out_features=1024, bias=True)
+              )
+              (ln_1): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+              (mlp): Sequential(
+                (c_fc): Linear(in_features=1024, out_features=4096, bias=True)
+                (gelu): QuickGELU()
+                (c_proj): Linear(in_features=4096, out_features=1024, bias=True)
+              )
+              (ln_2): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+            )
+            (4): ResidualAttentionBlock(
+              (attn): MultiheadAttention(
+                (out_proj): NonDynamicallyQuantizableLinear(in_features=1024, out_features=1024, bias=True)
+              )
+              (ln_1): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+              (mlp): Sequential(
+                (c_fc): Linear(in_features=1024, out_features=4096, bias=True)
+                (gelu): QuickGELU()
+                (c_proj): Linear(in_features=4096, out_features=1024, bias=True)
+              )
+              (ln_2): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+            )
+            (5): ResidualAttentionBlock(
+              (attn): MultiheadAttention(
+                (out_proj): NonDynamicallyQuantizableLinear(in_features=1024, out_features=1024, bias=True)
+              )
+              (ln_1): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+              (mlp): Sequential(
+                (c_fc): Linear(in_features=1024, out_features=4096, bias=True)
+                (gelu): QuickGELU()
+                (c_proj): Linear(in_features=4096, out_features=1024, bias=True)
+              )
+              (ln_2): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+            )
+            (6): ResidualAttentionBlock(
+              (attn): MultiheadAttention(
+                (out_proj): NonDynamicallyQuantizableLinear(in_features=1024, out_features=1024, bias=True)
+              )
+              (ln_1): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+              (mlp): Sequential(
+                (c_fc): Linear(in_features=1024, out_features=4096, bias=True)
+                (gelu): QuickGELU()
+                (c_proj): Linear(in_features=4096, out_features=1024, bias=True)
+              )
+              (ln_2): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+            )
+            (7): ResidualAttentionBlock(
+              (attn): MultiheadAttention(
+                (out_proj): NonDynamicallyQuantizableLinear(in_features=1024, out_features=1024, bias=True)
+              )
+              (ln_1): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+              (mlp): Sequential(
+                (c_fc): Linear(in_features=1024, out_features=4096, bias=True)
+                (gelu): QuickGELU()
+                (c_proj): Linear(in_features=4096, out_features=1024, bias=True)
+              )
+              (ln_2): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+            )
+            (8): ResidualAttentionBlock(
+              (attn): MultiheadAttention(
+                (out_proj): NonDynamicallyQuantizableLinear(in_features=1024, out_features=1024, bias=True)
+              )
+              (ln_1): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+              (mlp): Sequential(
+                (c_fc): Linear(in_features=1024, out_features=4096, bias=True)
+                (gelu): QuickGELU()
+                (c_proj): Linear(in_features=4096, out_features=1024, bias=True)
+              )
+              (ln_2): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+            )
+            (9): ResidualAttentionBlock(
+              (attn): MultiheadAttention(
+                (out_proj): NonDynamicallyQuantizableLinear(in_features=1024, out_features=1024, bias=True)
+              )
+              (ln_1): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+              (mlp): Sequential(
+                (c_fc): Linear(in_features=1024, out_features=4096, bias=True)
+                (gelu): QuickGELU()
+                (c_proj): Linear(in_features=4096, out_features=1024, bias=True)
+              )
+              (ln_2): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+            )
+            (10): ResidualAttentionBlock(
+              (attn): MultiheadAttention(
+                (out_proj): NonDynamicallyQuantizableLinear(in_features=1024, out_features=1024, bias=True)
+              )
+              (ln_1): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+              (mlp): Sequential(
+                (c_fc): Linear(in_features=1024, out_features=4096, bias=True)
+                (gelu): QuickGELU()
+                (c_proj): Linear(in_features=4096, out_features=1024, bias=True)
+              )
+              (ln_2): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+            )
+            (11): ResidualAttentionBlock(
+              (attn): MultiheadAttention(
+                (out_proj): NonDynamicallyQuantizableLinear(in_features=1024, out_features=1024, bias=True)
+              )
+              (ln_1): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+              (mlp): Sequential(
+                (c_fc): Linear(in_features=1024, out_features=4096, bias=True)
+                (gelu): QuickGELU()
+                (c_proj): Linear(in_features=4096, out_features=1024, bias=True)
+              )
+              (ln_2): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+            )
+            (12): ResidualAttentionBlock(
+              (attn): MultiheadAttention(
+                (out_proj): NonDynamicallyQuantizableLinear(in_features=1024, out_features=1024, bias=True)
+              )
+              (ln_1): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+              (mlp): Sequential(
+                (c_fc): Linear(in_features=1024, out_features=4096, bias=True)
+                (gelu): QuickGELU()
+                (c_proj): Linear(in_features=4096, out_features=1024, bias=True)
+              )
+              (ln_2): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+            )
+            (13): ResidualAttentionBlock(
+              (attn): MultiheadAttention(
+                (out_proj): NonDynamicallyQuantizableLinear(in_features=1024, out_features=1024, bias=True)
+              )
+              (ln_1): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+              (mlp): Sequential(
+                (c_fc): Linear(in_features=1024, out_features=4096, bias=True)
+                (gelu): QuickGELU()
+                (c_proj): Linear(in_features=4096, out_features=1024, bias=True)
+              )
+              (ln_2): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+            )
+            (14): ResidualAttentionBlock(
+              (attn): MultiheadAttention(
+                (out_proj): NonDynamicallyQuantizableLinear(in_features=1024, out_features=1024, bias=True)
+              )
+              (ln_1): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+              (mlp): Sequential(
+                (c_fc): Linear(in_features=1024, out_features=4096, bias=True)
+                (gelu): QuickGELU()
+                (c_proj): Linear(in_features=4096, out_features=1024, bias=True)
+              )
+              (ln_2): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+            )
+            (15): ResidualAttentionBlock(
+              (attn): MultiheadAttention(
+                (out_proj): NonDynamicallyQuantizableLinear(in_features=1024, out_features=1024, bias=True)
+              )
+              (ln_1): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+              (mlp): Sequential(
+                (c_fc): Linear(in_features=1024, out_features=4096, bias=True)
+                (gelu): QuickGELU()
+                (c_proj): Linear(in_features=4096, out_features=1024, bias=True)
+              )
+              (ln_2): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+            )
+            (16): ResidualAttentionBlock(
+              (attn): MultiheadAttention(
+                (out_proj): NonDynamicallyQuantizableLinear(in_features=1024, out_features=1024, bias=True)
+              )
+              (ln_1): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+              (mlp): Sequential(
+                (c_fc): Linear(in_features=1024, out_features=4096, bias=True)
+                (gelu): QuickGELU()
+                (c_proj): Linear(in_features=4096, out_features=1024, bias=True)
+              )
+              (ln_2): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+            )
+            (17): ResidualAttentionBlock(
+              (attn): MultiheadAttention(
+                (out_proj): NonDynamicallyQuantizableLinear(in_features=1024, out_features=1024, bias=True)
+              )
+              (ln_1): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+              (mlp): Sequential(
+                (c_fc): Linear(in_features=1024, out_features=4096, bias=True)
+                (gelu): QuickGELU()
+                (c_proj): Linear(in_features=4096, out_features=1024, bias=True)
+              )
+              (ln_2): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+            )
+            (18): ResidualAttentionBlock(
+              (attn): MultiheadAttention(
+                (out_proj): NonDynamicallyQuantizableLinear(in_features=1024, out_features=1024, bias=True)
+              )
+              (ln_1): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+              (mlp): Sequential(
+                (c_fc): Linear(in_features=1024, out_features=4096, bias=True)
+                (gelu): QuickGELU()
+                (c_proj): Linear(in_features=4096, out_features=1024, bias=True)
+              )
+              (ln_2): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+            )
+            (19): ResidualAttentionBlock(
+              (attn): MultiheadAttention(
+                (out_proj): NonDynamicallyQuantizableLinear(in_features=1024, out_features=1024, bias=True)
+              )
+              (ln_1): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+              (mlp): Sequential(
+                (c_fc): Linear(in_features=1024, out_features=4096, bias=True)
+                (gelu): QuickGELU()
+                (c_proj): Linear(in_features=4096, out_features=1024, bias=True)
+              )
+              (ln_2): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+            )
+            (20): ResidualAttentionBlock(
+              (attn): MultiheadAttention(
+                (out_proj): NonDynamicallyQuantizableLinear(in_features=1024, out_features=1024, bias=True)
+              )
+              (ln_1): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+              (mlp): Sequential(
+                (c_fc): Linear(in_features=1024, out_features=4096, bias=True)
+                (gelu): QuickGELU()
+                (c_proj): Linear(in_features=4096, out_features=1024, bias=True)
+              )
+              (ln_2): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+            )
+            (21): ResidualAttentionBlock(
+              (attn): MultiheadAttention(
+                (out_proj): NonDynamicallyQuantizableLinear(in_features=1024, out_features=1024, bias=True)
+              )
+              (ln_1): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+              (mlp): Sequential(
+                (c_fc): Linear(in_features=1024, out_features=4096, bias=True)
+                (gelu): QuickGELU()
+                (c_proj): Linear(in_features=4096, out_features=1024, bias=True)
+              )
+              (ln_2): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+            )
+            (22): ResidualAttentionBlock(
+              (attn): MultiheadAttention(
+                (out_proj): NonDynamicallyQuantizableLinear(in_features=1024, out_features=1024, bias=True)
+              )
+              (ln_1): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+              (mlp): Sequential(
+                (c_fc): Linear(in_features=1024, out_features=4096, bias=True)
+                (gelu): QuickGELU()
+                (c_proj): Linear(in_features=4096, out_features=1024, bias=True)
+              )
+              (ln_2): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+            )
+            (23): ResidualAttentionBlock(
+              (attn): MultiheadAttention(
+                (out_proj): NonDynamicallyQuantizableLinear(in_features=1024, out_features=1024, bias=True)
+              )
+              (ln_1): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+              (mlp): Sequential(
+                (c_fc): Linear(in_features=1024, out_features=4096, bias=True)
+                (gelu): QuickGELU()
+                (c_proj): Linear(in_features=4096, out_features=1024, bias=True)
+              )
+              (ln_2): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+            )
+          )
+        )
+        (ln_post): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+        (mask_pool): AvgPool2d(kernel_size=14, stride=14, padding=0)
+      )
+      (transformer): Transformer(
+        (resblocks): Sequential(
+          (0): ResidualAttentionBlock(
+            (attn): MultiheadAttention(
+              (out_proj): NonDynamicallyQuantizableLinear(in_features=768, out_features=768, bias=True)
+            )
+            (ln_1): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+            (mlp): Sequential(
+              (c_fc): Linear(in_features=768, out_features=3072, bias=True)
+              (gelu): QuickGELU()
+              (c_proj): Linear(in_features=3072, out_features=768, bias=True)
+            )
+            (ln_2): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): ResidualAttentionBlock(
+            (attn): MultiheadAttention(
+              (out_proj): NonDynamicallyQuantizableLinear(in_features=768, out_features=768, bias=True)
+            )
+            (ln_1): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+            (mlp): Sequential(
+              (c_fc): Linear(in_features=768, out_features=3072, bias=True)
+              (gelu): QuickGELU()
+              (c_proj): Linear(in_features=3072, out_features=768, bias=True)
+            )
+            (ln_2): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+          )
+          (2): ResidualAttentionBlock(
+            (attn): MultiheadAttention(
+              (out_proj): NonDynamicallyQuantizableLinear(in_features=768, out_features=768, bias=True)
+            )
+            (ln_1): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+            (mlp): Sequential(
+              (c_fc): Linear(in_features=768, out_features=3072, bias=True)
+              (gelu): QuickGELU()
+              (c_proj): Linear(in_features=3072, out_features=768, bias=True)
+            )
+            (ln_2): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+          )
+          (3): ResidualAttentionBlock(
+            (attn): MultiheadAttention(
+              (out_proj): NonDynamicallyQuantizableLinear(in_features=768, out_features=768, bias=True)
+            )
+            (ln_1): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+            (mlp): Sequential(
+              (c_fc): Linear(in_features=768, out_features=3072, bias=True)
+              (gelu): QuickGELU()
+              (c_proj): Linear(in_features=3072, out_features=768, bias=True)
+            )
+            (ln_2): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): ResidualAttentionBlock(
+            (attn): MultiheadAttention(
+              (out_proj): NonDynamicallyQuantizableLinear(in_features=768, out_features=768, bias=True)
+            )
+            (ln_1): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+            (mlp): Sequential(
+              (c_fc): Linear(in_features=768, out_features=3072, bias=True)
+              (gelu): QuickGELU()
+              (c_proj): Linear(in_features=3072, out_features=768, bias=True)
+            )
+            (ln_2): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+          )
+          (5): ResidualAttentionBlock(
+            (attn): MultiheadAttention(
+              (out_proj): NonDynamicallyQuantizableLinear(in_features=768, out_features=768, bias=True)
+            )
+            (ln_1): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+            (mlp): Sequential(
+              (c_fc): Linear(in_features=768, out_features=3072, bias=True)
+              (gelu): QuickGELU()
+              (c_proj): Linear(in_features=3072, out_features=768, bias=True)
+            )
+            (ln_2): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+          )
+          (6): ResidualAttentionBlock(
+            (attn): MultiheadAttention(
+              (out_proj): NonDynamicallyQuantizableLinear(in_features=768, out_features=768, bias=True)
+            )
+            (ln_1): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+            (mlp): Sequential(
+              (c_fc): Linear(in_features=768, out_features=3072, bias=True)
+              (gelu): QuickGELU()
+              (c_proj): Linear(in_features=3072, out_features=768, bias=True)
+            )
+            (ln_2): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+          )
+          (7): ResidualAttentionBlock(
+            (attn): MultiheadAttention(
+              (out_proj): NonDynamicallyQuantizableLinear(in_features=768, out_features=768, bias=True)
+            )
+            (ln_1): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+            (mlp): Sequential(
+              (c_fc): Linear(in_features=768, out_features=3072, bias=True)
+              (gelu): QuickGELU()
+              (c_proj): Linear(in_features=3072, out_features=768, bias=True)
+            )
+            (ln_2): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+          )
+          (8): ResidualAttentionBlock(
+            (attn): MultiheadAttention(
+              (out_proj): NonDynamicallyQuantizableLinear(in_features=768, out_features=768, bias=True)
+            )
+            (ln_1): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+            (mlp): Sequential(
+              (c_fc): Linear(in_features=768, out_features=3072, bias=True)
+              (gelu): QuickGELU()
+              (c_proj): Linear(in_features=3072, out_features=768, bias=True)
+            )
+            (ln_2): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+          )
+          (9): ResidualAttentionBlock(
+            (attn): MultiheadAttention(
+              (out_proj): NonDynamicallyQuantizableLinear(in_features=768, out_features=768, bias=True)
+            )
+            (ln_1): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+            (mlp): Sequential(
+              (c_fc): Linear(in_features=768, out_features=3072, bias=True)
+              (gelu): QuickGELU()
+              (c_proj): Linear(in_features=3072, out_features=768, bias=True)
+            )
+            (ln_2): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+          )
+          (10): ResidualAttentionBlock(
+            (attn): MultiheadAttention(
+              (out_proj): NonDynamicallyQuantizableLinear(in_features=768, out_features=768, bias=True)
+            )
+            (ln_1): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+            (mlp): Sequential(
+              (c_fc): Linear(in_features=768, out_features=3072, bias=True)
+              (gelu): QuickGELU()
+              (c_proj): Linear(in_features=3072, out_features=768, bias=True)
+            )
+            (ln_2): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+          )
+          (11): ResidualAttentionBlock(
+            (attn): MultiheadAttention(
+              (out_proj): NonDynamicallyQuantizableLinear(in_features=768, out_features=768, bias=True)
+            )
+            (ln_1): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+            (mlp): Sequential(
+              (c_fc): Linear(in_features=768, out_features=3072, bias=True)
+              (gelu): QuickGELU()
+              (c_proj): Linear(in_features=3072, out_features=768, bias=True)
+            )
+            (ln_2): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+          )
+        )
+      )
+      (token_embedding): Embedding(49408, 768)
+      (ln_final): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+    )
+    (text_templates): VILDPromptExtractor()
+  )
+)
+relative_position_bias_table
+relative_position_bias_table
+relative_position_bias_table
+relative_position_bias_table
+relative_position_bias_table
+relative_position_bias_table
+relative_position_bias_table
+relative_position_bias_table
+relative_position_bias_table
+relative_position_bias_table
+relative_position_bias_table
+relative_position_bias_table
+relative_position_bias_table
+relative_position_bias_table
+relative_position_bias_table
+relative_position_bias_table
+relative_position_bias_table
+relative_position_bias_table
+relative_position_bias_table
+relative_position_bias_table
+relative_position_bias_table
+relative_position_bias_table
+relative_position_bias_table
+relative_position_bias_table
+[32m[05/26 21:21:10 d2.data.dataset_mapper]: [0m[DatasetMapper] Augmentations used in training: [RandomCrop(crop_type='absolute', crop_size=[640, 640]), ResizeShortestEdge(short_edge_length=(640, 704, 768, 832, 896, 960, 1024, 1088, 1152, 1216, 1280, 1344, 1408, 1472), max_size=2560, sample_style='choice'), RandomFlip()]
+[5m[31mWARNING[0m [32m[05/26 21:21:10 d2.data.datasets.coco]: [0m
+Category ids in annotations are not in [1, #categories]! We'll apply a mapping for you.
+
+[32m[05/26 21:21:10 d2.data.datasets.coco]: [0mLoaded 118 images in COCO format from /home/ra78lof/consulting_pro/SAN/san/data/ceiling_painting_segmentation/train/json_annotation_train.json
+[32m[05/26 21:21:10 d2.data.build]: [0mRemoved 22 images with no usable annotations. 96 images left.
+[32m[05/26 21:21:10 d2.data.build]: [0mDistribution of instances among all 4 categories:
+[36m|  category  | #instances   |  category  | #instances   |  category  | #instances   |
+|:----------:|:-------------|:----------:|:-------------|:----------:|:-------------|
+|   mural    | 0            |   brief    | 2            |   mural    | 338          |
+|   relief   | 3            |            |              |            |              |
+|   total    | 343          |            |              |            |              |[0m
+[32m[05/26 21:21:10 d2.data.common]: [0mSerializing the dataset using: <class 'detectron2.data.common._TorchSerializedList'>
+[32m[05/26 21:21:10 d2.data.common]: [0mSerializing 96 elements to byte tensors and concatenating them all ...
+[32m[05/26 21:21:10 d2.data.common]: [0mSerialized dataset takes 1.03 MiB
+[32m[05/26 21:21:10 d2.data.build]: [0mMaking batched data loader with batch_size=1
+[32m[05/26 21:21:10 d2.checkpoint.detection_checkpoint]: [0m[DetectionCheckpointer] Loading from pretrained_weights/ovseg_swinbase_vitL14_ft_mpt.pth ...
+[32m[05/26 21:21:10 fvcore.common.checkpoint]: [0m[Checkpointer] Loading from pretrained_weights/ovseg_swinbase_vitL14_ft_mpt.pth ...
+/home/ra78lof/anaconda3/envs/ov-seg/lib/python3.11/site-packages/fvcore/common/checkpoint.py:252: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  return torch.load(f, map_location=torch.device("cpu"))
+[5m[31mWARNING[0m [32m[05/26 21:21:11 fvcore.common.checkpoint]: [0mSkip loading parameter 'criterion.empty_weight' to the model due to incompatible shapes: (172,) in the checkpoint but (5,) in the model! You might want to double check if this is expected.
+[5m[31mWARNING[0m [32m[05/26 21:21:11 fvcore.common.checkpoint]: [0mSome model parameters or buffers are not found in the checkpoint:
+[34mcriterion.empty_weight[0m
+[32m[05/26 21:21:11 d2.engine.train_loop]: [0mStarting training from iteration 0
+[32m[05/26 21:21:16 d2.utils.events]: [0m eta: 0:03:33  iter: 19  total_loss: 10.05  loss_ce: 0.9739  loss_mask: 0.3773  loss_dice: 0.2899  loss_ce_0: 1.275  loss_mask_0: 0.3717  loss_dice_0: 0.2773  loss_ce_1: 1.008  loss_mask_1: 0.3553  loss_dice_1: 0.313  loss_ce_2: 0.965  loss_mask_2: 0.4307  loss_dice_2: 0.297  loss_ce_3: 0.9803  loss_mask_3: 0.3281  loss_dice_3: 0.292  loss_ce_4: 1.007  loss_mask_4: 0.4037  loss_dice_4: 0.3021    time: 0.2194  last_time: 0.2357  data_time: 0.0092  last_data_time: 0.0015   lr: 1.2451e-08  max_mem: 19152M
+[32m[05/26 21:21:21 d2.utils.events]: [0m eta: 0:03:29  iter: 39  total_loss: 11.93  loss_ce: 1.129  loss_mask: 0.3834  loss_dice: 0.371  loss_ce_0: 1.241  loss_mask_0: 0.3112  loss_dice_0: 0.443  loss_ce_1: 1.196  loss_mask_1: 0.3691  loss_dice_1: 0.4061  loss_ce_2: 1.177  loss_mask_2: 0.3464  loss_dice_2: 0.4106  loss_ce_3: 1.198  loss_mask_3: 0.3419  loss_dice_3: 0.377  loss_ce_4: 1.179  loss_mask_4: 0.3253  loss_dice_4: 0.3799    time: 0.2191  last_time: 0.2213  data_time: 0.0014  last_data_time: 0.0014   lr: 2.5087e-08  max_mem: 19152M
+[32m[05/26 21:21:26 d2.utils.events]: [0m eta: 0:03:34  iter: 59  total_loss: 9.976  loss_ce: 0.7993  loss_mask: 0.2786  loss_dice: 0.2937  loss_ce_0: 0.7762  loss_mask_0: 0.2967  loss_dice_0: 0.2721  loss_ce_1: 0.7962  loss_mask_1: 0.2942  loss_dice_1: 0.279  loss_ce_2: 0.7779  loss_mask_2: 0.286  loss_dice_2: 0.2756  loss_ce_3: 0.7946  loss_mask_3: 0.2397  loss_dice_3: 0.2549  loss_ce_4: 0.8046  loss_mask_4: 0.3028  loss_dice_4: 0.2668    time: 0.2357  last_time: 0.3219  data_time: 0.0016  last_data_time: 0.0016   lr: 3.7239e-08  max_mem: 19152M
+[32m[05/26 21:21:31 d2.utils.events]: [0m eta: 0:03:35  iter: 79  total_loss: 9.97  loss_ce: 0.7098  loss_mask: 0.4315  loss_dice: 0.3496  loss_ce_0: 0.7626  loss_mask_0: 0.4457  loss_dice_0: 0.3906  loss_ce_1: 0.7266  loss_mask_1: 0.4568  loss_dice_1: 0.3759  loss_ce_2: 0.7264  loss_mask_2: 0.4016  loss_dice_2: 0.2981  loss_ce_3: 0.6828  loss_mask_3: 0.36  loss_dice_3: 0.3892  loss_ce_4: 0.6936  loss_mask_4: 0.3778  loss_dice_4: 0.3462    time: 0.2436  last_time: 0.3607  data_time: 0.0016  last_data_time: 0.0011   lr: 4.8908e-08  max_mem: 19152M
+[32m[05/26 21:21:36 d2.utils.events]: [0m eta: 0:03:30  iter: 99  total_loss: 10.69  loss_ce: 0.6911  loss_mask: 0.324  loss_dice: 0.3099  loss_ce_0: 0.7553  loss_mask_0: 0.3139  loss_dice_0: 0.3189  loss_ce_1: 0.6905  loss_mask_1: 0.3598  loss_dice_1: 0.3427  loss_ce_2: 0.6225  loss_mask_2: 0.372  loss_dice_2: 0.3126  loss_ce_3: 0.6857  loss_mask_3: 0.3365  loss_dice_3: 0.3144  loss_ce_4: 0.6688  loss_mask_4: 0.3623  loss_dice_4: 0.2864    time: 0.2443  last_time: 0.2315  data_time: 0.0015  last_data_time: 0.0017   lr: 6.009e-08  max_mem: 19152M
+[32m[05/26 21:21:41 d2.utils.events]: [0m eta: 0:03:24  iter: 119  total_loss: 11.41  loss_ce: 0.7354  loss_mask: 0.4386  loss_dice: 0.2936  loss_ce_0: 0.7611  loss_mask_0: 0.5923  loss_dice_0: 0.2922  loss_ce_1: 0.769  loss_mask_1: 0.3997  loss_dice_1: 0.3272  loss_ce_2: 0.7198  loss_mask_2: 0.4659  loss_dice_2: 0.3321  loss_ce_3: 0.7546  loss_mask_3: 0.4244  loss_dice_3: 0.3049  loss_ce_4: 0.7249  loss_mask_4: 0.4285  loss_dice_4: 0.3194    time: 0.2452  last_time: 0.2216  data_time: 0.0016  last_data_time: 0.0019   lr: 7.0785e-08  max_mem: 19152M
+[32m[05/26 21:21:46 d2.utils.events]: [0m eta: 0:03:19  iter: 139  total_loss: 11.19  loss_ce: 0.7907  loss_mask: 0.326  loss_dice: 0.2801  loss_ce_0: 0.8981  loss_mask_0: 0.4201  loss_dice_0: 0.2953  loss_ce_1: 0.8832  loss_mask_1: 0.437  loss_dice_1: 0.3682  loss_ce_2: 0.8811  loss_mask_2: 0.3532  loss_dice_2: 0.2997  loss_ce_3: 0.8335  loss_mask_3: 0.3159  loss_dice_3: 0.2979  loss_ce_4: 0.7957  loss_mask_4: 0.3411  loss_dice_4: 0.2844    time: 0.2445  last_time: 0.2400  data_time: 0.0016  last_data_time: 0.0010   lr: 8.099e-08  max_mem: 19152M
+[32m[05/26 21:21:51 d2.utils.events]: [0m eta: 0:03:14  iter: 159  total_loss: 11.91  loss_ce: 0.9249  loss_mask: 0.3417  loss_dice: 0.3469  loss_ce_0: 1.028  loss_mask_0: 0.3804  loss_dice_0: 0.3688  loss_ce_1: 0.8757  loss_mask_1: 0.4257  loss_dice_1: 0.4105  loss_ce_2: 0.9079  loss_mask_2: 0.4094  loss_dice_2: 0.4119  loss_ce_3: 0.9122  loss_mask_3: 0.3841  loss_dice_3: 0.3898  loss_ce_4: 0.8993  loss_mask_4: 0.3256  loss_dice_4: 0.3649    time: 0.2443  last_time: 0.2211  data_time: 0.0016  last_data_time: 0.0020   lr: 9.0704e-08  max_mem: 19152M
+[32m[05/26 21:21:56 d2.utils.events]: [0m eta: 0:03:10  iter: 179  total_loss: 12.04  loss_ce: 0.8698  loss_mask: 0.502  loss_dice: 0.3081  loss_ce_0: 0.898  loss_mask_0: 0.5644  loss_dice_0: 0.3084  loss_ce_1: 0.9164  loss_mask_1: 0.4769  loss_dice_1: 0.3112  loss_ce_2: 0.8118  loss_mask_2: 0.4795  loss_dice_2: 0.316  loss_ce_3: 0.8785  loss_mask_3: 0.591  loss_dice_3: 0.3345  loss_ce_4: 0.8708  loss_mask_4: 0.4782  loss_dice_4: 0.3251    time: 0.2458  last_time: 0.3142  data_time: 0.0016  last_data_time: 0.0013   lr: 9.9925e-08  max_mem: 19152M
+[32m[05/26 21:22:01 d2.utils.events]: [0m eta: 0:03:05  iter: 199  total_loss: 10.57  loss_ce: 1.112  loss_mask: 0.355  loss_dice: 0.2361  loss_ce_0: 1.121  loss_mask_0: 0.3526  loss_dice_0: 0.2737  loss_ce_1: 1.096  loss_mask_1: 0.367  loss_dice_1: 0.3003  loss_ce_2: 1.1  loss_mask_2: 0.342  loss_dice_2: 0.2671  loss_ce_3: 1.121  loss_mask_3: 0.3197  loss_dice_3: 0.2548  loss_ce_4: 1.116  loss_mask_4: 0.3659  loss_dice_4: 0.2305    time: 0.2457  last_time: 0.2973  data_time: 0.0015  last_data_time: 0.0012   lr: 1.0865e-07  max_mem: 19152M
+[32m[05/26 21:22:06 d2.utils.events]: [0m eta: 0:03:00  iter: 219  total_loss: 11.23  loss_ce: 0.9427  loss_mask: 0.3981  loss_dice: 0.3743  loss_ce_0: 0.9949  loss_mask_0: 0.4265  loss_dice_0: 0.314  loss_ce_1: 0.8647  loss_mask_1: 0.4497  loss_dice_1: 0.3779  loss_ce_2: 0.8586  loss_mask_2: 0.3886  loss_dice_2: 0.3259  loss_ce_3: 0.9697  loss_mask_3: 0.4713  loss_dice_3: 0.3265  loss_ce_4: 1.012  loss_mask_4: 0.4674  loss_dice_4: 0.3764    time: 0.2476  last_time: 0.1387  data_time: 0.0017  last_data_time: 0.0014   lr: 1.1688e-07  max_mem: 19332M
+[32m[05/26 21:22:11 d2.utils.events]: [0m eta: 0:02:56  iter: 239  total_loss: 8.849  loss_ce: 0.692  loss_mask: 0.2987  loss_dice: 0.2558  loss_ce_0: 0.813  loss_mask_0: 0.373  loss_dice_0: 0.2362  loss_ce_1: 0.694  loss_mask_1: 0.3838  loss_dice_1: 0.2583  loss_ce_2: 0.6827  loss_mask_2: 0.3768  loss_dice_2: 0.29  loss_ce_3: 0.6737  loss_mask_3: 0.3341  loss_dice_3: 0.2712  loss_ce_4: 0.7074  loss_mask_4: 0.356  loss_dice_4: 0.232    time: 0.2486  last_time: 0.2980  data_time: 0.0016  last_data_time: 0.0020   lr: 1.2461e-07  max_mem: 19332M
+[32m[05/26 21:22:16 d2.utils.events]: [0m eta: 0:02:51  iter: 259  total_loss: 10.5  loss_ce: 0.625  loss_mask: 0.3754  loss_dice: 0.3393  loss_ce_0: 0.6376  loss_mask_0: 0.3693  loss_dice_0: 0.366  loss_ce_1: 0.6361  loss_mask_1: 0.4253  loss_dice_1: 0.3046  loss_ce_2: 0.5771  loss_mask_2: 0.3453  loss_dice_2: 0.2828  loss_ce_3: 0.624  loss_mask_3: 0.3763  loss_dice_3: 0.3035  loss_ce_4: 0.5893  loss_mask_4: 0.3975  loss_dice_4: 0.3082    time: 0.2481  last_time: 0.2143  data_time: 0.0016  last_data_time: 0.0022   lr: 1.3184e-07  max_mem: 19332M
+[32m[05/26 21:22:21 d2.utils.events]: [0m eta: 0:02:46  iter: 279  total_loss: 8.815  loss_ce: 0.689  loss_mask: 0.2677  loss_dice: 0.2919  loss_ce_0: 0.8253  loss_mask_0: 0.3016  loss_dice_0: 0.285  loss_ce_1: 0.7829  loss_mask_1: 0.2658  loss_dice_1: 0.3133  loss_ce_2: 0.7162  loss_mask_2: 0.2655  loss_dice_2: 0.277  loss_ce_3: 0.7209  loss_mask_3: 0.233  loss_dice_3: 0.2737  loss_ce_4: 0.6954  loss_mask_4: 0.2499  loss_dice_4: 0.2767    time: 0.2454  last_time: 0.3257  data_time: 0.0014  last_data_time: 0.0018   lr: 1.3857e-07  max_mem: 19332M
+[32m[05/26 21:22:25 d2.utils.events]: [0m eta: 0:02:41  iter: 299  total_loss: 7.668  loss_ce: 0.6443  loss_mask: 0.2333  loss_dice: 0.2153  loss_ce_0: 0.6863  loss_mask_0: 0.29  loss_dice_0: 0.2437  loss_ce_1: 0.702  loss_mask_1: 0.2631  loss_dice_1: 0.2455  loss_ce_2: 0.6466  loss_mask_2: 0.2729  loss_dice_2: 0.199  loss_ce_3: 0.6471  loss_mask_3: 0.2708  loss_dice_3: 0.2138  loss_ce_4: 0.6459  loss_mask_4: 0.2298  loss_dice_4: 0.1907    time: 0.2432  last_time: 0.2990  data_time: 0.0015  last_data_time: 0.0023   lr: 1.4479e-07  max_mem: 19332M
+[32m[05/26 21:22:29 d2.utils.events]: [0m eta: 0:02:36  iter: 319  total_loss: 8.623  loss_ce: 0.7459  loss_mask: 0.3123  loss_dice: 0.2173  loss_ce_0: 0.7828  loss_mask_0: 0.3055  loss_dice_0: 0.239  loss_ce_1: 0.6747  loss_mask_1: 0.3251  loss_dice_1: 0.2145  loss_ce_2: 0.6548  loss_mask_2: 0.347  loss_dice_2: 0.205  loss_ce_3: 0.7569  loss_mask_3: 0.3691  loss_dice_3: 0.204  loss_ce_4: 0.7431  loss_mask_4: 0.3361  loss_dice_4: 0.2163    time: 0.2423  last_time: 0.1344  data_time: 0.0016  last_data_time: 0.0019   lr: 1.505e-07  max_mem: 19332M
+[32m[05/26 21:22:34 d2.utils.events]: [0m eta: 0:02:32  iter: 339  total_loss: 9.065  loss_ce: 0.7187  loss_mask: 0.2161  loss_dice: 0.1767  loss_ce_0: 0.7364  loss_mask_0: 0.2702  loss_dice_0: 0.1801  loss_ce_1: 0.7403  loss_mask_1: 0.2703  loss_dice_1: 0.1995  loss_ce_2: 0.6819  loss_mask_2: 0.2251  loss_dice_2: 0.2271  loss_ce_3: 0.6878  loss_mask_3: 0.2622  loss_dice_3: 0.1763  loss_ce_4: 0.744  loss_mask_4: 0.2551  loss_dice_4: 0.1791    time: 0.2417  last_time: 0.1347  data_time: 0.0016  last_data_time: 0.0017   lr: 1.557e-07  max_mem: 19332M
+[32m[05/26 21:22:38 d2.utils.events]: [0m eta: 0:02:27  iter: 359  total_loss: 11.54  loss_ce: 0.9363  loss_mask: 0.3003  loss_dice: 0.3741  loss_ce_0: 1.051  loss_mask_0: 0.3367  loss_dice_0: 0.4384  loss_ce_1: 0.9196  loss_mask_1: 0.3091  loss_dice_1: 0.42  loss_ce_2: 0.9956  loss_mask_2: 0.3438  loss_dice_2: 0.4083  loss_ce_3: 1.01  loss_mask_3: 0.2936  loss_dice_3: 0.3666  loss_ce_4: 0.9524  loss_mask_4: 0.3304  loss_dice_4: 0.3928    time: 0.2406  last_time: 0.2082  data_time: 0.0015  last_data_time: 0.0012   lr: 1.6039e-07  max_mem: 19332M
+[32m[05/26 21:22:44 d2.utils.events]: [0m eta: 0:02:23  iter: 379  total_loss: 8.666  loss_ce: 0.6403  loss_mask: 0.2515  loss_dice: 0.2123  loss_ce_0: 0.6507  loss_mask_0: 0.317  loss_dice_0: 0.2291  loss_ce_1: 0.6729  loss_mask_1: 0.2865  loss_dice_1: 0.2445  loss_ce_2: 0.6757  loss_mask_2: 0.315  loss_dice_2: 0.2391  loss_ce_3: 0.7028  loss_mask_3: 0.3133  loss_dice_3: 0.202  loss_ce_4: 0.6444  loss_mask_4: 0.2703  loss_dice_4: 0.2073    time: 0.2437  last_time: 0.3903  data_time: 0.0017  last_data_time: 0.0019   lr: 1.6456e-07  max_mem: 19332M
+[32m[05/26 21:22:49 d2.utils.events]: [0m eta: 0:02:18  iter: 399  total_loss: 8.621  loss_ce: 0.9225  loss_mask: 0.2011  loss_dice: 0.2667  loss_ce_0: 0.9775  loss_mask_0: 0.3909  loss_dice_0: 0.295  loss_ce_1: 0.9001  loss_mask_1: 0.309  loss_dice_1: 0.2574  loss_ce_2: 0.8504  loss_mask_2: 0.2844  loss_dice_2: 0.2586  loss_ce_3: 0.9334  loss_mask_3: 0.2825  loss_dice_3: 0.2373  loss_ce_4: 0.905  loss_mask_4: 0.2118  loss_dice_4: 0.2615    time: 0.2434  last_time: 0.2982  data_time: 0.0016  last_data_time: 0.0014   lr: 1.6822e-07  max_mem: 19332M
+[32m[05/26 21:22:55 d2.utils.events]: [0m eta: 0:02:14  iter: 419  total_loss: 9.222  loss_ce: 0.644  loss_mask: 0.4218  loss_dice: 0.2668  loss_ce_0: 0.6442  loss_mask_0: 0.4005  loss_dice_0: 0.2359  loss_ce_1: 0.694  loss_mask_1: 0.3842  loss_dice_1: 0.3041  loss_ce_2: 0.5847  loss_mask_2: 0.4217  loss_dice_2: 0.2733  loss_ce_3: 0.6191  loss_mask_3: 0.3959  loss_dice_3: 0.2773  loss_ce_4: 0.6112  loss_mask_4: 0.378  loss_dice_4: 0.276    time: 0.2448  last_time: 0.2801  data_time: 0.0017  last_data_time: 0.0019   lr: 1.7135e-07  max_mem: 19332M
+[32m[05/26 21:22:59 d2.utils.events]: [0m eta: 0:02:09  iter: 439  total_loss: 11.11  loss_ce: 0.8705  loss_mask: 0.3241  loss_dice: 0.2923  loss_ce_0: 0.9613  loss_mask_0: 0.3569  loss_dice_0: 0.3363  loss_ce_1: 0.9808  loss_mask_1: 0.3488  loss_dice_1: 0.2781  loss_ce_2: 0.8414  loss_mask_2: 0.3867  loss_dice_2: 0.2752  loss_ce_3: 0.9683  loss_mask_3: 0.3273  loss_dice_3: 0.3373  loss_ce_4: 0.8837  loss_mask_4: 0.3246  loss_dice_4: 0.2752    time: 0.2438  last_time: 0.1292  data_time: 0.0015  last_data_time: 0.0019   lr: 1.7396e-07  max_mem: 19332M
+[32m[05/26 21:23:03 d2.utils.events]: [0m eta: 0:02:04  iter: 459  total_loss: 6.331  loss_ce: 0.4617  loss_mask: 0.277  loss_dice: 0.2236  loss_ce_0: 0.596  loss_mask_0: 0.3435  loss_dice_0: 0.2666  loss_ce_1: 0.6278  loss_mask_1: 0.3318  loss_dice_1: 0.2365  loss_ce_2: 0.554  loss_mask_2: 0.3204  loss_dice_2: 0.2271  loss_ce_3: 0.5302  loss_mask_3: 0.3009  loss_dice_3: 0.2299  loss_ce_4: 0.4976  loss_mask_4: 0.2933  loss_dice_4: 0.2138    time: 0.2422  last_time: 0.1610  data_time: 0.0015  last_data_time: 0.0019   lr: 1.7604e-07  max_mem: 19332M
+[32m[05/26 21:23:09 d2.utils.events]: [0m eta: 0:02:00  iter: 479  total_loss: 7.801  loss_ce: 0.4845  loss_mask: 0.354  loss_dice: 0.1933  loss_ce_0: 0.5779  loss_mask_0: 0.4485  loss_dice_0: 0.1981  loss_ce_1: 0.5966  loss_mask_1: 0.405  loss_dice_1: 0.2424  loss_ce_2: 0.5031  loss_mask_2: 0.356  loss_dice_2: 0.2357  loss_ce_3: 0.5  loss_mask_3: 0.3372  loss_dice_3: 0.1947  loss_ce_4: 0.5077  loss_mask_4: 0.3234  loss_dice_4: 0.2072    time: 0.2432  last_time: 0.1822  data_time: 0.0016  last_data_time: 0.0017   lr: 1.7758e-07  max_mem: 19332M
+[32m[05/26 21:23:13 d2.utils.events]: [0m eta: 0:01:55  iter: 499  total_loss: 9.108  loss_ce: 0.7167  loss_mask: 0.263  loss_dice: 0.2728  loss_ce_0: 0.822  loss_mask_0: 0.4006  loss_dice_0: 0.3219  loss_ce_1: 0.7815  loss_mask_1: 0.3891  loss_dice_1: 0.3126  loss_ce_2: 0.7484  loss_mask_2: 0.3707  loss_dice_2: 0.2951  loss_ce_3: 0.7444  loss_mask_3: 0.2931  loss_dice_3: 0.2713  loss_ce_4: 0.7483  loss_mask_4: 0.2514  loss_dice_4: 0.2501    time: 0.2428  last_time: 0.2292  data_time: 0.0016  last_data_time: 0.0017   lr: 1.7859e-07  max_mem: 19332M
+[32m[05/26 21:23:19 d2.utils.events]: [0m eta: 0:01:50  iter: 519  total_loss: 6.569  loss_ce: 0.6687  loss_mask: 0.2183  loss_dice: 0.2089  loss_ce_0: 0.6651  loss_mask_0: 0.2829  loss_dice_0: 0.1975  loss_ce_1: 0.6786  loss_mask_1: 0.3365  loss_dice_1: 0.2736  loss_ce_2: 0.657  loss_mask_2: 0.2533  loss_dice_2: 0.2268  loss_ce_3: 0.6785  loss_mask_3: 0.2692  loss_dice_3: 0.1846  loss_ce_4: 0.6474  loss_mask_4: 0.2326  loss_dice_4: 0.2141    time: 0.2438  last_time: 0.1470  data_time: 0.0017  last_data_time: 0.0018   lr: 1.7906e-07  max_mem: 19332M
+[32m[05/26 21:23:24 d2.utils.events]: [0m eta: 0:01:46  iter: 539  total_loss: 9.548  loss_ce: 0.501  loss_mask: 0.382  loss_dice: 0.2536  loss_ce_0: 0.502  loss_mask_0: 0.3563  loss_dice_0: 0.247  loss_ce_1: 0.5693  loss_mask_1: 0.3879  loss_dice_1: 0.241  loss_ce_2: 0.4835  loss_mask_2: 0.4019  loss_dice_2: 0.2613  loss_ce_3: 0.4865  loss_mask_3: 0.3933  loss_dice_3: 0.2236  loss_ce_4: 0.5213  loss_mask_4: 0.3596  loss_dice_4: 0.2563    time: 0.2438  last_time: 0.2317  data_time: 0.0016  last_data_time: 0.0019   lr: 1.7899e-07  max_mem: 19332M
+[32m[05/26 21:23:28 d2.utils.events]: [0m eta: 0:01:41  iter: 559  total_loss: 8.876  loss_ce: 0.7722  loss_mask: 0.317  loss_dice: 0.3352  loss_ce_0: 0.9099  loss_mask_0: 0.3585  loss_dice_0: 0.2689  loss_ce_1: 0.7898  loss_mask_1: 0.343  loss_dice_1: 0.3944  loss_ce_2: 0.8068  loss_mask_2: 0.3235  loss_dice_2: 0.2982  loss_ce_3: 0.8183  loss_mask_3: 0.3427  loss_dice_3: 0.2997  loss_ce_4: 0.7846  loss_mask_4: 0.3181  loss_dice_4: 0.2913    time: 0.2435  last_time: 0.3614  data_time: 0.0016  last_data_time: 0.0013   lr: 1.7837e-07  max_mem: 19332M
+[32m[05/26 21:23:33 d2.utils.events]: [0m eta: 0:01:36  iter: 579  total_loss: 7.709  loss_ce: 0.6029  loss_mask: 0.2432  loss_dice: 0.2427  loss_ce_0: 0.6866  loss_mask_0: 0.2987  loss_dice_0: 0.272  loss_ce_1: 0.6025  loss_mask_1: 0.3345  loss_dice_1: 0.3132  loss_ce_2: 0.5969  loss_mask_2: 0.268  loss_dice_2: 0.2492  loss_ce_3: 0.5406  loss_mask_3: 0.2928  loss_dice_3: 0.2663  loss_ce_4: 0.5785  loss_mask_4: 0.3081  loss_dice_4: 0.2319    time: 0.2435  last_time: 0.2654  data_time: 0.0016  last_data_time: 0.0014   lr: 1.7719e-07  max_mem: 19332M
+[32m[05/26 21:23:38 d2.utils.events]: [0m eta: 0:01:32  iter: 599  total_loss: 6.355  loss_ce: 0.5061  loss_mask: 0.2896  loss_dice: 0.3476  loss_ce_0: 0.547  loss_mask_0: 0.331  loss_dice_0: 0.3064  loss_ce_1: 0.5702  loss_mask_1: 0.307  loss_dice_1: 0.2854  loss_ce_2: 0.4736  loss_mask_2: 0.3248  loss_dice_2: 0.2772  loss_ce_3: 0.4834  loss_mask_3: 0.2996  loss_dice_3: 0.3182  loss_ce_4: 0.5137  loss_mask_4: 0.3654  loss_dice_4: 0.3092    time: 0.2429  last_time: 0.3759  data_time: 0.0015  last_data_time: 0.0015   lr: 1.7546e-07  max_mem: 19332M
+[32m[05/26 21:23:42 d2.utils.events]: [0m eta: 0:01:27  iter: 619  total_loss: 6.648  loss_ce: 0.4873  loss_mask: 0.3332  loss_dice: 0.2267  loss_ce_0: 0.5646  loss_mask_0: 0.3182  loss_dice_0: 0.2475  loss_ce_1: 0.5288  loss_mask_1: 0.3186  loss_dice_1: 0.2428  loss_ce_2: 0.4879  loss_mask_2: 0.2655  loss_dice_2: 0.2492  loss_ce_3: 0.5271  loss_mask_3: 0.2908  loss_dice_3: 0.2313  loss_ce_4: 0.5079  loss_mask_4: 0.3219  loss_dice_4: 0.2215    time: 0.2425  last_time: 0.1580  data_time: 0.0016  last_data_time: 0.0012   lr: 1.7315e-07  max_mem: 19332M
+[32m[05/26 21:23:47 d2.utils.events]: [0m eta: 0:01:23  iter: 639  total_loss: 7.011  loss_ce: 0.6354  loss_mask: 0.205  loss_dice: 0.1887  loss_ce_0: 0.7256  loss_mask_0: 0.2152  loss_dice_0: 0.2054  loss_ce_1: 0.628  loss_mask_1: 0.2091  loss_dice_1: 0.212  loss_ce_2: 0.5794  loss_mask_2: 0.1939  loss_dice_2: 0.2075  loss_ce_3: 0.5949  loss_mask_3: 0.2168  loss_dice_3: 0.185  loss_ce_4: 0.6053  loss_mask_4: 0.2442  loss_dice_4: 0.1872    time: 0.2417  last_time: 0.1926  data_time: 0.0015  last_data_time: 0.0018   lr: 1.7028e-07  max_mem: 19332M
+[32m[05/26 21:23:51 d2.utils.events]: [0m eta: 0:01:18  iter: 659  total_loss: 7.599  loss_ce: 0.6777  loss_mask: 0.3518  loss_dice: 0.2719  loss_ce_0: 0.6593  loss_mask_0: 0.3348  loss_dice_0: 0.2829  loss_ce_1: 0.7022  loss_mask_1: 0.3078  loss_dice_1: 0.2537  loss_ce_2: 0.5479  loss_mask_2: 0.2558  loss_dice_2: 0.2517  loss_ce_3: 0.6456  loss_mask_3: 0.3509  loss_dice_3: 0.2725  loss_ce_4: 0.6795  loss_mask_4: 0.3294  loss_dice_4: 0.2752    time: 0.2409  last_time: 0.1821  data_time: 0.0015  last_data_time: 0.0014   lr: 1.6683e-07  max_mem: 19332M
+[32m[05/26 21:23:56 d2.utils.events]: [0m eta: 0:01:13  iter: 679  total_loss: 8.211  loss_ce: 0.734  loss_mask: 0.3471  loss_dice: 0.2592  loss_ce_0: 0.8488  loss_mask_0: 0.3112  loss_dice_0: 0.2851  loss_ce_1: 0.7602  loss_mask_1: 0.287  loss_dice_1: 0.3256  loss_ce_2: 0.7402  loss_mask_2: 0.2534  loss_dice_2: 0.3344  loss_ce_3: 0.7605  loss_mask_3: 0.2337  loss_dice_3: 0.2733  loss_ce_4: 0.75  loss_mask_4: 0.2894  loss_dice_4: 0.2703    time: 0.2407  last_time: 0.1818  data_time: 0.0016  last_data_time: 0.0020   lr: 1.6279e-07  max_mem: 19332M
+[32m[05/26 21:24:00 d2.utils.events]: [0m eta: 0:01:09  iter: 699  total_loss: 5.629  loss_ce: 0.4829  loss_mask: 0.2364  loss_dice: 0.1783  loss_ce_0: 0.51  loss_mask_0: 0.2991  loss_dice_0: 0.2058  loss_ce_1: 0.5176  loss_mask_1: 0.2887  loss_dice_1: 0.2073  loss_ce_2: 0.4666  loss_mask_2: 0.2695  loss_dice_2: 0.1762  loss_ce_3: 0.5045  loss_mask_3: 0.2771  loss_dice_3: 0.1885  loss_ce_4: 0.4621  loss_mask_4: 0.2755  loss_dice_4: 0.1943    time: 0.2407  last_time: 0.1348  data_time: 0.0016  last_data_time: 0.0015   lr: 1.5816e-07  max_mem: 19332M
+[32m[05/26 21:24:06 d2.utils.events]: [0m eta: 0:01:04  iter: 719  total_loss: 6.162  loss_ce: 0.4742  loss_mask: 0.2881  loss_dice: 0.2036  loss_ce_0: 0.4793  loss_mask_0: 0.2994  loss_dice_0: 0.2741  loss_ce_1: 0.484  loss_mask_1: 0.3633  loss_dice_1: 0.2303  loss_ce_2: 0.4287  loss_mask_2: 0.3252  loss_dice_2: 0.2034  loss_ce_3: 0.5095  loss_mask_3: 0.2376  loss_dice_3: 0.206  loss_ce_4: 0.4644  loss_mask_4: 0.2787  loss_dice_4: 0.2028    time: 0.2411  last_time: 0.3951  data_time: 0.0017  last_data_time: 0.0019   lr: 1.5292e-07  max_mem: 19332M
+[32m[05/26 21:24:10 d2.utils.events]: [0m eta: 0:00:59  iter: 739  total_loss: 9.803  loss_ce: 0.5358  loss_mask: 0.3122  loss_dice: 0.35  loss_ce_0: 0.6024  loss_mask_0: 0.292  loss_dice_0: 0.4006  loss_ce_1: 0.6953  loss_mask_1: 0.3142  loss_dice_1: 0.39  loss_ce_2: 0.5811  loss_mask_2: 0.3037  loss_dice_2: 0.407  loss_ce_3: 0.5198  loss_mask_3: 0.2867  loss_dice_3: 0.3398  loss_ce_4: 0.5416  loss_mask_4: 0.326  loss_dice_4: 0.3767    time: 0.2412  last_time: 0.2627  data_time: 0.0017  last_data_time: 0.0017   lr: 1.4707e-07  max_mem: 19332M
+[32m[05/26 21:24:16 d2.utils.events]: [0m eta: 0:00:55  iter: 759  total_loss: 7.437  loss_ce: 0.4865  loss_mask: 0.3102  loss_dice: 0.2561  loss_ce_0: 0.5791  loss_mask_0: 0.3331  loss_dice_0: 0.2025  loss_ce_1: 0.6007  loss_mask_1: 0.3818  loss_dice_1: 0.2612  loss_ce_2: 0.5539  loss_mask_2: 0.2472  loss_dice_2: 0.223  loss_ce_3: 0.5962  loss_mask_3: 0.2904  loss_dice_3: 0.2055  loss_ce_4: 0.5221  loss_mask_4: 0.3108  loss_dice_4: 0.23    time: 0.2415  last_time: 0.2975  data_time: 0.0016  last_data_time: 0.0017   lr: 1.4059e-07  max_mem: 19332M
+[32m[05/26 21:24:20 d2.utils.events]: [0m eta: 0:00:50  iter: 779  total_loss: 7.769  loss_ce: 0.4805  loss_mask: 0.3613  loss_dice: 0.3054  loss_ce_0: 0.6054  loss_mask_0: 0.4294  loss_dice_0: 0.263  loss_ce_1: 0.4796  loss_mask_1: 0.4037  loss_dice_1: 0.3092  loss_ce_2: 0.5245  loss_mask_2: 0.3617  loss_dice_2: 0.2957  loss_ce_3: 0.4889  loss_mask_3: 0.3764  loss_dice_3: 0.3214  loss_ce_4: 0.4688  loss_mask_4: 0.3818  loss_dice_4: 0.2982    time: 0.2415  last_time: 0.1812  data_time: 0.0016  last_data_time: 0.0020   lr: 1.3347e-07  max_mem: 19332M
+[32m[05/26 21:24:25 d2.utils.events]: [0m eta: 0:00:46  iter: 799  total_loss: 10.74  loss_ce: 0.7812  loss_mask: 0.2113  loss_dice: 0.3949  loss_ce_0: 1.029  loss_mask_0: 0.2497  loss_dice_0: 0.2911  loss_ce_1: 0.8876  loss_mask_1: 0.241  loss_dice_1: 0.3439  loss_ce_2: 0.8866  loss_mask_2: 0.2281  loss_dice_2: 0.3053  loss_ce_3: 0.8314  loss_mask_3: 0.2184  loss_dice_3: 0.328  loss_ce_4: 0.8462  loss_mask_4: 0.2135  loss_dice_4: 0.4054    time: 0.2417  last_time: 0.2689  data_time: 0.0015  last_data_time: 0.0013   lr: 1.257e-07  max_mem: 20263M
+[32m[05/26 21:24:30 d2.utils.events]: [0m eta: 0:00:41  iter: 819  total_loss: 6.451  loss_ce: 0.3895  loss_mask: 0.3408  loss_dice: 0.2188  loss_ce_0: 0.4112  loss_mask_0: 0.3353  loss_dice_0: 0.1915  loss_ce_1: 0.4251  loss_mask_1: 0.4115  loss_dice_1: 0.2213  loss_ce_2: 0.3822  loss_mask_2: 0.3059  loss_dice_2: 0.2159  loss_ce_3: 0.4055  loss_mask_3: 0.3102  loss_dice_3: 0.2163  loss_ce_4: 0.4095  loss_mask_4: 0.3366  loss_dice_4: 0.2202    time: 0.2417  last_time: 0.1298  data_time: 0.0017  last_data_time: 0.0021   lr: 1.1725e-07  max_mem: 20263M
+[32m[05/26 21:24:36 d2.utils.events]: [0m eta: 0:00:36  iter: 839  total_loss: 7.785  loss_ce: 0.5559  loss_mask: 0.3043  loss_dice: 0.2999  loss_ce_0: 0.6369  loss_mask_0: 0.3675  loss_dice_0: 0.2642  loss_ce_1: 0.5985  loss_mask_1: 0.3064  loss_dice_1: 0.2679  loss_ce_2: 0.5377  loss_mask_2: 0.3133  loss_dice_2: 0.304  loss_ce_3: 0.6268  loss_mask_3: 0.2618  loss_dice_3: 0.2465  loss_ce_4: 0.5777  loss_mask_4: 0.269  loss_dice_4: 0.2593    time: 0.2423  last_time: 0.2874  data_time: 0.0018  last_data_time: 0.0022   lr: 1.081e-07  max_mem: 20263M
+[32m[05/26 21:24:40 d2.utils.events]: [0m eta: 0:00:32  iter: 859  total_loss: 5.484  loss_ce: 0.5779  loss_mask: 0.2649  loss_dice: 0.1836  loss_ce_0: 0.579  loss_mask_0: 0.2519  loss_dice_0: 0.1568  loss_ce_1: 0.5584  loss_mask_1: 0.2283  loss_dice_1: 0.1615  loss_ce_2: 0.5501  loss_mask_2: 0.1916  loss_dice_2: 0.1605  loss_ce_3: 0.5449  loss_mask_3: 0.2704  loss_dice_3: 0.1771  loss_ce_4: 0.568  loss_mask_4: 0.2683  loss_dice_4: 0.178    time: 0.2420  last_time: 0.1751  data_time: 0.0015  last_data_time: 0.0018   lr: 9.822e-08  max_mem: 20414M
+[32m[05/26 21:24:45 d2.utils.events]: [0m eta: 0:00:27  iter: 879  total_loss: 4.861  loss_ce: 0.378  loss_mask: 0.2208  loss_dice: 0.1529  loss_ce_0: 0.4775  loss_mask_0: 0.2268  loss_dice_0: 0.1488  loss_ce_1: 0.3999  loss_mask_1: 0.2929  loss_dice_1: 0.2379  loss_ce_2: 0.4275  loss_mask_2: 0.232  loss_dice_2: 0.1694  loss_ce_3: 0.4711  loss_mask_3: 0.2323  loss_dice_3: 0.1688  loss_ce_4: 0.3286  loss_mask_4: 0.2783  loss_dice_4: 0.172    time: 0.2419  last_time: 0.2224  data_time: 0.0015  last_data_time: 0.0015   lr: 8.758e-08  max_mem: 20414M
+[32m[05/26 21:24:50 d2.utils.events]: [0m eta: 0:00:23  iter: 899  total_loss: 8.489  loss_ce: 0.6429  loss_mask: 0.2652  loss_dice: 0.2882  loss_ce_0: 0.7347  loss_mask_0: 0.3158  loss_dice_0: 0.3188  loss_ce_1: 0.64  loss_mask_1: 0.283  loss_dice_1: 0.2874  loss_ce_2: 0.6189  loss_mask_2: 0.246  loss_dice_2: 0.3066  loss_ce_3: 0.6463  loss_mask_3: 0.2692  loss_dice_3: 0.2928  loss_ce_4: 0.6175  loss_mask_4: 0.2635  loss_dice_4: 0.3101    time: 0.2419  last_time: 0.1379  data_time: 0.0016  last_data_time: 0.0012   lr: 7.613e-08  max_mem: 20414M
+[32m[05/26 21:24:55 d2.utils.events]: [0m eta: 0:00:18  iter: 919  total_loss: 6.669  loss_ce: 0.4803  loss_mask: 0.3033  loss_dice: 0.2377  loss_ce_0: 0.5421  loss_mask_0: 0.335  loss_dice_0: 0.2765  loss_ce_1: 0.4724  loss_mask_1: 0.3104  loss_dice_1: 0.2169  loss_ce_2: 0.4586  loss_mask_2: 0.2517  loss_dice_2: 0.2242  loss_ce_3: 0.512  loss_mask_3: 0.2991  loss_dice_3: 0.2245  loss_ce_4: 0.4582  loss_mask_4: 0.2682  loss_dice_4: 0.2312    time: 0.2421  last_time: 0.3424  data_time: 0.0016  last_data_time: 0.0019   lr: 6.3806e-08  max_mem: 20414M
+[32m[05/26 21:24:59 d2.utils.events]: [0m eta: 0:00:13  iter: 939  total_loss: 7.192  loss_ce: 0.5929  loss_mask: 0.2971  loss_dice: 0.2484  loss_ce_0: 0.6341  loss_mask_0: 0.3015  loss_dice_0: 0.2179  loss_ce_1: 0.6311  loss_mask_1: 0.3192  loss_dice_1: 0.2431  loss_ce_2: 0.6159  loss_mask_2: 0.317  loss_dice_2: 0.2554  loss_ce_3: 0.689  loss_mask_3: 0.3035  loss_dice_3: 0.308  loss_ce_4: 0.6324  loss_mask_4: 0.2733  loss_dice_4: 0.2414    time: 0.2419  last_time: 0.1321  data_time: 0.0017  last_data_time: 0.0014   lr: 5.0509e-08  max_mem: 20414M
+[32m[05/26 21:25:04 d2.utils.events]: [0m eta: 0:00:09  iter: 959  total_loss: 7.882  loss_ce: 0.5154  loss_mask: 0.2412  loss_dice: 0.3142  loss_ce_0: 0.5941  loss_mask_0: 0.2877  loss_dice_0: 0.3696  loss_ce_1: 0.5826  loss_mask_1: 0.2706  loss_dice_1: 0.3606  loss_ce_2: 0.4769  loss_mask_2: 0.2705  loss_dice_2: 0.3308  loss_ce_3: 0.5099  loss_mask_3: 0.3269  loss_dice_3: 0.3594  loss_ce_4: 0.5253  loss_mask_4: 0.3023  loss_dice_4: 0.3082    time: 0.2420  last_time: 0.1513  data_time: 0.0016  last_data_time: 0.0020   lr: 3.6077e-08  max_mem: 20414M
+[32m[05/26 21:25:09 d2.utils.events]: [0m eta: 0:00:04  iter: 979  total_loss: 5.215  loss_ce: 0.405  loss_mask: 0.2142  loss_dice: 0.1874  loss_ce_0: 0.4526  loss_mask_0: 0.2959  loss_dice_0: 0.1834  loss_ce_1: 0.3889  loss_mask_1: 0.3455  loss_dice_1: 0.198  loss_ce_2: 0.392  loss_mask_2: 0.2734  loss_dice_2: 0.1969  loss_ce_3: 0.4039  loss_mask_3: 0.2337  loss_dice_3: 0.1897  loss_ce_4: 0.4143  loss_mask_4: 0.2025  loss_dice_4: 0.1848    time: 0.2417  last_time: 0.2699  data_time: 0.0015  last_data_time: 0.0012   lr: 2.0169e-08  max_mem: 20414M
+[32m[05/26 21:25:14 fvcore.common.checkpoint]: [0mSaving checkpoint to ./output/model_final.pth
+[32m[05/26 21:25:17 d2.utils.events]: [0m eta: 0:00:00  iter: 999  total_loss: 7.88  loss_ce: 0.6517  loss_mask: 0.2833  loss_dice: 0.199  loss_ce_0: 0.7231  loss_mask_0: 0.3401  loss_dice_0: 0.2364  loss_ce_1: 0.7339  loss_mask_1: 0.3063  loss_dice_1: 0.2584  loss_ce_2: 0.6917  loss_mask_2: 0.2522  loss_dice_2: 0.2122  loss_ce_3: 0.7482  loss_mask_3: 0.2767  loss_dice_3: 0.2288  loss_ce_4: 0.7216  loss_mask_4: 0.2387  loss_dice_4: 0.2381    time: 0.2422  last_time: 0.2891  data_time: 0.0016  last_data_time: 0.0011   lr: 1.3288e-09  max_mem: 21694M
+[32m[05/26 21:25:17 d2.engine.hooks]: [0mOverall training speed: 998 iterations in 0:04:01 (0.2422 s / it)
+[32m[05/26 21:25:17 d2.engine.hooks]: [0mTotal training time: 0:04:05 (0:00:03 on hooks)
+[5m[31mWARNING[0m [32m[05/26 21:25:18 d2.data.datasets.coco]: [0m
+Category ids in annotations are not in [1, #categories]! We'll apply a mapping for you.
+
+[32m[05/26 21:25:18 d2.data.datasets.coco]: [0mLoaded 35 images in COCO format from /home/ra78lof/consulting_pro/SAN/san/data/ceiling_painting_segmentation/valid/json_annotation_val.json
+[32m[05/26 21:25:18 d2.data.build]: [0mDistribution of instances among all 4 categories:
+[36m|  category  | #instances   |  category  | #instances   |  category  | #instances   |
+|:----------:|:-------------|:----------:|:-------------|:----------:|:-------------|
+|   mural    | 0            |   brief    | 0            |   mural    | 173          |
+|   relief   | 0            |            |              |            |              |
+|   total    | 173          |            |              |            |              |[0m
+[32m[05/26 21:25:18 d2.data.dataset_mapper]: [0m[DatasetMapper] Augmentations used in inference: [ResizeShortestEdge(short_edge_length=(640, 640), max_size=2560, sample_style='choice')]
+[32m[05/26 21:25:18 d2.data.common]: [0mSerializing the dataset using: <class 'detectron2.data.common._TorchSerializedList'>
+[32m[05/26 21:25:18 d2.data.common]: [0mSerializing 35 elements to byte tensors and concatenating them all ...
+[32m[05/26 21:25:18 d2.data.common]: [0mSerialized dataset takes 0.21 MiB
+[5m[31mWARNING[0m [32m[05/26 21:25:18 d2.engine.defaults]: [0mNo evaluator found. Use `DefaultTrainer.test(evaluators=)`, or implement its `build_evaluator` method.

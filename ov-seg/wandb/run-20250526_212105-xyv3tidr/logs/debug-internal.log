@@ -1,0 +1,17 @@
+{"time":"2025-05-26T21:21:05.015064537Z","level":"INFO","msg":"stream: starting","core version":"0.19.11","symlink path":"/home/ra78lof/consulting_pro/ov-seg/wandb/run-20250526_212105-xyv3tidr/logs/debug-core.log"}
+{"time":"2025-05-26T21:21:05.283730227Z","level":"INFO","msg":"created new stream","id":"xyv3tidr"}
+{"time":"2025-05-26T21:21:05.283765467Z","level":"INFO","msg":"stream: started","id":"xyv3tidr"}
+{"time":"2025-05-26T21:21:05.283778227Z","level":"INFO","msg":"writer: Do: started","stream_id":"xyv3tidr"}
+{"time":"2025-05-26T21:21:05.283787547Z","level":"INFO","msg":"sender: started","stream_id":"xyv3tidr"}
+{"time":"2025-05-26T21:21:05.283830187Z","level":"INFO","msg":"handler: started","stream_id":"xyv3tidr"}
+{"time":"2025-05-26T21:21:05.504439242Z","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-05-26T21:21:05.504660081Z","level":"ERROR","msg":"git repo not found","error":"repository does not exist"}
+{"time":"2025-05-26T21:25:18.039569995Z","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-05-26T21:25:18.039611934Z","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-05-26T21:25:18.834694511Z","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-05-26T21:25:19.007240681Z","level":"INFO","msg":"handler: operation stats","stats":{"operations":[{"desc":"uploading history steps 47-49, summary, console lines 1417-1436","runtime_seconds":0.172364751}],"total_operations":1}}
+{"time":"2025-05-26T21:25:19.015186682Z","level":"INFO","msg":"stream: closing","id":"xyv3tidr"}
+{"time":"2025-05-26T21:25:19.015198442Z","level":"INFO","msg":"handler: closed","stream_id":"xyv3tidr"}
+{"time":"2025-05-26T21:25:19.015205282Z","level":"INFO","msg":"writer: Close: closed","stream_id":"xyv3tidr"}
+{"time":"2025-05-26T21:25:19.015226412Z","level":"INFO","msg":"sender: closed","stream_id":"xyv3tidr"}
+{"time":"2025-05-26T21:25:19.015280372Z","level":"INFO","msg":"stream: closed","id":"xyv3tidr"}

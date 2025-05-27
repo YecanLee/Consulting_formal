@@ -121,7 +121,7 @@ class VisualizationDemo(object):
             blank_area = (r[0] == 0)
             pred_mask = r.argmax(dim=0).to('cpu')
             pred_mask[blank_area] = 255
-            pred_mask = np.array(pred_mask, dtype=np.int)
+            pred_mask = np.array(pred_mask, dtype=np.int32)
 
             vis_output = visualizer.draw_sem_seg(
                 pred_mask
