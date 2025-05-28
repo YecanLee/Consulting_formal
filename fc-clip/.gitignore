@@ -1,2 +1,4 @@
 output/
 logs/
+
+pretrained_weights/*

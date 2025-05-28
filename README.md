@@ -85,11 +85,78 @@ If your labeled dataset is in `COCO` format, you could use the `register_coco_in
 
 Please do not forget to call the defined registration function in the `SAN/san/data/datasets/register_<your_dataset_name>.py` file. Otherwise, the model will not be able to find your dataset.  
 
-## 🚀Train Command Encylopedia
+## 🚀Train Command Encyclopedia
+### ⭐CAT-Seg
+To finetune the pretrained `CAT-Seg` model with our customized ceiling painting dataset, please run the following command:
 
-## 🔥Demo Command Encylopedia
+```bash
+cd CAT-Seg
+mkdir pretrained_weights   
 
-### Built upon `detectron2`
+# download the pretrained weights with ViT-L backbone
+wget -P pretrained_weights https://huggingface.co/spaces/hamacojr/CAT-Seg-weights/resolve/main/model_large.pth   
+# Or
+# wget -P pretrained_weights https://huggingface.co/spaces/hamacojr/CAT-Seg-weights/resolve/main/model_base.pth
+
+# finetune the pretrained model with ViT-L backbone
+python train_net.py --config configs/ceiling_config.yaml  \
+--num-gpus 1 \
+--dist-url "auto"  \
+--resume MODEL.WEIGHTS pretrained_weights/model_large.pth \
+OUTPUT_DIR output    
+
+# finetune the pretrained model with ViT-B backbone
+# python train_net.py 
+# --config configs/ceiling_config.yaml  \
+# --num-gpus 1 \
+# --dist-url "auto"  \
+# --resume MODEL.WEIGHTS pretrained_weights/model_base.pth \
+# OUTPUT_DIR output
+```
+### ⭐ebseg
+To finetune the pretrained `ebseg` model with our customized ceiling painting dataset, please run the following command:
+```bash
+python train_net.py  \
+--config-file configs/ebseg/ceiling_painting.yaml  \
+--num-gpus 1  \
+OUTPUT_DIR output
+```   
+
+### ⭐fc-clip
+To finetune the pretrained `fc-clip` model with our customized ceiling painting dataset, please run the following command:
+```bash
+python train_net.py  \
+--config-file configs/coco/panoptic-segmentation/fcclip/fcclip_convnext_large_train_ceiling.yaml \
+--resume \
+--num-gpus 1 \
+SOLVER.IMS_PER_BATCH 6 \ # tested on 1 GPU with 24GB vram
+SOLVER.BASE_LR 0.00006 \
+MODEL.WEIGHTS pretrained_weights/fcclip_cocopan.pth
+```
+
+### ⭐MAFT-Plus
+To finetune the pretrained `MAFT-Plus` model with our customized ceiling painting dataset, please run the following command:
+```bash
+python train_net.py \
+--config-file configs/semantic/train_ceiling_semantic_large.yaml  \
+--num-gpus 1  \
+MODEL.WEIGHTS pretrained_weights/maftp_l.pth
+```
+
+### ⭐GroupViT
+Since the `GroupViT` repo is trained with multiple `text-to-image` pairs datasets, we will only include the inference command in the `GroupViT` folder right now at this moment, the training command will come soon, stay tuned! 
+```bash
+# GroupViT inference command
+./tools/dist_launch.sh main_seg.py \
+configs/group_vit_gcc_ceiling.yml 1 \
+--resume \
+pretrained_weights/group_vit_gcc_yfcc_30e-879422e0.pth \
+--opts evaluate.seg.cfg=segmentation/configs/_base_/datasets/ceiling_painting.py
+```
+
+## 🔥Demo Command Encyclopedia
+
+### Built upon `mm-lab`
 - SegCLIP   
 To run the `main_seg_vis.py` script in `SegCLIP` folder to do inference upon __one__ image, please run the following command:
 
@@ -102,7 +169,7 @@ python main_seg_vis.py --input YOUR_IMAGE_PATH \
 --init_model YOUR_TRAINED_WEIGHTS_PATH
 ```
 
-### Built upon `mm-lab`
+### Built upon `detectron2`
 - OV-Seg   
 To run the `demo.py` script in `ov-seg` folder to do inference upon one or more images, please run the following command:
 
@@ -116,7 +183,7 @@ python demo.py --config-file configs/ovseg_swinB_vitL_ceiling_demo.yaml \
 
 There is a numpy version issue in the original repo, please pin to our version to use the demo.
 
-## In construction and Alert
+## 🚧In construction and Alert
 Some of the models here require more than one train scripts, this section is mainly used to record which repo requires more than one train scripts.
 
 The `MasQCLIP` requires two Progressive Distillation traning and one Mask-Q Tuning, they all used the `train_net.py` script, but with different config files.
@@ -127,7 +194,7 @@ The mmcv-full from the GroupViT and SegCLIP are only compiled with numpy version
 
 We pinned our mmcv as well as our mmsegmentation package to older versions since those papers were developed based on 1.X version instead of 2.X version.
 
-### TODO(A quick to-do list)
+## 📝TODO(A quick to-do list)
 - [ ] Check if the evaluators are working for different models. This may require us to change the way we register the `ceiling_painting` dataset. Or we may need to modify the metadata `evaluator_type` of the dataset.
 - [ ] Add pre-commit hooks to check the code style. We may only check the files we changed during the whole project instead of every file.
 - [ ] Add dockerfile for each model. We will only offer one training dockerfile and one deployment dockerfile.
@@ -136,7 +203,8 @@ We pinned our mmcv as well as our mmsegmentation package to older versions since
 
 - [ ] Add some open sourced `video generation` models into the `Fancy_Ideas` folder. I propose we could use this [new paper](https://github.com/thu-ml/RIFLEx) since this new `ICML` paper can generate a little bit longer video compared to the previous models.
 
-## Debug Guidance
+## 🐛Debug Guidance
+### mmcv and mmsegmentation installation debug guidance
 The repos which were built upon the `mm-lab` series of packages require extra attention when you try to install the environment since the `mmcv` or `mmsegmentation` package are compiled with C++ backend, which may cause some issues when you try to install the environment.
 
 We pinned our environment installation as a combination of `segclip` and `groupvit` repo's environment installation instructions. But we only used `apex` installation part of the `groupvit` repo's installation instructions. However, extra attention should be paid to this part.
@@ -221,3 +289,86 @@ After this, you can run the `GroupViT` repo's inference command again.
 And this should work.
 
 To add new datasets into the repo built upon the `detectron2` framework, you should always try to pin to the way we used in the `fc-clip` repo folder first, this is the vanilla method from the `detectron2` package, in the case of encountering errors, try to register the dataset by using the `register_ceiling_dataset` defined in the `consulting_pro/fc-clip/fcclip/data/datasets/register_ceiling.py` file. Some of the models may require you to use a different dataset register format during the training and inference phase.
+
+### dataset format debug guidance
+If you encounter the following error during the __training__ or __inference__ phase:   
+```bash
+AttributeError: Cannot find field 'gt_masks' in the given Instances
+```
+Please check your config file and add this line in your `MODEL` section:
+```bash
+MODEL:
+  ...
+  MASK_ON: True
+```
+
+### model source code debug guidance
+If you encounter the following error during the __training__ or __inference__ phase:
+```bash   
+AttributeError: 'PolygonMasks' object has no attribute 'shape'
+```
+Please check the source code of the model and modify the source code to fix this issue. The model file should be two lines above the final line of the error message.    
+Please modify the `prepare_targets` function in the model source code to fix this issue.
+You may need to change from this:   
+```bash
+    def prepare_targets(self, targets, images):
+        h_pad, w_pad = images.tensor.shape[-2:]
+        new_targets = []
+        labels = []
+        for targets_per_image in targets:
+            gt_masks = targets_per_image.gt_masks
+            padded_masks = torch.zeros(
+                (gt_masks.shape[0], h_pad, w_pad),
+                dtype=gt_masks.dtype,
+                device=gt_masks.device,
+            )
+            padded_masks[:, : gt_masks.shape[1], : gt_masks.shape[2]] = gt_masks
+            labels.append(targets_per_image.gt_classes)
+            new_targets.append(
+                {
+                    "labels": targets_per_image.gt_classes,
+                    "masks": padded_masks,
+                }
+            )
+        return new_targets, labels
+```
+
+to this:   
+```bash
+    def prepare_targets(self, targets, images):
+        h_pad, w_pad = images.tensor.shape[-2:]
+        new_targets = []
+        labels = []
+        for targets_per_image in targets:
+            gt_masks = targets_per_image.gt_masks
+            gt_masks = BitMasks.from_polygon_masks(gt_masks, h_pad, w_pad)
+            gt_masks_tensor = gt_masks.tensor
+            padded_masks = torch.zeros(
+                (gt_masks_tensor.shape[0], h_pad, w_pad),
+                dtype=gt_masks_tensor.dtype,
+                device=gt_masks_tensor.device,
+            )
+            padded_masks[:, : gt_masks_tensor.shape[1], : gt_masks_tensor.shape[2]] = gt_masks_tensor
+            labels.append(targets_per_image.gt_classes)
+            new_targets.append(
+                {
+                    "labels": targets_per_image.gt_classes,
+                    "masks": padded_masks,
+                }
+            )
+        return new_targets, labels
+```
+
+### tensor shape and device debug guidance
+If you encounter the following error during the __training__ or __inference__ phase:
+```bash
+RuntimeError: weight tensor should be defined either for all or no classes
+```
+Please add the following line in your config file:
+```bash
+MODEL:
+  EBSEG:
+    ...
+    NUM_CLASSES: 4 # your dataset's class number
+```
+
