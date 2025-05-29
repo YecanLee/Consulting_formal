@@ -517,3 +517,163 @@ class MaskFormer(nn.Module):
         result.scores = scores_per_image * mask_scores_per_image
         result.pred_classes = labels_per_image
         return result
+
+
+@META_ARCH_REGISTRY.register()
+class MaskDistillSemantic(nn.Module):
+    """
+    Customized MaskDistill for semantic segmentation.
+    Uses teacher predictions to generate pseudo-labels for student training.
+    """
+    
+    def __init__(self, cfg):
+        super().__init__()
+        self.confidence_threshold = 0.8  # Threshold for using teacher predictions
+        self.distill_weight = cfg.MODEL.get("DISTILL_WEIGHT", 0.0001)  # Weight for distillation loss, pinned to 0.0001
+        self.temperature = cfg.MODEL.get("DISTILL_TEMPERATURE", 3.0)  # Temperature for KL divergence
+        
+        self.teacher_model = MaskFormer(cfg)
+        self.student_model = MaskFormer(cfg)
+        
+        # load weights
+        if cfg.MODEL.WEIGHTS:
+            teacher_weights = torch.load(cfg.MODEL.WEIGHTS)
+            
+            # Filter out masqclip keys and handle size mismatches with maskformer
+            model_state_dict = teacher_weights["model"]
+            filtered_state_dict = {}
+            
+            for key, value in model_state_dict.items():
+                # Skip masqclip keys
+                if key.startswith("masqclip."):
+                    continue
+                    
+                # Handle size mismatches for class-specific layers
+                if key in ["sem_seg_head.predictor.class_embed.weight", 
+                          "sem_seg_head.predictor.class_embed.bias",
+                          "criterion.empty_weight"]:
+                    # The original model hard-coded the number of classes
+                    # We will randomly initialize the weights of these layers
+                    print(f"Skipping layer {key} due to size mismatch")
+                    continue
+                    
+                filtered_state_dict[key] = value
+            
+            # Load the filtered state dict with strict=False
+            missing_keys, unexpected_keys = self.teacher_model.load_state_dict(
+                filtered_state_dict, strict=False
+            )
+            
+            print(f"Missing keys in teacher model: {missing_keys}")
+            print(f"Unexpected keys: {unexpected_keys}")
+        
+        # Freeze teacher model, only train student model
+        for para in self.teacher_model.parameters():
+            para.requires_grad = False
+        for para in self.student_model.parameters():
+            para.requires_grad = True
+
+    # Expose student model attributes for checkpoint loading compatibility
+    @property
+    def backbone(self):
+        return self.student_model.backbone
+    
+    @property
+    def sem_seg_head(self):
+        return self.student_model.sem_seg_head
+    
+    @property
+    def criterion(self):
+        return self.student_model.criterion
+            
+    def load_state_dict(self, state_dict, strict=False):
+        return self.student_model.load_state_dict(state_dict, strict)
+    
+    def state_dict(self):
+        return self.student_model.state_dict()
+    
+    @property
+    def device(self):
+        return self.student_model.device
+    
+    def compute_distillation_loss(self, student_outputs, teacher_outputs):
+        """
+        Compute knowledge distillation loss between student and teacher predictions.
+        Uses KL divergence with temperature scaling.
+        """
+        student_logits = student_outputs["pred_logits"]  # [B, N_queries, C+1]
+        teacher_logits = teacher_outputs["pred_logits"]  # [B, N_queries, C+1]
+        
+        student_prob = F.softmax(student_logits / self.temperature, dim=-1)
+        teacher_prob = F.softmax(teacher_logits / self.temperature, dim=-1)
+        
+        # KL divergence loss
+        kl_loss = F.kl_div(
+            student_prob.log(), 
+            teacher_prob, 
+            reduction='none'
+        ).sum(dim=-1).mean()
+        
+        # Scale by temperature^2 as per standard KL divergence
+        kl_loss = kl_loss * (self.temperature ** 2)
+        
+        # Also add mask distillation if available
+        if "pred_masks" in student_outputs and "pred_masks" in teacher_outputs:
+            student_masks = student_outputs["pred_masks"]  # [B, N_queries, H, W]
+            teacher_masks = teacher_outputs["pred_masks"].detach() # no gradient needed for teacher masks
+            
+            # Use L2 loss for mask distillation
+            mask_loss = F.mse_loss(student_masks, teacher_masks)
+            
+            return {"loss_distill_cls": kl_loss * self.distill_weight, 
+                    "loss_distill_mask": mask_loss * self.distill_weight}
+        
+        return {"loss_distill_cls": kl_loss * self.distill_weight}
+    
+    def forward(self, batched_inputs):
+        if self.training:
+            self.teacher_model.eval()
+            self.student_model.train()
+            
+            # Prepare inputs
+            images = [x["image"].to(self.device) for x in batched_inputs]
+            images = [(x - self.student_model.pixel_mean) / self.student_model.pixel_std for x in images]
+            images = ImageList.from_tensors(images, self.student_model.size_divisibility)
+            
+            # Get teacher predictions (no gradient needed for teacher model)
+            with torch.no_grad():
+                teacher_features = self.teacher_model.backbone(images.tensor)
+                teacher_outputs = self.teacher_model.sem_seg_head(teacher_features)
+            
+            # Get student predictions, train only with student model
+            student_features = self.student_model.backbone(images.tensor)
+            student_outputs = self.student_model.sem_seg_head(student_features)
+            
+            # Prepare targets for standard loss computation
+            if "instances" in batched_inputs[0]:
+                gt_instances = [x["instances"].to(self.device) for x in batched_inputs]
+                targets = self.student_model.prepare_targets(gt_instances, images)
+            else:
+                targets = None
+            
+            # Compute standard losses for student model (CrossEntropyLoss)
+            losses = self.student_model.criterion(student_outputs, targets)
+            
+            # Apply loss weights for student model
+            for k in list(losses.keys()):
+                if k in self.student_model.criterion.weight_dict:
+                    losses[k] *= self.student_model.criterion.weight_dict[k]
+                else:
+                    losses.pop(k)
+            
+            # Add distillation losses for student model
+            distill_losses = self.compute_distillation_loss(student_outputs, teacher_outputs)
+            losses.update(distill_losses)
+            
+            return losses
+        # inference mode
+        else: 
+            self.student_model.eval()
+            with torch.no_grad():
+                predictions = self.student_model(batched_inputs)
+            return predictions
