@@ -14,7 +14,7 @@ from detectron2.data import MetadataCatalog
 from detectron2.modeling import META_ARCH_REGISTRY, build_backbone, build_sem_seg_head
 from detectron2.modeling.backbone import Backbone
 from detectron2.modeling.postprocessing import sem_seg_postprocess
-from detectron2.structures import Boxes, ImageList, Instances, BitMasks
+from detectron2.structures import Boxes, ImageList, Instances, BitMasks, PolygonMasks
 from detectron2.utils.memory import retry_if_cuda_oom
 import torch.utils.checkpoint as cp
 from .modeling.meta_arch.mask_adapter_head import build_mask_adapter
@@ -484,12 +484,25 @@ class FCCLIP(nn.Module):
 
         for targets_per_image in targets:
             gt_masks = targets_per_image.gt_masks
+            # Handle both BitMasks and PolygonMasks
             if isinstance(gt_masks, BitMasks):
-                gt_masks = gt_masks.tensor
-            valid_mask_indices = [i for i, mask in enumerate(gt_masks) if mask.sum() > min_mask_area]  # 筛选掉面积小于阈值的掩码
+                gt_masks_tensor = gt_masks.tensor
+            elif isinstance(gt_masks, PolygonMasks):
+                # Convert PolygonMasks to tensor format
+                gt_masks_tensor = gt_masks.to_bitmasks(
+                    boxes=targets_per_image.gt_boxes, 
+                    height=targets_per_image.image_size[0], 
+                    width=targets_per_image.image_size[1]
+                ).tensor
+            else:
+                # If it's already a tensor or list of tensors
+                gt_masks_tensor = torch.stack([torch.from_numpy(m) if isinstance(m, np.ndarray) else m for m in gt_masks])
+            
+            # filter out masks with area less than min_mask_area
+            valid_mask_indices = [i for i in range(len(gt_masks_tensor)) if gt_masks_tensor[i].sum() > min_mask_area]
 
             if len(valid_mask_indices) > 0:
-                valid_gt_masks = gt_masks[valid_mask_indices]
+                valid_gt_masks = gt_masks_tensor[valid_mask_indices]
                 valid_gt_classes = targets_per_image.gt_classes[valid_mask_indices]
 
                 padded_masks = torch.zeros((valid_gt_masks.shape[0], h_pad, w_pad), dtype=valid_gt_masks.dtype, device=valid_gt_masks.device)
@@ -501,8 +514,8 @@ class FCCLIP(nn.Module):
                     }
                 )
 
-                total_masks = torch.zeros((num_masks, h_pad, w_pad), dtype=gt_masks.dtype, device=gt_masks.device)
-                selected_labels = torch.full((num_masks,), -1, dtype=valid_gt_classes.dtype, device=gt_masks.device)
+                total_masks = torch.zeros((num_masks, h_pad, w_pad), dtype=valid_gt_masks.dtype, device=valid_gt_masks.device)
+                selected_labels = torch.full((num_masks,), -1, dtype=valid_gt_classes.dtype, device=valid_gt_masks.device)
 
                 if valid_gt_masks.shape[0] > num_masks:
                     selected_indices = torch.randperm(valid_gt_masks.shape[0])[:num_masks]
@@ -515,14 +528,16 @@ class FCCLIP(nn.Module):
                         selected_labels[idx] = valid_gt_classes[idx]
                     
                     for idx in range(valid_gt_masks.shape[0], num_masks):
-                        total_masks[idx] = torch.zeros((h_pad, w_pad), dtype=gt_masks.dtype, device=gt_masks.device)
+                        total_masks[idx] = torch.zeros((h_pad, w_pad), dtype=valid_gt_masks.dtype, device=valid_gt_masks.device)
                         selected_labels[idx] = -1
             else:
-                total_masks = torch.zeros((num_masks, h_pad, w_pad), dtype=gt_masks.dtype, device=gt_masks.device)
-                selected_labels = torch.full((num_masks,), -1, dtype=torch.long, device=gt_masks.device)
+                # Create proper device for empty masks
+                device = targets_per_image.gt_classes.device if hasattr(targets_per_image, 'gt_classes') else self.device
+                total_masks = torch.zeros((num_masks, h_pad, w_pad), dtype=torch.float32, device=device)
+                selected_labels = torch.full((num_masks,), -1, dtype=torch.long, device=device)
                 
-                padded_masks = torch.zeros((0, h_pad, w_pad), dtype=gt_masks.dtype, device=gt_masks.device)
-                valid_gt_classes = torch.zeros((0), device=gt_masks.device)
+                padded_masks = torch.zeros((0, h_pad, w_pad), dtype=torch.float32, device=device)
+                valid_gt_classes = torch.zeros((0,), dtype=torch.long, device=device)
                 new_targets.append(
                     {
                         "labels": valid_gt_classes,

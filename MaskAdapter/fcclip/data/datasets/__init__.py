@@ -27,5 +27,6 @@ from . import (
     register_coco_instance,
     register_ade20k_instance,
     register_coco_stuff_164k,
-    openseg_classes
+    openseg_classes,
+    register_ceiling,
 )
