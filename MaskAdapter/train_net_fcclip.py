@@ -16,6 +16,20 @@ try:
 except:
     pass
 
+# suppress the annoying warning from detectron2
+import warnings
+warnings.filterwarnings(
+    "ignore",
+    category=FutureWarning,
+    message=r"`torch\.cuda\.amp\.autocast"   
+)
+# suppress torch.load weights_only warning
+warnings.filterwarnings(
+    "ignore",
+    category=FutureWarning,
+    message=r"You are using `torch\.load` with `weights_only=False`"
+)
+
 import copy
 import itertools
 import logging
@@ -29,7 +43,7 @@ import torch
 import detectron2.utils.comm as comm
 from detectron2.checkpoint import DetectionCheckpointer
 from detectron2.config import get_cfg
-from detectron2.data import MetadataCatalog, build_detection_train_loader
+from detectron2.data import MetadataCatalog, build_detection_train_loader, DatasetMapper
 from detectron2.engine import (
     DefaultTrainer,
     default_argument_parser,
@@ -172,6 +186,9 @@ class Trainer(DefaultTrainer):
         # coco panoptic segmentation lsj new baseline
         elif cfg.INPUT.DATASET_MAPPER_NAME == "coco_panoptic_lsj":
             mapper = COCOPanopticNewBaselineDatasetMapper(cfg, True)
+            return build_detection_train_loader(cfg, mapper=mapper)
+        elif cfg.INPUT.DATASET_MAPPER_NAME == "ceiling_painting":
+            mapper = DatasetMapper(cfg, True)
             return build_detection_train_loader(cfg, mapper=mapper)
         else:
             mapper = None

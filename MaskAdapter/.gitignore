@@ -163,5 +163,4 @@ cython_debug/
 
 
 /pretrained_weights
-/datasets
 /output

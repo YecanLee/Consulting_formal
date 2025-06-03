@@ -16,6 +16,20 @@ try:
 except:
     pass
 
+# suppress the annoying warning from detectron2
+import warnings
+warnings.filterwarnings(
+    "ignore",
+    category=FutureWarning,
+    message=r"`torch\.cuda\.amp\.autocast"   
+)
+# suppress torch.load weights_only warning
+warnings.filterwarnings(
+    "ignore",
+    category=FutureWarning,
+    message=r"You are using `torch\.load` with `weights_only=False`"
+)
+
 import copy
 import itertools
 import logging
