@@ -1,0 +1,46 @@
+_BASE_: ../coco-stuff-164k-156/zero_shot_maskformer_R50_bs32_60k.yaml
+
+# Use the semantic segmentation dataset
+DATASETS:
+  TRAIN: ("ceiling_sem_seg_train",)
+  TEST: ("ceiling_sem_seg_train",)  # Using train for testing temporarily
+  
+INPUT:
+  # Use the semantic segmentation mapper
+  DATASET_MAPPER_NAME: "mask_former_semantic"
+  
+  # Adjust image size if needed
+  MIN_SIZE_TRAIN: (512,)
+  MAX_SIZE_TRAIN: 1024
+  MIN_SIZE_TEST: 512
+  MAX_SIZE_TEST: 1024
+  
+  # Data augmentation
+  CROP:
+    ENABLED: True
+    TYPE: "absolute"
+    SIZE: (512, 512)
+    SINGLE_CATEGORY_MAX_AREA: 1.0
+  COLOR_AUG_SSD: True
+  SIZE_DIVISIBILITY: 512
+
+# Model configuration
+MODEL:
+  SEM_SEG_HEAD:
+    NUM_CLASSES: 4  # Adjust based on your actual number of classes
+  MASK_FORMER:
+    NUM_OBJECT_QUERIES: 100
+    
+# Solver configuration for small dataset
+SOLVER:
+  IMS_PER_BATCH: 8  # Reduce if GPU memory is limited
+  BASE_LR: 0.0001
+  MAX_ITER: 5000  # Adjust based on dataset size
+  CHECKPOINT_PERIOD: 1000
+  
+# Test configuration
+TEST:
+  EVAL_PERIOD: 500
+  
+# Output directory
+OUTPUT_DIR: "./output/ceiling_semantic_segmentation" 

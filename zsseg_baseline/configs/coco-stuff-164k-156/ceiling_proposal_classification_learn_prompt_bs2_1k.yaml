@@ -1,0 +1,27 @@
+_BASE_: ../coco-stuff-164k-171/maskformer_R50_bs32_60k.yaml
+
+DATASETS:
+  TRAIN: ("ceiling_sem_seg_train",)
+  TEST: ("ceiling_sem_seg_val",)
+
+INPUT:
+  MIN_SIZE_TRAIN: (640,640)
+  MIN_SIZE_TEST: 640
+  MAX_SIZE_TEST: 1280
+  DATASET_MAPPER_NAME: "mask_former_semantic"
+
+SOLVER:
+  IMS_PER_BATCH: 32
+  TEST_IMS_PER_BATCH: 4
+  MAX_ITER: 1000
+  CHECKPOINT_PERIOD: 1000
+TEST:
+  EVAL_PERIOD: 1000
+
+MODEL:
+  SEM_SEG_HEAD:
+    NUM_CLASSES: 4
+  MASK_FORMER:
+    NUM_OBJECT_QUERIES: 100
+
+OUTPUT_DIR: ".output/ceiling_semantic_segmentation"
