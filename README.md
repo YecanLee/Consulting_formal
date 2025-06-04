@@ -132,6 +132,33 @@ python train_net.py  \
 SOLVER.IMS_PER_BATCH 6 \ # tested on 1 GPU with 24GB vram
 SOLVER.BASE_LR 0.00006 \
 MODEL.WEIGHTS pretrained_weights/fcclip_cocopan.pth
+```   
+
+### ⭐GroupViT
+Since the `GroupViT` repo is trained with multiple `text-to-image` pairs datasets, we will only include the inference command in the `GroupViT` folder right now at this moment, the training command will come soon, stay tuned! 
+```bash
+# GroupViT inference command
+./tools/dist_launch.sh main_seg.py \
+configs/group_vit_gcc_ceiling.yml 1 \
+--resume \
+pretrained_weights/group_vit_gcc_yfcc_30e-879422e0.pth \
+--opts evaluate.seg.cfg=segmentation/configs/_base_/datasets/ceiling_painting.py
+```   
+
+### ⭐maskclippp
+To finetune the pretrained `MaskCLIP++` model with our customized ceiling painting dataset, please run the following command:
+```bash
+python train_net.py \
+--config-file configs/mask_clippp/train_ceiling_mask_clippp.yaml \
+--num-gpus 1 \
+```
+
+### ⭐maskclip
+To finetune the pretrained `MaskCLIP` model with our customized ceiling painting dataset, please run the following command:
+```bash
+python train_net.py \
+--num-gpus 1 \
+--config-file configs/coco/ceiling_maskformer2_R50_bs2_10ep.yaml
 ```
 
 ### ⭐MAFT-Plus
@@ -143,16 +170,99 @@ python train_net.py \
 MODEL.WEIGHTS pretrained_weights/maftp_l.pth
 ```
 
-### ⭐GroupViT
-Since the `GroupViT` repo is trained with multiple `text-to-image` pairs datasets, we will only include the inference command in the `GroupViT` folder right now at this moment, the training command will come soon, stay tuned! 
+### ⭐MasQCLIP
+To finetune the pretrained `MasQCLIP` model with our customized ceiling painting dataset, please run the following command:
 ```bash
-# GroupViT inference command
-./tools/dist_launch.sh main_seg.py \
-configs/group_vit_gcc_ceiling.yml 1 \
---resume \
-pretrained_weights/group_vit_gcc_yfcc_30e-879422e0.pth \
---opts evaluate.seg.cfg=segmentation/configs/_base_/datasets/ceiling_painting.py
+python train_net.py \
+--num-gpus 1 \
+--config-file configs/base-novel/coco-semantic/student_ceiling_R50_30k_base48.yaml \
+OUTPUT_DIR output \
+MODEL.WEIGHTS pretrained_weights/cross_dataset.pth
 ```
+
+### ⭐MaskAdapter
+The MaskAdapter model has a mixed-masks training phase and another finetuning phase, we provide two scripts: `train_net_fcclip.py` and `train_net_maftp.py`, which train the mask-adapter for FC-CLIP and MAFTP models, respectively. These two models use different backbones (CLIP) and training source data. 
+
+To train the MaskAdapter model for FC-CLIP, please run the following command:
+```bash
+python train_net_fcclip.py \
+--num-gpus 1 \
+--config-file configs/mixed-mask-training/fc-clip/fcclip/fcclip_convnext_large_train_ceiling.yaml \
+MODEL.WEIGHTS pretrained_weights/fcclip_cocopan.pth
+```
+
+To train the MaskAdapter model for MAFTP, please run the following command:
+```bash
+python train_net_maftp.py \
+--num-gpus 1   \
+--config-file configs/mixed-mask-training/maftp/semantic/train_semantic_large_train_ceiling.yaml  \
+MODEL.WEIGHTS pretrained_weights/maftp_l.pth
+```
+
+To finetune the MaskAdapter itself, please run the following command:
+```bash
+python train_net.py \
+--config-file configs/mixed-mask-training/fc-clip/fcclip/fcclip_convnext_large_train_ceiling.yaml \
+MODEL.WEIGHTS pretrained_weights/fcclip_cocopan.pth
+```
+
+### ⭐SegCLIP
+To evaluate the SegCLIP model based on pretrained weights, please run the following command:
+```bash
+CUDA_VISIBLE_DEVICES=0 \
+python -m torch.distributed.launch \
+--nproc_per_node=1 \
+main_seg_zeroshot.py \
+--dataset ceiling_painting \
+--init_model checkpoints/segclip.bin 
+```
+
+### ⭐SCAN 
+To finetune the SCAN model, please run the following command:
+```bash
+python train_net.py  \
+--num-gpu 1 \
+--config-file configs/scan_vitL_ceiling.yaml
+```
+
+### ⭐sed
+To finetune the sed model, please run the following command:
+```bash
+python train_net.py \
+--config configs/convnextL_768_ceiling.yaml \
+--num-gpus 1 \
+--dist-url "auto" \
+OUTPUT_DIR output \
+MODEL.WEIGHTS pretrained_weights/sed_model_large.pth
+```
+
+### ⭐ov-seg 
+To finetune the ov-seg model, please run the following command:
+```bash
+python train_net.py \
+--num-gpu 1 \
+--config-file configs/ovseg_swinB_vitL_bs2_ceiling.yaml \
+MODEL.WEIGHTS pretrained_weights/ovseg_swinbase_vitL14_ft_mpt.pth
+```
+
+### ⭐zsseg_baseline
+To finetune the zsseg_baseline model, please run the following command:
+```bash
+python train_net.py \
+--config-file configs/coco-stuff-164k-156/ceiling_proposal_classification_learn_prompt_bs2_1k.yaml \
+--num-gpus 1
+```
+
+### ⭐Zegformer
+To finetune the zegformer model, please run the following command:
+```bash
+python train_net.py   \
+--config-file configs/coco-stuff/zegformer_R101_bs1_60k_vit16_ceiling.yaml   \
+--num-gpus 1 \
+SOLVER.IMS_PER_BATCH 2 \
+SOLVER.BASE_LR 0.0001
+```
+
 
 ## 🔥Demo Command Encyclopedia
 
@@ -183,12 +293,16 @@ python demo.py --config-file configs/ovseg_swinB_vitL_ceiling_demo.yaml \
 
 There is a numpy version issue in the original repo, please pin to our version to use the demo.
 
+## Fancy Ideas Part Usage Guidance
+To use the `DragGAN` GUI on our own ceiling painting dataset instead of the default images from `DragGAN` repo, you need to fist perform GAN inversion by using one of the available tools. We used `PTI` to perform the GAN inversion. Please refer to the `Fancy_Ideas/PTI/` for more details.
+
 ## 🚧In construction and Alert
 Some of the models here require more than one train scripts, this section is mainly used to record which repo requires more than one train scripts.
 
 The `MasQCLIP` requires two Progressive Distillation traning and one Mask-Q Tuning, they all used the `train_net.py` script, but with different config files.
 
-The `MaskQCLIP` was trained with only two classes, `backdground` and `non-background`. This means that the model may have a different class_emb shape compared to our customized ceiling painting dataset. If we only have "mural" as the only class, this is fine. Otherwise, we need to modify the `class_emb` layer in the `mask_distill.py` file `MaskFormer` class to match our dataset.
+~~The `MasQCLIP` was trained with only two classes, `backdground` and `non-background`. This means that the model may have a different class_emb shape compared to our customized ceiling painting dataset. If we only have "mural" as the only class, this is fine. Otherwise, we need to modify the `class_emb` layer in the `mask_distill.py` file `MaskFormer` class to match our dataset.~~ 
+The `MasQCLIP` was built upon the instance segmentation task, the original source codes were using input["instances"] to get the ground truth masks. To use the model for our custom ceiling painting segmentation dataset, we offered a modified segmentation model in our codes. Please refer to the `MasQCLIP/masqclip/mask_distill.py` file for more details.
 
 The mmcv-full from the GroupViT and SegCLIP are only compiled with numpy version smaller than 2.0.0, otherwise the installation of the mmcv-full will fail.
 
@@ -372,3 +486,11 @@ MODEL:
     NUM_CLASSES: 4 # your dataset's class number
 ```
 
+
+
+### Special format requirements related to the `detectron2` package
+The `detectron2` package does not really offer a good way to directly register the semantic segmentation dataset, the `register_coco_instances` function is mainly used to register the instance segmentation dataset if the dataset itself follows the `COCO` format.
+
+We need to adjust the dataset first to register the semantic segmentation dataset if the model strictly requires to work only with semantic segmentation dataset. The semantic segmentation dataset we got from the `Roboflow` follows the `COCO` format, however, this means that we only have unannotated images with one json meta file inside the folder. Some models like `zsseg_baseline` does not compile with this way of annotation.
+
+To solve this issue, we need to register the dataset with images and annotations in two subfolders, this is similar to the way for registering dataset in the `mmsegmentation` package.You can check the `register_ceiling_semantic_datasets` function in the `zsseg_baseline/mask_former/data/datasets/register_ceiling_semantic.py` file for more details.You can modify based on this file later for other use cases.
