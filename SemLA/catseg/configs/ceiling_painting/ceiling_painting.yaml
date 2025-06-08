@@ -1,0 +1,24 @@
+_BASE_: ../base.yaml
+MODEL:
+  SEM_SEG_HEAD:
+    NUM_CLASSES: 4
+    TRAIN_CLASS_JSON: "../../SAN/san/data/ceiling_painting_segmentation/train/json_annotation_train.json"
+    TEST_CLASS_JSON: "../../SAN/san/data/ceiling_painting_segmentation/valid/json_annotation_val.json"
+  MASK_ON: True
+DATASETS:
+  TRAIN: ("ceiling_easy_train",)
+  TEST: ("ceiling_easy_val",)
+SOLVER:
+  MAX_ITER: 1000
+  CHECKPOINT_PERIOD: 1000
+  IMS_PER_BATCH: 2  
+DATALOADER:
+  NUM_WORKERS: 4
+INPUT:
+  MIN_SIZE_TRAIN: (960, )
+  CROP:
+    ENABLED: False
+    TYPE: "absolute"
+    SIZE: (960, 960)
+  SIZE_DIVISIBILITY: 960
+  DATASET_MAPPER_NAME: "ceiling_painting_dataset"
