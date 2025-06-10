@@ -1,0 +1,27 @@
+/home/ra78lof/anaconda3/envs/fcclip/lib/python3.11/site-packages/torch/functional.py:513: UserWarning: torch.meshgrid: in an upcoming release, it will be required to pass the indexing argument. (Triggered internally at ../aten/src/ATen/native/TensorShape.cpp:3609.)
+  return _VF.meshgrid(tensors, **kwargs)  # type: ignore[attr-defined]
+Traceback (most recent call last):
+  File "/home/ra78lof/consulting_pro/OneFormer/train_net.py", line 460, in <module>
+    launch(
+  File "/home/ra78lof/consulting_pro/detectron2/detectron2/engine/launch.py", line 84, in launch
+    main_func(*args)
+  File "/home/ra78lof/consulting_pro/OneFormer/train_net.py", line 448, in main
+    trainer = Trainer(cfg)
+              ^^^^^^^^^^^^
+  File "/home/ra78lof/consulting_pro/detectron2/detectron2/engine/defaults.py", line 410, in __init__
+    model = self.build_model(cfg)
+            ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ra78lof/consulting_pro/detectron2/detectron2/engine/defaults.py", line 550, in build_model
+    model = build_model(cfg)
+            ^^^^^^^^^^^^^^^^
+  File "/home/ra78lof/consulting_pro/detectron2/detectron2/modeling/meta_arch/build.py", line 22, in build_model
+    model = META_ARCH_REGISTRY.get(meta_arch)(cfg)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ra78lof/consulting_pro/detectron2/detectron2/config/config.py", line 190, in wrapped
+    init_func(self, **explicit_args)
+  File "/home/ra78lof/consulting_pro/OneFormer/oneformer/oneformer_model.py", line 117, in __init__
+    self.thing_indices = [k for k in self.metadata.thing_dataset_id_to_contiguous_id.keys()]
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ra78lof/consulting_pro/detectron2/detectron2/data/catalog.py", line 126, in __getattr__
+    raise AttributeError(
+AttributeError: Attribute 'thing_dataset_id_to_contiguous_id' does not exist in the metadata of dataset 'ceiling_easy_train'. Available keys are dict_keys(['name', 'evaluator_type', 'stuff_classes', 'ignore_label']).

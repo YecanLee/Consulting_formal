@@ -1,0 +1,200 @@
+2025-06-10 14:01:40,760 INFO    StreamThr :1896869 [internal.py:wandb_internal():86] W&B internal server running at pid: 1896869, started at: 2025-06-10 14:01:40.759999
+2025-06-10 14:01:40,761 DEBUG   HandlerThread:1896869 [handler.py:handle_request():146] handle_request: status
+2025-06-10 14:01:40,762 INFO    WriterThread:1896869 [datastore.py:open_for_write():87] open: /home/ra78lof/consulting_pro/OneFormer/wandb/run-20250610_140140-4j1pm38a/run-4j1pm38a.wandb
+2025-06-10 14:01:40,762 DEBUG   SenderThread:1896869 [sender.py:send():379] send: header
+2025-06-10 14:01:40,764 DEBUG   SenderThread:1896869 [sender.py:send():379] send: run
+2025-06-10 14:01:41,296 INFO    SenderThread:1896869 [dir_watcher.py:__init__():211] watching files in: /home/ra78lof/consulting_pro/OneFormer/wandb/run-20250610_140140-4j1pm38a/files
+2025-06-10 14:01:41,296 INFO    SenderThread:1896869 [sender.py:_start_run_threads():1124] run started: 4j1pm38a with start time 1749564100.759771
+2025-06-10 14:01:41,301 DEBUG   HandlerThread:1896869 [handler.py:handle_request():146] handle_request: check_version
+2025-06-10 14:01:41,302 DEBUG   SenderThread:1896869 [sender.py:send_request():406] send_request: check_version
+2025-06-10 14:01:41,364 DEBUG   HandlerThread:1896869 [handler.py:handle_request():146] handle_request: run_start
+2025-06-10 14:01:41,372 DEBUG   HandlerThread:1896869 [system_info.py:__init__():26] System info init
+2025-06-10 14:01:41,372 DEBUG   HandlerThread:1896869 [system_info.py:__init__():41] System info init done
+2025-06-10 14:01:41,372 INFO    HandlerThread:1896869 [system_monitor.py:start():194] Starting system monitor
+2025-06-10 14:01:41,372 INFO    SystemMonitor:1896869 [system_monitor.py:_start():158] Starting system asset monitoring threads
+2025-06-10 14:01:41,372 INFO    HandlerThread:1896869 [system_monitor.py:probe():214] Collecting system info
+2025-06-10 14:01:41,372 INFO    SystemMonitor:1896869 [interfaces.py:start():190] Started cpu monitoring
+2025-06-10 14:01:41,373 INFO    SystemMonitor:1896869 [interfaces.py:start():190] Started disk monitoring
+2025-06-10 14:01:41,374 INFO    SystemMonitor:1896869 [interfaces.py:start():190] Started gpu monitoring
+2025-06-10 14:01:41,374 INFO    SystemMonitor:1896869 [interfaces.py:start():190] Started memory monitoring
+2025-06-10 14:01:41,374 INFO    SystemMonitor:1896869 [interfaces.py:start():190] Started network monitoring
+2025-06-10 14:01:41,382 DEBUG   HandlerThread:1896869 [system_info.py:probe():150] Probing system
+2025-06-10 14:01:41,383 DEBUG   HandlerThread:1896869 [system_info.py:_probe_git():135] Probing git
+2025-06-10 14:01:41,388 DEBUG   HandlerThread:1896869 [system_info.py:_probe_git():143] Probing git done
+2025-06-10 14:01:41,388 DEBUG   HandlerThread:1896869 [system_info.py:probe():198] Probing system done
+2025-06-10 14:01:41,388 DEBUG   HandlerThread:1896869 [system_monitor.py:probe():223] {'os': 'Linux-6.5.0-44-generic-x86_64-with-glibc2.38', 'python': '3.11.0', 'heartbeatAt': '2025-06-10T14:01:41.382555', 'startedAt': '2025-06-10T14:01:40.757611', 'docker': None, 'cuda': None, 'args': ('--num-gpus', '1', '--config-file', 'configs/ceiling_painting/swin/oneformer_swin_large_bs2_10ep.yaml', 'OUTPUT_DIR', 'outputs/ceiling_swin_large', 'WANDB.NAME', 'ceiling_swin_large', 'MODEL.WEIGHTS', 'pretrained_weights/1280x1280_250_16_swin_l_oneformer_ade20k_160k.pth'), 'state': 'running', 'program': '/home/ra78lof/consulting_pro/OneFormer/train_net.py', 'codePathLocal': 'train_net.py', 'codePath': 'train_net.py', 'git': {'remote': 'https://github.com/SHI-Labs/OneFormer', 'commit': '4962ef6a96ffb76a76771bfa3e8b3587f209752b'}, 'email': 'yecanlee@yahoo.com', 'root': '/home/ra78lof/consulting_pro/OneFormer', 'host': 'LMMISTA-biostat', 'username': 'ra78lof', 'executable': '/home/ra78lof/anaconda3/envs/fcclip/bin/python', 'cpu_count': 16, 'cpu_count_logical': 32, 'cpu_freq': {'current': 3085.9179062499998, 'min': 2200.0, 'max': 3400.0}, 'cpu_freq_per_core': [{'current': 2200.0, 'min': 2200.0, 'max': 3400.0}, {'current': 2200.0, 'min': 2200.0, 'max': 3400.0}, {'current': 2200.0, 'min': 2200.0, 'max': 3400.0}, {'current': 3683.911, 'min': 2200.0, 'max': 3400.0}, {'current': 3721.846, 'min': 2200.0, 'max': 3400.0}, {'current': 3605.514, 'min': 2200.0, 'max': 3400.0}, {'current': 3400.0, 'min': 2200.0, 'max': 3400.0}, {'current': 2200.0, 'min': 2200.0, 'max': 3400.0}, {'current': 3783.463, 'min': 2200.0, 'max': 3400.0}, {'current': 2200.0, 'min': 2200.0, 'max': 3400.0}, {'current': 2200.0, 'min': 2200.0, 'max': 3400.0}, {'current': 2200.0, 'min': 2200.0, 'max': 3400.0}, {'current': 3800.644, 'min': 2200.0, 'max': 3400.0}, {'current': 4743.362, 'min': 2200.0, 'max': 3400.0}, {'current': 4006.758, 'min': 2200.0, 'max': 3400.0}, {'current': 3866.451, 'min': 2200.0, 'max': 3400.0}, {'current': 4302.68, 'min': 2200.0, 'max': 3400.0}, {'current': 3081.41, 'min': 2200.0, 'max': 3400.0}, {'current': 4079.84, 'min': 2200.0, 'max': 3400.0}, {'current': 3720.758, 'min': 2200.0, 'max': 3400.0}, {'current': 2200.0, 'min': 2200.0, 'max': 3400.0}, {'current': 3740.055, 'min': 2200.0, 'max': 3400.0}, {'current': 3720.348, 'min': 2200.0, 'max': 3400.0}, {'current': 2800.0, 'min': 2200.0, 'max': 3400.0}, {'current': 2200.0, 'min': 2200.0, 'max': 3400.0}, {'current': 2200.0, 'min': 2200.0, 'max': 3400.0}, {'current': 2200.0, 'min': 2200.0, 'max': 3400.0}, {'current': 2200.0, 'min': 2200.0, 'max': 3400.0}, {'current': 2200.0, 'min': 2200.0, 'max': 3400.0}, {'current': 3400.0, 'min': 2200.0, 'max': 3400.0}, {'current': 4693.896, 'min': 2200.0, 'max': 3400.0}, {'current': 4187.14, 'min': 2200.0, 'max': 3400.0}], 'disk': {'/': {'total': 1759.3491401672363, 'used': 799.0754432678223}}, 'gpu': 'NVIDIA GeForce RTX 4090', 'gpu_count': 1, 'gpu_devices': [{'name': 'NVIDIA GeForce RTX 4090', 'memory_total': 25757220864}], 'memory': {'total': 62.70907211303711}}
+2025-06-10 14:01:41,388 INFO    HandlerThread:1896869 [system_monitor.py:probe():224] Finished collecting system info
+2025-06-10 14:01:41,388 INFO    HandlerThread:1896869 [system_monitor.py:probe():227] Publishing system info
+2025-06-10 14:01:41,388 DEBUG   HandlerThread:1896869 [system_info.py:_save_conda():207] Saving list of conda packages installed into the current environment
+2025-06-10 14:01:42,296 INFO    Thread-12 :1896869 [dir_watcher.py:_on_file_created():271] file/dir created: /home/ra78lof/consulting_pro/OneFormer/wandb/run-20250610_140140-4j1pm38a/files/conda-environment.yaml
+2025-06-10 14:01:42,854 DEBUG   HandlerThread:1896869 [system_info.py:_save_conda():222] Saving conda packages done
+2025-06-10 14:01:42,854 DEBUG   HandlerThread:1896869 [system_info.py:_save_code():44] Saving code
+2025-06-10 14:01:42,857 DEBUG   HandlerThread:1896869 [system_info.py:_save_code():65] Saving code done
+2025-06-10 14:01:42,857 DEBUG   HandlerThread:1896869 [system_info.py:_save_patches():82] Saving git patches
+2025-06-10 14:01:42,922 DEBUG   HandlerThread:1896869 [system_info.py:_save_patches():124] Saving git patches done
+2025-06-10 14:01:42,922 INFO    HandlerThread:1896869 [system_monitor.py:probe():229] Finished publishing system info
+2025-06-10 14:01:42,925 DEBUG   SenderThread:1896869 [sender.py:send():379] send: files
+2025-06-10 14:01:42,925 INFO    SenderThread:1896869 [sender.py:_save_file():1390] saving file wandb-metadata.json with policy now
+2025-06-10 14:01:42,925 INFO    SenderThread:1896869 [sender.py:_save_file():1390] saving file code/train_net.py with policy now
+2025-06-10 14:01:42,925 INFO    SenderThread:1896869 [sender.py:_save_file():1390] saving file diff.patch with policy now
+2025-06-10 14:01:42,978 DEBUG   HandlerThread:1896869 [handler.py:handle_request():146] handle_request: python_packages
+2025-06-10 14:01:42,979 DEBUG   SenderThread:1896869 [sender.py:send_request():406] send_request: python_packages
+2025-06-10 14:01:42,979 DEBUG   SenderThread:1896869 [sender.py:send():379] send: telemetry
+2025-06-10 14:01:42,980 DEBUG   HandlerThread:1896869 [handler.py:handle_request():146] handle_request: stop_status
+2025-06-10 14:01:42,980 DEBUG   SenderThread:1896869 [sender.py:send_request():406] send_request: stop_status
+2025-06-10 14:01:42,981 DEBUG   HandlerThread:1896869 [handler.py:handle_request():146] handle_request: internal_messages
+2025-06-10 14:01:43,296 INFO    Thread-12 :1896869 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/ra78lof/consulting_pro/OneFormer/wandb/run-20250610_140140-4j1pm38a/files/conda-environment.yaml
+2025-06-10 14:01:43,296 INFO    Thread-12 :1896869 [dir_watcher.py:_on_file_created():271] file/dir created: /home/ra78lof/consulting_pro/OneFormer/wandb/run-20250610_140140-4j1pm38a/files/diff.patch
+2025-06-10 14:01:43,296 INFO    Thread-12 :1896869 [dir_watcher.py:_on_file_created():271] file/dir created: /home/ra78lof/consulting_pro/OneFormer/wandb/run-20250610_140140-4j1pm38a/files/output.log
+2025-06-10 14:01:43,296 INFO    Thread-12 :1896869 [dir_watcher.py:_on_file_created():271] file/dir created: /home/ra78lof/consulting_pro/OneFormer/wandb/run-20250610_140140-4j1pm38a/files/wandb-metadata.json
+2025-06-10 14:01:43,296 INFO    Thread-12 :1896869 [dir_watcher.py:_on_file_created():271] file/dir created: /home/ra78lof/consulting_pro/OneFormer/wandb/run-20250610_140140-4j1pm38a/files/code/train_net.py
+2025-06-10 14:01:43,297 INFO    Thread-12 :1896869 [dir_watcher.py:_on_file_created():271] file/dir created: /home/ra78lof/consulting_pro/OneFormer/wandb/run-20250610_140140-4j1pm38a/files/requirements.txt
+2025-06-10 14:01:43,297 INFO    Thread-12 :1896869 [dir_watcher.py:_on_file_created():271] file/dir created: /home/ra78lof/consulting_pro/OneFormer/wandb/run-20250610_140140-4j1pm38a/files/code
+2025-06-10 14:01:43,490 INFO    wandb-upload_2:1896869 [upload_job.py:push():131] Uploaded file /tmp/tmp_onkm8__wandb/uaen5z0k-diff.patch
+2025-06-10 14:01:43,510 INFO    wandb-upload_0:1896869 [upload_job.py:push():131] Uploaded file /tmp/tmp_onkm8__wandb/uo4bmrk6-wandb-metadata.json
+2025-06-10 14:01:43,637 INFO    wandb-upload_1:1896869 [upload_job.py:push():131] Uploaded file /tmp/tmp_onkm8__wandb/z0t60vhc-code/train_net.py
+2025-06-10 14:01:45,297 INFO    Thread-12 :1896869 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/ra78lof/consulting_pro/OneFormer/wandb/run-20250610_140140-4j1pm38a/files/output.log
+2025-06-10 14:01:46,251 DEBUG   HandlerThread:1896869 [handler.py:handle_request():146] handle_request: status_report
+2025-06-10 14:01:47,298 INFO    Thread-12 :1896869 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/ra78lof/consulting_pro/OneFormer/wandb/run-20250610_140140-4j1pm38a/files/output.log
+2025-06-10 14:01:49,450 DEBUG   SenderThread:1896869 [sender.py:send():379] send: telemetry
+2025-06-10 14:01:49,450 DEBUG   SenderThread:1896869 [sender.py:send():379] send: exit
+2025-06-10 14:01:49,450 INFO    SenderThread:1896869 [sender.py:send_exit():586] handling exit code: 0
+2025-06-10 14:01:49,451 INFO    SenderThread:1896869 [sender.py:send_exit():588] handling runtime: 8
+2025-06-10 14:01:49,451 INFO    SenderThread:1896869 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2025-06-10 14:01:49,451 INFO    SenderThread:1896869 [sender.py:send_exit():594] send defer
+2025-06-10 14:01:49,451 DEBUG   HandlerThread:1896869 [handler.py:handle_request():146] handle_request: defer
+2025-06-10 14:01:49,451 INFO    HandlerThread:1896869 [handler.py:handle_request_defer():172] handle defer: 0
+2025-06-10 14:01:49,451 DEBUG   SenderThread:1896869 [sender.py:send_request():406] send_request: defer
+2025-06-10 14:01:49,451 INFO    SenderThread:1896869 [sender.py:send_request_defer():610] handle sender defer: 0
+2025-06-10 14:01:49,451 INFO    SenderThread:1896869 [sender.py:transition_state():614] send defer: 1
+2025-06-10 14:01:49,451 DEBUG   HandlerThread:1896869 [handler.py:handle_request():146] handle_request: defer
+2025-06-10 14:01:49,451 INFO    HandlerThread:1896869 [handler.py:handle_request_defer():172] handle defer: 1
+2025-06-10 14:01:49,451 DEBUG   SenderThread:1896869 [sender.py:send_request():406] send_request: defer
+2025-06-10 14:01:49,451 INFO    SenderThread:1896869 [sender.py:send_request_defer():610] handle sender defer: 1
+2025-06-10 14:01:49,451 INFO    SenderThread:1896869 [sender.py:transition_state():614] send defer: 2
+2025-06-10 14:01:49,451 DEBUG   HandlerThread:1896869 [handler.py:handle_request():146] handle_request: defer
+2025-06-10 14:01:49,452 INFO    HandlerThread:1896869 [handler.py:handle_request_defer():172] handle defer: 2
+2025-06-10 14:01:49,452 INFO    HandlerThread:1896869 [system_monitor.py:finish():203] Stopping system monitor
+2025-06-10 14:01:49,452 DEBUG   SystemMonitor:1896869 [system_monitor.py:_start():172] Starting system metrics aggregation loop
+2025-06-10 14:01:49,452 DEBUG   SystemMonitor:1896869 [system_monitor.py:_start():179] Finished system metrics aggregation loop
+2025-06-10 14:01:49,452 DEBUG   SystemMonitor:1896869 [system_monitor.py:_start():183] Publishing last batch of metrics
+2025-06-10 14:01:49,452 INFO    HandlerThread:1896869 [interfaces.py:finish():202] Joined cpu monitor
+2025-06-10 14:01:49,453 INFO    HandlerThread:1896869 [interfaces.py:finish():202] Joined disk monitor
+2025-06-10 14:01:49,510 INFO    HandlerThread:1896869 [interfaces.py:finish():202] Joined gpu monitor
+2025-06-10 14:01:49,510 INFO    HandlerThread:1896869 [interfaces.py:finish():202] Joined memory monitor
+2025-06-10 14:01:49,510 INFO    HandlerThread:1896869 [interfaces.py:finish():202] Joined network monitor
+2025-06-10 14:01:49,510 DEBUG   SenderThread:1896869 [sender.py:send_request():406] send_request: defer
+2025-06-10 14:01:49,511 INFO    SenderThread:1896869 [sender.py:send_request_defer():610] handle sender defer: 2
+2025-06-10 14:01:49,511 INFO    SenderThread:1896869 [sender.py:transition_state():614] send defer: 3
+2025-06-10 14:01:49,511 DEBUG   SenderThread:1896869 [sender.py:send():379] send: stats
+2025-06-10 14:01:49,511 DEBUG   HandlerThread:1896869 [handler.py:handle_request():146] handle_request: defer
+2025-06-10 14:01:49,511 INFO    HandlerThread:1896869 [handler.py:handle_request_defer():172] handle defer: 3
+2025-06-10 14:01:49,511 DEBUG   SenderThread:1896869 [sender.py:send_request():406] send_request: defer
+2025-06-10 14:01:49,511 INFO    SenderThread:1896869 [sender.py:send_request_defer():610] handle sender defer: 3
+2025-06-10 14:01:49,511 INFO    SenderThread:1896869 [sender.py:transition_state():614] send defer: 4
+2025-06-10 14:01:49,511 DEBUG   HandlerThread:1896869 [handler.py:handle_request():146] handle_request: defer
+2025-06-10 14:01:49,511 INFO    HandlerThread:1896869 [handler.py:handle_request_defer():172] handle defer: 4
+2025-06-10 14:01:49,512 DEBUG   SenderThread:1896869 [sender.py:send_request():406] send_request: defer
+2025-06-10 14:01:49,512 INFO    SenderThread:1896869 [sender.py:send_request_defer():610] handle sender defer: 4
+2025-06-10 14:01:49,512 INFO    SenderThread:1896869 [sender.py:transition_state():614] send defer: 5
+2025-06-10 14:01:49,512 DEBUG   HandlerThread:1896869 [handler.py:handle_request():146] handle_request: defer
+2025-06-10 14:01:49,512 INFO    HandlerThread:1896869 [handler.py:handle_request_defer():172] handle defer: 5
+2025-06-10 14:01:49,512 DEBUG   SenderThread:1896869 [sender.py:send():379] send: summary
+2025-06-10 14:01:49,512 INFO    SenderThread:1896869 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2025-06-10 14:01:49,512 DEBUG   SenderThread:1896869 [sender.py:send_request():406] send_request: defer
+2025-06-10 14:01:49,512 INFO    SenderThread:1896869 [sender.py:send_request_defer():610] handle sender defer: 5
+2025-06-10 14:01:49,512 INFO    SenderThread:1896869 [sender.py:transition_state():614] send defer: 6
+2025-06-10 14:01:49,512 DEBUG   HandlerThread:1896869 [handler.py:handle_request():146] handle_request: defer
+2025-06-10 14:01:49,512 INFO    HandlerThread:1896869 [handler.py:handle_request_defer():172] handle defer: 6
+2025-06-10 14:01:49,512 DEBUG   SenderThread:1896869 [sender.py:send_request():406] send_request: defer
+2025-06-10 14:01:49,512 INFO    SenderThread:1896869 [sender.py:send_request_defer():610] handle sender defer: 6
+2025-06-10 14:01:49,514 DEBUG   HandlerThread:1896869 [handler.py:handle_request():146] handle_request: status_report
+2025-06-10 14:01:49,718 INFO    SenderThread:1896869 [sender.py:transition_state():614] send defer: 7
+2025-06-10 14:01:49,719 DEBUG   HandlerThread:1896869 [handler.py:handle_request():146] handle_request: defer
+2025-06-10 14:01:49,719 INFO    HandlerThread:1896869 [handler.py:handle_request_defer():172] handle defer: 7
+2025-06-10 14:01:49,719 DEBUG   SenderThread:1896869 [sender.py:send_request():406] send_request: defer
+2025-06-10 14:01:49,719 INFO    SenderThread:1896869 [sender.py:send_request_defer():610] handle sender defer: 7
+2025-06-10 14:01:50,299 INFO    Thread-12 :1896869 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/ra78lof/consulting_pro/OneFormer/wandb/run-20250610_140140-4j1pm38a/files/config.yaml
+2025-06-10 14:01:50,299 INFO    Thread-12 :1896869 [dir_watcher.py:_on_file_created():271] file/dir created: /home/ra78lof/consulting_pro/OneFormer/wandb/run-20250610_140140-4j1pm38a/files/wandb-summary.json
+2025-06-10 14:01:50,451 DEBUG   HandlerThread:1896869 [handler.py:handle_request():146] handle_request: poll_exit
+2025-06-10 14:01:51,300 INFO    Thread-12 :1896869 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/ra78lof/consulting_pro/OneFormer/wandb/run-20250610_140140-4j1pm38a/files/output.log
+2025-06-10 14:01:52,507 INFO    SenderThread:1896869 [sender.py:transition_state():614] send defer: 8
+2025-06-10 14:01:52,507 DEBUG   SenderThread:1896869 [sender.py:send_request():406] send_request: poll_exit
+2025-06-10 14:01:52,507 DEBUG   HandlerThread:1896869 [handler.py:handle_request():146] handle_request: defer
+2025-06-10 14:01:52,507 INFO    HandlerThread:1896869 [handler.py:handle_request_defer():172] handle defer: 8
+2025-06-10 14:01:52,508 DEBUG   SenderThread:1896869 [sender.py:send_request():406] send_request: defer
+2025-06-10 14:01:52,508 INFO    SenderThread:1896869 [sender.py:send_request_defer():610] handle sender defer: 8
+2025-06-10 14:01:52,508 INFO    SenderThread:1896869 [job_builder.py:build():318] Attempting to build job artifact
+2025-06-10 14:01:52,510 INFO    SenderThread:1896869 [job_builder.py:_get_source_type():455] is repo sourced job
+2025-06-10 14:01:52,519 INFO    SenderThread:1896869 [job_builder.py:build():431] adding wandb-job metadata file
+2025-06-10 14:01:52,523 INFO    SenderThread:1896869 [sender.py:transition_state():614] send defer: 9
+2025-06-10 14:01:52,523 DEBUG   HandlerThread:1896869 [handler.py:handle_request():146] handle_request: defer
+2025-06-10 14:01:52,523 DEBUG   SenderThread:1896869 [sender.py:send():379] send: artifact
+2025-06-10 14:01:52,523 INFO    HandlerThread:1896869 [handler.py:handle_request_defer():172] handle defer: 9
+2025-06-10 14:01:53,301 INFO    Thread-12 :1896869 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/ra78lof/consulting_pro/OneFormer/wandb/run-20250610_140140-4j1pm38a/files/output.log
+2025-06-10 14:01:53,386 INFO    SenderThread:1896869 [sender.py:send_artifact():1468] sent artifact job-https___github.com_SHI-Labs_OneFormer_train_net.py - {'id': 'QXJ0aWZhY3Q6MTc5NDk0MDY2NQ==', 'state': 'COMMITTED', 'artifactSequence': {'id': 'QXJ0aWZhY3RDb2xsZWN0aW9uOjY0OTQxODUxMw==', 'latestArtifact': {'id': 'QXJ0aWZhY3Q6MTc5NDk0MDY2NQ==', 'versionIndex': 1}}}
+2025-06-10 14:01:53,386 DEBUG   SenderThread:1896869 [sender.py:send_request():406] send_request: defer
+2025-06-10 14:01:53,386 INFO    SenderThread:1896869 [sender.py:send_request_defer():610] handle sender defer: 9
+2025-06-10 14:01:53,386 INFO    SenderThread:1896869 [dir_watcher.py:finish():358] shutting down directory watcher
+2025-06-10 14:01:53,452 DEBUG   HandlerThread:1896869 [handler.py:handle_request():146] handle_request: poll_exit
+2025-06-10 14:01:54,301 INFO    SenderThread:1896869 [dir_watcher.py:finish():388] scan: /home/ra78lof/consulting_pro/OneFormer/wandb/run-20250610_140140-4j1pm38a/files
+2025-06-10 14:01:54,302 INFO    SenderThread:1896869 [dir_watcher.py:finish():402] scan save: /home/ra78lof/consulting_pro/OneFormer/wandb/run-20250610_140140-4j1pm38a/files/output.log output.log
+2025-06-10 14:01:54,302 INFO    SenderThread:1896869 [dir_watcher.py:finish():402] scan save: /home/ra78lof/consulting_pro/OneFormer/wandb/run-20250610_140140-4j1pm38a/files/wandb-summary.json wandb-summary.json
+2025-06-10 14:01:54,304 INFO    SenderThread:1896869 [dir_watcher.py:finish():402] scan save: /home/ra78lof/consulting_pro/OneFormer/wandb/run-20250610_140140-4j1pm38a/files/wandb-metadata.json wandb-metadata.json
+2025-06-10 14:01:54,304 INFO    SenderThread:1896869 [dir_watcher.py:finish():402] scan save: /home/ra78lof/consulting_pro/OneFormer/wandb/run-20250610_140140-4j1pm38a/files/requirements.txt requirements.txt
+2025-06-10 14:01:54,304 INFO    SenderThread:1896869 [dir_watcher.py:finish():402] scan save: /home/ra78lof/consulting_pro/OneFormer/wandb/run-20250610_140140-4j1pm38a/files/config.yaml config.yaml
+2025-06-10 14:01:54,306 INFO    SenderThread:1896869 [dir_watcher.py:finish():402] scan save: /home/ra78lof/consulting_pro/OneFormer/wandb/run-20250610_140140-4j1pm38a/files/conda-environment.yaml conda-environment.yaml
+2025-06-10 14:01:54,306 INFO    SenderThread:1896869 [dir_watcher.py:finish():402] scan save: /home/ra78lof/consulting_pro/OneFormer/wandb/run-20250610_140140-4j1pm38a/files/diff.patch diff.patch
+2025-06-10 14:01:54,309 INFO    SenderThread:1896869 [dir_watcher.py:finish():402] scan save: /home/ra78lof/consulting_pro/OneFormer/wandb/run-20250610_140140-4j1pm38a/files/code/train_net.py code/train_net.py
+2025-06-10 14:01:54,309 INFO    SenderThread:1896869 [sender.py:transition_state():614] send defer: 10
+2025-06-10 14:01:54,310 DEBUG   SenderThread:1896869 [sender.py:send_request():406] send_request: poll_exit
+2025-06-10 14:01:54,310 DEBUG   HandlerThread:1896869 [handler.py:handle_request():146] handle_request: defer
+2025-06-10 14:01:54,310 INFO    HandlerThread:1896869 [handler.py:handle_request_defer():172] handle defer: 10
+2025-06-10 14:01:54,310 DEBUG   SenderThread:1896869 [sender.py:send_request():406] send_request: defer
+2025-06-10 14:01:54,310 INFO    SenderThread:1896869 [sender.py:send_request_defer():610] handle sender defer: 10
+2025-06-10 14:01:54,310 INFO    SenderThread:1896869 [file_pusher.py:finish():172] shutting down file pusher
+2025-06-10 14:01:54,454 DEBUG   HandlerThread:1896869 [handler.py:handle_request():146] handle_request: poll_exit
+2025-06-10 14:01:54,455 DEBUG   SenderThread:1896869 [sender.py:send_request():406] send_request: poll_exit
+2025-06-10 14:01:54,676 INFO    wandb-upload_4:1896869 [upload_job.py:push():131] Uploaded file /home/ra78lof/consulting_pro/OneFormer/wandb/run-20250610_140140-4j1pm38a/files/config.yaml
+2025-06-10 14:01:54,684 INFO    wandb-upload_1:1896869 [upload_job.py:push():131] Uploaded file /home/ra78lof/consulting_pro/OneFormer/wandb/run-20250610_140140-4j1pm38a/files/wandb-summary.json
+2025-06-10 14:01:54,699 INFO    wandb-upload_2:1896869 [upload_job.py:push():131] Uploaded file /home/ra78lof/consulting_pro/OneFormer/wandb/run-20250610_140140-4j1pm38a/files/output.log
+2025-06-10 14:01:54,747 INFO    wandb-upload_3:1896869 [upload_job.py:push():131] Uploaded file /home/ra78lof/consulting_pro/OneFormer/wandb/run-20250610_140140-4j1pm38a/files/requirements.txt
+2025-06-10 14:01:54,819 INFO    wandb-upload_0:1896869 [upload_job.py:push():131] Uploaded file /home/ra78lof/consulting_pro/OneFormer/wandb/run-20250610_140140-4j1pm38a/files/conda-environment.yaml
+2025-06-10 14:01:55,020 INFO    Thread-11 (_thread_body):1896869 [sender.py:transition_state():614] send defer: 11
+2025-06-10 14:01:55,020 DEBUG   HandlerThread:1896869 [handler.py:handle_request():146] handle_request: defer
+2025-06-10 14:01:55,020 INFO    HandlerThread:1896869 [handler.py:handle_request_defer():172] handle defer: 11
+2025-06-10 14:01:55,020 DEBUG   SenderThread:1896869 [sender.py:send_request():406] send_request: defer
+2025-06-10 14:01:55,020 INFO    SenderThread:1896869 [sender.py:send_request_defer():610] handle sender defer: 11
+2025-06-10 14:01:55,021 INFO    SenderThread:1896869 [file_pusher.py:join():178] waiting for file pusher
+2025-06-10 14:01:55,021 INFO    SenderThread:1896869 [sender.py:transition_state():614] send defer: 12
+2025-06-10 14:01:55,021 DEBUG   HandlerThread:1896869 [handler.py:handle_request():146] handle_request: defer
+2025-06-10 14:01:55,021 INFO    HandlerThread:1896869 [handler.py:handle_request_defer():172] handle defer: 12
+2025-06-10 14:01:55,021 DEBUG   SenderThread:1896869 [sender.py:send_request():406] send_request: defer
+2025-06-10 14:01:55,021 INFO    SenderThread:1896869 [sender.py:send_request_defer():610] handle sender defer: 12
+2025-06-10 14:01:55,021 INFO    SenderThread:1896869 [file_stream.py:finish():614] file stream finish called
+2025-06-10 14:01:55,211 INFO    SenderThread:1896869 [file_stream.py:finish():618] file stream finish is done
+2025-06-10 14:01:55,211 INFO    SenderThread:1896869 [sender.py:transition_state():614] send defer: 13
+2025-06-10 14:01:55,212 DEBUG   HandlerThread:1896869 [handler.py:handle_request():146] handle_request: defer
+2025-06-10 14:01:55,212 INFO    HandlerThread:1896869 [handler.py:handle_request_defer():172] handle defer: 13
+2025-06-10 14:01:55,212 DEBUG   SenderThread:1896869 [sender.py:send_request():406] send_request: defer
+2025-06-10 14:01:55,212 INFO    SenderThread:1896869 [sender.py:send_request_defer():610] handle sender defer: 13
+2025-06-10 14:01:55,212 INFO    SenderThread:1896869 [sender.py:transition_state():614] send defer: 14
+2025-06-10 14:01:55,212 DEBUG   HandlerThread:1896869 [handler.py:handle_request():146] handle_request: defer
+2025-06-10 14:01:55,212 INFO    HandlerThread:1896869 [handler.py:handle_request_defer():172] handle defer: 14
+2025-06-10 14:01:55,212 DEBUG   SenderThread:1896869 [sender.py:send():379] send: final
+2025-06-10 14:01:55,213 DEBUG   SenderThread:1896869 [sender.py:send():379] send: footer
+2025-06-10 14:01:55,213 DEBUG   SenderThread:1896869 [sender.py:send_request():406] send_request: defer
+2025-06-10 14:01:55,213 INFO    SenderThread:1896869 [sender.py:send_request_defer():610] handle sender defer: 14
+2025-06-10 14:01:55,214 DEBUG   HandlerThread:1896869 [handler.py:handle_request():146] handle_request: poll_exit
+2025-06-10 14:01:55,214 DEBUG   SenderThread:1896869 [sender.py:send_request():406] send_request: poll_exit
+2025-06-10 14:01:55,215 DEBUG   HandlerThread:1896869 [handler.py:handle_request():146] handle_request: internal_messages
+2025-06-10 14:01:55,215 DEBUG   HandlerThread:1896869 [handler.py:handle_request():146] handle_request: server_info
+2025-06-10 14:01:55,215 DEBUG   SenderThread:1896869 [sender.py:send_request():406] send_request: server_info
+2025-06-10 14:01:55,259 DEBUG   HandlerThread:1896869 [handler.py:handle_request():146] handle_request: get_summary
+2025-06-10 14:01:55,259 DEBUG   HandlerThread:1896869 [handler.py:handle_request():146] handle_request: sampled_history
+2025-06-10 14:01:55,368 DEBUG   HandlerThread:1896869 [handler.py:handle_request():146] handle_request: shutdown
+2025-06-10 14:01:55,368 INFO    HandlerThread:1896869 [handler.py:finish():866] shutting down handler
+2025-06-10 14:01:56,216 INFO    WriterThread:1896869 [datastore.py:close():296] close: /home/ra78lof/consulting_pro/OneFormer/wandb/run-20250610_140140-4j1pm38a/run-4j1pm38a.wandb
+2025-06-10 14:01:56,367 INFO    SenderThread:1896869 [sender.py:finish():1546] shutting down sender
+2025-06-10 14:01:56,367 INFO    SenderThread:1896869 [file_pusher.py:finish():172] shutting down file pusher
+2025-06-10 14:01:56,367 INFO    SenderThread:1896869 [file_pusher.py:join():178] waiting for file pusher

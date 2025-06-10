@@ -1,0 +1,60 @@
+diff --git a/oneformer/data/datasets/__init__.py b/oneformer/data/datasets/__init__.py
+index bfb31c1..31d27b4 100644
+--- a/oneformer/data/datasets/__init__.py
++++ b/oneformer/data/datasets/__init__.py
+@@ -6,4 +6,5 @@ from . import (
+     register_coco_panoptic2instance,
+     register_mapillary_vistas,
+     register_mapillary_vistas_panoptic,
++    register_ceiling,
+ )
+diff --git a/train_net.py b/train_net.py
+index 1507b25..de75540 100644
+--- a/train_net.py
++++ b/train_net.py
+@@ -8,6 +8,27 @@ OneFormer Training Script.
+ 
+ This script is a simplified version of the training script in detectron2/tools.
+ """
++
++# suppress the annoying warning from detectron2
++import warnings
++warnings.filterwarnings(
++    "ignore",
++    category=FutureWarning,
++    message=r"`torch\.cuda\.amp\.autocast"   
++)
++# suppress torch.load weights_only warning
++warnings.filterwarnings(
++    "ignore",
++    category=FutureWarning,
++    message=r"You are using `torch\.load` with `weights_only=False`"
++)
++
++warnings.filterwarnings(
++    "ignore",
++    category=FutureWarning,
++    message=r"`torch\.cuda\.amp\.custom_fwd"
++)
++
+ import copy
+ import itertools
+ import logging
+@@ -23,6 +44,7 @@ import detectron2.utils.comm as comm
+ from detectron2.checkpoint import DetectionCheckpointer
+ from detectron2.config import get_cfg
+ from detectron2.data import MetadataCatalog, build_detection_train_loader
++from detectron2.data.dataset_mapper import DatasetMapper
+ from detectron2.engine import (
+     DefaultTrainer,
+     default_argument_parser,
+@@ -164,6 +186,9 @@ class Trainer(DefaultTrainer):
+         elif cfg.INPUT.DATASET_MAPPER_NAME == "coco_unified_lsj":
+             mapper = COCOUnifiedNewBaselineDatasetMapper(cfg, True)
+             return build_detection_train_loader(cfg, mapper=mapper)
++        elif cfg.INPUT.DATASET_MAPPER_NAME == "ceiling_painting":
++            mapper = DatasetMapper(cfg, True)
++            return build_detection_train_loader(cfg, mapper=mapper)
+         else:
+             mapper = None
+             return build_detection_train_loader(cfg, mapper=mapper)
