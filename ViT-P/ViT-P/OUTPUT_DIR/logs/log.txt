@@ -1,0 +1,1648 @@
+I20250610 22:18:43 1931073 dinov2 config.py:59] git:
+  sha: 1596e6f1e36584c34ee04adf8b44a688123a773d, status: has uncommitted changes, branch: main
+
+I20250610 22:18:43 1931073 dinov2 config.py:60] config_file: dinov2/configs/ViT-P/vitl14_COCO.yaml
+eval: 
+eval_only: False
+no_resume: True
+opts: ['train.output_dir=/home/ra78lof/consulting_pro/ViT-P/ViT-P/OUTPUT_DIR']
+output_dir: /home/ra78lof/consulting_pro/ViT-P/ViT-P/OUTPUT_DIR
+I20250610 22:18:43 1931073 dinov2 config.py:33] MODEL:
+  WEIGHTS: ''
+compute_precision:
+  grad_scaler: true
+  student:
+    backbone:
+      sharding_strategy: SHARD_GRAD_OP
+      mixed_precision:
+        param_dtype: fp16
+        reduce_dtype: fp16
+        buffer_dtype: fp32
+    dino_head:
+      sharding_strategy: SHARD_GRAD_OP
+      mixed_precision:
+        param_dtype: fp16
+        reduce_dtype: fp32
+        buffer_dtype: fp32
+train:
+  batch_size_per_gpu: 2
+  dataset_path: Custom:../../../../../ceiling_dataset_for_ViT-P
+  output_dir: /home/ra78lof/consulting_pro/ViT-P/ViT-P/OUTPUT_DIR
+  saveckp_freq: 20
+  seed: 0
+  num_workers: 32
+  OFFICIAL_EPOCH_LENGTH: 5
+  cache_dataset: false
+student:
+  arch: vit_large
+  num_points: 250
+  num_classes: 4
+  patch_size: 14
+  drop_path_rate: 0.3
+  layerscale: 1.0e-05
+  drop_path_uniform: true
+  pretrained_weights: ./dinov2_vitl14_pretrain.pth
+  ffn_layer: mlp
+  block_chunks: 0
+  qkv_bias: true
+  proj_bias: true
+  ffn_bias: true
+  num_register_tokens: 0
+  interpolate_antialias: false
+  interpolate_offset: 0.1
+optim:
+  epochs: 30
+  weight_decay: 0
+  lr: 0.01
+  warmup_epochs: 0
+  clip_grad: 1.0
+  scaling_rule: sqrt_wrt_1024
+crops:
+  global_crops_size:
+  - 518
+  - 518
+evaluation:
+  eval_period_iterations: 500
+
+I20250610 22:18:43 1931073 dinov2 vision_transformer.py:129] using MLP layer as FFN
+W20250610 22:18:46 1931073 py.warnings warnings.py:109] /home/ra78lof/consulting_pro/ViT-P/ViT-P/dinov2/utils/utils.py:24: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  state_dict = torch.load(pretrained_weights, map_location="cpu")
+
+I20250610 22:20:37 1931479 dinov2 config.py:59] git:
+  sha: 1596e6f1e36584c34ee04adf8b44a688123a773d, status: has uncommitted changes, branch: main
+
+I20250610 22:20:37 1931479 dinov2 config.py:60] config_file: dinov2/configs/ViT-P/vitl14_COCO.yaml
+eval: 
+eval_only: False
+no_resume: True
+opts: ['train.output_dir=/home/ra78lof/consulting_pro/ViT-P/ViT-P/OUTPUT_DIR']
+output_dir: /home/ra78lof/consulting_pro/ViT-P/ViT-P/OUTPUT_DIR
+I20250610 22:20:37 1931479 dinov2 config.py:33] MODEL:
+  WEIGHTS: ''
+compute_precision:
+  grad_scaler: true
+  student:
+    backbone:
+      sharding_strategy: SHARD_GRAD_OP
+      mixed_precision:
+        param_dtype: fp16
+        reduce_dtype: fp16
+        buffer_dtype: fp32
+    dino_head:
+      sharding_strategy: SHARD_GRAD_OP
+      mixed_precision:
+        param_dtype: fp16
+        reduce_dtype: fp32
+        buffer_dtype: fp32
+train:
+  batch_size_per_gpu: 2
+  dataset_path: Custom:../../../../../ceiling_dataset_for_ViT-P
+  output_dir: /home/ra78lof/consulting_pro/ViT-P/ViT-P/OUTPUT_DIR
+  saveckp_freq: 20
+  seed: 0
+  num_workers: 32
+  OFFICIAL_EPOCH_LENGTH: 5
+  cache_dataset: false
+student:
+  arch: vit_large
+  num_points: 250
+  num_classes: 4
+  patch_size: 14
+  drop_path_rate: 0.3
+  layerscale: 1.0e-05
+  drop_path_uniform: true
+  pretrained_weights: ./dinov2_vitl14_pretrain.pth
+  ffn_layer: mlp
+  block_chunks: 0
+  qkv_bias: true
+  proj_bias: true
+  ffn_bias: true
+  num_register_tokens: 0
+  interpolate_antialias: false
+  interpolate_offset: 0.1
+optim:
+  epochs: 30
+  weight_decay: 0
+  lr: 0.01
+  warmup_epochs: 0
+  clip_grad: 1.0
+  scaling_rule: sqrt_wrt_1024
+crops:
+  global_crops_size:
+  - 518
+  - 518
+evaluation:
+  eval_period_iterations: 500
+
+I20250610 22:20:37 1931479 dinov2 vision_transformer.py:129] using MLP layer as FFN
+W20250610 22:20:40 1931479 py.warnings warnings.py:109] /home/ra78lof/consulting_pro/ViT-P/ViT-P/dinov2/utils/utils.py:24: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  state_dict = torch.load(pretrained_weights, map_location="cpu")
+
+I20250610 22:20:40 1931479 dinov2 utils.py:38] Pretrained weights found at ./dinov2_vitl14_pretrain.pth and loaded with msg: _IncompatibleKeys(missing_keys=['cls_embeddings.weight', 'head.weight', 'head.bias'], unexpected_keys=['cls_token'])
+I20250610 22:20:40 1931479 dinov2 ssl_meta_arch.py:47] OPTIONS -- architecture : embed_dim: 1024
+I20250610 22:20:41 1931479 dinov2 ssl_meta_arch.py:167] DISTRIBUTED FSDP -- preparing model for distributed training
+W20250610 22:20:41 1931479 py.warnings warnings.py:109] /home/ra78lof/anaconda3/envs/fcclip/lib/python3.11/site-packages/torch/distributed/fsdp/_init_utils.py:440: UserWarning: FSDP is switching to use `NO_SHARD` instead of ShardingStrategy.SHARD_GRAD_OP since the world size is 1.
+  warnings.warn(
+
+I20250610 22:20:41 1931479 dinov2 train.py:370] Model:
+SSLMetaArch(
+  (dino_loss): CrossEntropyLoss()
+  (student): ModuleDict(
+    (backbone): FullyShardedDataParallel(
+      (_fsdp_wrapped_module): DinoVisionTransformer(
+        (patch_embed): PatchEmbed(
+          (proj): Conv2d(3, 1024, kernel_size=(14, 14), stride=(14, 14))
+          (norm): Identity()
+        )
+        (cls_embeddings): Linear(in_features=2, out_features=1024, bias=False)
+        (blocks): ModuleList(
+          (0-23): 24 x NestedTensorBlock(
+            (norm1): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+            (attn): MemEffAttention(
+              (qkv): Linear(in_features=1024, out_features=3072, bias=True)
+              (attn_drop): Dropout(p=0.0, inplace=False)
+              (proj): Linear(in_features=1024, out_features=1024, bias=True)
+              (proj_drop): Dropout(p=0.0, inplace=False)
+            )
+            (ls1): LayerScale()
+            (drop_path1): Identity()
+            (norm2): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+            (mlp): Mlp(
+              (fc1): Linear(in_features=1024, out_features=4096, bias=True)
+              (act): GELU(approximate='none')
+              (fc2): Linear(in_features=4096, out_features=1024, bias=True)
+              (drop): Dropout(p=0.0, inplace=False)
+            )
+            (ls2): LayerScale()
+            (drop_path2): Identity()
+          )
+        )
+        (norm): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+        (head): Linear(in_features=1024, out_features=4, bias=True)
+        (loss_fct): CrossEntropyLoss()
+      )
+    )
+    (dino_head): FullyShardedDataParallel(
+      (_fsdp_wrapped_module): DINOHead(
+        (head): Identity()
+      )
+    )
+  )
+)
+I20250610 22:20:41 1931479 dinov2 loaders.py:79] using dataset: "Custom:../../../../../ceiling_dataset_for_ViT-P"
+I20250610 22:33:53 1932234 dinov2 config.py:59] git:
+  sha: 1596e6f1e36584c34ee04adf8b44a688123a773d, status: has uncommitted changes, branch: main
+
+I20250610 22:33:53 1932234 dinov2 config.py:60] config_file: dinov2/configs/ViT-P/vitl14_COCO.yaml
+eval: 
+eval_only: False
+no_resume: True
+opts: ['train.output_dir=/home/ra78lof/consulting_pro/ViT-P/ViT-P/OUTPUT_DIR']
+output_dir: /home/ra78lof/consulting_pro/ViT-P/ViT-P/OUTPUT_DIR
+I20250610 22:33:53 1932234 dinov2 config.py:33] MODEL:
+  WEIGHTS: ''
+compute_precision:
+  grad_scaler: true
+  student:
+    backbone:
+      sharding_strategy: SHARD_GRAD_OP
+      mixed_precision:
+        param_dtype: fp16
+        reduce_dtype: fp16
+        buffer_dtype: fp32
+    dino_head:
+      sharding_strategy: SHARD_GRAD_OP
+      mixed_precision:
+        param_dtype: fp16
+        reduce_dtype: fp32
+        buffer_dtype: fp32
+train:
+  batch_size_per_gpu: 2
+  dataset_path: Custom:../../../../../ceiling_dataset_for_ViT-P
+  output_dir: /home/ra78lof/consulting_pro/ViT-P/ViT-P/OUTPUT_DIR
+  saveckp_freq: 20
+  seed: 0
+  num_workers: 32
+  OFFICIAL_EPOCH_LENGTH: 5
+  cache_dataset: false
+student:
+  arch: vit_large
+  num_points: 250
+  num_classes: 4
+  patch_size: 14
+  drop_path_rate: 0.3
+  layerscale: 1.0e-05
+  drop_path_uniform: true
+  pretrained_weights: ./dinov2_vitl14_pretrain.pth
+  ffn_layer: mlp
+  block_chunks: 0
+  qkv_bias: true
+  proj_bias: true
+  ffn_bias: true
+  num_register_tokens: 0
+  interpolate_antialias: false
+  interpolate_offset: 0.1
+optim:
+  epochs: 30
+  weight_decay: 0
+  lr: 0.01
+  warmup_epochs: 0
+  clip_grad: 1.0
+  scaling_rule: sqrt_wrt_1024
+crops:
+  global_crops_size:
+  - 518
+  - 518
+evaluation:
+  eval_period_iterations: 500
+
+I20250610 22:33:53 1932234 dinov2 vision_transformer.py:129] using MLP layer as FFN
+W20250610 22:33:56 1932234 py.warnings warnings.py:109] /home/ra78lof/consulting_pro/ViT-P/ViT-P/dinov2/utils/utils.py:24: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  state_dict = torch.load(pretrained_weights, map_location="cpu")
+
+I20250610 22:33:56 1932234 dinov2 utils.py:38] Pretrained weights found at ./dinov2_vitl14_pretrain.pth and loaded with msg: _IncompatibleKeys(missing_keys=['cls_embeddings.weight', 'head.weight', 'head.bias'], unexpected_keys=['cls_token'])
+I20250610 22:33:56 1932234 dinov2 ssl_meta_arch.py:47] OPTIONS -- architecture : embed_dim: 1024
+I20250610 22:33:56 1932234 dinov2 ssl_meta_arch.py:167] DISTRIBUTED FSDP -- preparing model for distributed training
+W20250610 22:33:56 1932234 py.warnings warnings.py:109] /home/ra78lof/anaconda3/envs/fcclip/lib/python3.11/site-packages/torch/distributed/fsdp/_init_utils.py:440: UserWarning: FSDP is switching to use `NO_SHARD` instead of ShardingStrategy.SHARD_GRAD_OP since the world size is 1.
+  warnings.warn(
+
+I20250610 22:33:56 1932234 dinov2 train.py:370] Model:
+SSLMetaArch(
+  (dino_loss): CrossEntropyLoss()
+  (student): ModuleDict(
+    (backbone): FullyShardedDataParallel(
+      (_fsdp_wrapped_module): DinoVisionTransformer(
+        (patch_embed): PatchEmbed(
+          (proj): Conv2d(3, 1024, kernel_size=(14, 14), stride=(14, 14))
+          (norm): Identity()
+        )
+        (cls_embeddings): Linear(in_features=2, out_features=1024, bias=False)
+        (blocks): ModuleList(
+          (0-23): 24 x NestedTensorBlock(
+            (norm1): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+            (attn): MemEffAttention(
+              (qkv): Linear(in_features=1024, out_features=3072, bias=True)
+              (attn_drop): Dropout(p=0.0, inplace=False)
+              (proj): Linear(in_features=1024, out_features=1024, bias=True)
+              (proj_drop): Dropout(p=0.0, inplace=False)
+            )
+            (ls1): LayerScale()
+            (drop_path1): Identity()
+            (norm2): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+            (mlp): Mlp(
+              (fc1): Linear(in_features=1024, out_features=4096, bias=True)
+              (act): GELU(approximate='none')
+              (fc2): Linear(in_features=4096, out_features=1024, bias=True)
+              (drop): Dropout(p=0.0, inplace=False)
+            )
+            (ls2): LayerScale()
+            (drop_path2): Identity()
+          )
+        )
+        (norm): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+        (head): Linear(in_features=1024, out_features=4, bias=True)
+        (loss_fct): CrossEntropyLoss()
+      )
+    )
+    (dino_head): FullyShardedDataParallel(
+      (_fsdp_wrapped_module): DINOHead(
+        (head): Identity()
+      )
+    )
+  )
+)
+I20250610 22:33:56 1932234 dinov2 loaders.py:79] using dataset: "Custom:../../../../../ceiling_dataset_for_ViT-P"
+I20250610 22:35:45 1932705 dinov2 config.py:59] git:
+  sha: 1596e6f1e36584c34ee04adf8b44a688123a773d, status: has uncommitted changes, branch: main
+
+I20250610 22:35:45 1932705 dinov2 config.py:60] config_file: dinov2/configs/ViT-P/vitl14_COCO.yaml
+eval: 
+eval_only: False
+no_resume: True
+opts: ['train.output_dir=/home/ra78lof/consulting_pro/ViT-P/ViT-P/OUTPUT_DIR']
+output_dir: /home/ra78lof/consulting_pro/ViT-P/ViT-P/OUTPUT_DIR
+I20250610 22:35:45 1932705 dinov2 config.py:33] MODEL:
+  WEIGHTS: ''
+compute_precision:
+  grad_scaler: true
+  student:
+    backbone:
+      sharding_strategy: SHARD_GRAD_OP
+      mixed_precision:
+        param_dtype: fp16
+        reduce_dtype: fp16
+        buffer_dtype: fp32
+    dino_head:
+      sharding_strategy: SHARD_GRAD_OP
+      mixed_precision:
+        param_dtype: fp16
+        reduce_dtype: fp32
+        buffer_dtype: fp32
+train:
+  batch_size_per_gpu: 2
+  dataset_path: Custom:../../../../../ceiling_dataset_for_ViT-P
+  output_dir: /home/ra78lof/consulting_pro/ViT-P/ViT-P/OUTPUT_DIR
+  saveckp_freq: 20
+  seed: 0
+  num_workers: 32
+  OFFICIAL_EPOCH_LENGTH: 5
+  cache_dataset: false
+student:
+  arch: vit_large
+  num_points: 250
+  num_classes: 4
+  patch_size: 14
+  drop_path_rate: 0.3
+  layerscale: 1.0e-05
+  drop_path_uniform: true
+  pretrained_weights: ./dinov2_vitl14_pretrain.pth
+  ffn_layer: mlp
+  block_chunks: 0
+  qkv_bias: true
+  proj_bias: true
+  ffn_bias: true
+  num_register_tokens: 0
+  interpolate_antialias: false
+  interpolate_offset: 0.1
+optim:
+  epochs: 30
+  weight_decay: 0
+  lr: 0.01
+  warmup_epochs: 0
+  clip_grad: 1.0
+  scaling_rule: sqrt_wrt_1024
+crops:
+  global_crops_size:
+  - 518
+  - 518
+evaluation:
+  eval_period_iterations: 500
+
+I20250610 22:35:45 1932705 dinov2 vision_transformer.py:129] using MLP layer as FFN
+W20250610 22:35:49 1932705 py.warnings warnings.py:109] /home/ra78lof/consulting_pro/ViT-P/ViT-P/dinov2/utils/utils.py:24: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  state_dict = torch.load(pretrained_weights, map_location="cpu")
+
+I20250610 22:35:49 1932705 dinov2 utils.py:38] Pretrained weights found at ./dinov2_vitl14_pretrain.pth and loaded with msg: _IncompatibleKeys(missing_keys=['cls_embeddings.weight', 'head.weight', 'head.bias'], unexpected_keys=['cls_token'])
+I20250610 22:35:49 1932705 dinov2 ssl_meta_arch.py:47] OPTIONS -- architecture : embed_dim: 1024
+I20250610 22:35:49 1932705 dinov2 ssl_meta_arch.py:167] DISTRIBUTED FSDP -- preparing model for distributed training
+W20250610 22:35:49 1932705 py.warnings warnings.py:109] /home/ra78lof/anaconda3/envs/fcclip/lib/python3.11/site-packages/torch/distributed/fsdp/_init_utils.py:440: UserWarning: FSDP is switching to use `NO_SHARD` instead of ShardingStrategy.SHARD_GRAD_OP since the world size is 1.
+  warnings.warn(
+
+I20250610 22:35:49 1932705 dinov2 train.py:370] Model:
+SSLMetaArch(
+  (dino_loss): CrossEntropyLoss()
+  (student): ModuleDict(
+    (backbone): FullyShardedDataParallel(
+      (_fsdp_wrapped_module): DinoVisionTransformer(
+        (patch_embed): PatchEmbed(
+          (proj): Conv2d(3, 1024, kernel_size=(14, 14), stride=(14, 14))
+          (norm): Identity()
+        )
+        (cls_embeddings): Linear(in_features=2, out_features=1024, bias=False)
+        (blocks): ModuleList(
+          (0-23): 24 x NestedTensorBlock(
+            (norm1): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+            (attn): MemEffAttention(
+              (qkv): Linear(in_features=1024, out_features=3072, bias=True)
+              (attn_drop): Dropout(p=0.0, inplace=False)
+              (proj): Linear(in_features=1024, out_features=1024, bias=True)
+              (proj_drop): Dropout(p=0.0, inplace=False)
+            )
+            (ls1): LayerScale()
+            (drop_path1): Identity()
+            (norm2): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+            (mlp): Mlp(
+              (fc1): Linear(in_features=1024, out_features=4096, bias=True)
+              (act): GELU(approximate='none')
+              (fc2): Linear(in_features=4096, out_features=1024, bias=True)
+              (drop): Dropout(p=0.0, inplace=False)
+            )
+            (ls2): LayerScale()
+            (drop_path2): Identity()
+          )
+        )
+        (norm): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+        (head): Linear(in_features=1024, out_features=4, bias=True)
+        (loss_fct): CrossEntropyLoss()
+      )
+    )
+    (dino_head): FullyShardedDataParallel(
+      (_fsdp_wrapped_module): DINOHead(
+        (head): Identity()
+      )
+    )
+  )
+)
+I20250610 22:35:49 1932705 dinov2 loaders.py:79] using dataset: "Custom:../../../../../ceiling_dataset_for_ViT-P"
+W20250610 22:35:49 1932705 py.warnings warnings.py:109] /home/ra78lof/anaconda3/envs/fcclip/lib/python3.11/site-packages/torchvision/transforms/v2/_deprecated.py:42: UserWarning: The transform `ToTensor()` is deprecated and will be removed in a future release. Instead, please use `v2.Compose([v2.ToImage(), v2.ToDtype(torch.float32, scale=True)])`.Output is equivalent up to float precision.
+  warnings.warn(
+
+I20250610 22:35:49 1932705 dinov2 loaders.py:118] sampler: sharded infinite
+I20250610 22:35:49 1932705 dinov2 loaders.py:202] using PyTorch data loader
+I20250610 22:35:49 1932705 dinov2 loaders.py:217] infinite data loader
+I20250610 22:35:49 1932705 dinov2 loaders.py:79] using dataset: "Custom:../../../../../ceiling_dataset_for_ViT-P"
+I20250610 22:35:49 1932705 dinov2 loaders.py:143] sampler: distributed
+I20250610 22:35:49 1932705 dinov2 loaders.py:202] using PyTorch data loader
+I20250610 22:35:49 1932705 dinov2 loaders.py:215] # of batches: 0
+I20250610 22:35:49 1932705 dinov2 train.py:284] Starting training from iteration 0
+I20250611 11:30:43 1942973 dinov2 config.py:59] git:
+  sha: 1596e6f1e36584c34ee04adf8b44a688123a773d, status: has uncommitted changes, branch: main
+
+I20250611 11:30:43 1942973 dinov2 config.py:60] config_file: dinov2/configs/ViT-P/vitl14_COCO.yaml
+eval: 
+eval_only: False
+no_resume: True
+opts: ['train.output_dir=/home/ra78lof/consulting_pro/ViT-P/ViT-P/OUTPUT_DIR']
+output_dir: /home/ra78lof/consulting_pro/ViT-P/ViT-P/OUTPUT_DIR
+I20250611 11:30:43 1942973 dinov2 config.py:33] MODEL:
+  WEIGHTS: ''
+compute_precision:
+  grad_scaler: true
+  student:
+    backbone:
+      sharding_strategy: SHARD_GRAD_OP
+      mixed_precision:
+        param_dtype: fp16
+        reduce_dtype: fp16
+        buffer_dtype: fp32
+    dino_head:
+      sharding_strategy: SHARD_GRAD_OP
+      mixed_precision:
+        param_dtype: fp16
+        reduce_dtype: fp32
+        buffer_dtype: fp32
+train:
+  batch_size_per_gpu: 2
+  dataset_path: Custom:../../../../../ceiling_dataset_for_ViT-P
+  output_dir: /home/ra78lof/consulting_pro/ViT-P/ViT-P/OUTPUT_DIR
+  saveckp_freq: 20
+  seed: 0
+  num_workers: 32
+  OFFICIAL_EPOCH_LENGTH: 5
+  cache_dataset: false
+student:
+  arch: vit_large
+  num_points: 250
+  num_classes: 4
+  patch_size: 14
+  drop_path_rate: 0.3
+  layerscale: 1.0e-05
+  drop_path_uniform: true
+  pretrained_weights: ./dinov2_vitl14_pretrain.pth
+  ffn_layer: mlp
+  block_chunks: 0
+  qkv_bias: true
+  proj_bias: true
+  ffn_bias: true
+  num_register_tokens: 0
+  interpolate_antialias: false
+  interpolate_offset: 0.1
+optim:
+  epochs: 30
+  weight_decay: 0
+  lr: 0.01
+  warmup_epochs: 0
+  clip_grad: 1.0
+  scaling_rule: sqrt_wrt_1024
+crops:
+  global_crops_size:
+  - 518
+  - 518
+evaluation:
+  eval_period_iterations: 500
+
+I20250611 11:30:43 1942973 dinov2 vision_transformer.py:129] using MLP layer as FFN
+W20250611 11:30:46 1942973 py.warnings warnings.py:109] /home/ra78lof/consulting_pro/ViT-P/ViT-P/dinov2/utils/utils.py:24: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  state_dict = torch.load(pretrained_weights, map_location="cpu")
+
+I20250611 11:30:47 1942973 dinov2 utils.py:38] Pretrained weights found at ./dinov2_vitl14_pretrain.pth and loaded with msg: _IncompatibleKeys(missing_keys=['cls_embeddings.weight', 'head.weight', 'head.bias'], unexpected_keys=['cls_token'])
+I20250611 11:30:47 1942973 dinov2 ssl_meta_arch.py:47] OPTIONS -- architecture : embed_dim: 1024
+I20250611 11:30:47 1942973 dinov2 ssl_meta_arch.py:167] DISTRIBUTED FSDP -- preparing model for distributed training
+W20250611 11:30:47 1942973 py.warnings warnings.py:109] /home/ra78lof/anaconda3/envs/fcclip/lib/python3.11/site-packages/torch/distributed/fsdp/_init_utils.py:440: UserWarning: FSDP is switching to use `NO_SHARD` instead of ShardingStrategy.SHARD_GRAD_OP since the world size is 1.
+  warnings.warn(
+
+I20250611 11:30:47 1942973 dinov2 train.py:370] Model:
+SSLMetaArch(
+  (dino_loss): CrossEntropyLoss()
+  (student): ModuleDict(
+    (backbone): FullyShardedDataParallel(
+      (_fsdp_wrapped_module): DinoVisionTransformer(
+        (patch_embed): PatchEmbed(
+          (proj): Conv2d(3, 1024, kernel_size=(14, 14), stride=(14, 14))
+          (norm): Identity()
+        )
+        (cls_embeddings): Linear(in_features=2, out_features=1024, bias=False)
+        (blocks): ModuleList(
+          (0-23): 24 x NestedTensorBlock(
+            (norm1): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+            (attn): MemEffAttention(
+              (qkv): Linear(in_features=1024, out_features=3072, bias=True)
+              (attn_drop): Dropout(p=0.0, inplace=False)
+              (proj): Linear(in_features=1024, out_features=1024, bias=True)
+              (proj_drop): Dropout(p=0.0, inplace=False)
+            )
+            (ls1): LayerScale()
+            (drop_path1): Identity()
+            (norm2): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+            (mlp): Mlp(
+              (fc1): Linear(in_features=1024, out_features=4096, bias=True)
+              (act): GELU(approximate='none')
+              (fc2): Linear(in_features=4096, out_features=1024, bias=True)
+              (drop): Dropout(p=0.0, inplace=False)
+            )
+            (ls2): LayerScale()
+            (drop_path2): Identity()
+          )
+        )
+        (norm): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+        (head): Linear(in_features=1024, out_features=4, bias=True)
+        (loss_fct): CrossEntropyLoss()
+      )
+    )
+    (dino_head): FullyShardedDataParallel(
+      (_fsdp_wrapped_module): DINOHead(
+        (head): Identity()
+      )
+    )
+  )
+)
+I20250611 11:30:47 1942973 dinov2 loaders.py:79] using dataset: "Custom:../../../../../ceiling_dataset_for_ViT-P"
+W20250611 11:30:47 1942973 py.warnings warnings.py:109] /home/ra78lof/anaconda3/envs/fcclip/lib/python3.11/site-packages/torchvision/transforms/v2/_deprecated.py:42: UserWarning: The transform `ToTensor()` is deprecated and will be removed in a future release. Instead, please use `v2.Compose([v2.ToImage(), v2.ToDtype(torch.float32, scale=True)])`.Output is equivalent up to float precision.
+  warnings.warn(
+
+I20250611 11:30:47 1942973 dinov2 loaders.py:118] sampler: sharded infinite
+I20250611 11:30:47 1942973 dinov2 loaders.py:202] using PyTorch data loader
+I20250611 11:30:47 1942973 dinov2 loaders.py:217] infinite data loader
+I20250611 11:30:47 1942973 dinov2 loaders.py:79] using dataset: "Custom:../../../../../ceiling_dataset_for_ViT-P"
+I20250611 11:30:47 1942973 dinov2 loaders.py:143] sampler: distributed
+I20250611 11:30:47 1942973 dinov2 loaders.py:202] using PyTorch data loader
+I20250611 11:30:47 1942973 dinov2 loaders.py:215] # of batches: 0
+I20250611 11:30:47 1942973 dinov2 train.py:284] Starting training from iteration 0
+I20250611 11:34:43 1944341 dinov2 config.py:59] git:
+  sha: 1596e6f1e36584c34ee04adf8b44a688123a773d, status: has uncommitted changes, branch: main
+
+I20250611 11:34:43 1944341 dinov2 config.py:60] config_file: dinov2/configs/ViT-P/vitl14_COCO.yaml
+eval: 
+eval_only: False
+no_resume: True
+opts: ['train.output_dir=/home/ra78lof/consulting_pro/ViT-P/ViT-P/OUTPUT_DIR']
+output_dir: /home/ra78lof/consulting_pro/ViT-P/ViT-P/OUTPUT_DIR
+I20250611 11:34:43 1944341 dinov2 config.py:33] MODEL:
+  WEIGHTS: ''
+compute_precision:
+  grad_scaler: true
+  student:
+    backbone:
+      sharding_strategy: SHARD_GRAD_OP
+      mixed_precision:
+        param_dtype: fp16
+        reduce_dtype: fp16
+        buffer_dtype: fp32
+    dino_head:
+      sharding_strategy: SHARD_GRAD_OP
+      mixed_precision:
+        param_dtype: fp16
+        reduce_dtype: fp32
+        buffer_dtype: fp32
+train:
+  batch_size_per_gpu: 2
+  dataset_path: Custom:../../../../../ceiling_dataset_for_ViT-P
+  output_dir: /home/ra78lof/consulting_pro/ViT-P/ViT-P/OUTPUT_DIR
+  saveckp_freq: 20
+  seed: 0
+  num_workers: 32
+  OFFICIAL_EPOCH_LENGTH: 5
+  cache_dataset: false
+student:
+  arch: vit_large
+  num_points: 250
+  num_classes: 4
+  patch_size: 14
+  drop_path_rate: 0.3
+  layerscale: 1.0e-05
+  drop_path_uniform: true
+  pretrained_weights: ./dinov2_vitl14_pretrain.pth
+  ffn_layer: mlp
+  block_chunks: 0
+  qkv_bias: true
+  proj_bias: true
+  ffn_bias: true
+  num_register_tokens: 0
+  interpolate_antialias: false
+  interpolate_offset: 0.1
+optim:
+  epochs: 30
+  weight_decay: 0
+  lr: 0.01
+  warmup_epochs: 0
+  clip_grad: 1.0
+  scaling_rule: sqrt_wrt_1024
+crops:
+  global_crops_size:
+  - 518
+  - 518
+evaluation:
+  eval_period_iterations: 500
+
+I20250611 11:34:43 1944341 dinov2 vision_transformer.py:129] using MLP layer as FFN
+W20250611 11:34:46 1944341 py.warnings warnings.py:109] /home/ra78lof/consulting_pro/ViT-P/ViT-P/dinov2/utils/utils.py:24: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  state_dict = torch.load(pretrained_weights, map_location="cpu")
+
+I20250611 11:34:47 1944341 dinov2 utils.py:38] Pretrained weights found at ./dinov2_vitl14_pretrain.pth and loaded with msg: _IncompatibleKeys(missing_keys=['cls_embeddings.weight', 'head.weight', 'head.bias'], unexpected_keys=['cls_token'])
+I20250611 11:34:47 1944341 dinov2 ssl_meta_arch.py:47] OPTIONS -- architecture : embed_dim: 1024
+I20250611 11:34:47 1944341 dinov2 ssl_meta_arch.py:167] DISTRIBUTED FSDP -- preparing model for distributed training
+W20250611 11:34:47 1944341 py.warnings warnings.py:109] /home/ra78lof/anaconda3/envs/fcclip/lib/python3.11/site-packages/torch/distributed/fsdp/_init_utils.py:440: UserWarning: FSDP is switching to use `NO_SHARD` instead of ShardingStrategy.SHARD_GRAD_OP since the world size is 1.
+  warnings.warn(
+
+I20250611 11:34:47 1944341 dinov2 train.py:370] Model:
+SSLMetaArch(
+  (dino_loss): CrossEntropyLoss()
+  (student): ModuleDict(
+    (backbone): FullyShardedDataParallel(
+      (_fsdp_wrapped_module): DinoVisionTransformer(
+        (patch_embed): PatchEmbed(
+          (proj): Conv2d(3, 1024, kernel_size=(14, 14), stride=(14, 14))
+          (norm): Identity()
+        )
+        (cls_embeddings): Linear(in_features=2, out_features=1024, bias=False)
+        (blocks): ModuleList(
+          (0-23): 24 x NestedTensorBlock(
+            (norm1): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+            (attn): MemEffAttention(
+              (qkv): Linear(in_features=1024, out_features=3072, bias=True)
+              (attn_drop): Dropout(p=0.0, inplace=False)
+              (proj): Linear(in_features=1024, out_features=1024, bias=True)
+              (proj_drop): Dropout(p=0.0, inplace=False)
+            )
+            (ls1): LayerScale()
+            (drop_path1): Identity()
+            (norm2): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+            (mlp): Mlp(
+              (fc1): Linear(in_features=1024, out_features=4096, bias=True)
+              (act): GELU(approximate='none')
+              (fc2): Linear(in_features=4096, out_features=1024, bias=True)
+              (drop): Dropout(p=0.0, inplace=False)
+            )
+            (ls2): LayerScale()
+            (drop_path2): Identity()
+          )
+        )
+        (norm): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+        (head): Linear(in_features=1024, out_features=4, bias=True)
+        (loss_fct): CrossEntropyLoss()
+      )
+    )
+    (dino_head): FullyShardedDataParallel(
+      (_fsdp_wrapped_module): DINOHead(
+        (head): Identity()
+      )
+    )
+  )
+)
+I20250611 11:34:47 1944341 dinov2 loaders.py:79] using dataset: "Custom:../../../../../ceiling_dataset_for_ViT-P"
+W20250611 11:34:47 1944341 py.warnings warnings.py:109] /home/ra78lof/anaconda3/envs/fcclip/lib/python3.11/site-packages/torchvision/transforms/v2/_deprecated.py:42: UserWarning: The transform `ToTensor()` is deprecated and will be removed in a future release. Instead, please use `v2.Compose([v2.ToImage(), v2.ToDtype(torch.float32, scale=True)])`.Output is equivalent up to float precision.
+  warnings.warn(
+
+I20250611 11:34:47 1944341 dinov2 loaders.py:118] sampler: sharded infinite
+I20250611 11:34:47 1944341 dinov2 loaders.py:202] using PyTorch data loader
+I20250611 11:34:47 1944341 dinov2 loaders.py:217] infinite data loader
+I20250611 11:34:47 1944341 dinov2 loaders.py:79] using dataset: "Custom:../../../../../ceiling_dataset_for_ViT-P"
+I20250611 11:34:47 1944341 dinov2 loaders.py:143] sampler: distributed
+I20250611 11:34:47 1944341 dinov2 loaders.py:202] using PyTorch data loader
+I20250611 11:34:47 1944341 dinov2 loaders.py:215] # of batches: 0
+I20250611 11:34:47 1944341 dinov2 train.py:284] Starting training from iteration 0
+I20250611 11:56:05 1946411 dinov2 config.py:59] git:
+  sha: 1596e6f1e36584c34ee04adf8b44a688123a773d, status: has uncommitted changes, branch: main
+
+I20250611 11:56:05 1946411 dinov2 config.py:60] config_file: dinov2/configs/ViT-P/vitl14_COCO.yaml
+eval: 
+eval_only: False
+no_resume: True
+opts: ['train.output_dir=/home/ra78lof/consulting_pro/ViT-P/ViT-P/OUTPUT_DIR']
+output_dir: /home/ra78lof/consulting_pro/ViT-P/ViT-P/OUTPUT_DIR
+I20250611 11:56:05 1946411 dinov2 config.py:33] MODEL:
+  WEIGHTS: ''
+compute_precision:
+  grad_scaler: true
+  student:
+    backbone:
+      sharding_strategy: SHARD_GRAD_OP
+      mixed_precision:
+        param_dtype: fp16
+        reduce_dtype: fp16
+        buffer_dtype: fp32
+    dino_head:
+      sharding_strategy: SHARD_GRAD_OP
+      mixed_precision:
+        param_dtype: fp16
+        reduce_dtype: fp32
+        buffer_dtype: fp32
+train:
+  batch_size_per_gpu: 2
+  dataset_path: Custom:../../../../../ceiling_dataset_for_ViT-P
+  output_dir: /home/ra78lof/consulting_pro/ViT-P/ViT-P/OUTPUT_DIR
+  saveckp_freq: 20
+  seed: 0
+  num_workers: 32
+  OFFICIAL_EPOCH_LENGTH: 5
+  cache_dataset: false
+student:
+  arch: vit_large
+  num_points: 250
+  num_classes: 4
+  patch_size: 14
+  drop_path_rate: 0.3
+  layerscale: 1.0e-05
+  drop_path_uniform: true
+  pretrained_weights: ./dinov2_vitl14_pretrain.pth
+  ffn_layer: mlp
+  block_chunks: 0
+  qkv_bias: true
+  proj_bias: true
+  ffn_bias: true
+  num_register_tokens: 0
+  interpolate_antialias: false
+  interpolate_offset: 0.1
+optim:
+  epochs: 30
+  weight_decay: 0
+  lr: 0.01
+  warmup_epochs: 0
+  clip_grad: 1.0
+  scaling_rule: sqrt_wrt_1024
+crops:
+  global_crops_size:
+  - 518
+  - 518
+evaluation:
+  eval_period_iterations: 500
+
+I20250611 11:56:05 1946411 dinov2 vision_transformer.py:129] using MLP layer as FFN
+W20250611 11:56:08 1946411 py.warnings warnings.py:109] /home/ra78lof/consulting_pro/ViT-P/ViT-P/dinov2/utils/utils.py:24: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  state_dict = torch.load(pretrained_weights, map_location="cpu")
+
+I20250611 11:56:09 1946411 dinov2 utils.py:38] Pretrained weights found at ./dinov2_vitl14_pretrain.pth and loaded with msg: _IncompatibleKeys(missing_keys=['cls_embeddings.weight', 'head.weight', 'head.bias'], unexpected_keys=['cls_token'])
+I20250611 11:56:09 1946411 dinov2 ssl_meta_arch.py:47] OPTIONS -- architecture : embed_dim: 1024
+I20250611 11:56:09 1946411 dinov2 ssl_meta_arch.py:167] DISTRIBUTED FSDP -- preparing model for distributed training
+W20250611 11:56:09 1946411 py.warnings warnings.py:109] /home/ra78lof/anaconda3/envs/fcclip/lib/python3.11/site-packages/torch/distributed/fsdp/_init_utils.py:440: UserWarning: FSDP is switching to use `NO_SHARD` instead of ShardingStrategy.SHARD_GRAD_OP since the world size is 1.
+  warnings.warn(
+
+I20250611 11:56:09 1946411 dinov2 train.py:370] Model:
+SSLMetaArch(
+  (dino_loss): CrossEntropyLoss()
+  (student): ModuleDict(
+    (backbone): FullyShardedDataParallel(
+      (_fsdp_wrapped_module): DinoVisionTransformer(
+        (patch_embed): PatchEmbed(
+          (proj): Conv2d(3, 1024, kernel_size=(14, 14), stride=(14, 14))
+          (norm): Identity()
+        )
+        (cls_embeddings): Linear(in_features=2, out_features=1024, bias=False)
+        (blocks): ModuleList(
+          (0-23): 24 x NestedTensorBlock(
+            (norm1): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+            (attn): MemEffAttention(
+              (qkv): Linear(in_features=1024, out_features=3072, bias=True)
+              (attn_drop): Dropout(p=0.0, inplace=False)
+              (proj): Linear(in_features=1024, out_features=1024, bias=True)
+              (proj_drop): Dropout(p=0.0, inplace=False)
+            )
+            (ls1): LayerScale()
+            (drop_path1): Identity()
+            (norm2): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+            (mlp): Mlp(
+              (fc1): Linear(in_features=1024, out_features=4096, bias=True)
+              (act): GELU(approximate='none')
+              (fc2): Linear(in_features=4096, out_features=1024, bias=True)
+              (drop): Dropout(p=0.0, inplace=False)
+            )
+            (ls2): LayerScale()
+            (drop_path2): Identity()
+          )
+        )
+        (norm): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+        (head): Linear(in_features=1024, out_features=4, bias=True)
+        (loss_fct): CrossEntropyLoss()
+      )
+    )
+    (dino_head): FullyShardedDataParallel(
+      (_fsdp_wrapped_module): DINOHead(
+        (head): Identity()
+      )
+    )
+  )
+)
+I20250611 11:56:09 1946411 dinov2 loaders.py:79] using dataset: "Custom:../../../../../ceiling_dataset_for_ViT-P"
+W20250611 11:56:09 1946411 py.warnings warnings.py:109] /home/ra78lof/anaconda3/envs/fcclip/lib/python3.11/site-packages/torchvision/transforms/v2/_deprecated.py:42: UserWarning: The transform `ToTensor()` is deprecated and will be removed in a future release. Instead, please use `v2.Compose([v2.ToImage(), v2.ToDtype(torch.float32, scale=True)])`.Output is equivalent up to float precision.
+  warnings.warn(
+
+I20250611 11:56:09 1946411 dinov2 loaders.py:118] sampler: sharded infinite
+I20250611 11:56:09 1946411 dinov2 loaders.py:202] using PyTorch data loader
+I20250611 11:56:09 1946411 dinov2 loaders.py:217] infinite data loader
+I20250611 11:56:09 1946411 dinov2 loaders.py:79] using dataset: "Custom:../../../../../ceiling_dataset_for_ViT-P"
+I20250611 11:56:09 1946411 dinov2 loaders.py:143] sampler: distributed
+I20250611 11:56:09 1946411 dinov2 loaders.py:202] using PyTorch data loader
+I20250611 11:56:09 1946411 dinov2 loaders.py:215] # of batches: 0
+I20250611 11:56:09 1946411 dinov2 train.py:284] Starting training from iteration 0
+I20250611 11:59:03 1948022 dinov2 config.py:59] git:
+  sha: 1596e6f1e36584c34ee04adf8b44a688123a773d, status: has uncommitted changes, branch: main
+
+I20250611 11:59:03 1948022 dinov2 config.py:60] config_file: dinov2/configs/ViT-P/vitl14_COCO.yaml
+eval: 
+eval_only: False
+no_resume: True
+opts: ['train.output_dir=/home/ra78lof/consulting_pro/ViT-P/ViT-P/OUTPUT_DIR']
+output_dir: /home/ra78lof/consulting_pro/ViT-P/ViT-P/OUTPUT_DIR
+I20250611 11:59:03 1948022 dinov2 config.py:33] MODEL:
+  WEIGHTS: ''
+compute_precision:
+  grad_scaler: true
+  student:
+    backbone:
+      sharding_strategy: SHARD_GRAD_OP
+      mixed_precision:
+        param_dtype: fp16
+        reduce_dtype: fp16
+        buffer_dtype: fp32
+    dino_head:
+      sharding_strategy: SHARD_GRAD_OP
+      mixed_precision:
+        param_dtype: fp16
+        reduce_dtype: fp32
+        buffer_dtype: fp32
+train:
+  batch_size_per_gpu: 2
+  dataset_path: Custom:../../../../../ceiling_dataset_for_ViT-P
+  output_dir: /home/ra78lof/consulting_pro/ViT-P/ViT-P/OUTPUT_DIR
+  saveckp_freq: 20
+  seed: 0
+  num_workers: 32
+  OFFICIAL_EPOCH_LENGTH: 5
+  cache_dataset: false
+student:
+  arch: vit_large
+  num_points: 250
+  num_classes: 4
+  patch_size: 14
+  drop_path_rate: 0.3
+  layerscale: 1.0e-05
+  drop_path_uniform: true
+  pretrained_weights: ./dinov2_vitl14_pretrain.pth
+  ffn_layer: mlp
+  block_chunks: 0
+  qkv_bias: true
+  proj_bias: true
+  ffn_bias: true
+  num_register_tokens: 0
+  interpolate_antialias: false
+  interpolate_offset: 0.1
+optim:
+  epochs: 30
+  weight_decay: 0
+  lr: 0.01
+  warmup_epochs: 0
+  clip_grad: 1.0
+  scaling_rule: sqrt_wrt_1024
+crops:
+  global_crops_size:
+  - 518
+  - 518
+evaluation:
+  eval_period_iterations: 500
+
+I20250611 11:59:03 1948022 dinov2 vision_transformer.py:129] using MLP layer as FFN
+W20250611 11:59:06 1948022 py.warnings warnings.py:109] /home/ra78lof/consulting_pro/ViT-P/ViT-P/dinov2/utils/utils.py:24: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  state_dict = torch.load(pretrained_weights, map_location="cpu")
+
+I20250611 11:59:07 1948022 dinov2 utils.py:38] Pretrained weights found at ./dinov2_vitl14_pretrain.pth and loaded with msg: _IncompatibleKeys(missing_keys=['cls_embeddings.weight', 'head.weight', 'head.bias'], unexpected_keys=['cls_token'])
+I20250611 11:59:07 1948022 dinov2 ssl_meta_arch.py:47] OPTIONS -- architecture : embed_dim: 1024
+I20250611 11:59:07 1948022 dinov2 ssl_meta_arch.py:167] DISTRIBUTED FSDP -- preparing model for distributed training
+W20250611 11:59:07 1948022 py.warnings warnings.py:109] /home/ra78lof/anaconda3/envs/fcclip/lib/python3.11/site-packages/torch/distributed/fsdp/_init_utils.py:440: UserWarning: FSDP is switching to use `NO_SHARD` instead of ShardingStrategy.SHARD_GRAD_OP since the world size is 1.
+  warnings.warn(
+
+I20250611 11:59:07 1948022 dinov2 train.py:370] Model:
+SSLMetaArch(
+  (dino_loss): CrossEntropyLoss()
+  (student): ModuleDict(
+    (backbone): FullyShardedDataParallel(
+      (_fsdp_wrapped_module): DinoVisionTransformer(
+        (patch_embed): PatchEmbed(
+          (proj): Conv2d(3, 1024, kernel_size=(14, 14), stride=(14, 14))
+          (norm): Identity()
+        )
+        (cls_embeddings): Linear(in_features=2, out_features=1024, bias=False)
+        (blocks): ModuleList(
+          (0-23): 24 x NestedTensorBlock(
+            (norm1): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+            (attn): MemEffAttention(
+              (qkv): Linear(in_features=1024, out_features=3072, bias=True)
+              (attn_drop): Dropout(p=0.0, inplace=False)
+              (proj): Linear(in_features=1024, out_features=1024, bias=True)
+              (proj_drop): Dropout(p=0.0, inplace=False)
+            )
+            (ls1): LayerScale()
+            (drop_path1): Identity()
+            (norm2): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+            (mlp): Mlp(
+              (fc1): Linear(in_features=1024, out_features=4096, bias=True)
+              (act): GELU(approximate='none')
+              (fc2): Linear(in_features=4096, out_features=1024, bias=True)
+              (drop): Dropout(p=0.0, inplace=False)
+            )
+            (ls2): LayerScale()
+            (drop_path2): Identity()
+          )
+        )
+        (norm): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+        (head): Linear(in_features=1024, out_features=4, bias=True)
+        (loss_fct): CrossEntropyLoss()
+      )
+    )
+    (dino_head): FullyShardedDataParallel(
+      (_fsdp_wrapped_module): DINOHead(
+        (head): Identity()
+      )
+    )
+  )
+)
+I20250611 11:59:07 1948022 dinov2 loaders.py:79] using dataset: "Custom:../../../../../ceiling_dataset_for_ViT-P"
+W20250611 11:59:07 1948022 py.warnings warnings.py:109] /home/ra78lof/anaconda3/envs/fcclip/lib/python3.11/site-packages/torchvision/transforms/v2/_deprecated.py:42: UserWarning: The transform `ToTensor()` is deprecated and will be removed in a future release. Instead, please use `v2.Compose([v2.ToImage(), v2.ToDtype(torch.float32, scale=True)])`.Output is equivalent up to float precision.
+  warnings.warn(
+
+I20250611 11:59:07 1948022 dinov2 loaders.py:118] sampler: sharded infinite
+I20250611 11:59:07 1948022 dinov2 loaders.py:202] using PyTorch data loader
+I20250611 11:59:07 1948022 dinov2 loaders.py:217] infinite data loader
+I20250611 11:59:07 1948022 dinov2 loaders.py:79] using dataset: "Custom:../../../../../ceiling_dataset_for_ViT-P"
+I20250611 11:59:07 1948022 dinov2 loaders.py:143] sampler: distributed
+I20250611 11:59:07 1948022 dinov2 loaders.py:202] using PyTorch data loader
+I20250611 11:59:07 1948022 dinov2 loaders.py:215] # of batches: 0
+I20250611 11:59:07 1948022 dinov2 train.py:284] Starting training from iteration 0
+I20250611 12:01:07 1949454 dinov2 config.py:59] git:
+  sha: 1596e6f1e36584c34ee04adf8b44a688123a773d, status: has uncommitted changes, branch: main
+
+I20250611 12:01:07 1949454 dinov2 config.py:60] config_file: dinov2/configs/ViT-P/vitl14_COCO.yaml
+eval: 
+eval_only: False
+no_resume: True
+opts: ['train.output_dir=/home/ra78lof/consulting_pro/ViT-P/ViT-P/OUTPUT_DIR']
+output_dir: /home/ra78lof/consulting_pro/ViT-P/ViT-P/OUTPUT_DIR
+I20250611 12:01:07 1949454 dinov2 config.py:33] MODEL:
+  WEIGHTS: ''
+compute_precision:
+  grad_scaler: true
+  student:
+    backbone:
+      sharding_strategy: SHARD_GRAD_OP
+      mixed_precision:
+        param_dtype: fp16
+        reduce_dtype: fp16
+        buffer_dtype: fp32
+    dino_head:
+      sharding_strategy: SHARD_GRAD_OP
+      mixed_precision:
+        param_dtype: fp16
+        reduce_dtype: fp32
+        buffer_dtype: fp32
+train:
+  batch_size_per_gpu: 2
+  dataset_path: Custom:../../ceiling_dataset_for_ViT-P
+  output_dir: /home/ra78lof/consulting_pro/ViT-P/ViT-P/OUTPUT_DIR
+  saveckp_freq: 20
+  seed: 0
+  num_workers: 32
+  OFFICIAL_EPOCH_LENGTH: 5
+  cache_dataset: false
+student:
+  arch: vit_large
+  num_points: 250
+  num_classes: 4
+  patch_size: 14
+  drop_path_rate: 0.3
+  layerscale: 1.0e-05
+  drop_path_uniform: true
+  pretrained_weights: ./dinov2_vitl14_pretrain.pth
+  ffn_layer: mlp
+  block_chunks: 0
+  qkv_bias: true
+  proj_bias: true
+  ffn_bias: true
+  num_register_tokens: 0
+  interpolate_antialias: false
+  interpolate_offset: 0.1
+optim:
+  epochs: 30
+  weight_decay: 0
+  lr: 0.01
+  warmup_epochs: 0
+  clip_grad: 1.0
+  scaling_rule: sqrt_wrt_1024
+crops:
+  global_crops_size:
+  - 518
+  - 518
+evaluation:
+  eval_period_iterations: 500
+
+I20250611 12:01:07 1949454 dinov2 vision_transformer.py:129] using MLP layer as FFN
+W20250611 12:01:10 1949454 py.warnings warnings.py:109] /home/ra78lof/consulting_pro/ViT-P/ViT-P/dinov2/utils/utils.py:24: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  state_dict = torch.load(pretrained_weights, map_location="cpu")
+
+I20250611 12:01:11 1949454 dinov2 utils.py:38] Pretrained weights found at ./dinov2_vitl14_pretrain.pth and loaded with msg: _IncompatibleKeys(missing_keys=['cls_embeddings.weight', 'head.weight', 'head.bias'], unexpected_keys=['cls_token'])
+I20250611 12:01:11 1949454 dinov2 ssl_meta_arch.py:47] OPTIONS -- architecture : embed_dim: 1024
+I20250611 12:01:11 1949454 dinov2 ssl_meta_arch.py:167] DISTRIBUTED FSDP -- preparing model for distributed training
+W20250611 12:01:11 1949454 py.warnings warnings.py:109] /home/ra78lof/anaconda3/envs/fcclip/lib/python3.11/site-packages/torch/distributed/fsdp/_init_utils.py:440: UserWarning: FSDP is switching to use `NO_SHARD` instead of ShardingStrategy.SHARD_GRAD_OP since the world size is 1.
+  warnings.warn(
+
+I20250611 12:01:11 1949454 dinov2 train.py:370] Model:
+SSLMetaArch(
+  (dino_loss): CrossEntropyLoss()
+  (student): ModuleDict(
+    (backbone): FullyShardedDataParallel(
+      (_fsdp_wrapped_module): DinoVisionTransformer(
+        (patch_embed): PatchEmbed(
+          (proj): Conv2d(3, 1024, kernel_size=(14, 14), stride=(14, 14))
+          (norm): Identity()
+        )
+        (cls_embeddings): Linear(in_features=2, out_features=1024, bias=False)
+        (blocks): ModuleList(
+          (0-23): 24 x NestedTensorBlock(
+            (norm1): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+            (attn): MemEffAttention(
+              (qkv): Linear(in_features=1024, out_features=3072, bias=True)
+              (attn_drop): Dropout(p=0.0, inplace=False)
+              (proj): Linear(in_features=1024, out_features=1024, bias=True)
+              (proj_drop): Dropout(p=0.0, inplace=False)
+            )
+            (ls1): LayerScale()
+            (drop_path1): Identity()
+            (norm2): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+            (mlp): Mlp(
+              (fc1): Linear(in_features=1024, out_features=4096, bias=True)
+              (act): GELU(approximate='none')
+              (fc2): Linear(in_features=4096, out_features=1024, bias=True)
+              (drop): Dropout(p=0.0, inplace=False)
+            )
+            (ls2): LayerScale()
+            (drop_path2): Identity()
+          )
+        )
+        (norm): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+        (head): Linear(in_features=1024, out_features=4, bias=True)
+        (loss_fct): CrossEntropyLoss()
+      )
+    )
+    (dino_head): FullyShardedDataParallel(
+      (_fsdp_wrapped_module): DINOHead(
+        (head): Identity()
+      )
+    )
+  )
+)
+I20250611 12:01:11 1949454 dinov2 loaders.py:79] using dataset: "Custom:../../ceiling_dataset_for_ViT-P"
+W20250611 12:01:11 1949454 py.warnings warnings.py:109] /home/ra78lof/anaconda3/envs/fcclip/lib/python3.11/site-packages/torchvision/transforms/v2/_deprecated.py:42: UserWarning: The transform `ToTensor()` is deprecated and will be removed in a future release. Instead, please use `v2.Compose([v2.ToImage(), v2.ToDtype(torch.float32, scale=True)])`.Output is equivalent up to float precision.
+  warnings.warn(
+
+I20250611 12:01:11 1949454 dinov2 loaders.py:118] sampler: sharded infinite
+I20250611 12:01:11 1949454 dinov2 loaders.py:202] using PyTorch data loader
+I20250611 12:01:11 1949454 dinov2 loaders.py:217] infinite data loader
+I20250611 12:01:11 1949454 dinov2 loaders.py:79] using dataset: "Custom:../../ceiling_dataset_for_ViT-P"
+I20250611 12:01:11 1949454 dinov2 loaders.py:143] sampler: distributed
+I20250611 12:01:11 1949454 dinov2 loaders.py:202] using PyTorch data loader
+I20250611 12:01:11 1949454 dinov2 loaders.py:215] # of batches: 0
+I20250611 12:01:11 1949454 dinov2 train.py:284] Starting training from iteration 0
+I20250611 12:14:29 1951235 dinov2 config.py:59] git:
+  sha: 1596e6f1e36584c34ee04adf8b44a688123a773d, status: has uncommitted changes, branch: main
+
+I20250611 12:14:29 1951235 dinov2 config.py:60] config_file: dinov2/configs/ViT-P/vitl14_COCO.yaml
+eval: 
+eval_only: False
+no_resume: True
+opts: ['train.output_dir=/home/ra78lof/consulting_pro/ViT-P/ViT-P/OUTPUT_DIR']
+output_dir: /home/ra78lof/consulting_pro/ViT-P/ViT-P/OUTPUT_DIR
+I20250611 12:14:29 1951235 dinov2 config.py:33] MODEL:
+  WEIGHTS: ''
+compute_precision:
+  grad_scaler: true
+  student:
+    backbone:
+      sharding_strategy: SHARD_GRAD_OP
+      mixed_precision:
+        param_dtype: fp16
+        reduce_dtype: fp16
+        buffer_dtype: fp32
+    dino_head:
+      sharding_strategy: SHARD_GRAD_OP
+      mixed_precision:
+        param_dtype: fp16
+        reduce_dtype: fp32
+        buffer_dtype: fp32
+train:
+  batch_size_per_gpu: 2
+  dataset_path: Custom:../../ceiling_dataset_for_ViT-P
+  output_dir: /home/ra78lof/consulting_pro/ViT-P/ViT-P/OUTPUT_DIR
+  saveckp_freq: 20
+  seed: 0
+  num_workers: 32
+  OFFICIAL_EPOCH_LENGTH: 5
+  cache_dataset: false
+student:
+  arch: vit_large
+  num_points: 250
+  num_classes: 4
+  patch_size: 14
+  drop_path_rate: 0.3
+  layerscale: 1.0e-05
+  drop_path_uniform: true
+  pretrained_weights: ./dinov2_vitl14_pretrain.pth
+  ffn_layer: mlp
+  block_chunks: 0
+  qkv_bias: true
+  proj_bias: true
+  ffn_bias: true
+  num_register_tokens: 0
+  interpolate_antialias: false
+  interpolate_offset: 0.1
+optim:
+  epochs: 30
+  weight_decay: 0
+  lr: 0.01
+  warmup_epochs: 0
+  clip_grad: 1.0
+  scaling_rule: sqrt_wrt_1024
+crops:
+  global_crops_size:
+  - 518
+  - 518
+evaluation:
+  eval_period_iterations: 500
+
+I20250611 12:14:29 1951235 dinov2 vision_transformer.py:129] using MLP layer as FFN
+W20250611 12:14:32 1951235 py.warnings warnings.py:109] /home/ra78lof/consulting_pro/ViT-P/ViT-P/dinov2/utils/utils.py:24: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  state_dict = torch.load(pretrained_weights, map_location="cpu")
+
+I20250611 12:14:33 1951235 dinov2 utils.py:38] Pretrained weights found at ./dinov2_vitl14_pretrain.pth and loaded with msg: _IncompatibleKeys(missing_keys=['cls_embeddings.weight', 'head.weight', 'head.bias'], unexpected_keys=['cls_token'])
+I20250611 12:14:33 1951235 dinov2 ssl_meta_arch.py:47] OPTIONS -- architecture : embed_dim: 1024
+I20250611 12:14:33 1951235 dinov2 ssl_meta_arch.py:167] DISTRIBUTED FSDP -- preparing model for distributed training
+W20250611 12:14:33 1951235 py.warnings warnings.py:109] /home/ra78lof/anaconda3/envs/fcclip/lib/python3.11/site-packages/torch/distributed/fsdp/_init_utils.py:440: UserWarning: FSDP is switching to use `NO_SHARD` instead of ShardingStrategy.SHARD_GRAD_OP since the world size is 1.
+  warnings.warn(
+
+I20250611 12:14:33 1951235 dinov2 train.py:370] Model:
+SSLMetaArch(
+  (dino_loss): CrossEntropyLoss()
+  (student): ModuleDict(
+    (backbone): FullyShardedDataParallel(
+      (_fsdp_wrapped_module): DinoVisionTransformer(
+        (patch_embed): PatchEmbed(
+          (proj): Conv2d(3, 1024, kernel_size=(14, 14), stride=(14, 14))
+          (norm): Identity()
+        )
+        (cls_embeddings): Linear(in_features=2, out_features=1024, bias=False)
+        (blocks): ModuleList(
+          (0-23): 24 x NestedTensorBlock(
+            (norm1): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+            (attn): MemEffAttention(
+              (qkv): Linear(in_features=1024, out_features=3072, bias=True)
+              (attn_drop): Dropout(p=0.0, inplace=False)
+              (proj): Linear(in_features=1024, out_features=1024, bias=True)
+              (proj_drop): Dropout(p=0.0, inplace=False)
+            )
+            (ls1): LayerScale()
+            (drop_path1): Identity()
+            (norm2): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+            (mlp): Mlp(
+              (fc1): Linear(in_features=1024, out_features=4096, bias=True)
+              (act): GELU(approximate='none')
+              (fc2): Linear(in_features=4096, out_features=1024, bias=True)
+              (drop): Dropout(p=0.0, inplace=False)
+            )
+            (ls2): LayerScale()
+            (drop_path2): Identity()
+          )
+        )
+        (norm): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+        (head): Linear(in_features=1024, out_features=4, bias=True)
+        (loss_fct): CrossEntropyLoss()
+      )
+    )
+    (dino_head): FullyShardedDataParallel(
+      (_fsdp_wrapped_module): DINOHead(
+        (head): Identity()
+      )
+    )
+  )
+)
+I20250611 12:14:33 1951235 dinov2 loaders.py:79] using dataset: "Custom:../../ceiling_dataset_for_ViT-P"
+W20250611 12:14:33 1951235 py.warnings warnings.py:109] /home/ra78lof/anaconda3/envs/fcclip/lib/python3.11/site-packages/torchvision/transforms/v2/_deprecated.py:42: UserWarning: The transform `ToTensor()` is deprecated and will be removed in a future release. Instead, please use `v2.Compose([v2.ToImage(), v2.ToDtype(torch.float32, scale=True)])`.Output is equivalent up to float precision.
+  warnings.warn(
+
+I20250611 12:14:33 1951235 dinov2 loaders.py:118] sampler: sharded infinite
+I20250611 12:14:33 1951235 dinov2 loaders.py:202] using PyTorch data loader
+I20250611 12:14:33 1951235 dinov2 loaders.py:217] infinite data loader
+I20250611 12:14:33 1951235 dinov2 loaders.py:79] using dataset: "Custom:../../ceiling_dataset_for_ViT-P"
+I20250611 12:14:33 1951235 dinov2 loaders.py:143] sampler: distributed
+I20250611 12:14:33 1951235 dinov2 loaders.py:202] using PyTorch data loader
+I20250611 12:14:33 1951235 dinov2 loaders.py:215] # of batches: 0
+I20250611 12:14:33 1951235 dinov2 train.py:284] Starting training from iteration 0
+I20250611 12:16:56 1952583 dinov2 config.py:59] git:
+  sha: 1596e6f1e36584c34ee04adf8b44a688123a773d, status: has uncommitted changes, branch: main
+
+I20250611 12:16:56 1952583 dinov2 config.py:60] config_file: dinov2/configs/ViT-P/vitl14_COCO.yaml
+eval: 
+eval_only: False
+no_resume: True
+opts: ['train.output_dir=/home/ra78lof/consulting_pro/ViT-P/ViT-P/OUTPUT_DIR']
+output_dir: /home/ra78lof/consulting_pro/ViT-P/ViT-P/OUTPUT_DIR
+I20250611 12:16:56 1952583 dinov2 config.py:33] MODEL:
+  WEIGHTS: ''
+compute_precision:
+  grad_scaler: true
+  student:
+    backbone:
+      sharding_strategy: SHARD_GRAD_OP
+      mixed_precision:
+        param_dtype: fp16
+        reduce_dtype: fp16
+        buffer_dtype: fp32
+    dino_head:
+      sharding_strategy: SHARD_GRAD_OP
+      mixed_precision:
+        param_dtype: fp16
+        reduce_dtype: fp32
+        buffer_dtype: fp32
+train:
+  batch_size_per_gpu: 2
+  dataset_path: Custom:../../ceiling_dataset_for_ViT-P
+  output_dir: /home/ra78lof/consulting_pro/ViT-P/ViT-P/OUTPUT_DIR
+  saveckp_freq: 20
+  seed: 0
+  num_workers: 32
+  OFFICIAL_EPOCH_LENGTH: 5
+  cache_dataset: false
+student:
+  arch: vit_large
+  num_points: 250
+  num_classes: 4
+  patch_size: 14
+  drop_path_rate: 0.3
+  layerscale: 1.0e-05
+  drop_path_uniform: true
+  pretrained_weights: ./dinov2_vitl14_pretrain.pth
+  ffn_layer: mlp
+  block_chunks: 0
+  qkv_bias: true
+  proj_bias: true
+  ffn_bias: true
+  num_register_tokens: 0
+  interpolate_antialias: false
+  interpolate_offset: 0.1
+optim:
+  epochs: 30
+  weight_decay: 0
+  lr: 0.01
+  warmup_epochs: 0
+  clip_grad: 1.0
+  scaling_rule: sqrt_wrt_1024
+crops:
+  global_crops_size:
+  - 518
+  - 518
+evaluation:
+  eval_period_iterations: 500
+
+I20250611 12:16:56 1952583 dinov2 vision_transformer.py:129] using MLP layer as FFN
+W20250611 12:16:59 1952583 py.warnings warnings.py:109] /home/ra78lof/consulting_pro/ViT-P/ViT-P/dinov2/utils/utils.py:24: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  state_dict = torch.load(pretrained_weights, map_location="cpu")
+
+I20250611 12:16:59 1952583 dinov2 utils.py:38] Pretrained weights found at ./dinov2_vitl14_pretrain.pth and loaded with msg: _IncompatibleKeys(missing_keys=['cls_embeddings.weight', 'head.weight', 'head.bias'], unexpected_keys=['cls_token'])
+I20250611 12:16:59 1952583 dinov2 ssl_meta_arch.py:47] OPTIONS -- architecture : embed_dim: 1024
+I20250611 12:16:59 1952583 dinov2 ssl_meta_arch.py:167] DISTRIBUTED FSDP -- preparing model for distributed training
+W20250611 12:16:59 1952583 py.warnings warnings.py:109] /home/ra78lof/anaconda3/envs/fcclip/lib/python3.11/site-packages/torch/distributed/fsdp/_init_utils.py:440: UserWarning: FSDP is switching to use `NO_SHARD` instead of ShardingStrategy.SHARD_GRAD_OP since the world size is 1.
+  warnings.warn(
+
+I20250611 12:16:59 1952583 dinov2 train.py:370] Model:
+SSLMetaArch(
+  (dino_loss): CrossEntropyLoss()
+  (student): ModuleDict(
+    (backbone): FullyShardedDataParallel(
+      (_fsdp_wrapped_module): DinoVisionTransformer(
+        (patch_embed): PatchEmbed(
+          (proj): Conv2d(3, 1024, kernel_size=(14, 14), stride=(14, 14))
+          (norm): Identity()
+        )
+        (cls_embeddings): Linear(in_features=2, out_features=1024, bias=False)
+        (blocks): ModuleList(
+          (0-23): 24 x NestedTensorBlock(
+            (norm1): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+            (attn): MemEffAttention(
+              (qkv): Linear(in_features=1024, out_features=3072, bias=True)
+              (attn_drop): Dropout(p=0.0, inplace=False)
+              (proj): Linear(in_features=1024, out_features=1024, bias=True)
+              (proj_drop): Dropout(p=0.0, inplace=False)
+            )
+            (ls1): LayerScale()
+            (drop_path1): Identity()
+            (norm2): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+            (mlp): Mlp(
+              (fc1): Linear(in_features=1024, out_features=4096, bias=True)
+              (act): GELU(approximate='none')
+              (fc2): Linear(in_features=4096, out_features=1024, bias=True)
+              (drop): Dropout(p=0.0, inplace=False)
+            )
+            (ls2): LayerScale()
+            (drop_path2): Identity()
+          )
+        )
+        (norm): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+        (head): Linear(in_features=1024, out_features=4, bias=True)
+        (loss_fct): CrossEntropyLoss()
+      )
+    )
+    (dino_head): FullyShardedDataParallel(
+      (_fsdp_wrapped_module): DINOHead(
+        (head): Identity()
+      )
+    )
+  )
+)
+I20250611 12:16:59 1952583 dinov2 loaders.py:79] using dataset: "Custom:../../ceiling_dataset_for_ViT-P"
+W20250611 12:16:59 1952583 py.warnings warnings.py:109] /home/ra78lof/anaconda3/envs/fcclip/lib/python3.11/site-packages/torchvision/transforms/v2/_deprecated.py:42: UserWarning: The transform `ToTensor()` is deprecated and will be removed in a future release. Instead, please use `v2.Compose([v2.ToImage(), v2.ToDtype(torch.float32, scale=True)])`.Output is equivalent up to float precision.
+  warnings.warn(
+
+I20250611 12:16:59 1952583 dinov2 loaders.py:118] sampler: sharded infinite
+I20250611 12:16:59 1952583 dinov2 loaders.py:202] using PyTorch data loader
+I20250611 12:16:59 1952583 dinov2 loaders.py:217] infinite data loader
+I20250611 12:16:59 1952583 dinov2 loaders.py:79] using dataset: "Custom:../../ceiling_dataset_for_ViT-P"
+I20250611 12:16:59 1952583 dinov2 loaders.py:143] sampler: distributed
+I20250611 12:16:59 1952583 dinov2 loaders.py:202] using PyTorch data loader
+I20250611 12:16:59 1952583 dinov2 loaders.py:215] # of batches: 18
+I20250611 12:16:59 1952583 dinov2 train.py:284] Starting training from iteration 0
+I20250611 12:17:45 1954004 dinov2 config.py:59] git:
+  sha: 1596e6f1e36584c34ee04adf8b44a688123a773d, status: has uncommitted changes, branch: main
+
+I20250611 12:17:45 1954004 dinov2 config.py:60] config_file: dinov2/configs/ViT-P/vitl14_COCO.yaml
+eval: 
+eval_only: False
+no_resume: True
+opts: ['train.output_dir=/home/ra78lof/consulting_pro/ViT-P/ViT-P/OUTPUT_DIR']
+output_dir: /home/ra78lof/consulting_pro/ViT-P/ViT-P/OUTPUT_DIR
+I20250611 12:17:45 1954004 dinov2 config.py:33] MODEL:
+  WEIGHTS: ''
+compute_precision:
+  grad_scaler: true
+  student:
+    backbone:
+      sharding_strategy: SHARD_GRAD_OP
+      mixed_precision:
+        param_dtype: fp16
+        reduce_dtype: fp16
+        buffer_dtype: fp32
+    dino_head:
+      sharding_strategy: SHARD_GRAD_OP
+      mixed_precision:
+        param_dtype: fp16
+        reduce_dtype: fp32
+        buffer_dtype: fp32
+train:
+  batch_size_per_gpu: 2
+  dataset_path: Custom:../../ceiling_dataset_for_ViT-P
+  output_dir: /home/ra78lof/consulting_pro/ViT-P/ViT-P/OUTPUT_DIR
+  saveckp_freq: 20
+  seed: 0
+  num_workers: 32
+  OFFICIAL_EPOCH_LENGTH: 5
+  cache_dataset: false
+student:
+  arch: vit_large
+  num_points: 250
+  num_classes: 4
+  patch_size: 14
+  drop_path_rate: 0.3
+  layerscale: 1.0e-05
+  drop_path_uniform: true
+  pretrained_weights: ./dinov2_vitl14_pretrain.pth
+  ffn_layer: mlp
+  block_chunks: 0
+  qkv_bias: true
+  proj_bias: true
+  ffn_bias: true
+  num_register_tokens: 0
+  interpolate_antialias: false
+  interpolate_offset: 0.1
+optim:
+  epochs: 30
+  weight_decay: 0
+  lr: 0.01
+  warmup_epochs: 0
+  clip_grad: 1.0
+  scaling_rule: sqrt_wrt_1024
+crops:
+  global_crops_size:
+  - 518
+  - 518
+evaluation:
+  eval_period_iterations: 500
+
+I20250611 12:17:45 1954004 dinov2 vision_transformer.py:129] using MLP layer as FFN
+W20250611 12:17:48 1954004 py.warnings warnings.py:109] /home/ra78lof/consulting_pro/ViT-P/ViT-P/dinov2/utils/utils.py:24: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  state_dict = torch.load(pretrained_weights, map_location="cpu")
+
+I20250611 12:17:48 1954004 dinov2 utils.py:38] Pretrained weights found at ./dinov2_vitl14_pretrain.pth and loaded with msg: _IncompatibleKeys(missing_keys=['cls_embeddings.weight', 'head.weight', 'head.bias'], unexpected_keys=['cls_token'])
+I20250611 12:17:48 1954004 dinov2 ssl_meta_arch.py:47] OPTIONS -- architecture : embed_dim: 1024
+I20250611 12:17:48 1954004 dinov2 ssl_meta_arch.py:167] DISTRIBUTED FSDP -- preparing model for distributed training
+W20250611 12:17:48 1954004 py.warnings warnings.py:109] /home/ra78lof/anaconda3/envs/fcclip/lib/python3.11/site-packages/torch/distributed/fsdp/_init_utils.py:440: UserWarning: FSDP is switching to use `NO_SHARD` instead of ShardingStrategy.SHARD_GRAD_OP since the world size is 1.
+  warnings.warn(
+
+I20250611 12:17:48 1954004 dinov2 train.py:370] Model:
+SSLMetaArch(
+  (dino_loss): CrossEntropyLoss()
+  (student): ModuleDict(
+    (backbone): FullyShardedDataParallel(
+      (_fsdp_wrapped_module): DinoVisionTransformer(
+        (patch_embed): PatchEmbed(
+          (proj): Conv2d(3, 1024, kernel_size=(14, 14), stride=(14, 14))
+          (norm): Identity()
+        )
+        (cls_embeddings): Linear(in_features=2, out_features=1024, bias=False)
+        (blocks): ModuleList(
+          (0-23): 24 x NestedTensorBlock(
+            (norm1): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+            (attn): MemEffAttention(
+              (qkv): Linear(in_features=1024, out_features=3072, bias=True)
+              (attn_drop): Dropout(p=0.0, inplace=False)
+              (proj): Linear(in_features=1024, out_features=1024, bias=True)
+              (proj_drop): Dropout(p=0.0, inplace=False)
+            )
+            (ls1): LayerScale()
+            (drop_path1): Identity()
+            (norm2): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+            (mlp): Mlp(
+              (fc1): Linear(in_features=1024, out_features=4096, bias=True)
+              (act): GELU(approximate='none')
+              (fc2): Linear(in_features=4096, out_features=1024, bias=True)
+              (drop): Dropout(p=0.0, inplace=False)
+            )
+            (ls2): LayerScale()
+            (drop_path2): Identity()
+          )
+        )
+        (norm): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+        (head): Linear(in_features=1024, out_features=4, bias=True)
+        (loss_fct): CrossEntropyLoss()
+      )
+    )
+    (dino_head): FullyShardedDataParallel(
+      (_fsdp_wrapped_module): DINOHead(
+        (head): Identity()
+      )
+    )
+  )
+)
+I20250611 12:17:48 1954004 dinov2 loaders.py:79] using dataset: "Custom:../../ceiling_dataset_for_ViT-P"
+W20250611 12:17:48 1954004 py.warnings warnings.py:109] /home/ra78lof/anaconda3/envs/fcclip/lib/python3.11/site-packages/torchvision/transforms/v2/_deprecated.py:42: UserWarning: The transform `ToTensor()` is deprecated and will be removed in a future release. Instead, please use `v2.Compose([v2.ToImage(), v2.ToDtype(torch.float32, scale=True)])`.Output is equivalent up to float precision.
+  warnings.warn(
+
+I20250611 12:17:48 1954004 dinov2 loaders.py:119] sampler: sharded infinite
+I20250611 12:17:48 1954004 dinov2 loaders.py:203] using PyTorch data loader
+I20250611 12:17:48 1954004 dinov2 loaders.py:218] infinite data loader
+I20250611 12:17:48 1954004 dinov2 loaders.py:79] using dataset: "Custom:../../ceiling_dataset_for_ViT-P"
+I20250611 12:17:48 1954004 dinov2 loaders.py:144] sampler: distributed
+I20250611 12:17:48 1954004 dinov2 loaders.py:203] using PyTorch data loader
+I20250611 12:17:48 1954004 dinov2 loaders.py:216] # of batches: 18
+I20250611 12:17:48 1954004 dinov2 train.py:284] Starting training from iteration 0
+I20250611 12:41:11 1955658 dinov2 config.py:59] git:
+  sha: 1596e6f1e36584c34ee04adf8b44a688123a773d, status: has uncommitted changes, branch: main
+
+I20250611 12:41:11 1955658 dinov2 config.py:60] config_file: dinov2/configs/ViT-P/vitl14_COCO.yaml
+eval: 
+eval_only: False
+no_resume: True
+opts: ['train.output_dir=/home/ra78lof/consulting_pro/ViT-P/ViT-P/OUTPUT_DIR']
+output_dir: /home/ra78lof/consulting_pro/ViT-P/ViT-P/OUTPUT_DIR
+I20250611 12:41:11 1955658 dinov2 config.py:33] MODEL:
+  WEIGHTS: ''
+compute_precision:
+  grad_scaler: true
+  student:
+    backbone:
+      sharding_strategy: SHARD_GRAD_OP
+      mixed_precision:
+        param_dtype: fp16
+        reduce_dtype: fp16
+        buffer_dtype: fp32
+    dino_head:
+      sharding_strategy: SHARD_GRAD_OP
+      mixed_precision:
+        param_dtype: fp16
+        reduce_dtype: fp32
+        buffer_dtype: fp32
+train:
+  batch_size_per_gpu: 2
+  dataset_path: Custom:../../ceiling_dataset_for_ViT-P
+  output_dir: /home/ra78lof/consulting_pro/ViT-P/ViT-P/OUTPUT_DIR
+  saveckp_freq: 20
+  seed: 0
+  num_workers: 32
+  OFFICIAL_EPOCH_LENGTH: 5
+  cache_dataset: false
+student:
+  arch: vit_large
+  num_points: 250
+  num_classes: 4
+  patch_size: 14
+  drop_path_rate: 0.3
+  layerscale: 1.0e-05
+  drop_path_uniform: true
+  pretrained_weights: ./dinov2_vitl14_pretrain.pth
+  ffn_layer: mlp
+  block_chunks: 0
+  qkv_bias: true
+  proj_bias: true
+  ffn_bias: true
+  num_register_tokens: 0
+  interpolate_antialias: false
+  interpolate_offset: 0.1
+optim:
+  epochs: 30
+  weight_decay: 0
+  lr: 0.01
+  warmup_epochs: 0
+  clip_grad: 1.0
+  scaling_rule: sqrt_wrt_1024
+crops:
+  global_crops_size:
+  - 518
+  - 518
+evaluation:
+  eval_period_iterations: 500
+
+I20250611 12:41:11 1955658 dinov2 vision_transformer.py:129] using MLP layer as FFN
+W20250611 12:41:14 1955658 py.warnings warnings.py:109] /home/ra78lof/consulting_pro/ViT-P/ViT-P/dinov2/utils/utils.py:24: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  state_dict = torch.load(pretrained_weights, map_location="cpu")
+
+I20250611 12:41:15 1955658 dinov2 utils.py:38] Pretrained weights found at ./dinov2_vitl14_pretrain.pth and loaded with msg: _IncompatibleKeys(missing_keys=['cls_embeddings.weight', 'head.weight', 'head.bias'], unexpected_keys=['cls_token'])
+I20250611 12:41:15 1955658 dinov2 ssl_meta_arch.py:47] OPTIONS -- architecture : embed_dim: 1024
+I20250611 12:41:15 1955658 dinov2 ssl_meta_arch.py:167] DISTRIBUTED FSDP -- preparing model for distributed training
+W20250611 12:41:15 1955658 py.warnings warnings.py:109] /home/ra78lof/anaconda3/envs/fcclip/lib/python3.11/site-packages/torch/distributed/fsdp/_init_utils.py:440: UserWarning: FSDP is switching to use `NO_SHARD` instead of ShardingStrategy.SHARD_GRAD_OP since the world size is 1.
+  warnings.warn(
+
+I20250611 12:41:15 1955658 dinov2 train.py:370] Model:
+SSLMetaArch(
+  (dino_loss): CrossEntropyLoss()
+  (student): ModuleDict(
+    (backbone): FullyShardedDataParallel(
+      (_fsdp_wrapped_module): DinoVisionTransformer(
+        (patch_embed): PatchEmbed(
+          (proj): Conv2d(3, 1024, kernel_size=(14, 14), stride=(14, 14))
+          (norm): Identity()
+        )
+        (cls_embeddings): Linear(in_features=2, out_features=1024, bias=False)
+        (blocks): ModuleList(
+          (0-23): 24 x NestedTensorBlock(
+            (norm1): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+            (attn): MemEffAttention(
+              (qkv): Linear(in_features=1024, out_features=3072, bias=True)
+              (attn_drop): Dropout(p=0.0, inplace=False)
+              (proj): Linear(in_features=1024, out_features=1024, bias=True)
+              (proj_drop): Dropout(p=0.0, inplace=False)
+            )
+            (ls1): LayerScale()
+            (drop_path1): Identity()
+            (norm2): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+            (mlp): Mlp(
+              (fc1): Linear(in_features=1024, out_features=4096, bias=True)
+              (act): GELU(approximate='none')
+              (fc2): Linear(in_features=4096, out_features=1024, bias=True)
+              (drop): Dropout(p=0.0, inplace=False)
+            )
+            (ls2): LayerScale()
+            (drop_path2): Identity()
+          )
+        )
+        (norm): LayerNorm((1024,), eps=1e-06, elementwise_affine=True)
+        (head): Linear(in_features=1024, out_features=4, bias=True)
+        (loss_fct): CrossEntropyLoss()
+      )
+    )
+    (dino_head): FullyShardedDataParallel(
+      (_fsdp_wrapped_module): DINOHead(
+        (head): Identity()
+      )
+    )
+  )
+)
+I20250611 12:41:15 1955658 dinov2 loaders.py:79] using dataset: "Custom:../../ceiling_dataset_for_ViT-P"
+W20250611 12:41:15 1955658 py.warnings warnings.py:109] /home/ra78lof/anaconda3/envs/fcclip/lib/python3.11/site-packages/torchvision/transforms/v2/_deprecated.py:42: UserWarning: The transform `ToTensor()` is deprecated and will be removed in a future release. Instead, please use `v2.Compose([v2.ToImage(), v2.ToDtype(torch.float32, scale=True)])`.Output is equivalent up to float precision.
+  warnings.warn(
+
+I20250611 12:41:15 1955658 dinov2 loaders.py:119] sampler: sharded infinite
+I20250611 12:41:15 1955658 dinov2 loaders.py:203] using PyTorch data loader
+I20250611 12:41:15 1955658 dinov2 loaders.py:218] infinite data loader
+I20250611 12:41:15 1955658 dinov2 loaders.py:79] using dataset: "Custom:../../ceiling_dataset_for_ViT-P"
+I20250611 12:41:15 1955658 dinov2 loaders.py:144] sampler: distributed
+I20250611 12:41:15 1955658 dinov2 loaders.py:203] using PyTorch data loader
+I20250611 12:41:15 1955658 dinov2 loaders.py:216] # of batches: 18
+I20250611 12:41:15 1955658 dinov2 train.py:284] Starting training from iteration 0
+I20250611 12:41:19 1955658 dinov2 helpers.py:102] Training  [  0/150]  eta: 0:10:36  current_batch_size: 2.0000 (2.0000)  total_loss: 2.1035 (2.1035)  dino_local_crops_loss: 2.1035 (2.1035)  time: 4.243662  data: 3.439888  max mem: 4596
+I20250611 12:41:29 1955658 dinov2 helpers.py:102] Training  [100/150]  eta: 0:00:06  current_batch_size: 2.0000 (2.0000)  total_loss: 0.4041 (1.1101)  dino_local_crops_loss: 0.4041 (1.1101)  time: 0.100622  data: 0.000069  max mem: 5771
+I20250611 12:41:33 1955658 dinov2 helpers.py:102] Training  [149/150]  eta: 0:00:00  current_batch_size: 2.0000 (2.0000)  total_loss: 0.0057 (1.1242)  dino_local_crops_loss: 0.0057 (1.1242)  time: 0.093787  data: 0.000072  max mem: 5771
+I20250611 12:41:34 1955658 dinov2 helpers.py:130] Training Total time: 0:00:19 (0.127318 s / it)
