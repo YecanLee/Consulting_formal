@@ -66,6 +66,24 @@ pip install -r requirements.txt
 Since the `mm-lab` developed packages are really hard to install, we provide a detailed installation instruction for the `SegCLIP` paper. Please check the `Debug Guidance` section for more details. 
 
 
+### 🪄Special packages installation instructions
+
+#### `OneFormer`
+
+`oneformer` used `natten` package which requries newest `torch` version (torch>=2.7), to compile with most of the packages used in our project, we pinned the `torch` installation command to `pip install torch==2.4`. To install the `natten` package which compiled with `torch==2.4`, please run the following command:
+
+```bash
+pip3 install natten==0.17.1+torch240cu121 -f https://shi-labs.com/natten/wheels
+```
+
+#### `ViT-P`
+
+`ViT-P` used `xformers` package, to pin the `xformers` package to a version which is compatible with `torch==2.4`, please run the following command:
+
+```bash
+pip install xformers==0.0.28
+```
+
 ## Folder Structure
 ### SAN paper folder structure
 We concentrate on the different parts we modified compared to the original repo in the `SAN` folder. 
