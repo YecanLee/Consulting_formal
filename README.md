@@ -84,6 +84,40 @@ pip3 install natten==0.17.1+torch240cu121 -f https://shi-labs.com/natten/wheels
 pip install xformers==0.0.28
 ```
 
+#### `ODISE`
+Some repos were using super old way of installing corresponding packages, especially `torch` and `torchvision` packages, For `ODISE` repo, please use the following command to install the corresponding packages, please do not skip any of the following steps, otherwise the env cannot be built successfully.
+```bash
+# python version has to be 3.9, at least smaller than 3.10, otherwise the env cannot be built successfully.
+# the `detectron2` package requires python version smaller than 3.10, otherwise the env cannot be built successfully.
+conda create -n odise python=3.9 -y 
+conda activate odise
+# install specific version of cuda toolkit for torch and torchvision installation
+conda install nvidia/label/cuda-11.6.0::cuda-toolkit -y
+# remember to check the conda version before this, `conda --version`, it works for me when I used `>=25.0.0` version of conda.
+conda install pytorch=1.13.1 torchvision=0.14.1 pytorch-cuda=11.6 -c pytorch -c nvidia -y
+conda install -c "nvidia/label/cuda-11.6.1" libcusolver-dev -y
+cd third_party/Mask2Former
+pip install ninja 
+conda install 'gxx[version=">=6.0.0,<11.5.0"]' -c conda-forge -y
+vim  third_party/Mask2Former/setup.py 
+# comment out the following line:
+# "detectron2 @ https://github.com/facebookresearch/detectron2/archive/v0.6.zip",
+# then manually install the `detectron2` by ourselves.
+# instead of installing the `detectron2` package like before, we install it by this way:
+pip install --no-build-isolation 'git+https://github.com/facebookresearch/detectron2.git'
+python setup.py install
+cd ../.. 
+# now wr need to comment out the following line in the main `setup.py` file:
+vim setup.py 
+# comment out the following several lines:
+# import torch on line 17 
+# torch_ver = [int(x) for x in torch.__version__.split(".")[:2]] on line 19
+# assert torch_ver >= [1, 8], "Requires PyTorch >= 1.8" on line 20
+# f"mask2former @ file://localhost/{os.getcwd()}/third_party/Mask2Former/" on line 86
+pip install -r /third_party/Mask2Former/mask2former.egg-info/requires.txt
+pip install -e . # ready to rock!
+```
+
 ## Folder Structure
 ### SAN paper folder structure
 We concentrate on the different parts we modified compared to the original repo in the `SAN` folder. 
@@ -327,13 +361,17 @@ The mmcv-full from the GroupViT and SegCLIP are only compiled with numpy version
 We pinned our mmcv as well as our mmsegmentation package to older versions since those papers were developed based on 1.X version instead of 2.X version.
 
 ## 📝TODO(A quick to-do list)
-- [ ] Check if the evaluators are working for different models. This may require us to change the way we register the `ceiling_painting` dataset. Or we may need to modify the metadata `evaluator_type` of the dataset.
+- [x] Check if the evaluators are working for different models. This may require us to change the way we register the `ceiling_painting` dataset. Or we may need to modify the metadata `evaluator_type` of the dataset.
 - [ ] Add pre-commit hooks to check the code style. We may only check the files we changed during the whole project instead of every file.
 - [ ] Add dockerfile for each model. We will only offer one training dockerfile and one deployment dockerfile.
 
 - [x] Pin the debug guidance in fc-clip as an example, this should be pinned very precisely to which line and which file should be modified if `detectron2` package is used to trian and validate the model proposed in the paper.
 
-- [ ] Add some open sourced `video generation` models into the `Fancy_Ideas` folder. I propose we could use this [new paper](https://github.com/thu-ml/RIFLEx) since this new `ICML` paper can generate a little bit longer video compared to the previous models.
+- [x] Add some open sourced `video generation` models into the `Fancy_Ideas` folder. ~~I propose we could use this [new paper](https://github.com/thu-ml/RIFLEx) since this new `ICML` paper can generate a little bit longer video compared to the previous models.~~ Since veo3 is generally available in Europe now, we should use the `google_veo_video` script to generate the video instead.
+
+- [ ] Some nice links to plug in at the beginning of the `README.md` file for fancier display. Plug in some nice buttons and symbols like `paperswithcode` and `arxiv` to make the paper more interactive and engaging.
+
+- [ ] A simple agent will be deployed to tell you the content of the paper for the codes you are using right now, we will use `Gemini` series model to deploy the agent. 
 
 ## 🐛Debug Guidance
 ### mmcv and mmsegmentation installation debug guidance
@@ -512,3 +550,35 @@ The `detectron2` package does not really offer a good way to directly register t
 We need to adjust the dataset first to register the semantic segmentation dataset if the model strictly requires to work only with semantic segmentation dataset. The semantic segmentation dataset we got from the `Roboflow` follows the `COCO` format, however, this means that we only have unannotated images with one json meta file inside the folder. Some models like `zsseg_baseline` does not compile with this way of annotation.
 
 To solve this issue, we need to register the dataset with images and annotations in two subfolders, this is similar to the way for registering dataset in the `mmsegmentation` package.You can check the `register_ceiling_semantic_datasets` function in the `zsseg_baseline/mask_former/data/datasets/register_ceiling_semantic.py` file for more details.You can modify based on this file later for other use cases.
+
+For more detailed guidance, please refer to the [DETAILED_GUIDANCE.md](DETAILED_GUIDANCE.md) file.
+
+## 🤔 Hint for training and inference
+
+This section will only introduce the tricks you may need to know when you are training and inference the models by yourself, for debugging and troubleshooting purposes, please refer to the [Debug Guidance](README.md#-debug-guidance) section.
+
+### x-formers issues.
+
+According to our experience, there are normally flags inside the codes to decide which attention implementation the model gonna use, to give a simple example, we could normally observe the following codes snippt:
+```python
+try:
+   from xformers.ops import memory_efficient_attention
+except ImportError:
+   # either pass or use the `scaled_dot_product_attention` from vanilla torch `flash-attn2` implementation
+```
+⚠️ALERT!⚠️ the `scaled_dot_product_attention` backends are automatically selected, you should always avoid to set it up by yourself!    
+⚠️ALERT!⚠️ the `flash-attn2` backend here is the 2nd generation `flash-attn` implementation, not the `flash-attn3` or `flash-attn4`.
+
+### GPU acceleration tricks
+Some lines of codes are almost like a free-lunch to accelerate the training and inference process, you can simply add the following lines of codes to the model to enable the CUDA acceleration if you are working with a newer generation NVIDIA GPU:
+```python
+if torch.cuda.get_device_properties(0).major >= 8:
+    torch.backends.cuda.matmul.allow_tf32 = True
+    torch.backends.cudnn.allow_tf32 = True
+    print('Fast inference setting for Ampere GPUs is enabled 🔥🔥🔥.')
+```
+Those lines of codes will automatically enable the CUDA acceleration for the newer generation NVIDIA GPUs, you can check the [CUDA acceleration](https://pytorch.org/docs/stable/notes/cuda.html#tensorfloat-32-tf32-on-ampere-devices) for more details.
+
+## Model details (For Nerds)
+
+If you are still interest in how some models work internally, and you may want to improve them in the future,you can refer to the [Model Details](MODEL_DETAILS.md) file. Since there are many articles already online for studying the `Semantic Segmentation` task, we only only explain the `open vocabulary segmentation` task related to the models we implemented in this repo.
